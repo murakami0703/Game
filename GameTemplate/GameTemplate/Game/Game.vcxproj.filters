@@ -133,9 +133,6 @@
       <Filter>sprite</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="DirectionLight.cpp">
-      <Filter>light</Filter>
-    </ClCompile>
     <ClCompile Include="Camera2D.cpp">
       <Filter>graphics\2D</Filter>
     </ClCompile>
@@ -146,10 +143,8 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
-    <ClCompile Include="C3DModelDraw.cpp">
-      <Filter>graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -245,9 +240,6 @@
       <Filter>sprite</Filter>
     </ClInclude>
     <ClInclude Include="Map.h" />
-    <ClInclude Include="DirectionLight.h">
-      <Filter>light</Filter>
-    </ClInclude>
     <ClInclude Include="Camera2D.h">
       <Filter>graphics\2D</Filter>
     </ClInclude>
@@ -258,21 +250,22 @@
     <ClInclude Include="IGameObject.h">
       <Filter>gameobject</Filter>
     </ClInclude>
-    <ClInclude Include="C3DModelDraw.h">
-      <Filter>graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Font.h" />
+    <ClInclude Include="Enemy.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx">
-      <Filter>Assets\modelData</Filter>
+    <MeshContentTask Include="Assets\modelData\enemy.FBX">
+      <Filter>Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\test.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\unityChan.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="..\..\..\..\Documents\Github\DirectX_1\Lesson_06_Answer\Lesson_06\Lesson_06\Assets\sprite\mikyan.jpg">
+    <ImageContentTask Include="Assets\sprite\mikyan.jpg">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>

@@ -99,10 +99,9 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C3DModelDraw.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
-    <ClCompile Include="DirectionLight.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -142,10 +141,9 @@
     <ClCompile Include="system\system.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C3DModelDraw.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />
-    <ClInclude Include="DirectionLight.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GameObjectManager.h" />
@@ -184,14 +182,12 @@
     <ClInclude Include="system\system.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\enemy.FBX" />
     <MeshContentTask Include="Assets\modelData\test.FBX" />
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx">
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>
-    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="..\..\..\..\Documents\Github\DirectX_1\Lesson_06_Answer\Lesson_06\Lesson_06\Assets\sprite\mikyan.jpg" />
+    <ImageContentTask Include="Assets\sprite\mikyan.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

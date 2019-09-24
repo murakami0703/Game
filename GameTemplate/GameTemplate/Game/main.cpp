@@ -6,7 +6,6 @@
 #include "Map.h"
 #include "GameCamera.h"
 #include "GameObjectManager.h"
-#include "DirectionLight.h"
 
 /// <summary>
 /// ƒOƒ[ƒoƒ‹•Ï”
