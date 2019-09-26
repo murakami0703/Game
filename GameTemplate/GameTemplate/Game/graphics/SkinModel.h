@@ -79,6 +79,11 @@ public:
 		enSkinModelSRVReg_DiffuseTexture = 0,		//!<ディフューズテクスチャ。
 		enSkinModelSRVReg_BoneMatrix,				//!<ボーン行列。
 	};
+	/// <summary>
+	/// 更新
+	/// </summary>
+	void Update();
+
 private:
 	/*!
 	*@brief	サンプラステートの初期化。
@@ -93,10 +98,16 @@ private:
 	*@param[in]	filePath		ロードするcmoファイルのファイルパス。
 	*/
 	void InitSkeleton(const wchar_t* filePath);
-	
-	void InitAlbedoTexture();	//アルベドテクスチャを初期化。
-	void InitDirectionLight();	//ディレクションライトの初期化。
-	void Update();				//更新。
+	/// <summary>
+	/// アルベドテクスチャを初期化。
+	/// </summary>
+	void InitAlbedoTexture();
+	/// <summary>
+	/// ディレクションライトの初期化。
+	/// </summary>
+	void InitDirectionLight();
+
+	static const int Dcolor = 4;
 
 private:
 	//定数バッファ。
@@ -107,8 +118,8 @@ private:
 	};
 	//ライト用の定数バッファ
 	struct SDirectionLight {
-		CVector4 direction;		//ライトの方向。
-		CVector4 color;			//ライトのカラー。
+		CVector4 direction[Dcolor];		//ライトの方向。
+		CVector4 color[Dcolor];			//ライトのカラー。
 	};
 
 	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;	//!<FBXの上方向。

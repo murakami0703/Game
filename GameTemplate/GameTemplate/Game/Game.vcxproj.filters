@@ -145,6 +145,7 @@
     </ClCompile>
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="SkinModelRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -252,15 +253,16 @@
     </ClInclude>
     <ClInclude Include="Font.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="SkinModelRender.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\enemy.FBX">
-      <Filter>Assets</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\test.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\enemy.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

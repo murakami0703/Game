@@ -17,16 +17,16 @@ void Player::Move()
 {
 	//十字移動。
 	if (g_pad[0].IsPress(enButtonLeft)) {
-		m_position.x -= 1.0f;
+		m_position.x -= 2.0f;
 	}
 	if (g_pad[0].IsPress(enButtonRight)) {
-		m_position.x += 1.0f;
+		m_position.x += 2.0f;
 	}
 	if (g_pad[0].IsPress(enButtonUp)) {
-		m_position.z += 1.0f;
+		m_position.z += 2.0f;
 	}
 	if (g_pad[0].IsPress(enButtonDown)) {
-		m_position.z -= 1.0f;
+		m_position.z -= 2.0f;
 	}
 }
 void Player::Update()
@@ -34,6 +34,7 @@ void Player::Update()
 	Move();
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, CQuaternion::Identity(), CVector3::One());
+	//m_model.Update();
 }
 void Player::Draw()
 {

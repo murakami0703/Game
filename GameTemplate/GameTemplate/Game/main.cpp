@@ -4,6 +4,7 @@
 #include "level/Level.h"
 #include "Sprite.h"
 #include "Map.h"
+#include "Enemy.h"
 #include "GameCamera.h"
 #include "GameObjectManager.h"
 
@@ -44,6 +45,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Map map;
 	//ゲームカメラ
 	GameCamera Gcamera;
+	Enemy enemy;
+
 	//sprite
 	g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
@@ -65,6 +68,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		player->Draw();
 		//マップの描画。
 		map.Draw();
+		//敵の描画と更新。
+		enemy.Update();
+		enemy.Draw();
+
 		//ゲームカメラの更新
 		Gcamera.Update(player);
 
@@ -76,6 +83,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//カメラの更新。
 		//g_camera3D.Update();
 		g_camera2D.Update();
+		
 		
 		//描画終了。
 		g_graphicsEngine->EndRender();
