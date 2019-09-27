@@ -16,6 +16,6 @@ private:
 	CVector3 m_position = CVector3().Zero();			//ç¿ïW
 	CVector3 m_scale= CVector3().One();					//ägëÂó¶
 
-	//CAnimationClip  m_animClips[enewalk];
+	AnimationClip  m_animClips[num];
 };
 

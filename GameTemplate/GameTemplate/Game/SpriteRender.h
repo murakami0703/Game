@@ -1,5 +1,5 @@
 #pragma once
-class SpriteRender
+class SpriteRender : public IGameObject
 {
 	/// <summary>
 	/// スプライトレンダラー

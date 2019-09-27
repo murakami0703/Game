@@ -103,6 +103,7 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="graphics\animation\Animation.cpp" />
@@ -140,12 +141,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="SpriteStandby.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\enemy.FBX" />

@@ -4,13 +4,14 @@
 
 Enemy::Enemy()
 {
-	/*m_animClips[enewalk].Load(L"animData/Crowwalk.tka"); 
-	m_animClips[enewalk].SetLoopFlag(true);*/
+	//アニメーションの再生。
+	m_animClips[enewalk].Load(L"Assets/animData/enemove.tka");
+	m_animClips[enewalk].SetLoopFlag(true);
+
 	//cmoファイルの読み込み。
 	m_enemy.Init(L"Assets/modelData/enemy.cmo");
 	m_position = { 0.0f,30.0f,0.0f };
 	m_scale = { 5.0f,5.0f,5.0f };
-
 
 }
 
@@ -26,6 +27,7 @@ void Enemy::Update()
 }
 void Enemy::Draw()
 {
+
 	m_enemy.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()

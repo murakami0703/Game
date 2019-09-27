@@ -146,6 +146,8 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -254,6 +256,8 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="SkinModelRender.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">
