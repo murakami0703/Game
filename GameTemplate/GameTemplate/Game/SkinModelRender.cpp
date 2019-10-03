@@ -10,3 +10,7 @@ SkinModelRender::SkinModelRender()
 SkinModelRender::~SkinModelRender()
 {
 }
+void SkinModelRender::Update()
+{
+
+}

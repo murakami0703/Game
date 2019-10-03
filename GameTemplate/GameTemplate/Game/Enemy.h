@@ -1,4 +1,6 @@
 #pragma once
+#include "Player.h"
+
 class Enemy
 {
 public:
@@ -9,8 +11,10 @@ public:
 		enewalk,
 		num
 	};
-	void Update();
+	void Update(Player* player);
 	void Draw();
+	void Move(Player* player);
+
 private:
 	SkinModel m_enemy;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();			//座標

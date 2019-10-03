@@ -29,13 +29,23 @@ cbuffer VSPSCb : register(b0){
 };
 
 /// <summary>
-/// ライト用の定数バッファ
+/// ディレクションライトの定数バッファ
 /// </summary>
 static const int Dcolor = 4;
 
-cbuffer LightCb : register(b1) {
+struct SDirectionLight {
 	float3 dligDirection[Dcolor];
 	float4 dligColor[Dcolor];
+};
+
+/// <summary>
+/// ライト用の定数バッファ
+/// </summary>
+cbuffer SLight : register(b1) {
+	SDirectionLight		directionLight;		//ディレクションライト
+	float3			eyePos;				//視点の座標。
+	float			specPow;			//鏡面反射の絞り。
+	float3			EnvironmentLight;				//環境光。
 };
 
 /////////////////////////////////////////////////////////////
@@ -72,6 +82,7 @@ struct PSInput{
 	float3 Normal		: NORMAL;
 	float3 Tangent		: TANGENT;
 	float2 TexCoord 	: TEXCOORD0;
+	float3 worldPos		: TEXCOORD1;	//ワールド座標
 };
 /*!
  *@brief	スキン行列を計算。
@@ -97,6 +108,8 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 {
 	PSInput psInput = (PSInput)0;
 	float4 pos = mul(mWorld, In.Position);
+	//鏡面反射の計算のために、ワールド座標をピクセルシェーダーに渡す。
+	psInput.worldPos = pos;
 	pos = mul(mView, pos);
 	pos = mul(mProj, pos);
 	psInput.Position = pos;
@@ -154,17 +167,29 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//albedoテクスチャからカラーをフェッチする。
 	float4 albedoColor = albedoTexture.Sample(Sampler, In.TexCoord);
 	//ディレクションライトの拡散反射光を計算する。
-	/*float3 lig = 0.0f;
-	lig += max(0.0f, dot(In.Normal * -1.0f, dligDirection)) * dligColor;
-	float3 lig = 0;
+	float3 lig = 0.0f;
 	for (int i = 0; i < Dcolor; i++) {
-		lig += max(0.0f, dot(In.Normal * -1.0f, dligDirection[i])) * dligColor[i];
-	}
-	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
+		lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.dligDirection[i])) * directionLight.dligColor[i];
+		//ディレクションライトの鏡面反射光を計算する。
+		{
+			//反射ベクトルを求める。
+			float3 r = directionLight.dligDirection[i] + (2 * dot(In.Normal, -directionLight.dligDirection[i]))* In.Normal;
 
+			//視点からライトを当てる物体に伸びるベクトルを求める。
+			float3 e = normalize(In.worldPos - eyePos);
+
+			//ベクトルの内積を計算。
+			float specPower = max(0, dot(r, -e));
+
+			//スぺキュラ反射をライトに加算する。
+			lig += directionLight.dligColor[i].xyz*pow(specPower, specPow);
+
+		}
+	}
+	//環境光を当てる。
+	lig += EnvironmentLight;
+
+	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;
 	return finalColor;
-	*/
-	return albedoColor;
-
 }

@@ -19,11 +19,23 @@ Enemy::Enemy()
 Enemy::~Enemy()
 {
 }
-
-void Enemy::Update()
+void Enemy::Move(Player* player)
 {
+	CVector3 p_pos = player->GetPosition();
+	CVector3 diff = p_pos - m_position;
+	if (diff.Length() >100.0f){
+		diff.y = 0.0f;
+		diff.Normalize();
+		m_position += diff * 1.0f;
+	}
+}
+void Enemy::Update(Player* player)
+{
+	Move(player);
 	//ワールド行列の更新。
 	m_enemy.UpdateWorldMatrix(m_position, CQuaternion::Identity(), m_scale);
+	m_enemy.Update();
+
 }
 void Enemy::Draw()
 {

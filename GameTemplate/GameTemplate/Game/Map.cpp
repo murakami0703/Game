@@ -16,6 +16,7 @@ Map::~Map()
 
 void Map::Update()
 {
+	m_mapModel.Update();
 }
 void Map::Draw()
 {

@@ -46,7 +46,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームカメラ
 	GameCamera Gcamera;
 	Enemy enemy;
-
 	//sprite
 	g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
@@ -62,14 +61,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		}
 		//物理エンジンの更新。
 		g_physics.Update();
+
 		//プレイヤーの更新。
 		player->Update();
 		//プレイヤーの描画。
 		player->Draw();
 		//マップの描画。
+		map.Update();
 		map.Draw();
 		//敵の描画と更新。
-		enemy.Update();
+		enemy.Update(player);
 		enemy.Draw();
 
 		//ゲームカメラの更新

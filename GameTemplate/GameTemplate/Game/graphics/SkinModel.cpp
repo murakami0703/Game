@@ -17,9 +17,9 @@ SkinModel::~SkinModel()
 		m_albedoTextureSRV->Release();
 	}
 	//ライト用の定数バッファの解放。
-	/*if (m_lightCb != nullptr) {
+	if (m_lightCb != nullptr) {
 		m_lightCb->Release();
-	}*/
+	}
 
 }
 void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
@@ -37,7 +37,7 @@ void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
 	InitAlbedoTexture();
 
 	//ディレクションライトの初期化。
-	//InitDirectionLight();
+	InitDirectionLight();
 
 	//SkinModelDataManagerを使用してCMOファイルのロード。
 	m_modelDx = g_skinModelDataManager.Load(filePath, m_skeleton);
@@ -84,7 +84,7 @@ void SkinModel::InitConstantBuffer()
 	//作成。
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_cb);
 	//ライト用の定数バッファを作成。
-	bufferDesc.ByteWidth = sizeof(SDirectionLight);				//SDirectionLightは16byteの倍数になっているので、切り上げはやらない。
+	bufferDesc.ByteWidth = (((sizeof(SLight) - 1) / 16) + 1) * 16;				//SDirectionLightは16byteの倍数になっているので、切り上げはやらない。
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_lightCb);
 
 }
@@ -100,22 +100,23 @@ void SkinModel::InitAlbedoTexture()
 void SkinModel::InitDirectionLight() {
 	//ディレクションライトの初期化。
 
-	m_dirLight.direction[0] = { 1.0f, -1.0f, 0.0f, 0.0f };
-	m_dirLight.direction[0].Normalize();	//正規化。
-	m_dirLight.color[0] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	m_light.directionLight.direction[0] = { 1.0f, -1.0f, 0.0f, 0.0f };
+	m_light.directionLight.direction[0].Normalize();	//正規化。
+	m_light.directionLight.color[0] = { 1.0f, 0.0f, 0.0f, 1.0f };
 
-	m_dirLight.direction[1] = { 1.0f, -1.0f, 0.0f, 0.0f };
-	m_dirLight.direction[1].Normalize();	//正規化。
-	m_dirLight.color[1] = { 0.0f, 1.0f, 0.0f, 1.0f };
+	m_light.directionLight.direction[1] = { 1.0f, -1.0f, 0.0f, 0.0f };
+	m_light.directionLight.direction[1].Normalize();	//正規化。
+	m_light.directionLight.color[1] = { 0.0f, 1.0f, 0.0f, 1.0f };
 
-	m_dirLight.direction[2] = { 1.0f, -1.0f, 0.0f, 0.0f };
-	m_dirLight.direction[2].Normalize();	//正規化。
-	m_dirLight.color[2] = { 0.0f, 0.0f, 1.0f, 1.0f };
+	m_light.directionLight.direction[2] = { 1.0f, -1.0f, 0.0f, 0.0f };
+	m_light.directionLight.direction[2].Normalize();	//正規化。
+	m_light.directionLight.color[2] = { 0.0f, 0.0f, 1.0f, 1.0f };
 
-	m_dirLight.direction[3] = { 1.0f, -1.0f, 0.0f, 0.0f };
-	m_dirLight.direction[3].Normalize();	//正規化。
-	m_dirLight.color[3] = { 0.0f, 1.0f, 0.0f, 1.0f };
-
+	m_light.directionLight.direction[3] = { 1.0f, -1.0f, 0.0f, 0.0f };
+	m_light.directionLight.direction[3].Normalize();	//正規化。
+	m_light.directionLight.color[3] = { 0.0f, 1.0f, 0.0f, 1.0f };
+	//鏡面反射光の絞り。
+	m_light.specPow = 10.0f;
 }
 void SkinModel::InitSamplerState()
 {
@@ -159,15 +160,13 @@ void SkinModel::Update()
 {
 	//更新。
 	//ライト回転してるだけ。。
-	/*CQuaternion qRot;
-	qRot.SetRotationDeg(CVector3::AxisY(), 2.0f);
-	qRot.Multiply(m_dirLight.direction);*/
 	CQuaternion qRot;
 	qRot.SetRotationDeg(CVector3::AxisY(), 2.0f);
-	for (int i = 0; i < 3; i++) {
-		qRot.Multiply(m_dirLight.direction[i]);
-
+	for (int i = 0; i < Dcolor; i++) {
+		qRot.Multiply(m_light.directionLight.direction[i]);
 	}
+	m_light.EnvironmentLight = { 0.1f,0.1f,0.1f };
+
 }
 void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 {
@@ -180,13 +179,15 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 	vsCb.mProj = projMatrix;
 	vsCb.mView = viewMatrix;
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
+	//視点の設定。
+	m_light.eyePos = g_camera3D.GetPosition();
 	//ライト用の定数バッファを更新。
-	//d3dDeviceContext->UpdateSubresource(m_lightCb, 0, nullptr, &m_dirLight, 0, 0);
+	d3dDeviceContext->UpdateSubresource(m_lightCb, 0, nullptr, &m_light, 0, 0);
 	//定数バッファをGPUに転送。
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
 	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
 	//定数バッファをシェーダースロットに設定。
-	//d3dDeviceContext->PSSetConstantBuffers(1, 1, &m_lightCb);
+	d3dDeviceContext->PSSetConstantBuffers(1, 1, &m_lightCb);
 	//サンプラステートを設定。
 	d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 	//ボーン行列をGPUに転送。
