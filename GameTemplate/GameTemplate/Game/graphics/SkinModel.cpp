@@ -114,7 +114,7 @@ void SkinModel::InitDirectionLight() {
 
 	m_light.directionLight.direction[3] = { 1.0f, -1.0f, 0.0f, 0.0f };
 	m_light.directionLight.direction[3].Normalize();	//正規化。
-	m_light.directionLight.color[3] = { 0.0f, 1.0f, 0.0f, 1.0f };
+	m_light.directionLight.color[3] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	//鏡面反射光の絞り。
 	m_light.specPow = 10.0f;
 }
@@ -168,10 +168,10 @@ void SkinModel::Update()
 	m_light.EnvironmentLight = { 0.1f,0.1f,0.1f };
 
 }
-void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
+void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix,int  renderMode)
 {
-	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 	ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 
 	//定数バッファの内容を更新。
 	SVSConstantBuffer vsCb;
@@ -194,6 +194,12 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 	m_skeleton.SendBoneMatrixArrayToGPU();
 	//アルベドテクスチャを設定する。
 	d3dDeviceContext->PSSetShaderResources(0, 1, &m_albedoTextureSRV);
+	//エフェクトにクエリを行う。
+	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
+		auto modelMaterial = reinterpret_cast<SkinModelEffect*>(material);
+		modelMaterial->SetRenderMode(renderMode);
+	});
+
 	//描画。
 	m_modelDx->Draw(
 		d3dDeviceContext,

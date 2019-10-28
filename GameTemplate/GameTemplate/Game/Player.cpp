@@ -4,42 +4,42 @@
 
 Player::Player()
 {
-	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/unityChan.cmo");
+	m_skinModelRender->Init(L"modelData/unityChan.cmo");
 }
-
-
 Player::~Player()
 {
-
 }
+
 void Player::Move()
 {
 	//十字移動。
 	if (g_pad[0].IsPress(enButtonLeft)) {
-		m_position.x -= 2.0f;
+		m_position.x -= 4.0f;
 	}
 	if (g_pad[0].IsPress(enButtonRight)) {
-		m_position.x += 2.0f;
+		m_position.x += 4.0f;
 	}
 	if (g_pad[0].IsPress(enButtonUp)) {
-		m_position.z += 2.0f;
+		m_position.z += 4.0f;
 	}
 	if (g_pad[0].IsPress(enButtonDown)) {
-		m_position.z -= 2.0f;
+		m_position.z -= 4.0f;
 	}
+}
+bool Player::Start(){
+	//cmoファイルの読み込み。
+	/*m_model.Init(L"Assets/modelData/unityChan.cmo");
+	m_characon.Init(5.0f, 5.0f, m_position);*/
+	return true;
 }
 void Player::Update()
 {
 	Move();
 	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, CQuaternion::Identity(), CVector3::One());
-	m_model.Update();
+	//移動と回転
+	//m_skinModelRender->SetPosition(m_position);
 }
-void Player::Draw()
+void Player::Draw(int renderMode)
 {
-	m_model.Draw(
-		g_camera3D.GetViewMatrix(), 
-		g_camera3D.GetProjectionMatrix()
-	);
+	m_skinModelRender->Draw(renderMode);
 }

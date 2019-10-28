@@ -35,6 +35,7 @@ public:
 			}
 		}
 	}
+
 private:
 	std::vector< IGameObject* > m_goList;
 };

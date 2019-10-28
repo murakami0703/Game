@@ -10,7 +10,47 @@ SkinModelRender::SkinModelRender()
 SkinModelRender::~SkinModelRender()
 {
 }
+
+void SkinModelRender::Init(const wchar_t* filePath, AnimationClip* animationClips = nullptr, int numAnimationClips , EnFbxUpAxis fbxUpAxis)
+{
+	m_enFbxUpAxis = fbxUpAxis;
+	m_skinModel.Init(filePath, m_enFbxUpAxis);
+	InitAnimation(animationClips, numAnimationClips);
+}
+/// <summary>
+/// 更新前に呼ばれる関数
+/// </summary>
+bool SkinModelRender::Start()
+{
+	return true;
+}
+/// <summary>
+/// 更新
+/// </summary>
 void SkinModelRender::Update()
 {
+	m_skinModel.Update.UpdateWorldMatrix(m_position, m_rotation, m_scale, m_enFbxUpAxis);
 
+}
+/// <summary>
+/// 描画
+/// </summary>
+void SkinModelRender::Draw(int renderMode) {
+	m_model.Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix(),
+		renderMode
+	);
+
+}
+/// <summary>
+/// アニメーションの初期化。
+/// </summary>
+void SkinModelRender::InitAnimation(AnimationClip* animationClips, int numAnimationClips)
+{
+	m_animationClips = animationClips;
+	m_numAnimationClips = numAnimationClips;
+	if (m_animationClips != nullptr) {
+		m_animation.Init(m_skinModel, m_animationClips, m_numAnimationClips);
+	}
 }

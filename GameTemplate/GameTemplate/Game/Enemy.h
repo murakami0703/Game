@@ -12,7 +12,7 @@ public:
 		num
 	};
 	void Update(Player* player);
-	void Draw();
+	void Draw(int renderMode);
 	void Move(Player* player);
 
 private:

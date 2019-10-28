@@ -5,7 +5,7 @@ public:
 	Map();
 	~Map();
 	void Update();
-	void Draw();
+	void Draw(int renderMode);
 private:
 	SkinModel m_mapModel;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();		//座標

@@ -9,23 +9,36 @@ protected:
 	std::wstring m_materialName;	//!<マテリアル名。
 	Shader* m_pVSShader = nullptr;
 	Shader* m_pPSShader = nullptr;
+	Shader* m_pPSSilhouette = nullptr;
 	Shader m_vsShader;
 	Shader m_psShader;
+	Shader m_psSilhouette;		//シルエット描画用のピクセルシェーダー。
+	bool m_renderMode = 0;		//シルエット描画用
 	bool isSkining;
 	ID3D11ShaderResourceView* m_albedoTex = nullptr;
+	ID3D11DepthStencilState* m_silhouettoDepthStepsilState = nullptr;	//シルエット描画用のデプスステンシルステート。
 
 public:
 	ModelEffect()
 	{
 		m_psShader.Load("Assets/shader/model.fx", "PSMain", Shader::EnType::PS);
-		
+		m_psSilhouette.Load("Assets/shader/model.fx", "PSMain_Silhouette", Shader::EnType::PS);
 		m_pPSShader = &m_psShader;
+		m_pPSSilhouette = &m_psSilhouette;
+
+		//デプスステンシルの初期化。
+		InitSilhouettoDepthStepsilState();
+
 	}
 	virtual ~ModelEffect()
 	{
 		if (m_albedoTex) {
 			m_albedoTex->Release();
 		}
+		if (m_silhouettoDepthStepsilState != nullptr) {
+			m_silhouettoDepthStepsilState->Release();
+		}
+
 	}
 	void __cdecl Apply(ID3D11DeviceContext* deviceContext) override;
 
@@ -47,7 +60,16 @@ public:
 	{
 		return wcscmp(name, m_materialName.c_str()) == 0;
 	}
-	
+	void SetRenderMode(int renderMode)
+	{
+		m_renderMode = renderMode;
+	}
+private:
+	/// <summary>
+	/// シルエット描画用のデプスステンシルステートを初期化。
+	/// </summary>
+	void InitSilhouettoDepthStepsilState();
+
 };
 /*!
 *@brief

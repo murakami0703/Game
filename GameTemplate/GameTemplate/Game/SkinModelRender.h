@@ -7,21 +7,40 @@ class SkinModelRender : public IGameObject
 public:
 	SkinModelRender();
 	~SkinModelRender();
-	
 	/// <summary>
 	/// 初期化。
 	/// </summary>
-	void Init();
+	/// <param name="filePath">ロードしたいcmoファイルのファイルパス</param>
+	/// <param name="animationClips">アニメーションクリップの配列の先頭アドレス</param>
+	/// <param name="numAnimationClips">アニメーションクリップの数</param>
+	/// <param name="fbxUpAxis">fbxの上方向</param>
+	void Init(const wchar_t* filePath, AnimationClip* animationClips = nullptr,int numAnimationClips = 0, EnFbxUpAxis fbxUpAxis = enFbxUpAxisZ);
 
 	/// <summary>
 	/// アニメーションの再生。
 	/// </summary>
-	void PlayAnimation();
+	/// <param name="animNo">アニメーションクリップの番号。</param>
+	/// <param name="interpolateTime">補完時間</param>
+	void PlayAnimation(int animNo, float interpolateTime = 0.0f)
+	{
+		m_animation.Play(animNo, interpolateTime);
+	}
 
 	/// <summary>
 	/// アニメーションの初期化。
 	/// </summary>
-	void InitAnimation();
+	/// <param name="animationClips">アニメーションクリップの配列の先頭アドレス</param>
+	/// <param name="numAnimationClips">アニメーションクリップの数</param>
+	void InitAnimation(AnimationClip* animationClips, int numAnimationClips);
+
+	/// <summary>
+	/// スキンモデル取得。
+	/// </summary>
+	/// <returns>スキンモデル</returns>
+	SkinModel& GetSkinModel()
+	{
+		return m_skinModel;
+	}
 
 	/// <summary>
 	/// 座標を設定。
@@ -57,11 +76,20 @@ public:
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 描画
+	/// </summary>
+	void Draw(int renderMode);
 private:
 	SkinModel m_model;									//スキンモデル。
 	CVector3 m_position;			//座標。
 	CQuaternion m_rotation;			//回転。
 	CVector3 m_scale = CVector3().One();			//拡大率。
+	AnimationClip*				m_animationClips = nullptr;			//アニメーションクリップ。
+	int							m_numAnimationClips = 0;			//アニメーションクリップの数。
+	EnFbxUpAxis					m_enFbxUpAxis = enFbxUpAxisZ;		//FBXの上方向。
+	SkinModel					m_skinModel;						//スキンモデル。
+	Animation					m_animation;						//!<アニメーション。
 
 };
 

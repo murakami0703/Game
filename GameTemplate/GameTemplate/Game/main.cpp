@@ -50,11 +50,38 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
 
+	//深度ステンシルステート。
+	D3D11_DEPTH_STENCIL_DESC desc = { 0 };
+	desc.DepthEnable = true;
+	desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	desc.DepthFunc = D3D11_COMPARISON_GREATER;
+	desc.StencilEnable = false;
+	desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+	desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+	desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+	//D3Dデバイスを取得。
+	auto d3ddevice = g_graphicsEngine->GetD3DDevice();
+
+	//デプスステンシルステートを作成。
+	ID3D11DepthStencilState* depthStencilState;
+	d3ddevice->CreateDepthStencilState(&desc, &depthStencilState);
+
+	int renderMode = 0;	//０なら通常描画、１ならシルエット描画。
+
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
 		//描画開始。
 		g_graphicsEngine->BegineRender();
+		//手前に描画を行うデプスステンシルステートを設定する。
+		g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
 		//ゲームパッドの更新。	
 		for (auto& pad : g_pad) {
 			pad.Update();
@@ -62,16 +89,23 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//物理エンジンの更新。
 		g_physics.Update();
 
+		renderMode = 0;
+		//マップの描画。
+		map.Update();
+		map.Draw(renderMode);
+		//敵の描画と更新。
+		enemy.Update(player);
+		enemy.Draw(renderMode);
+
+		//シルエット描画
+		renderMode = 1;
 		//プレイヤーの更新。
 		player->Update();
 		//プレイヤーの描画。
-		player->Draw();
-		//マップの描画。
-		map.Update();
-		map.Draw();
-		//敵の描画と更新。
-		enemy.Update(player);
-		enemy.Draw();
+		player->Draw(renderMode);
+		//通常描画
+		renderMode = 0;
+		player->Draw(renderMode);
 
 		//ゲームカメラの更新
 		Gcamera.Update(player);

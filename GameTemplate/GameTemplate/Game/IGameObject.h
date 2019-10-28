@@ -5,6 +5,17 @@ typedef unsigned char	GameObjectPrio;
 class IGameObject
 {
 public:
+	IGameObject() :
+		m_priority(0),
+		m_isStart(false)
+	{
+	}
+	/// <summary>
+	/// Updateの直前で呼ばれる開始処理
+	/// </summary>
+	/// <returns></returns>
+	virtual bool Start() { return true; }
+
 	/// <summary>
 	/// 更新。
 	/// </summary>
@@ -43,6 +54,7 @@ public:
 		return isReqDelete;
 	}
 private:
+	bool m_isStart;						//Startの開始フラグ。
 	bool isReqDelete = false;		//削除リクエスト。
 	GameObjectPrio m_priority;		//実行優先度。
 	

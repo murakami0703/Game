@@ -17,11 +17,13 @@ Map::~Map()
 void Map::Update()
 {
 	m_mapModel.Update();
+
 }
-void Map::Draw()
+void Map::Draw(int renderMode)
 {
 	m_mapModel.Draw(
 		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix()
+		g_camera3D.GetProjectionMatrix(),
+		renderMode
 	);
 }
