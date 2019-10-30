@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-	m_skinModelRender->Init(L"modelData/unityChan.cmo");
+	m_skinModelRender->Init(L"Assets/modelData/unityChan.cmo");
 }
 Player::~Player()
 {
@@ -39,7 +39,7 @@ void Player::Update()
 	//ˆÚ“®‚Æ‰ñ“]
 	//m_skinModelRender->SetPosition(m_position);
 }
-void Player::Draw(int renderMode)
+void Player::Render(int renderMode)
 {
 	m_skinModelRender->Draw(renderMode);
 }

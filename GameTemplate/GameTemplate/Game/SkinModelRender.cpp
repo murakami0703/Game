@@ -11,10 +11,9 @@ SkinModelRender::~SkinModelRender()
 {
 }
 
-void SkinModelRender::Init(const wchar_t* filePath, AnimationClip* animationClips = nullptr, int numAnimationClips , EnFbxUpAxis fbxUpAxis)
+void SkinModelRender::Init(const wchar_t* filePath, AnimationClip* animationClips , int numAnimationClips , EnFbxUpAxis fbxUpAxis)
 {
-	m_enFbxUpAxis = fbxUpAxis;
-	m_skinModel.Init(filePath, m_enFbxUpAxis);
+	m_skinModel.Init(filePath, fbxUpAxis);
 	InitAnimation(animationClips, numAnimationClips);
 }
 /// <summary>
@@ -29,14 +28,14 @@ bool SkinModelRender::Start()
 /// </summary>
 void SkinModelRender::Update()
 {
-	m_skinModel.Update.UpdateWorldMatrix(m_position, m_rotation, m_scale, m_enFbxUpAxis);
+	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 
 }
 /// <summary>
 /// •`‰æ
 /// </summary>
 void SkinModelRender::Draw(int renderMode) {
-	m_model.Draw(
+	m_skinModel.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
 		renderMode

@@ -102,10 +102,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//プレイヤーの更新。
 		player->Update();
 		//プレイヤーの描画。
-		player->Draw(renderMode);
+		player->Render(renderMode);
 		//通常描画
 		renderMode = 0;
-		player->Draw(renderMode);
+		player->Render(renderMode);
 
 		//ゲームカメラの更新
 		Gcamera.Update(player);

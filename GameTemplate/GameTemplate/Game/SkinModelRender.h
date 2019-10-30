@@ -81,15 +81,13 @@ public:
 	/// </summary>
 	void Draw(int renderMode);
 private:
-	SkinModel m_model;									//スキンモデル。
 	CVector3 m_position;			//座標。
 	CQuaternion m_rotation;			//回転。
 	CVector3 m_scale = CVector3().One();			//拡大率。
 	AnimationClip*				m_animationClips = nullptr;			//アニメーションクリップ。
 	int							m_numAnimationClips = 0;			//アニメーションクリップの数。
-	EnFbxUpAxis					m_enFbxUpAxis = enFbxUpAxisZ;		//FBXの上方向。
 	SkinModel					m_skinModel;						//スキンモデル。
-	Animation					m_animation;						//!<アニメーション。
+	Animation					m_animation;						//アニメーション。
 
 };
 

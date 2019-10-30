@@ -1,7 +1,7 @@
 #pragma once
 #include "character/CharacterController.h"
 
-class Player
+class Player 
 {
 public:
 	Player();
@@ -17,7 +17,7 @@ public:
 
 	bool Start();
 	void Update();
-	void Draw(int renderMode);
+	void Render(int renderMode);
 	/// <summary>
 	/// プレイヤーのポジションを返す関数。
 	/// </summary>
