@@ -33,12 +33,43 @@ void Player::Move()
 void Player::Update()
 {
 	Move();
+
 	//ワールド行列の更新。
-	//移動と回転
 	m_model.UpdateWorldMatrix(m_position, CQuaternion::Identity(), CVector3::One());
 	m_model.Update();
 
 }
+void Player::PlAnimation()
+{
+	switch (m_anime)
+	{
+	case Player::Animation_Idel:
+		//待機中
+		//十字キーが押されたら移動アニメーション再生
+		if (g_pad[0].IsPress(enButtonLeft) ||
+			g_pad[0].IsPress(enButtonRight) ||
+			g_pad[0].IsPress(enButtonUp) ||
+			g_pad[0].IsPress(enButtonDown))
+		{
+			m_anime = Animation_Walk;
+		}
+		break;
+	case Player::Animation_Walk:
+		//移動中
+		break;
+	case Player::Animation_Attack1:
+		break;
+	case Player::Animation_Attack2:
+		break;
+	case Player::Animation_Jump:
+		//ジャンプ中
+		break;
+	default:
+		break;
+	}
+
+}
+
 void Player::Draw(int renderMode)
 {
 	m_model.Draw(

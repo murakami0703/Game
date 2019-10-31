@@ -17,6 +17,7 @@ public:
 
 	void Update();
 	void Draw(int renderMode);
+	void PlAnimation();
 	/// <summary>
 	/// プレイヤーのポジションを返す関数。
 	/// </summary>
@@ -28,6 +29,7 @@ private:
 	void Move();						//移動。
 	SkinModel m_model;		//スキンモデルレンダラー。
 	CVector3 m_position = CVector3().Zero();			//座標
+	Animation m_anime = Animation_Idel;
 	CharacterController m_characon;		//キャラコン
 };
 
