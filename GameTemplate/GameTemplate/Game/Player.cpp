@@ -4,7 +4,11 @@
 
 Player::Player()
 {
-	m_skinModelRender->Init(L"Assets/modelData/unityChan.cmo");
+	m_model.Init(L"Assets/modelData/unityChan.cmo");
+	//m_characon.Init(5.0f, 5.0f, m_position);
+
+	m_position = { 0.0f,0.0f,0.0f };
+
 }
 Player::~Player()
 {
@@ -26,20 +30,20 @@ void Player::Move()
 		m_position.z -= 4.0f;
 	}
 }
-bool Player::Start(){
-	//cmoファイルの読み込み。
-	/*m_model.Init(L"Assets/modelData/unityChan.cmo");
-	m_characon.Init(5.0f, 5.0f, m_position);*/
-	return true;
-}
 void Player::Update()
 {
 	Move();
 	//ワールド行列の更新。
 	//移動と回転
-	//m_skinModelRender->SetPosition(m_position);
+	m_model.UpdateWorldMatrix(m_position, CQuaternion::Identity(), CVector3::One());
+	m_model.Update();
+
 }
-void Player::Render(int renderMode)
+void Player::Draw(int renderMode)
 {
-	m_skinModelRender->Draw(renderMode);
+	m_model.Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix(),
+		renderMode
+	);
 }

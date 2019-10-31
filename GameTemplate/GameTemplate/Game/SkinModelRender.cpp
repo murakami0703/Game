@@ -31,17 +31,7 @@ void SkinModelRender::Update()
 	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 
 }
-/// <summary>
-/// 描画
-/// </summary>
-void SkinModelRender::Draw(int renderMode) {
-	m_skinModel.Draw(
-		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix(),
-		renderMode
-	);
 
-}
 /// <summary>
 /// アニメーションの初期化。
 /// </summary>

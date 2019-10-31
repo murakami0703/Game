@@ -15,9 +15,8 @@ public:
 		Animation_Jump,
 	};
 
-	bool Start();
 	void Update();
-	void Render(int renderMode);
+	void Draw(int renderMode);
 	/// <summary>
 	/// プレイヤーのポジションを返す関数。
 	/// </summary>
@@ -27,7 +26,7 @@ public:
 	}
 private:
 	void Move();						//移動。
-	SkinModelRender* m_skinModelRender = nullptr;		//スキンモデルレンダラー。
+	SkinModel m_model;		//スキンモデルレンダラー。
 	CVector3 m_position = CVector3().Zero();			//座標
 	CharacterController m_characon;		//キャラコン
 };

@@ -75,11 +75,7 @@ public:
 	/// 更新。
 	/// </summary>
 	void Update();
-
-	/// <summary>
-	/// 描画
-	/// </summary>
-	void Draw(int renderMode);
+	
 private:
 	CVector3 m_position;			//座標。
 	CQuaternion m_rotation;			//回転。

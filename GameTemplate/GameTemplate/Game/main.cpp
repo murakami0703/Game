@@ -50,6 +50,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
 
+	int renderMode = 0;
 	//深度ステンシルステート。
 	D3D11_DEPTH_STENCIL_DESC desc = { 0 };
 	desc.DepthEnable = true;
@@ -73,7 +74,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	ID3D11DepthStencilState* depthStencilState;
 	d3ddevice->CreateDepthStencilState(&desc, &depthStencilState);
 
-	int renderMode = 0;	//０なら通常描画、１ならシルエット描画。
+	
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
@@ -101,11 +102,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		renderMode = 1;
 		//プレイヤーの更新。
 		player->Update();
-		//プレイヤーの描画。
-		player->Render(renderMode);
+		player->Draw(renderMode);
+
 		//通常描画
 		renderMode = 0;
-		player->Render(renderMode);
+		player->Draw(renderMode);
+
 
 		//ゲームカメラの更新
 		Gcamera.Update(player);
