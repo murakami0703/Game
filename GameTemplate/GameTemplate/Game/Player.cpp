@@ -4,10 +4,19 @@
 
 Player::Player()
 {
-	m_model.Init(L"Assets/modelData/unityChan.cmo");
-	//m_characon.Init(5.0f, 5.0f, m_position);
+	//アニメーションクリップのロード。
+	m_animClips[Animation_Idel].Load(L"Assets/animData/run.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/walk.tka");
+	//ループフラグの設定。
+	m_animClips[Animation_Idel].SetLoopFlag(true);
+	m_animClips[Animation_Walk].SetLoopFlag(true);
 
-	m_position = { 0.0f,0.0f,0.0f };
+	m_model.Init(L"Assets/modelData/unityChan.cmo");
+	m_position = { 0.0f,5.0f,0.0f };
+	//m_characon.Init(20.0f, 100.0f, m_position);
+	m_move = m_position;
+	m_plAnime.Init(m_model, m_animClips, AnimationClip_Num);
+	m_plAnime.Play(Animation_Walk);
 
 }
 Player::~Player()
@@ -18,26 +27,30 @@ void Player::Move()
 {
 	//十字移動。
 	if (g_pad[0].IsPress(enButtonLeft)) {
-		m_position.x -= 4.0f;
+		m_move.x -= 4.0f;
 	}
 	if (g_pad[0].IsPress(enButtonRight)) {
-		m_position.x += 4.0f;
+		m_move.x += 4.0f;
 	}
 	if (g_pad[0].IsPress(enButtonUp)) {
-		m_position.z += 4.0f;
+		m_move.z += 4.0f;
 	}
 	if (g_pad[0].IsPress(enButtonDown)) {
-		m_position.z -= 4.0f;
+		m_move.z -= 4.0f;
 	}
 }
 void Player::Update()
 {
 	Move();
+	//重力
+	if (m_position.y > 0.0f) {
+		//m_move.y -= 0.2f;
 
+	}
+	//m_position = m_characon.Execute((1.0f / 60.0f), m_move);
 	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, CQuaternion::Identity(), CVector3::One());
+	m_model.UpdateWorldMatrix(m_move, CQuaternion::Identity(), CVector3::One());
 	m_model.Update();
-
 }
 void Player::PlAnimation()
 {
