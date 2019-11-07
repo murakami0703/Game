@@ -10,9 +10,6 @@ public:
 	enum PAnimation {
 		Animation_Idel,
 		Animation_Walk,
-		Animation_Attack1,
-		Animation_Attack2,
-		Animation_Jump,
 		AnimationClip_Num
 	};
 
@@ -30,10 +27,11 @@ private:
 	void Move();						//移動。
 	SkinModel m_model;		//スキンモデルレンダラー。
 	CVector3 m_position = CVector3().Zero();			//座標
+	CQuaternion m_rotation = CQuaternion().Identity();	//回転
 	CVector3 m_move;	//移動
 
-	PAnimation m_anime = Animation_Idel;		//アニメーション状態
-	Animation m_plAnime;
+	//PAnimation m_anime = Animation_Idel;		//アニメーション状態
+	Animation	m_animation;
 	AnimationClip m_animClips[AnimationClip_Num];	//アニメーションクリップ
 	CharacterController m_characon;		//キャラコン
 };

@@ -13,11 +13,10 @@ Player::Player()
 
 	m_model.Init(L"Assets/modelData/unityChan.cmo");
 	m_position = { 0.0f,5.0f,0.0f };
-	//m_characon.Init(20.0f, 100.0f, m_position);
+	m_characon.Init(20.0f, 100.0f, m_position);//キャラコン
 	m_move = m_position;
-	m_plAnime.Init(m_model, m_animClips, AnimationClip_Num);
-	m_plAnime.Play(Animation_Walk);
-
+	m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化
+	m_animation.Play(Animation_Walk);//アニメーション再生
 }
 Player::~Player()
 {
@@ -27,34 +26,47 @@ void Player::Move()
 {
 	//十字移動。
 	if (g_pad[0].IsPress(enButtonLeft)) {
-		m_move.x -= 4.0f;
+		m_move.x = -100.0f;
+		m_rotation.SetRotation(CVector3().AxisY(), 80.0f);
+
 	}
-	if (g_pad[0].IsPress(enButtonRight)) {
-		m_move.x += 4.0f;
+	else if (g_pad[0].IsPress(enButtonRight)) {
+		m_move.x = 100.0f;
+		m_rotation.SetRotation(CVector3().AxisY(), -80.0f);
+
 	}
-	if (g_pad[0].IsPress(enButtonUp)) {
-		m_move.z += 4.0f;
+	else if (g_pad[0].IsPress(enButtonUp)) {
+		m_move.z = 100.0f;
+		m_rotation.SetRotation(CVector3().AxisX(), 0.0f);
+
 	}
-	if (g_pad[0].IsPress(enButtonDown)) {
-		m_move.z -= 4.0f;
+	else if (g_pad[0].IsPress(enButtonDown)) {
+		m_move.z = -100.0f;
+		m_rotation.SetRotation(CVector3().AxisY(), -110.0f);
+
 	}
+	//重力
+	if (m_characon.IsOnGround()) {
+		m_move.y = 0.0f;
+	}
+
+	m_position = m_characon.Execute((1.0f / 60.0f), m_move);
+
 }
 void Player::Update()
 {
-	Move();
-	//重力
-	if (m_position.y > 0.0f) {
-		//m_move.y -= 0.2f;
-
-	}
-	//m_position = m_characon.Execute((1.0f / 60.0f), m_move);
+	m_animation.Update(0.05f);//アニメーション再生
+	Move();//十字移動
+	CQuaternion qRot;
+	qRot.SetRotationDeg(CVector3().AxisX(), 80.0f);	//3dsMaxで設定されているアニメーションでキャラが回転しているので、補正を入れる。
+	qRot.Multiply(m_rotation, qRot);
 	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_move, CQuaternion::Identity(), CVector3::One());
+	m_model.UpdateWorldMatrix(m_position, qRot, CVector3::One());
 	m_model.Update();
 }
 void Player::PlAnimation()
 {
-	switch (m_anime)
+	/*switch (m_anime)
 	{
 	case Player::Animation_Idel:
 		//待機中
@@ -79,7 +91,7 @@ void Player::PlAnimation()
 		break;
 	default:
 		break;
-	}
+	}*/
 
 }
 
