@@ -46,6 +46,15 @@
     <Filter Include="gameobject">
       <UniqueIdentifier>{3d104487-5cfb-4d01-9449-b4db18e2c782}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{41395a16-8d77-4e4a-a304-0f88d490b82e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{dda85d33-ecb3-4a78-a976-244537885439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{eada28bd-66d8-41f8-b7ed-23cb66d59f13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -120,7 +129,6 @@
     <ClCompile Include="level\MapChip.cpp">
       <Filter>level</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Sprite.cpp">
@@ -136,7 +144,6 @@
     <ClCompile Include="Camera2D.cpp">
       <Filter>graphics\2D</Filter>
     </ClCompile>
-    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="IGameObject.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
@@ -144,11 +151,19 @@
       <Filter>gameobject</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="SkinModelRender.cpp">
       <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCamera.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,7 +248,6 @@
     <ClInclude Include="level\MapChip.h">
       <Filter>level</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Sprite.h">
       <Filter>sprite</Filter>
@@ -248,7 +262,6 @@
     <ClInclude Include="Camera2D.h">
       <Filter>graphics\2D</Filter>
     </ClInclude>
-    <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GameObjectManager.h">
       <Filter>gameobject</Filter>
     </ClInclude>
@@ -256,11 +269,19 @@
       <Filter>gameobject</Filter>
     </ClInclude>
     <ClInclude Include="Font.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="SkinModelRender.h">
       <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCamera.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +292,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\enemy.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\pp.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

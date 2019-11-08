@@ -4,9 +4,6 @@
 
 Enemy::Enemy()
 {
-	//アニメーションの再生。
-	m_animClips[enewalk].Load(L"Assets/animData/enemove.tka");
-	m_animClips[enewalk].SetLoopFlag(true);
 
 	//cmoファイルの読み込み。
 	m_enemy.Init(L"Assets/modelData/enemy.cmo");
@@ -19,19 +16,39 @@ Enemy::Enemy()
 Enemy::~Enemy()
 {
 }
-void Enemy::Move(Player* player)
+void Enemy::Follow(Player* player)
 {
 	CVector3 p_pos = player->GetPosition();
 	CVector3 diff = p_pos - m_position;
 	if (diff.Length() >100.0f){
 		diff.y = 0.0f;
 		diff.Normalize();
-		m_position += diff * 1.0f;
+		m_position += diff * 0.5f;
 	}
 }
 void Enemy::Update(Player* player)
 {
-	Move(player);
+	CVector3 p_pos = player->GetPosition();
+	CVector3 diff = p_pos - m_position;
+	switch (m_state) {
+	case eState_Haikai:
+		//徘徊中
+		if (diff.Length() < 300.0f) {
+			m_state = eState_TuisekiPlayer;
+		}
+		break;
+	case eState_TuisekiPlayer:
+		//プレイヤーを追跡
+		Follow(player);
+		//遠くなったので徘徊位置に戻る
+		if (diff.Length() > 400.0f) {
+			m_state = eState_Return;
+		}
+		break;
+	case eState_Return:
+		//徘徊位置に戻る
+		m_state = eState_Haikai;
+	}
 	//ワールド行列の更新。
 	m_enemy.UpdateWorldMatrix(m_position, CQuaternion::Identity(), m_scale);
 	m_enemy.Update();
