@@ -168,16 +168,27 @@ void SkinModel::Update()
 	m_light.EnvironmentLight = { 0.1f,0.1f,0.1f };
 
 }
-void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix,int  renderMode)
+void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix,EnRenderMode  renderMode)
 {
 	ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
 	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 
+	auto shadowMap = g_game->GetShadowMap();
 	//定数バッファの内容を更新。
 	SVSConstantBuffer vsCb;
 	vsCb.mWorld = m_worldMatrix;
 	vsCb.mProj = projMatrix;
 	vsCb.mView = viewMatrix;
+	//todo ライトカメラのビュー、プロジェクション行列を送る。
+	vsCb.mLightProj = shadowMap->GetLightProjMatrix();
+	vsCb.mLightView = shadowMap->GetLighViewMatrix();
+	if (m_isShadowReciever == true) {
+		vsCb.isShadowReciever = 1;
+	}
+	else {
+		vsCb.isShadowReciever = 0;
+	}
+
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
 	//視点の設定。
 	m_light.eyePos = g_camera3D.GetPosition();
@@ -188,6 +199,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix,int  renderMode)
 	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
 	//定数バッファをシェーダースロットに設定。
 	d3dDeviceContext->PSSetConstantBuffers(1, 1, &m_lightCb);
+	d3dDeviceContext->PSSetConstantBuffers(2, 1, &m_cb);
 	//サンプラステートを設定。
 	d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 	//ボーン行列をGPUに転送。

@@ -71,7 +71,6 @@ struct VSInputNmTxVcTangent
     float3 Normal   : NORMAL;				//法線。
     float3 Tangent  : TANGENT;				//接ベクトル。
     float2 TexCoord : TEXCOORD0;			//UV座標。
-	float4 posInLVP		: TEXCOORD1;	//ライトビュープロジェクション空間での座標。
 };
 /*!
  * @brief	スキンありモデルの頂点構造体。
@@ -95,6 +94,7 @@ struct PSInput{
 	float3 Tangent		: TANGENT;
 	float2 TexCoord 	: TEXCOORD0;
 	float3 worldPos		: TEXCOORD1;	//ワールド座標
+	float4 posInLVP		: TEXCOORD2;	//ライトビュープロジェクション空間での座標。
 };
 
 /// <summary>
@@ -130,12 +130,17 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	float4 pos = mul(mWorld, In.Position);
 	//鏡面反射の計算のために、ワールド座標をピクセルシェーダーに渡す。
 	psInput.worldPos = pos;
-	pos = mul(mView, pos);
-	pos = mul(mProj, pos);
+	/*pos = mul(mView, pos);
+	pos = mul(mProj, pos);*/
+
+	//ワールド座標系からカメラ座標系に変換する。
+	psInput.Position = mul(mView, pos);
+	//カメラ座標系からスクリーン座標系に変換する。
+	psInput.Position = mul(mProj, psInput.Position);
 
 	if (isShadowReciever == 1) {
 		//続いて、ライトビュープロジェクション空間に変換。
-		psInput.posInLVP = mul(mLightView, worldPos);
+		psInput.posInLVP = mul(mLightView, pos);
 		psInput.posInLVP = mul(mLightProj, psInput.posInLVP);
 	}
 
@@ -208,7 +213,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 				///LVP空間での深度値を計算。
 				float zInLVP = In.posInLVP.z / In.posInLVP.w;
 				//シャドウマップに書き込まれている深度値を取得。
-				float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
+				float zInShadowMap = g_shadowMap.Sample(Sampler, shadowMapUV);
 
 				if ((shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f) && zInLVP > zInShadowMap + 0.01f) {
 					//影が落ちているので、光を弱くする

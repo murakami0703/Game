@@ -6,10 +6,11 @@ Map::Map()
 {
 	//cmoファイルの読み込み。
 	m_mapModel.Init(L"Assets/modelData/test.cmo");
-	m_mapModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
-	m_phyStaticObject.CreateMeshObject(m_mapModel, m_position, m_rotation);
+	//地面をシャドウレシーバーにする。
 	m_mapModel.SetShadowReciever(true);
 
+	m_mapModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+	m_phyStaticObject.CreateMeshObject(m_mapModel, m_position, m_rotation);
 }
 
 
@@ -22,7 +23,7 @@ void Map::Update()
 	m_mapModel.Update();
 
 }
-void Map::Draw(int renderMode)
+void Map::Draw(EnRenderMode renderMode)
 {
 	m_mapModel.Draw(
 		g_camera3D.GetViewMatrix(),

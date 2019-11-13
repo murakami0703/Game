@@ -16,7 +16,8 @@ protected:
 	Shader m_vsShadowMap;			//シャドウマップ生成用の頂点シェーダー。
 	Shader m_psShadowMap;		//シャドウマップ生成用のピクセルシェーダー。
 
-	bool m_renderMode = 0;		//シルエット描画用
+	//bool m_renderMode = 0;		//シルエット描画用
+	EnRenderMode m_renderMode = enRenderMode_Invalid;	//レンダリングモード。
 	bool isSkining;
 	ID3D11ShaderResourceView* m_albedoTex = nullptr;
 	ID3D11DepthStencilState* m_silhouettoDepthStepsilState = nullptr;	//シルエット描画用のデプスステンシルステート。
@@ -56,7 +57,15 @@ public:
 	}
 	void SetAlbedoTexture(ID3D11ShaderResourceView* tex)
 	{
+		if (m_albedoTex != nullptr) {
+			//参照カウンタを下げる。
+			m_albedoTex->Release();
+		}
 		m_albedoTex = tex;
+		//参照カウンタを上げる。
+		m_albedoTex->AddRef();
+
+		//m_albedoTex = tex;
 	}
 	void SetMatrialName(const wchar_t* matName)
 	{
@@ -67,7 +76,7 @@ public:
 	{
 		return wcscmp(name, m_materialName.c_str()) == 0;
 	}
-	void SetRenderMode(int renderMode)
+	void SetRenderMode(EnRenderMode renderMode)
 	{
 		m_renderMode = renderMode;
 	}

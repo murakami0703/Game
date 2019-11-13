@@ -18,7 +18,7 @@ public:
 	/*!
 	* @brief	描画。
 	*/
-	void Draw(int renderMode);
+	void Draw(EnRenderMode renderMode);
 private:
 	SkinModel m_model;		//!<モデル。
 	PhysicsStaticObject m_physicsStaticObject;	//!<静的物理オブジェクト。

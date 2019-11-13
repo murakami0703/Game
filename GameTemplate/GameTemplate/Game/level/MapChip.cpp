@@ -12,7 +12,7 @@ MapChip::MapChip(const LevelObjectData& objData)
 	m_physicsStaticObject.CreateMeshObject(m_model, objData.position, objData.rotation);
 }
 
-void MapChip::Draw(int renderMode)
+void MapChip::Draw(EnRenderMode renderMode)
 {
 	m_model.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), renderMode);
 }

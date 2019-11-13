@@ -167,6 +167,8 @@
     </ClCompile>
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="SShadowMap.cpp" />
+    <ClCompile Include="SRenderTarget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -287,6 +289,8 @@
     </ClInclude>
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="SShadowMap.h" />
+    <ClInclude Include="SRenderTarget.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">
@@ -299,6 +303,9 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\pp.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\pl.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

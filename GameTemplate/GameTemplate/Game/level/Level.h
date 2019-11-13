@@ -51,7 +51,7 @@ public :
 	/*!
 	* @brief	レベルを描画。
 	*/
-	void Draw(int renderMode);
+	void Draw(EnRenderMode renderMode);
 private:
 	std::vector<MapChipPtr> m_mapChipArray;		//!<マップチップの可変長配列。
 };
