@@ -25,6 +25,13 @@ void __cdecl ModelEffect::Apply(ID3D11DeviceContext* deviceContext)
 		//通常描画。
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_pPSShader->GetBody(), NULL, 0);
 		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
+		//todo シェーダーリソースビューを一気に設定する。
+		ID3D11ShaderResourceView* srvArray[] = {
+			m_albedoTex,							//アルベドテクスチャ。
+			//!!!g_game->GetShadowMap()->GetShadowMapSRV()	//シャドウマップ。
+		};
+		deviceContext->PSSetShaderResources(0, 2, srvArray);
+
 		break;
 	case 1:
 		//シルエット描画。

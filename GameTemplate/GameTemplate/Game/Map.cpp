@@ -8,6 +8,8 @@ Map::Map()
 	m_mapModel.Init(L"Assets/modelData/test.cmo");
 	m_mapModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	m_phyStaticObject.CreateMeshObject(m_mapModel, m_position, m_rotation);
+	m_mapModel.SetShadowReciever(true);
+
 }
 
 

@@ -165,6 +165,8 @@
     <ClCompile Include="GameCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -283,6 +285,8 @@
     <ClInclude Include="GameCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="RenderTarget.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">

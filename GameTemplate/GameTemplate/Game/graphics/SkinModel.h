@@ -85,6 +85,15 @@ public:
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// シャドウレシーバーのフラグを設定。
+	/// </summary>
+	/// <param name="flag"></param>
+	void SetShadowReciever(bool flag)
+	{
+		m_isShadowReciever = flag;
+	}
+
 private:
 	/*!
 	*@brief	サンプラステートの初期化。
@@ -116,6 +125,10 @@ private:
 		CMatrix mWorld;
 		CMatrix mView;
 		CMatrix mProj;
+		CMatrix mLightView;		// ライトビュー行列。
+		CMatrix mLightProj;		// ライトプロジェクション行列。
+		int isShadowReciever;	// シャドウレシーバーのフラグ。
+
 	};
 	//ディレクションライトの定数バッファ
 	struct SDirectionLight {
@@ -139,6 +152,7 @@ private:
 	ID3D11Buffer*		m_lightCb = nullptr;				//!<ライト用の定数バッファ。
 	SLight				m_light;						//!<ライトの構造体。
 	ID3D11ShaderResourceView* m_albedoTextureSRV = nullptr;	//!<アルベドテクスチャのSRV
+	bool m_isShadowReciever = false;						//シャドウレシーバーのフラグ。
 
 };
 
