@@ -16,7 +16,7 @@ public:
 	};
 
 	void Update();
-	void Draw(int renderMode);
+	void Draw(EnRenderMode renderMode);
 	/// <summary>
 	/// プレイヤーのポジションを返す関数。
 	/// </summary>
@@ -24,6 +24,10 @@ public:
 	CVector3 Player::GetPosition() {
 		return m_position;
 	}
+	SkinModel* GetPlayerSkinModel() {
+		return &m_model;
+	}
+
 private:
 	void Move();						//移動。
 	void PlAnimation();//アニメーション

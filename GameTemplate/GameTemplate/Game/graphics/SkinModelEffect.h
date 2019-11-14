@@ -16,7 +16,8 @@ protected:
 	Shader m_vsShadowMap;			//シャドウマップ生成用の頂点シェーダー。
 	Shader m_psShadowMap;		//シャドウマップ生成用のピクセルシェーダー。
 
-	bool m_renderMode = 0;		//シルエット描画用
+	//bool m_renderMode = 0;		//シルエット描画用
+	EnRenderMode m_renderMode = enRenderMode_Normal;	//レンダリングモード。
 	bool isSkining;
 	ID3D11ShaderResourceView* m_albedoTex = nullptr;
 	ID3D11DepthStencilState* m_silhouettoDepthStepsilState = nullptr;	//シルエット描画用のデプスステンシルステート。
@@ -31,7 +32,6 @@ public:
 
 		// シャドウマップ用のシェーダーをロード。
 		m_psShadowMap.Load("Assets/shader/model.fx", "PSMain_ShadowMap", Shader::EnType::PS);
-		m_vsShadowMap.Load("Assets/shader/model.fx", "VSMain_ShadowMap", Shader::EnType::VS);
 
 		//デプスステンシルの初期化。
 		InitSilhouettoDepthStepsilState();
@@ -67,7 +67,7 @@ public:
 	{
 		return wcscmp(name, m_materialName.c_str()) == 0;
 	}
-	void SetRenderMode(int renderMode)
+	void SetRenderMode(EnRenderMode renderMode)
 	{
 		m_renderMode = renderMode;
 	}
@@ -87,6 +87,8 @@ public:
 	NonSkinModelEffect()
 	{
 		m_vsShader.Load("Assets/shader/model.fx", "VSMain", Shader::EnType::VS);
+		m_vsShadowMap.Load("Assets/shader/model.fx", "VSMain_ShadowMap", Shader::EnType::VS);
+
 		m_pVSShader = &m_vsShader;
 		isSkining = false;
 	}

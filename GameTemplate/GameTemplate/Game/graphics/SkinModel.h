@@ -53,7 +53,7 @@ public:
 	*@param[in]	projMatrix		プロジェクション行列。
 	*  カメラ座標系の3Dモデルをスクリーン座標系に変換する行列です。
 	*/
-	void Draw( CMatrix viewMatrix, CMatrix projMatrix , int renderStep);
+	void Draw( CMatrix viewMatrix, CMatrix projMatrix , EnRenderMode m_renderMode = enRenderMode_Normal);
 	/*!
 	*@brief	スケルトンの取得。
 	*/
@@ -135,6 +135,10 @@ private:
 		CVector4 direction[Dcolor];		//ライトの方向。
 		CVector4 color[Dcolor];			//ライトのカラー。
 	};
+	//シャドウマップの定数バッファ
+	struct ShadowMapConstantBuffer {
+		CMatrix lightViewProjMatrix;
+	};
 	//ライト構造体
 	struct SLight {
 		SDirectionLight		directionLight;		//ディレクションライト
@@ -151,7 +155,10 @@ private:
 	ID3D11SamplerState* m_samplerState = nullptr;		//!<サンプラステート。
 	ID3D11Buffer*		m_lightCb = nullptr;				//!<ライト用の定数バッファ。
 	SLight				m_light;						//!<ライトの構造体。
+	ID3D11Buffer*		m_shadowMapcb = nullptr;					//!<シャドウマップ用の定数バッファ。
 	ID3D11ShaderResourceView* m_albedoTextureSRV = nullptr;	//!<アルベドテクスチャのSRV
+	ID3D11ShaderResourceView* m_shadowMapSRV = nullptr;		//!<シャドウマップのSRV
+
 	bool m_isShadowReciever = false;						//シャドウレシーバーのフラグ。
 
 };

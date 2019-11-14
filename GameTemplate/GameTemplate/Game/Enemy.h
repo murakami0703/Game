@@ -12,7 +12,7 @@ public:
 		num
 	};
 	void Update(Player* player);
-	void Draw(int renderMode);
+	void Draw(EnRenderMode renderMode);
 	void Follow(Player* player);
 	void move();
 

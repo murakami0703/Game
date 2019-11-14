@@ -54,11 +54,11 @@ void Enemy::Update(Player* player)
 	m_enemy.Update();
 
 }
-void Enemy::Draw(int renderMode)
+void Enemy::Draw(EnRenderMode m_renderMode)
 {
 	m_enemy.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
-		renderMode
+		m_renderMode
 	);
 }

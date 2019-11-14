@@ -140,7 +140,7 @@ void Player::PlAnimation()
 
 }
 
-void Player::Draw(int renderMode)
+void Player::Draw(EnRenderMode renderMode)
 {
 	m_model.Draw(
 		g_camera3D.GetViewMatrix(),

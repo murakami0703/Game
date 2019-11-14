@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SkinModel.h"
 #include "SkinModelDataManager.h"
+#include "ShadowMap.h"
 
 SkinModel::~SkinModel()
 {
@@ -168,36 +169,52 @@ void SkinModel::Update()
 	m_light.EnvironmentLight = { 0.1f,0.1f,0.1f };
 
 }
-void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix,int  renderMode)
+void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_renderMode)
 {
 	ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
 	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 
+	auto shadowMap = ShadowMap::GetInstance();
 	//定数バッファの内容を更新。
 	SVSConstantBuffer vsCb;
 	vsCb.mWorld = m_worldMatrix;
 	vsCb.mProj = projMatrix;
 	vsCb.mView = viewMatrix;
+	// ライトカメラのビュー、プロジェクション行列を送る。
+	vsCb.mLightProj = shadowMap->GetLightProjMatrix();
+	vsCb.mLightView = shadowMap->GetLightViewMatrix();
+	if (m_isShadowReciever == true) {
+		vsCb.isShadowReciever = 1;
+	}
+	else {
+		vsCb.isShadowReciever = 0;
+	}
+	//定数バッファの更新
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
 	//視点の設定。
 	m_light.eyePos = g_camera3D.GetPosition();
 	//ライト用の定数バッファを更新。
 	d3dDeviceContext->UpdateSubresource(m_lightCb, 0, nullptr, &m_light, 0, 0);
+	//シャドウマップ用の定数バッファを更新。
+	d3dDeviceContext->UpdateSubresource(m_shadowMapcb, 0, nullptr, &vsCb, 0, 0);
 	//定数バッファをGPUに転送。
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
 	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
 	//定数バッファをシェーダースロットに設定。
 	d3dDeviceContext->PSSetConstantBuffers(1, 1, &m_lightCb);
+	d3dDeviceContext->PSSetConstantBuffers(2, 1, &m_shadowMapcb);
+
 	//サンプラステートを設定。
 	d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 	//ボーン行列をGPUに転送。
 	m_skeleton.SendBoneMatrixArrayToGPU();
 	//アルベドテクスチャを設定する。
 	d3dDeviceContext->PSSetShaderResources(0, 1, &m_albedoTextureSRV);
+	d3dDeviceContext->PSSetShaderResources(0, 1, &m_shadowMapSRV);
 	//エフェクトにクエリを行う。
 	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
 		auto modelMaterial = reinterpret_cast<SkinModelEffect*>(material);
-		modelMaterial->SetRenderMode(renderMode);
+		modelMaterial->SetRenderMode(m_renderMode);
 	});
 
 	//描画。

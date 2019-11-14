@@ -8,7 +8,11 @@ public:
 	Map();
 	~Map();
 	void Update();
-	void Draw(int renderMode);
+	void Draw(EnRenderMode renderMode);
+
+	SkinModel* GetMapSkinModel() {
+		return &m_mapModel;
+	}
 private:
 	SkinModel m_mapModel;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();		//座標

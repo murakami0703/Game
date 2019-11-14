@@ -71,7 +71,6 @@ struct VSInputNmTxVcTangent
     float3 Normal   : NORMAL;				//法線。
     float3 Tangent  : TANGENT;				//接ベクトル。
     float2 TexCoord : TEXCOORD0;			//UV座標。
-	float4 posInLVP		: TEXCOORD1;	//ライトビュープロジェクション空間での座標。
 };
 /*!
  * @brief	スキンありモデルの頂点構造体。
@@ -95,13 +94,14 @@ struct PSInput{
 	float3 Tangent		: TANGENT;
 	float2 TexCoord 	: TEXCOORD0;
 	float3 worldPos		: TEXCOORD1;	//ワールド座標
+	float4 posInLVP		: TEXCOORD2;	//ライトビュープロジェクション空間での座標。
 };
 
 /// <summary>
 /// シャドウマップ用のピクセルシェーダへの入力。
 /// </summary>
 struct PSInput_ShadowMap {
-	float4 Position 			: SV_POSITION;	//座標。
+	float4 Position 	: SV_POSITION;	//座標。
 };
 
 /*!
@@ -133,14 +133,17 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	pos = mul(mView, pos);
 	pos = mul(mProj, pos);
 
+	float4 WorldPos_ = mul(mWorld, In.Position);
+
 	if (isShadowReciever == 1) {
 		//続いて、ライトビュープロジェクション空間に変換。
-		psInput.posInLVP = mul(mLightView, worldPos);
+		psInput.posInLVP = mul(mLightView, WorldPos_);
 		psInput.posInLVP = mul(mLightProj, psInput.posInLVP);
 	}
 
 	psInput.Position = pos;
 	psInput.TexCoord = In.TexCoord;
+
 	psInput.Normal = normalize(mul(mWorld, In.Normal));
 	psInput.Tangent = normalize(mul(mWorld, In.Tangent));
 	return psInput;
@@ -197,24 +200,25 @@ float4 PSMain( PSInput In ) : SV_Target0
 	float3 lig = 0.0f;
 	for (int i = 0; i < Dcolor; i++) {
 		lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.dligDirection[i])) * directionLight.dligColor[i];
+	}
+	if (isShadowReciever == 1) {
+		//シャドウレシーバー。
+	//LVP空間から見た時の最も手前の深度値をシャドウマップから取得する。
+		float2 shadowMapUV = In.posInLVP.xy / In.posInLVP.w;
+		shadowMapUV *= float2(0.5f, -0.5f);
+		shadowMapUV += 0.5f;
+		//シャドウマップの範囲内かどうかを判定する。
 
-			if (isShadowReciever == 1) {	//シャドウレシーバー。
-		//LVP空間から見た時の最も手前の深度値をシャドウマップから取得する。
-				float2 shadowMapUV = In.posInLVP.xy / In.posInLVP.w;
-				shadowMapUV *= float2(0.5f, -0.5f);
-				shadowMapUV += 0.5f;
-				//シャドウマップの範囲内かどうかを判定する。
+		///LVP空間での深度値を計算。
+		float zInLVP = In.posInLVP.z / In.posInLVP.w;
+		//シャドウマップに書き込まれている深度値を取得。
+		float zInShadowMap = g_shadowMap.Sample(Sampler, shadowMapUV);
 
-				///LVP空間での深度値を計算。
-				float zInLVP = In.posInLVP.z / In.posInLVP.w;
-				//シャドウマップに書き込まれている深度値を取得。
-				float zInShadowMap = g_shadowMap.Sample(g_sampler, shadowMapUV);
-
-				if ((shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f) && zInLVP > zInShadowMap + 0.01f) {
-					//影が落ちているので、光を弱くする
-					lig *= 0.5f;
-				}
-			}
+		if ((shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f) && zInLVP > zInShadowMap + 0.01f) {
+			//影が落ちているので、光を弱くする
+			lig *= 0.5f;
+		}
+	}
 		//ディレクションライトの鏡面反射光を計算する。
 		{
 			//反射ベクトルを求める。

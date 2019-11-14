@@ -9,7 +9,6 @@ Map::Map()
 	m_mapModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	m_phyStaticObject.CreateMeshObject(m_mapModel, m_position, m_rotation);
 	m_mapModel.SetShadowReciever(true);
-
 }
 
 
@@ -22,7 +21,7 @@ void Map::Update()
 	m_mapModel.Update();
 
 }
-void Map::Draw(int renderMode)
+void Map::Draw(EnRenderMode renderMode)
 {
 	m_mapModel.Draw(
 		g_camera3D.GetViewMatrix(),
