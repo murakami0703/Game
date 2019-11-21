@@ -1,6 +1,7 @@
 #pragma once
 
 #include "physics/PhysicsStaticObject.h"
+#include "ShadowMap.h"
 
 class Map
 {

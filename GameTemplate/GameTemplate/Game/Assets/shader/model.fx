@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////
 //アルベドテクスチャ。
 Texture2D<float4> albedoTexture : register(t0);	
-Texture2D<float4> g_shadowMap : register(t1);		//シャドウマップ。
+Texture2D<float4> g_shadowMap : register(t2);		//シャドウマップ。
 
 //ボーン行列
 StructuredBuffer<float4x4> boneMatrix : register(t1);
@@ -128,16 +128,16 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 {
 	PSInput psInput = (PSInput)0;
 	float4 pos = mul(mWorld, In.Position);
+	float4 shadowPos = pos;
 	//鏡面反射の計算のために、ワールド座標をピクセルシェーダーに渡す。
 	psInput.worldPos = pos;
 	pos = mul(mView, pos);
 	pos = mul(mProj, pos);
 
-	float4 WorldPos_ = mul(mWorld, In.Position);
 
 	if (isShadowReciever == 1) {
 		//続いて、ライトビュープロジェクション空間に変換。
-		psInput.posInLVP = mul(mLightView, WorldPos_);
+		psInput.posInLVP = mul(mLightView, shadowPos);
 		psInput.posInLVP = mul(mLightProj, psInput.posInLVP);
 	}
 
@@ -200,6 +200,23 @@ float4 PSMain( PSInput In ) : SV_Target0
 	float3 lig = 0.0f;
 	for (int i = 0; i < Dcolor; i++) {
 		lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.dligDirection[i])) * directionLight.dligColor[i];
+
+		//ディレクションライトの鏡面反射光を計算する。
+		{
+			//反射ベクトルを求める。
+			float3 r = directionLight.dligDirection[i] + (2 * dot(In.Normal, -directionLight.dligDirection[i]))* In.Normal;
+
+			//視点からライトを当てる物体に伸びるベクトルを求める。
+			float3 e = normalize(In.worldPos - eyePos);
+
+			//ベクトルの内積を計算。
+			float specPower = max(0, dot(r, -e));
+
+			//スぺキュラ反射をライトに加算する。
+			lig += directionLight.dligColor[i].xyz*pow(specPower, specPow);
+
+		}
+
 	}
 	if (isShadowReciever == 1) {
 		//シャドウレシーバー。
@@ -219,22 +236,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			lig *= 0.5f;
 		}
 	}
-		//ディレクションライトの鏡面反射光を計算する。
-		{
-			//反射ベクトルを求める。
-			float3 r = directionLight.dligDirection[i] + (2 * dot(In.Normal, -directionLight.dligDirection[i]))* In.Normal;
-
-			//視点からライトを当てる物体に伸びるベクトルを求める。
-			float3 e = normalize(In.worldPos - eyePos);
-
-			//ベクトルの内積を計算。
-			float specPower = max(0, dot(r, -e));
-
-			//スぺキュラ反射をライトに加算する。
-			lig += directionLight.dligColor[i].xyz*pow(specPower, specPow);
-
-		}
-	}
+	
 	//環境光を当てる。
 	lig += EnvironmentLight;
 

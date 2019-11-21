@@ -138,7 +138,7 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		//デプスステンシルビューを作成。
 		d3dDevice->CreateDepthStencilView(m_depthStencilTex, &depthStencilViewDesc, &m_depthStencilView);
 	}
-	// ビューポート。
+	//6.todo ビューポート。
 	{
 		m_viewport.TopLeftX = 0;
 		m_viewport.TopLeftY = 0;

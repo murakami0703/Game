@@ -51,8 +51,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//sprite
 	g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
-
-	EnRenderMode renderMode = enRenderMode_Normal;
 	//深度ステンシルステート。
 	D3D11_DEPTH_STENCIL_DESC desc = { 0 };
 	desc.DepthEnable = true;
@@ -90,12 +88,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			}
 			//物理エンジンの更新。
 			g_physics.Update();
+
+			//プレイヤーの更新。
+			player->Update();
 			//マップの描画。
 			map->Update();
 			//敵の描画と更新。
 			enemy.Update(player);
-			//プレイヤーの更新。
-			player->Update();
 			//ゲームカメラの更新
 			Gcamera.Update(player);
 
@@ -107,8 +106,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			m_shadowMap.RegistShadowCaster(player->GetPlayerSkinModel());
 			m_shadowMap.RegistShadowCaster(map->GetMapSkinModel());
 			//シャドウマップを更新。
-			m_shadowMap.UpdateFromLightTarget(
-				{ 1000.0f, 1000.0f, 1000.0f },
+			m_shadowMap.Update(
+				{ 0.0f, 1000.0f, 0.0f },
 				{ 0.0f, 0.0f, 0.0f }
 			);
 
@@ -150,16 +149,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			//手前に描画を行うデプスステンシルステートを設定する。
 			g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
 
-			renderMode = enRenderMode_Normal;
-
-			map->Draw(renderMode);
-			enemy.Draw(renderMode);
+			map->Draw(enRenderMode_Normal);
+			enemy.Draw(enRenderMode_Normal);
 			//シルエット描画
-			renderMode = enRenderMode_silhouette;
-			player->Draw(renderMode);
+			player->Draw(enRenderMode_silhouette);
 			//通常描画
-			renderMode = enRenderMode_Normal;
-			player->Draw(renderMode);
+			player->Draw(enRenderMode_Normal);
 			//SpriteのDraw関数を呼び出す。
 			g_sprite.SetMulColor({ 1.0f,0.0f,0.0f,1.0f });
 			g_sprite.Draw();

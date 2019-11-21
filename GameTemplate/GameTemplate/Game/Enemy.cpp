@@ -7,7 +7,8 @@ Enemy::Enemy()
 
 	//cmoÉtÉ@ÉCÉãÇÃì«Ç›çûÇ›ÅB
 	m_enemy.Init(L"Assets/modelData/enemy.cmo");
-	m_position = { 0.0f,30.0f,0.0f };
+	m_position = { 150.0f,30.0f,200.0f };
+	m_oldPos = m_position;
 	m_scale = { 5.0f,5.0f,5.0f };
 
 }
@@ -18,6 +19,7 @@ Enemy::~Enemy()
 }
 void Enemy::Follow(Player* player)
 {
+	//í«îˆÇøÇ„
 	CVector3 p_pos = player->GetPosition();
 	CVector3 diff = p_pos - m_position;
 	if (diff.Length() >100.0f){
@@ -26,6 +28,32 @@ void Enemy::Follow(Player* player)
 		m_position += diff * 0.5f;
 	}
 }
+
+void Enemy::move()
+{
+	//úpújíÜ
+	m_moveCount++;
+	m_position.z += m_move;
+	if (m_moveCount == 100) {
+		m_move = -0.6f;
+	}
+	if (m_moveCount == 200) {
+		m_move = 0.6f;
+		m_moveCount = 0;
+	}
+}
+void Enemy::Return()
+{
+	//úpújà íuÇ…ñﬂÇÈÅB
+	/*CVector3 diff = m_position - m_oldPos;
+	diff.y = 0.0f;
+	diff.Normalize();
+	m_position += diff * 0.7f;
+	if (diff.Length() < 1.0f) {
+		m_state = eState_Haikai;
+	}*/
+}
+
 void Enemy::Update(Player* player)
 {
 	CVector3 p_pos = player->GetPosition();
@@ -33,6 +61,7 @@ void Enemy::Update(Player* player)
 	switch (m_state) {
 	case eState_Haikai:
 		//úpújíÜ
+		move();
 		if (diff.Length() < 300.0f) {
 			m_state = eState_TuisekiPlayer;
 		}
@@ -42,12 +71,12 @@ void Enemy::Update(Player* player)
 		Follow(player);
 		//âìÇ≠Ç»Ç¡ÇΩÇÃÇ≈úpújà íuÇ…ñﬂÇÈ
 		if (diff.Length() > 400.0f) {
-			m_state = eState_Return;
+			m_state = eState_Haikai;
 		}
 		break;
 	case eState_Return:
 		//úpújà íuÇ…ñﬂÇÈ
-		m_state = eState_Haikai;
+		Return();
 	}
 	//ÉèÅ[ÉãÉhçsóÒÇÃçXêVÅB
 	m_enemy.UpdateWorldMatrix(m_position, CQuaternion::Identity(), m_scale);

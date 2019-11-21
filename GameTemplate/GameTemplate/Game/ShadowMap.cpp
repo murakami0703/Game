@@ -29,8 +29,19 @@ ShadowMap::~ShadowMap()
 	m_instance = nullptr;
 }
 
-void ShadowMap::UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 lightDir)
+void ShadowMap::Update(CVector3 lightCameraPos, CVector3 lightCameraTarget)
 {
+	m_lightCameraTarget = lightCameraTarget;
+	m_lightCameraPosition = lightCameraPos;
+	//ライトの方向を計算する。
+	auto lightDir = m_lightCameraTarget - m_lightCameraPosition;
+	if (lightDir.Length() < 0.0001f) {
+		//ライトカメラの注視点と視点が近すぎる。
+		//恐らくバグなので、クラッシュさせる。
+		std::abort();
+	}
+	//正規化して、方向ベクトルに変換する。
+	lightDir.Normalize();
 	//ライトの方向によって、ライトカメラの上方向を決める。
 	CVector3 lightCameraUpAxis;
 	if (fabsf(lightDir.y) > 0.99998f) {
@@ -51,27 +62,11 @@ void ShadowMap::UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 light
 	//ライトプロジェクション行列を作成する。
 	//太陽光からの影を落としたいなら、平行投影行列を作成する。
 	m_lightProjMatrix.MakeOrthoProjectionMatrix(
-		3000,
-		3000,
+		500,
+		500,
 		0.1f,
 		5000.0f
 	);
-}
-void ShadowMap::UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCameraTarget)
-{
-	m_lightCameraTarget = lightCameraTarget;
-	m_lightCameraPosition = lightCameraPos;
-	//ライトの方向を計算する。
-	auto lightDir = m_lightCameraTarget - m_lightCameraPosition;
-	if (lightDir.Length() < 0.0001f) {
-		//ライトカメラの注視点と視点が近すぎる。
-		//恐らくバグなので、クラッシュさせる。
-		std::abort();
-	}
-	//正規化して、方向ベクトルに変換する。
-	lightDir.Normalize();
-	//
-	UpdateFromLightDirection(lightCameraPos, lightDir);
 }
 void ShadowMap::RenderToShadowMap()
 {
@@ -91,8 +86,8 @@ void ShadowMap::RenderToShadowMap()
 	//シャドウキャスターをシャドウマップにレンダリング。
 	for (auto& caster : m_shadowCasters) {
 		caster->Draw(
-			m_lightProjMatrix,
 			m_lightViewMatrix,
+			m_lightProjMatrix,
 			enRenderMode_CreateShadowMap
 		);
 	}

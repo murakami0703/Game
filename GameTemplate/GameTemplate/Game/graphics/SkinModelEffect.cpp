@@ -19,8 +19,20 @@ void ModelEffect::InitSilhouettoDepthStepsilState()
 void __cdecl ModelEffect::Apply(ID3D11DeviceContext* deviceContext)
 {
 	//シェーダーを適用する。
-	deviceContext->VSSetShader((ID3D11VertexShader*)m_pVSShader->GetBody(), NULL, 0);
+	auto Shadow = ShadowMap::GetInstance();
 	switch (m_renderMode) {
+	case enRenderMode_Normal:
+	{//通常描画。
+		deviceContext->VSSetShader((ID3D11VertexShader*)m_pVSShader->GetBody(), NULL, 0);
+		deviceContext->PSSetShader((ID3D11PixelShader*)m_pPSShader->GetBody(), NULL, 0);
+		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
+		ID3D11ShaderResourceView* srvArray[] = {
+			m_albedoTex,//アルベドテクスチャ。
+			Shadow->GetShadowMapSRV()	//シャドウマップ。
+		};
+		deviceContext->PSSetShaderResources(0, 2, srvArray);
+	}
+		break;
 	case enRenderMode_silhouette:
 		//シルエット描画。
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_pPSSilhouette->GetBody(), NULL, 0);
@@ -31,18 +43,6 @@ void __cdecl ModelEffect::Apply(ID3D11DeviceContext* deviceContext)
 		//シャドウマップ生成。
 		deviceContext->VSSetShader((ID3D11VertexShader*)m_vsShadowMap.GetBody(), NULL, 0);
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_psShadowMap.GetBody(), NULL, 0);
-		break;
-	case enRenderMode_Normal:
-		//通常描画。
-		deviceContext->PSSetShader((ID3D11PixelShader*)m_pPSShader->GetBody(), NULL, 0);
-		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
-		auto Shadow = ShadowMap::GetInstance();
-		ID3D11ShaderResourceView* srvArray[] = {
-			m_albedoTex,//アルベドテクスチャ。
-			Shadow->GetShadowMapSRV()	//シャドウマップ。
-		};
-		deviceContext->PSSetShaderResources(0, 2, srvArray);
-
 		break;
 	}
 

@@ -161,11 +161,11 @@ void SkinModel::Update()
 {
 	//更新。
 	//ライト回転してるだけ。。
-	CQuaternion qRot;
+	/*CQuaternion qRot;
 	qRot.SetRotationDeg(CVector3::AxisY(), 2.0f);
 	for (int i = 0; i < Dcolor; i++) {
 		qRot.Multiply(m_light.directionLight.direction[i]);
-	}
+	}*/
 	m_light.EnvironmentLight = { 0.1f,0.1f,0.1f };
 
 }
@@ -195,8 +195,6 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 	m_light.eyePos = g_camera3D.GetPosition();
 	//ライト用の定数バッファを更新。
 	d3dDeviceContext->UpdateSubresource(m_lightCb, 0, nullptr, &m_light, 0, 0);
-	//シャドウマップ用の定数バッファを更新。
-	d3dDeviceContext->UpdateSubresource(m_shadowMapcb, 0, nullptr, &vsCb, 0, 0);
 	//定数バッファをGPUに転送。
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
 	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
@@ -209,8 +207,9 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 	//ボーン行列をGPUに転送。
 	m_skeleton.SendBoneMatrixArrayToGPU();
 	//アルベドテクスチャを設定する。
+	ID3D11ShaderResourceView* m_shadowMapSRV = shadowMap->GetShadowMapSRV();
 	d3dDeviceContext->PSSetShaderResources(0, 1, &m_albedoTextureSRV);
-	d3dDeviceContext->PSSetShaderResources(0, 1, &m_shadowMapSRV);
+	d3dDeviceContext->PSSetShaderResources(2, 1, &m_shadowMapSRV);
 	//エフェクトにクエリを行う。
 	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
 		auto modelMaterial = reinterpret_cast<SkinModelEffect*>(material);

@@ -3,53 +3,43 @@
 
 class ShadowMap
 {
-	static ShadowMap*m_instance;
+	static ShadowMap* m_instance;
 public:
+	/// <summary>
+	/// コンストラクタ。
+	/// </summary>
 	ShadowMap();
+	/// <summary>
+	/// デストラクタ。
+	/// </summary>
 	~ShadowMap();
-
 	/// <summary>
 	/// ライトビュー行列を取得。
 	/// </summary>
 	/// <returns></returns>
-	CMatrix GetLightViewMatrix() const
+	CMatrix GetLightViewMatrix()
 	{
 		return m_lightViewMatrix;
 	}
-
 	/// <summary>
-	/// ライトプロジェクト行列を取得。
+	/// ライトプロジェクション行列を取得。
 	/// </summary>
 	/// <returns></returns>
-	CMatrix GetLightProjMatrix() const
+	CMatrix GetLightProjMatrix()
 	{
 		return m_lightProjMatrix;
 	}
 
 	/// <summary>
-	/// 更新(ライトカメラの注視点を指定するバージョン。)
+	/// 更新。
 	/// </summary>
 	/// <remarks>
 	/// ライトビュー行列や、ライトプロジェクション行列を
-	/// 更新します。UpdateFromLightTargetかUpdateFromLightDirectionのどちらかを
-	/// 毎フレーム呼び出してください。
+	/// 更新します。毎フレーム呼び出してください。
 	/// </remarks>
 	/// <param name="pos">ライトカメラの視点の座標</param>
 	/// <param name="target">ライトかめらの注視点の座標</param>
-	void UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCameraTarget);
-
-	/// <summary>
-	/// 更新(ライトカメラの向きを指定するバージョン。
-	/// </summary>
-	/// <remarks>
-	/// ライトビュー行列や、ライトプロジェクション行列を
-	/// 更新します。UpdateFromLightTargetかUpdateFromLightDirectionのどちらかを
-	/// 毎フレーム呼び出してください。
-	/// </remarks>
-	/// <param name="lightCameraPos">ライトカメラの視点の座標</param>
-	/// <param name="lightDir">ライトの方向</param>
-	void UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 lightDir);
-
+	void Update(CVector3 lightCameraPos, CVector3 lightCameraTarget);
 	/// <summary>
 	/// シャドウマップにシャドウキャスターをレンダリング。
 	/// 毎フレーム呼び出して下さい。
@@ -60,7 +50,6 @@ public:
 	/// この関数を呼び出すと、シャドウキャスターのリストはクリアされます。
 	/// </remarks>
 	void RenderToShadowMap();
-
 	/// <summary>
 	/// シャドウキャスターを登録。
 	/// </summary>
@@ -76,7 +65,6 @@ public:
 	{
 		m_shadowCasters.push_back(shadowCaster);
 	}
-
 
 	/// <summary>
 	/// シャドウマップのSRVを取得。
@@ -98,7 +86,6 @@ private:
 	CMatrix m_lightViewMatrix = CMatrix::Identity();	//ライトビュー行列。
 	CMatrix m_lightProjMatrix = CMatrix::Identity();	//ライトプロジェクション行列。
 	RenderTarget m_shadowMapRT;						//シャドウマップを描画するレンダリングターゲット。
-	std::vector< SkinModel*> m_shadowCasters;	//シャドウキャスターの配列。
-
+	std::vector<SkinModel*> m_shadowCasters;	//シャドウキャスターの配列。
 };
 

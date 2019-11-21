@@ -5,9 +5,9 @@
 /// </summary>
 enum EnRenderMode {
 	enRenderMode_Invalid,			//不正なレンダリングモード。
+	enRenderMode_Normal,			//通常レンダリング。
 	enRenderMode_silhouette,		//シルエット描画
 	enRenderMode_CreateShadowMap,	//シャドウマップ生成。
-	enRenderMode_Normal,			//通常レンダリング。
 	enRenderMode_Num,				//レンダリングモードの数。
 };
 

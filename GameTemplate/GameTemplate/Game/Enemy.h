@@ -15,6 +15,7 @@ public:
 	void Draw(EnRenderMode renderMode);
 	void Follow(Player* player);
 	void move();
+	void Return();
 
 private:
 	/// <summary>
@@ -27,8 +28,13 @@ private:
 	};
 	SkinModel m_enemy;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();			//座標
+	CVector3 m_oldPos = CVector3().Zero();			//座標
 	CVector3 m_scale= CVector3().One();					//拡大率
 	EState m_state = eState_Haikai;						//敵の状態。
+
+	int m_moveCount = 0;
+	float m_move = 0.6f;
+
 	AnimationClip  m_animClips[num];
 };
 

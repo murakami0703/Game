@@ -1,5 +1,6 @@
 #pragma once
 #include "character/CharacterController.h"
+#include "ShadowMap.h"
 
 class Player 
 {

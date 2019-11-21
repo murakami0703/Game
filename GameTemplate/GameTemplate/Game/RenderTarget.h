@@ -69,6 +69,5 @@ private:
 	ID3D11Texture2D*			m_depthStencilTex = nullptr;		//!<デプスステンシルとなるテクスチャ。
 	ID3D11DepthStencilView*		m_depthStencilView = nullptr;		//!<デプスステンシルビュー。
 	D3D11_VIEWPORT				m_viewport;							//!<ビューポート。
-
 };
 

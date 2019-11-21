@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Map.h"
 
-
 Map::Map()
 {
 	//cmoファイルの読み込み。
