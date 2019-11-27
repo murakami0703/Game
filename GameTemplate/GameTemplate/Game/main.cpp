@@ -8,7 +8,7 @@
 #include "GameCamera.h"
 #include "GameObjectManager.h"
 #include "ShadowMap.h"
-
+#include "RenderTarget.h"
 /// <summary>
 /// グローバル変数
 /// </summary>
@@ -18,6 +18,9 @@ Camera2D g_camera2D;	//2Dカメラ
 
 Sprite g_sprite;		//スプライト。
 CVector3 g_spritePos = CVector3::Zero();	//スプライトの座標。
+
+
+Sprite g_Main;		//スプライト。
 
 /// ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -48,9 +51,30 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームカメラ
 	GameCamera Gcamera;
 	Enemy enemy;
+
+	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
+
+	m_mainRenderTarget.Create(
+		FRAME_BUFFER_W,
+		FRAME_BUFFER_H,
+		DXGI_FORMAT_R8G8B8A8_UNORM
+	);
+
+	g_Main.Init(
+		m_mainRenderTarget.GetRenderTargetSRV(),
+		FRAME_BUFFER_W,
+		FRAME_BUFFER_H
+	);
+
 	//sprite
 	g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
+	//フレームバッファのレンダリングターゲット。
+	ID3D11RenderTargetView* oldRenderTargetView;
+	ID3D11DepthStencilView* oldDepthStencilView;
+	//フレームバッファののビューポート
+	D3D11_VIEWPORT oldViewports;
+
 	//深度ステンシルステート。
 	D3D11_DEPTH_STENCIL_DESC desc = { 0 };
 	desc.DepthEnable = true;
@@ -79,7 +103,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
-		
+
 		//更新処理
 		{
 			//ゲームパッドの更新。	
@@ -116,53 +140,80 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		{
 			//描画開始。
 			g_graphicsEngine->BegineRender();
-			
-			//シャドウマップへの描画
-			auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
-			//現在のレンダリングターゲットをバックアップしておく。
-			ID3D11RenderTargetView* oldRenderTargetView;
-			ID3D11DepthStencilView* oldDepthStencilView;
-			d3dDeviceContext->OMGetRenderTargets(
-				1,
-				&oldRenderTargetView,
-				&oldDepthStencilView
-			);
-			//ビューポートもバックアップを取っておく。
-			unsigned int numViewport = 1;
-			D3D11_VIEWPORT oldViewports;
-			d3dDeviceContext->RSGetViewports(&numViewport, &oldViewports);
+			{
+				// プリレンダリング
+				{
+					//シャドウマップへの描画
+					auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+					//現在のレンダリングターゲットをバックアップしておく。
+					d3dDeviceContext->OMGetRenderTargets(
+						1,
+						&oldRenderTargetView,
+						&oldDepthStencilView
+					);
+					//ビューポートもバックアップを取っておく。
+					unsigned int numViewport = 1;
+					d3dDeviceContext->RSGetViewports(&numViewport, &oldViewports);
 
-			//シャドウマップにレンダリング
-			m_shadowMap.RenderToShadowMap();
+					//シャドウマップにレンダリング
+					m_shadowMap.RenderToShadowMap();
+				}
+				// フォワードレンダリング
+				{
+					//メインのレンダリングターゲットに切り替える。
+					auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+					ID3D11RenderTargetView* rtTbl[] = {
+					m_mainRenderTarget.GetRenderTargetView()
+					};
+					//レンダリングターゲットの切り替え。
+					d3dDeviceContext->OMSetRenderTargets(1, rtTbl, m_mainRenderTarget.GetDepthStensilView());
+					if (&oldViewports != nullptr) {
+						//ビューポートが指定されていたら、ビューポートも変更する。
+						d3dDeviceContext->RSSetViewports(1, &oldViewports);
+					}
+					//メインレンダリングターゲットをクリアする。
+					float clearColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+					m_mainRenderTarget.ClearRenderTarget(clearColor);
 
-			//元に戻す。
-			d3dDeviceContext->OMSetRenderTargets(
-				1,
-				&oldRenderTargetView,
-				oldDepthStencilView
-			);
-			d3dDeviceContext->RSSetViewports(numViewport, &oldViewports);
-			//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
-			oldRenderTargetView->Release();
-			oldDepthStencilView->Release();
+					//手前に描画を行うデプスステンシルステートを設定する。
+					g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
 
-			//手前に描画を行うデプスステンシルステートを設定する。
-			g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
+					map->Draw(enRenderMode_Normal);
+					enemy.Draw(enRenderMode_Normal);
+					//シルエット描画
+					player->Draw(enRenderMode_silhouette);
+					//通常描画
+					player->Draw(enRenderMode_Normal);
+				}
+				// ポストレンダリング
+				{
+					//レンダリングターゲットをフレームバッファに戻す。
+					auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+					//レンダリングターゲットの切り替え。
+					ID3D11RenderTargetView* rtTbl[] = {
+					oldRenderTargetView
+					};
+					d3dDeviceContext->OMSetRenderTargets(1, rtTbl, oldDepthStencilView);
+					if (&oldViewports != nullptr) {
+						//ビューポートが指定されていたら、ビューポートも変更する。
+						d3dDeviceContext->RSSetViewports(1, &oldViewports);
+					}
 
-			map->Draw(enRenderMode_Normal);
-			enemy.Draw(enRenderMode_Normal);
-			//シルエット描画
-			player->Draw(enRenderMode_silhouette);
-			//通常描画
-			player->Draw(enRenderMode_Normal);
-			//SpriteのDraw関数を呼び出す。
-			g_sprite.SetMulColor({ 1.0f,0.0f,0.0f,1.0f });
-			g_sprite.Draw();
-			//カメラの更新。
-			//g_camera3D.Update();
+					g_Main.Draw();
 
-			//描画終了。
-			g_graphicsEngine->EndRender();
+					//SpriteのDraw関数を呼び出す。
+					g_sprite.SetMulColor({ 1.0f,0.0f,0.0f,1.0f });
+					g_sprite.Draw();
+					//カメラの更新。
+					//g_camera3D.Update();
+
+					//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
+					oldRenderTargetView->Release();
+					oldDepthStencilView->Release();
+				}
+				//描画終了。
+				g_graphicsEngine->EndRender();
+			}
 		}
 	}
 };

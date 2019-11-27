@@ -37,13 +37,8 @@ void Sprite::InitConstantBuffer()
 	desc.CPUAccessFlags = 0;
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&desc, NULL, &m_cb);
 }
-
-// 初期化。
-void Sprite::Init(const wchar_t* texFilePath, float w, float h)
+void Sprite::InitCommon(float w, float h)
 {
-	//シェーダーロード。
-	m_ps.Load("Assets/shader/sprite.fx", "PSMain", Shader::EnType::PS);
-	m_vs.Load("Assets/shader/sprite.fx", "VSMain", Shader::EnType::VS);
 
 	m_size.x = w;
 	m_size.y = h;
@@ -53,6 +48,22 @@ void Sprite::Init(const wchar_t* texFilePath, float w, float h)
 	InitIndexBuffer(m_indexBuffer);
 	//サンプラステートの初期化。
 	InitSamplerState(m_samplerState);
+
+	//シェーダーロード。
+	m_ps.Load("Assets/shader/sprite.fx", "PSMain", Shader::EnType::PS);
+	m_vs.Load("Assets/shader/sprite.fx", "VSMain", Shader::EnType::VS);
+
+	//定数バッファを初期化。
+	InitConstantBuffer();
+	m_isInited = true;
+
+}
+
+// 初期化。
+void Sprite::Init(const wchar_t* texFilePath, float w, float h)
+{
+	//共通の初期化処理を呼び出す。
+	InitCommon(w, h);
 	//テクスチャのロード。
 	DirectX::CreateDDSTextureFromFileEx(
 		g_graphicsEngine->GetD3DDevice(),				//D3Dデバイス。
@@ -67,12 +78,15 @@ void Sprite::Init(const wchar_t* texFilePath, float w, float h)
 		&m_texture					//読み込んだテクスチャに
 									//アクセスするためのインターフェースの格納先。
 	);
-
-	//定数バッファを初期化。
-	InitConstantBuffer();
-	m_isInited = true;
-
 }
+void Sprite::Init(ID3D11ShaderResourceView* srv, float w, float h)
+{
+	//共通の初期化処理を呼び出す。
+	InitCommon(w, h);
+	m_texture = srv;
+	m_texture->AddRef();	//参照カウンタを増やす。
+}
+
 //更新
 void Sprite::Update(const CVector3& pos, const CQuaternion& rot, const CVector3& scale, CVector2 pivot)
 {

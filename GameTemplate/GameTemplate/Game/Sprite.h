@@ -15,6 +15,14 @@ public:
 	/// <param name="h">高さ</param>
 	void Init(const wchar_t* texFilePath, float w, float h);
 	/// <summary>
+	/// テクスチャのSRVを指定して初期化。
+	/// </summary>
+	/// <param name="srv"></param>
+	/// <param name="w"></param>
+	/// <param name="h"></param>
+	void Init(ID3D11ShaderResourceView* srv, float w, float h);
+
+	/// <summary>
 	/// 更新。
 	/// </summary>
 	/// <param name="pos">平行移動</param>
@@ -67,6 +75,10 @@ private:
 	 *@brief	定数バッファの初期化。
 	 */
 	void InitConstantBuffer();
+	/// <summary>
+	/// 初期化の共通処理。
+	/// </summary>
+	void InitCommon(float w, float h);
 
 };
 
