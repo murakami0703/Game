@@ -2,13 +2,16 @@
 #include "system/system.h"
 #include "Player.h"
 #include "level/Level.h"
-#include "Sprite.h"
+#include "sprite/Sprite.h"
 #include "Map.h"
-#include "Enemy.h"
+#include "enemy/Enemy.h"
 #include "GameCamera.h"
-#include "GameObjectManager.h"
+#include "gameObject/GameObjectManager.h"
 #include "ShadowMap.h"
 #include "RenderTarget.h"
+
+#include "enemy/EnemyGenerator.h"
+
 /// <summary>
 /// グローバル変数
 /// </summary>
@@ -20,7 +23,6 @@ Sprite g_sprite;		//スプライト。
 CVector3 g_spritePos = CVector3::Zero();	//スプライトの座標。
 
 
-Sprite g_Main;		//スプライト。
 
 /// ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -38,9 +40,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera2D.SetTarget(CVector3::Zero());
 	g_camera2D.SetPosition({ 0.0f, 0.0f, -10.0f });
 	//ビューボリュームの幅と高さを指定する。
-	float aspect = 1280.0f / 720.0f;
-	g_camera2D.SetViewVolumeHeight(300.0f);
-	g_camera2D.SetViewVolumeWidth(300.0f * aspect);
+	g_camera2D.SetViewVolumeHeight(FRAME_BUFFER_H);
+	g_camera2D.SetViewVolumeWidth(FRAME_BUFFER_W);
 
 	ShadowMap m_shadowMap;	//シャドウマップ。
 
@@ -51,15 +52,18 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームカメラ
 	GameCamera Gcamera;
 	Enemy enemy;
+	Sprite g_Main;		//スプライト。
 
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 
+
+	//メインレンダリングターゲットの初期化。
 	m_mainRenderTarget.Create(
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H,
 		DXGI_FORMAT_R8G8B8A8_UNORM
 	);
-
+	//メインテクスチャの初期化。
 	g_Main.Init(
 		m_mainRenderTarget.GetRenderTargetSRV(),
 		FRAME_BUFFER_W,
@@ -124,6 +128,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 			//SpriteのUpdate関数を呼び出す。
 			g_sprite.Update(g_spritePos, CQuaternion::Identity(), CVector3::One());
+			g_Main.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 			g_camera2D.Update();
 
 			//シャドウキャスターを登録。
@@ -158,7 +163,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					//シャドウマップにレンダリング
 					m_shadowMap.RenderToShadowMap();
 				}
-				// フォワードレンダリング
+				// フォワードレンダリング 
 				{
 					//メインのレンダリングターゲットに切り替える。
 					auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
@@ -202,7 +207,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					g_Main.Draw();
 
 					//SpriteのDraw関数を呼び出す。
-					g_sprite.SetMulColor({ 1.0f,0.0f,0.0f,1.0f });
+					g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
+					
 					g_sprite.Draw();
 					//カメラの更新。
 					//g_camera3D.Update();

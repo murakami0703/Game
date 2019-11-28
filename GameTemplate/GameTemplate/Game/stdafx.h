@@ -36,12 +36,12 @@
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/Camera.h"
-#include "Camera2D.h"
+#include "camera2D/Camera2D.h"
 
-#include "SpriteStandby.h"
-#include "Sprite.h"
+#include "sprite/SpriteStandby.h"
+#include "sprite/Sprite.h"
 
-#include "GameObjectManager.h"
+#include "gameObject/GameObjectManager.h"
 
 #include "SkinModelRender.h"
 

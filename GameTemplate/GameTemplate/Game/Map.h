@@ -11,6 +11,10 @@ public:
 	void Update();
 	void Draw(EnRenderMode renderMode);
 
+	/// <summary>
+	/// Mapのモデルを取得。
+	/// </summary>
+	/// <returns>Mapのスキンモデル</returns>
 	SkinModel* GetMapSkinModel() {
 		return &m_mapModel;
 	}

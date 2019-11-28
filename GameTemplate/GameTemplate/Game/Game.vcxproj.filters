@@ -131,34 +131,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Sprite.cpp">
-      <Filter>sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRender.cpp">
-      <Filter>sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteStandby.cpp">
-      <Filter>sprite</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Camera2D.cpp">
-      <Filter>graphics\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="IGameObject.cpp">
-      <Filter>gameobject</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>gameobject</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="SkinModelRender.cpp">
-      <Filter>graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -167,6 +142,31 @@
     </ClCompile>
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="graphics\camera2D\Camera2D.cpp">
+      <Filter>graphics\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite\SpriteRender.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite\Sprite.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite\SpriteStandby.cpp">
+      <Filter>sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\SkinModelRender.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy\Enemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy\EnemyGenerator.cpp" />
+    <ClCompile Include="gameObject\GameObjectManager.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="gameObject\IGameObject.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -251,34 +251,9 @@
       <Filter>level</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Sprite.h">
-      <Filter>sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRender.h">
-      <Filter>sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteStandby.h">
-      <Filter>sprite</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h" />
-    <ClInclude Include="Camera2D.h">
-      <Filter>graphics\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>gameobject</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameObject.h">
-      <Filter>gameobject</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Title.h" />
-    <ClInclude Include="SkinModelRender.h">
-      <Filter>graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -287,6 +262,31 @@
     </ClInclude>
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="graphics\camera2D\Camera2D.h">
+      <Filter>graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\SpriteRender.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\Sprite.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\SpriteStandby.h">
+      <Filter>sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\SkinModelRender.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy\EnemyGenerator.h" />
+    <ClInclude Include="enemy\Enemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject\GameObjectManager.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="gameObject\IGameObject.h">
+      <Filter>gameobject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">
