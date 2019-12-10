@@ -2,6 +2,7 @@
 
 #include "physics/PhysicsStaticObject.h"
 #include "ShadowMap.h"
+#include "level/Level.h"
 
 class Map
 {
@@ -19,6 +20,8 @@ public:
 		return &m_mapModel;
 	}
 private:
+	Level m_level;	//レベルデータ。
+
 	SkinModel m_mapModel;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();		//座標
 	CQuaternion m_rotation = CQuaternion().Identity();		//回転

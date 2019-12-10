@@ -5,20 +5,20 @@
 Player::Player()
 {
 	//アニメーションクリップのロード。
-	/*m_animClips[Animation_Idel].Load(L"Assets/animData/tes.tka");
+	m_animClips[Animation_Idel].Load(L"Assets/animData/tes.tka");
 	m_animClips[Animation_Walk].Load(L"Assets/animData/tesIdle.tka");
 	m_animClips[Animation_Attack1].Load(L"Assets/animData/tesAttack1.tka");
 	m_animClips[Animation_Attack2].Load(L"Assets/animData/tesAttack2.tka");
-	*/
+	
 	//ループフラグの設定。
 	m_animClips[Animation_Idel].SetLoopFlag(true);
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 
-	m_model.Init(L"Assets/modelData/unityChan.cmo");
-	m_position = { 0.0f,50.0f,0.0f };
+	m_model.Init(L"Assets/modelData/pp.cmo");
+	m_position = { 0.0f,30.0f,0.0f };
 	m_characon.Init(20.0f, 100.0f, m_position);//キャラコン
 	m_move = m_position;
-	//m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化
+	m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化
 }
 Player::~Player()
 {
@@ -72,8 +72,7 @@ void Player::Update()
 }
 void Player::PlAnimation()
 {
-/*
-//攻撃
+	//攻撃
 	if (g_pad[0].IsTrigger(enButtonA)) {
 		Atcount++;
 		if (Atcount == 1) {
@@ -84,7 +83,6 @@ void Player::PlAnimation()
 			m_anime = Animation_Attack2;
 		}
 	}
-
 
 	switch (m_anime)
 	{
@@ -119,7 +117,7 @@ void Player::PlAnimation()
 				m_anime = Animation_Idel;
 
 		}
-		/*m_animation.Play(Animation_Attack1); // 攻撃1
+		m_animation.Play(Animation_Attack1); // 攻撃1
 		if (m_animation.IsPlaying()==false) {
 				m_anime = Animation_Idel;
 		}
@@ -138,7 +136,6 @@ void Player::PlAnimation()
 	default:
 		break;
 	}
-*/
 }
 
 void Player::Draw(EnRenderMode renderMode)

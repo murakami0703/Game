@@ -160,7 +160,6 @@
     <ClCompile Include="enemy\Enemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="enemy\EnemyGenerator.cpp" />
     <ClCompile Include="gameObject\GameObjectManager.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
@@ -277,7 +276,6 @@
     <ClInclude Include="graphics\SkinModelRender.h">
       <Filter>graphics</Filter>
     </ClInclude>
-    <ClInclude Include="enemy\EnemyGenerator.h" />
     <ClInclude Include="enemy\Enemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>

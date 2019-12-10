@@ -102,7 +102,6 @@
     <ClCompile Include="graphics\camera2D\Camera2D.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="enemy\Enemy.cpp" />
-    <ClCompile Include="enemy\EnemyGenerator.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="gameObject\GameObjectManager.cpp" />
@@ -149,7 +148,6 @@
     <ClInclude Include="graphics\camera2D\Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="enemy\Enemy.h" />
-    <ClInclude Include="enemy\EnemyGenerator.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="gameObject\GameObjectManager.h" />

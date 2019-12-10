@@ -36,14 +36,14 @@
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/Camera.h"
-#include "camera2D/Camera2D.h"
+#include "graphics/camera2D/Camera2D.h"
 
 #include "sprite/SpriteStandby.h"
 #include "sprite/Sprite.h"
 
 #include "gameObject/GameObjectManager.h"
 
-#include "SkinModelRender.h"
+#include "graphics/SkinModelRender.h"
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
