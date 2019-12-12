@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
-
+#include "EnemyManeger.h"
 
 Enemy::Enemy()
 {
@@ -19,12 +19,11 @@ Enemy::~Enemy()
 void Enemy::Follow(Player* player)
 {
 	//追尾ちゅ
-	CVector3 p_pos = player->GetPosition();
-	CVector3 diff = p_pos - m_position;
-	if (diff.Length() >100.0f){
-		diff.y = 0.0f;
-		diff.Normalize();
-		m_position += diff * 0.5f;
+	if (m_toPlayerVec.Length() >100.0f){
+		auto dir = m_toPlayerVec;
+		dir.y = 0.0f;
+		dir.Normalize();
+		m_position += dir * 0.5f;
 	}
 }
 
@@ -44,27 +43,33 @@ void Enemy::move()
 void Enemy::Return()
 {
 	//徘徊位置に戻る。
-	/*CVector3 diff = m_position - m_oldPos;
+	CVector3 diff = m_position - m_oldPos;
 	diff.y = 0.0f;
 	diff.Normalize();
 	m_position += diff * 0.7f;
 	if (diff.Length() < 1.0f) {
 		m_state = eState_Haikai;
-	}*/
+	}
 }
-void Enemy::Dead()
+void Enemy::Dead(Player* player)
 {
+	if (player->GetAttackflag() == true) {
+		if (m_toPlayerVec.Length() < 50.0f) {
+			EnemyManager::GetInstance()->DeleteEnemy(this);
+		}
+	}
 }
 
 void Enemy::Update(Player* player)
 {
-	CVector3 p_pos = player->GetPosition();
-	CVector3 diff = p_pos - m_position;
+	
+	p_pos = player->GetPosition();
+	m_toPlayerVec = p_pos - m_position;
 	switch (m_state) {
 	case eState_Haikai:
 		//徘徊中
 		move();
-		if (diff.Length() < 300.0f) {
+		if (m_toPlayerVec.Length() < 300.0f) {
 			m_state = eState_TuisekiPlayer;
 		}
 		break;
@@ -72,7 +77,7 @@ void Enemy::Update(Player* player)
 		//プレイヤーを追跡
 		Follow(player);
 		//遠くなったので徘徊位置に戻る
-		if (diff.Length() > 400.0f) {
+		if (m_toPlayerVec.Length() > 400.0f) {
 			m_state = eState_Haikai;
 		}
 		break;
@@ -80,7 +85,7 @@ void Enemy::Update(Player* player)
 		//徘徊位置に戻る
 		Return();
 	}
-	Dead();
+	Dead(player);
 	//ワールド行列の更新。
 	m_enemy.UpdateWorldMatrix(m_position, CQuaternion::Identity(), m_scale);
 	m_enemy.Update();

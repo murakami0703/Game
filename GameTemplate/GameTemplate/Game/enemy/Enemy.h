@@ -33,17 +33,19 @@ private:
 	void Follow(Player* player);
 	void move();
 	void Return();
-	void Dead();
+	void Dead(Player* player);
 
 	SkinModel m_enemy;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();			//座標
 	CVector3 m_oldPos = CVector3().Zero();			//座標
 	CVector3 m_scale= CVector3().One();					//拡大率
 	EState m_state = eState_Haikai;						//敵の状態。
-
+	CVector3 p_pos = CVector3().Zero();
+	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
 	int m_moveCount = 0;
 	float m_move = 0.6f;
 
 	AnimationClip  m_animClips[num];
+
 };
 

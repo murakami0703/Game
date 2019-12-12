@@ -55,6 +55,9 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{eada28bd-66d8-41f8-b7ed-23cb66d59f13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sound">
+      <UniqueIdentifier>{e91662ef-364b-4c39-8f80-ac23b8a2dcb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -165,6 +168,22 @@
     </ClCompile>
     <ClCompile Include="gameObject\IGameObject.cpp">
       <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy\EnemyManeger.cpp" />
+    <ClCompile Include="sound\WaveFile.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\WaveFileBank.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\SoundEngine.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\SoundSource.cpp">
+      <Filter>sound</Filter>
+    </ClCompile>
+    <ClCompile Include="EneBow.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,6 +303,22 @@
     </ClInclude>
     <ClInclude Include="gameObject\IGameObject.h">
       <Filter>gameobject</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy\EnemyManeger.h" />
+    <ClInclude Include="sound\WaveFile.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\WaveFileBank.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\SoundSource.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\SoundEngine.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="EneBow.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

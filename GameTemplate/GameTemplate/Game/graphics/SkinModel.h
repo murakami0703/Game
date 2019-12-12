@@ -93,7 +93,6 @@ public:
 	{
 		m_isShadowReciever = flag;
 	}
-
 private:
 	/*!
 	*@brief	サンプラステートの初期化。
@@ -118,7 +117,6 @@ private:
 	void InitDirectionLight();
 
 	static const int Dcolor = 4;
-
 private:
 	//定数バッファ。
 	struct SVSConstantBuffer {

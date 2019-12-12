@@ -77,10 +77,11 @@ void Player::PlAnimation()
 		Atcount++;
 		if (Atcount == 1) {
 			m_anime = Animation_Attack1;
-
+			attackflag = true;
 		}
 		if (Atcount >= 2) {
 			m_anime = Animation_Attack2;
+			attackflag = true;
 		}
 	}
 
@@ -114,22 +115,24 @@ void Player::PlAnimation()
     			m_animation.Play(Animation_Attack1,0.5f); // çUåÇ1
 			if (m_animation.IsPlaying() == false) {
 				Atcount = 0;
+				attackflag = false;
 				m_anime = Animation_Idel;
 
 		}
-		m_animation.Play(Animation_Attack1); // çUåÇ1
+		/*m_animation.Play(Animation_Attack1); // çUåÇ1
 		if (m_animation.IsPlaying()==false) {
 				m_anime = Animation_Idel;
 		}
 		else if (g_pad[0].IsPress(enButtonB)) {
 			m_anime = Animation_Attack2;
 		}
-		
+		*/
 		break;
 	case Player::Animation_Attack2:
 			m_animation.Play(Animation_Attack2, 0.5f);//çUåÇ2
 			if (m_animation.IsPlaying() == false) {
 				Atcount = 0;
+				attackflag = false;
 				m_anime = Animation_Idel;
 			}
 		break;

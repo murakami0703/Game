@@ -32,7 +32,13 @@ public:
 	SkinModel* GetPlayerSkinModel() {
 		return &m_model;
 	}
-
+	/// <summary>
+	/// 攻撃判定
+	/// </summary>
+	/// <returns>trueなら攻撃中</returns>
+	bool Player::GetAttackflag() {
+		return attackflag;
+	}
 private:
 	void Move();						//移動。
 	void PlAnimation();//アニメーション
@@ -49,5 +55,8 @@ private:
 	PAnimation m_anime = Animation_Idel;		//アニメーション状態
 	Animation	m_animation;					//アニメーション
 	AnimationClip m_animClips[AnimationClip_Num];	//アニメーションクリップ
+
+	//攻撃関連
+	bool attackflag = false;	//攻撃判定用。
 };
 

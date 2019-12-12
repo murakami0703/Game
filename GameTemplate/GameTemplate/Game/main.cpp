@@ -9,7 +9,7 @@
 #include "gameObject/GameObjectManager.h"
 #include "ShadowMap.h"
 #include "RenderTarget.h"
-
+#include "enemy/EnemyManeger.h"
 
 /// <summary>
 /// グローバル変数
@@ -50,13 +50,26 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Map* map = new Map;
 	//ゲームカメラ
 	GameCamera Gcamera;
-	Enemy enemy;
+	EnemyManager m_eneMane;
+	Enemy* enemy = new Enemy;
+	enemy->SetPosition({ 150.0f,30.0f,200.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ -300.0f,30.0f,20.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 150.0f,30.0f,-150.0f });
+	m_eneMane.RegistEnemy(enemy);
+	
+	/*Enemy enemy;
 	enemy.SetPosition({ 150.0f,30.0f,200.0f });
-	Enemy enemy1;
-	enemy1.SetPosition({ -300.0f,30.0f,20.0f });
+	Enemy* enemy1 = new Enemy;
+	enemy1->SetPosition({ -300.0f,30.0f,20.0f });
 	Enemy enemy2;
 	enemy2.SetPosition({ 150.0f,30.0f,-150.0f });
-
+	*/
 	Sprite g_Main;		//スプライト。
 
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
@@ -127,9 +140,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			//マップの描画。
 			map->Update();
 			//敵の描画と更新。
-			enemy.Update(player);
-			enemy1.Update(player);
-			enemy2.Update(player);
+			m_eneMane.Update(player);
 
 			//ゲームカメラの更新
 			Gcamera.Update(player);
@@ -192,10 +203,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
 
 					map->Draw(enRenderMode_Normal);
-					enemy.Draw(enRenderMode_Normal);
-					enemy1.Draw(enRenderMode_Normal);
-					enemy2.Draw(enRenderMode_Normal);
-
+					m_eneMane.Draw(enRenderMode_Normal);
 					//シルエット描画
 					player->Draw(enRenderMode_silhouette);
 					//通常描画
