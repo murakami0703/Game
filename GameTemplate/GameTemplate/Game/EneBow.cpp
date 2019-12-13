@@ -10,3 +10,7 @@ EneBow::EneBow()
 EneBow::~EneBow()
 {
 }
+void EneBow::Update(Player* player)
+{
+
+}
