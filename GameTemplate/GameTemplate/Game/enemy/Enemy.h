@@ -42,10 +42,12 @@ private:
 	EState m_state = eState_Haikai;						//敵の状態。
 	CVector3 p_pos = CVector3().Zero();
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
-	int m_moveCount = 0;
-	float m_move = 0.6f;
-
 	AnimationClip  m_animClips[num];
 
+	//移動関連
+	int m_moveCount = 0;
+	float m_moveSpeed = 0.6f;			//エネミの移動速度。
+	const float m_plFollow = 100.0f;	//追尾する距離。
+	const float m_follSpeed = 0.7f;		//追尾中の移動速度。
 };
 

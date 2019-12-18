@@ -10,6 +10,7 @@
 #include "ShadowMap.h"
 #include "RenderTarget.h"
 #include "enemy/EnemyManeger.h"
+#include "ItemManeger.h"
 
 /// <summary>
 /// グローバル変数
@@ -50,8 +51,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Map* map = new Map;
 	//ゲームカメラ
 	GameCamera Gcamera;
+	//エネミ
 	EnemyManager m_eneMane;
-	Enemy* enemy = new Enemy;
+	{Enemy* enemy = new Enemy;
 	enemy->SetPosition({ 150.0f,30.0f,200.0f });
 	m_eneMane.RegistEnemy(enemy);
 
@@ -62,14 +64,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	enemy = new Enemy;
 	enemy->SetPosition({ 150.0f,30.0f,-150.0f });
 	m_eneMane.RegistEnemy(enemy);
-	
-	/*Enemy enemy;
-	enemy.SetPosition({ 150.0f,30.0f,200.0f });
-	Enemy* enemy1 = new Enemy;
-	enemy1->SetPosition({ -300.0f,30.0f,20.0f });
-	Enemy enemy2;
-	enemy2.SetPosition({ 150.0f,30.0f,-150.0f });
-	*/
+	}
 	Sprite g_Main;		//スプライト。
 
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。

@@ -30,23 +30,23 @@ void Player::Move()
 	m_move.z = 0.0f;
 	//è\éöà⁄ìÆÅB
 	if (g_pad[0].IsPress(enButtonLeft)) {
-		m_move.x -= 200.0f;
-		m_rotation.SetRotation(CVector3().AxisY(), 80.0f);
+		m_move.x -= m_movespeed;
+		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
 
 	}
 	else if (g_pad[0].IsPress(enButtonRight)) {
-		m_move.x += 200.0f;
-		m_rotation.SetRotation(CVector3().AxisY(), -80.0f);
+		m_move.x += m_movespeed;
+		m_rotation.SetRotation(CVector3().AxisY(), -m_rotationLR);
 
 	}
 	else if (g_pad[0].IsPress(enButtonUp)) {
-		m_move.z += 200.0f;
+		m_move.z += m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), 0.0f);
 
 	}
 	else if (g_pad[0].IsPress(enButtonDown)) {
-		m_move.z -= 200.0f;
-		m_rotation.SetRotation(CVector3().AxisY(), 110.0f);
+		m_move.z -= m_movespeed;
+		m_rotation.SetRotation(CVector3().AxisY(), m_rotationD);
 
 	}
 
@@ -55,7 +55,7 @@ void Player::Move()
 		m_move.y = 0.0f;
 	}
 
-	m_position = m_characon.Execute((1.0f / 60.0f), m_move);
+	m_position = m_characon.Execute(m_caraTime, m_move);
 
 }
 void Player::Update()
@@ -119,14 +119,6 @@ void Player::PlAnimation()
 				m_anime = Animation_Idel;
 
 		}
-		/*m_animation.Play(Animation_Attack1); // çUåÇ1
-		if (m_animation.IsPlaying()==false) {
-				m_anime = Animation_Idel;
-		}
-		else if (g_pad[0].IsPress(enButtonB)) {
-			m_anime = Animation_Attack2;
-		}
-		*/
 		break;
 	case Player::Animation_Attack2:
 			m_animation.Play(Animation_Attack2, 0.5f);//çUåÇ2

@@ -58,6 +58,12 @@
     <Filter Include="sound">
       <UniqueIdentifier>{e91662ef-364b-4c39-8f80-ac23b8a2dcb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="item">
+      <UniqueIdentifier>{75eba650-fc6f-4b9d-aa05-98ef00eea70a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="manager">
+      <UniqueIdentifier>{82c6d5b4-b07e-4d61-9fd7-993362951d8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -169,7 +175,6 @@
     <ClCompile Include="gameObject\IGameObject.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
-    <ClCompile Include="enemy\EnemyManeger.cpp" />
     <ClCompile Include="sound\WaveFile.cpp">
       <Filter>sound</Filter>
     </ClCompile>
@@ -184,6 +189,15 @@
     </ClCompile>
     <ClCompile Include="EneBow.cpp">
       <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManeger.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy\EnemyManeger.cpp">
+      <Filter>manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +318,6 @@
     <ClInclude Include="gameObject\IGameObject.h">
       <Filter>gameobject</Filter>
     </ClInclude>
-    <ClInclude Include="enemy\EnemyManeger.h" />
     <ClInclude Include="sound\WaveFile.h">
       <Filter>sound</Filter>
     </ClInclude>
@@ -319,6 +332,15 @@
     </ClInclude>
     <ClInclude Include="EneBow.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManeger.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy\EnemyManeger.h">
+      <Filter>manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

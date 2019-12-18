@@ -19,11 +19,11 @@ Enemy::~Enemy()
 void Enemy::Follow(Player* player)
 {
 	//’Ç”ö‚¿‚ã
-	if (m_toPlayerVec.Length() >100.0f){
+	if (m_toPlayerVec.Length() > m_plFollow){
 		auto dir = m_toPlayerVec;
 		dir.y = 0.0f;
 		dir.Normalize();
-		m_position += dir * 0.5f;
+		m_position += dir * m_follSpeed;
 	}
 }
 
@@ -31,12 +31,12 @@ void Enemy::move()
 {
 	//œpœj’†
 	m_moveCount++;
-	m_position.z += m_move;
+	m_position.z += m_moveSpeed;
 	if (m_moveCount == 100) {
-		m_move = -0.6f;
+		m_moveSpeed = -m_moveSpeed;
 	}
 	if (m_moveCount == 200) {
-		m_move = 0.6f;
+		m_moveSpeed = m_moveSpeed;
 		m_moveCount = 0;
 	}
 }
@@ -46,7 +46,7 @@ void Enemy::Return()
 	CVector3 diff = m_position - m_oldPos;
 	diff.y = 0.0f;
 	diff.Normalize();
-	m_position += diff * 0.7f;
+	m_position += diff * m_moveSpeed;
 	if (diff.Length() < 1.0f) {
 		m_state = eState_Haikai;
 	}
