@@ -64,6 +64,9 @@
     <Filter Include="manager">
       <UniqueIdentifier>{82c6d5b4-b07e-4d61-9fd7-993362951d8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gimmick">
+      <UniqueIdentifier>{296469b4-326c-402a-8a53-8735d3ad7382}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -198,6 +201,9 @@
     </ClCompile>
     <ClCompile Include="enemy\EnemyManeger.cpp">
       <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Gimmick.cpp">
+      <Filter>gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="enemy\EnemyManeger.h">
       <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Gimmick.h">
+      <Filter>gimmick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -51,10 +51,10 @@ private:
 	CharacterController m_characon;		//キャラコン
 
 	//移動関連
-	const float m_movespeed = 200.0f;
+	float m_movespeed = 200.0f;
 	const float m_rotationLR = 80.0f;
 	const float m_rotationD = 110.0f;
-	int m_caraTime = (1.0f / 60.0f);
+	float m_caraTime = (1.0f / 60.0f);
 	//Animation関連
 	int Atcount = 0;	//攻撃回数判定用。
 	PAnimation m_anime = Animation_Idel;		//アニメーション状態

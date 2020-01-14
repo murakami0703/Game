@@ -101,6 +101,7 @@
   <ItemGroup>
     <ClCompile Include="EneBow.cpp" />
     <ClCompile Include="enemy\EnemyManeger.cpp" />
+    <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="graphics\camera2D\Camera2D.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="enemy\Enemy.cpp" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="EneBow.h" />
     <ClInclude Include="enemy\EnemyManeger.h" />
+    <ClInclude Include="Gimmick.h" />
     <ClInclude Include="graphics\camera2D\Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="enemy\Enemy.h" />

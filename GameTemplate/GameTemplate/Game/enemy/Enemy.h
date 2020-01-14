@@ -20,6 +20,7 @@ public:
 	{
 		m_position = pos;
 	}
+
 private:
 	/// <summary>
 	/// 状態
@@ -49,5 +50,7 @@ private:
 	float m_moveSpeed = 0.6f;			//エネミの移動速度。
 	const float m_plFollow = 100.0f;	//追尾する距離。
 	const float m_follSpeed = 0.7f;		//追尾中の移動速度。
+	const float m_tuisekiLength = 300.0f;		//追尾する距離。
+	const float m_ReturnLength = 400.0f;		//徘徊位置に戻る距離。
 };
 

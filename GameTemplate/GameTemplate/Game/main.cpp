@@ -62,8 +62,21 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	m_eneMane.RegistEnemy(enemy);
 
 	enemy = new Enemy;
-	enemy->SetPosition({ 150.0f,30.0f,-150.0f });
+	enemy->SetPosition({ 250.0f,30.0f,-150.0f });
 	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 150.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 190.0f,30.0f,-170.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
 	}
 	Sprite g_Main;		//スプライト。
 

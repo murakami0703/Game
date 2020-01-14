@@ -54,7 +54,7 @@ void Enemy::Return()
 void Enemy::Dead(Player* player)
 {
 	if (player->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 50.0f) {
+		if (m_toPlayerVec.Length() < 60.0f) {
 			EnemyManager::GetInstance()->DeleteEnemy(this);
 		}
 	}
@@ -69,15 +69,19 @@ void Enemy::Update(Player* player)
 	case eState_Haikai:
 		//œpœj’†
 		move();
-		if (m_toPlayerVec.Length() < 300.0f) {
+		if (m_toPlayerVec.Length() < m_tuisekiLength && EnemyManager::GetInstance()->GetEnemyTcount() < 5) {
 			m_state = eState_TuisekiPlayer;
 		}
 		break;
 	case eState_TuisekiPlayer:
 		//ƒvƒŒƒCƒ„[‚ð’ÇÕ
+		if (EnemyManager::GetInstance()->GetEnemyTcount() < 5) {
+			EnemyManager::GetInstance()->AddEnemyTCount(1);
+		}
 		Follow(player);
 		//‰“‚­‚È‚Á‚½‚Ì‚ÅœpœjˆÊ’u‚É–ß‚é
-		if (m_toPlayerVec.Length() > 400.0f) {
+		if (m_toPlayerVec.Length() > m_ReturnLength) {
+			EnemyManager::GetInstance()->AddEnemyTCount(-1);
 			m_state = eState_Haikai;
 		}
 		break;

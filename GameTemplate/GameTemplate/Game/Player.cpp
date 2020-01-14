@@ -15,8 +15,8 @@ Player::Player()
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 
 	m_model.Init(L"Assets/modelData/pp.cmo");
-	m_position = { 0.0f,30.0f,0.0f };
-	m_characon.Init(20.0f, 100.0f, m_position);//キャラコン
+	m_position = { 0.0f,60.0f,0.0f };
+	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 	m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化
 }
