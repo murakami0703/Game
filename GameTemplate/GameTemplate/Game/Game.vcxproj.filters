@@ -190,9 +190,6 @@
     <ClCompile Include="sound\SoundSource.cpp">
       <Filter>sound</Filter>
     </ClCompile>
-    <ClCompile Include="EneBow.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>item</Filter>
     </ClCompile>
@@ -205,6 +202,7 @@
     <ClCompile Include="Gimmick.cpp">
       <Filter>gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -336,9 +334,6 @@
     <ClInclude Include="sound\SoundEngine.h">
       <Filter>sound</Filter>
     </ClInclude>
-    <ClInclude Include="EneBow.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>item</Filter>
     </ClInclude>
@@ -351,6 +346,7 @@
     <ClInclude Include="Gimmick.h">
       <Filter>gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="Fade.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">

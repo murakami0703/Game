@@ -19,7 +19,6 @@ void EnemyManager::Update(Player* player)
 	for (auto& en : m_enemys) {
 		en->Update(player);
 	}
-	
 }
 void EnemyManager::Draw(EnRenderMode renderMode)
 {

@@ -44,7 +44,7 @@
 
 #include "sprite/SpriteStandby.h"
 #include "sprite/Sprite.h"
-
+#include "Fade.h"
 #include "gameObject/GameObjectManager.h"
 
 #include "graphics/SkinModelRender.h"

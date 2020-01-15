@@ -11,7 +11,7 @@
 #include "RenderTarget.h"
 #include "enemy/EnemyManeger.h"
 #include "ItemManeger.h"
-
+#include "Fade.h"
 /// <summary>
 /// グローバル変数
 /// </summary>
@@ -79,7 +79,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	}
 	Sprite g_Main;		//スプライト。
-
+	//試し
+	Fade fad;
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 
 
@@ -157,6 +158,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			g_sprite.Update(g_spritePos, CQuaternion::Identity(), CVector3::One());
 			g_Main.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 			g_camera2D.Update();
+
+			//フード
+			if (g_pad[0].IsTrigger(enButtonA)) {
+				fad.SetSprite(g_sprite);
+				fad.SetState(Fade::Fadein);
+			}
+			fad.Update();
 
 			//シャドウキャスターを登録。
 			m_shadowMap.RegistShadowCaster(player->GetPlayerSkinModel());

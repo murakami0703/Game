@@ -99,8 +99,8 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EneBow.cpp" />
     <ClCompile Include="enemy\EnemyManeger.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="graphics\camera2D\Camera2D.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
@@ -154,8 +154,8 @@
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EneBow.h" />
     <ClInclude Include="enemy\EnemyManeger.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="graphics\camera2D\Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />

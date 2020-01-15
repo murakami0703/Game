@@ -20,7 +20,6 @@ public:
 	{
 		m_position = pos;
 	}
-
 private:
 	/// <summary>
 	/// ó‘Ô

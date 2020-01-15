@@ -70,18 +70,16 @@ void Enemy::Update(Player* player)
 		//œpœj’†
 		move();
 		if (m_toPlayerVec.Length() < m_tuisekiLength && EnemyManager::GetInstance()->GetEnemyTcount() < 5) {
+			EnemyManager::GetInstance()->AddEnemyTrackingCount(1);		//’ÇÕó‘Ô‚ÖB
 			m_state = eState_TuisekiPlayer;
 		}
 		break;
 	case eState_TuisekiPlayer:
 		//ƒvƒŒƒCƒ„[‚ð’ÇÕ
-		if (EnemyManager::GetInstance()->GetEnemyTcount() < 5) {
-			EnemyManager::GetInstance()->AddEnemyTCount(1);
-		}
 		Follow(player);
 		//‰“‚­‚È‚Á‚½‚Ì‚ÅœpœjˆÊ’u‚É–ß‚é
 		if (m_toPlayerVec.Length() > m_ReturnLength) {
-			EnemyManager::GetInstance()->AddEnemyTCount(-1);
+			EnemyManager::GetInstance()->AddEnemyTrackingCount(-1);
 			m_state = eState_Haikai;
 		}
 		break;

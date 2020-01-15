@@ -8,7 +8,7 @@ public:
 	~EnemyManager();
 	void Update(Player* player);
 	void Draw(EnRenderMode renderMode);
-	void AddEnemyTCount(int x) {
+	void AddEnemyTrackingCount(int x) {
 		//ˆø”‚Éİ’è‚µ‚½’l‚ğ‰ÁZ‚·‚é@•‰‚Ì”‚ğİ’è‚µ‚½‚çŒ¸­‚·‚é
 		m_enemyTcount += x;
 		if (m_enemyTcount < 0) {
