@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "EnemyManeger.h"
-
 Enemy::Enemy()
 {
 
@@ -19,11 +18,11 @@ Enemy::~Enemy()
 void Enemy::Follow(Player* player)
 {
 	//í«îˆÇøÇ„
-	if (m_toPlayerVec.Length() > m_plFollow){
-		auto dir = m_toPlayerVec;
-		dir.y = 0.0f;
-		dir.Normalize();
-		m_position += dir * m_follSpeed;
+	CVector3 m_toBPVec = m_battlePoint->position - m_position;
+	if (m_toBPVec.Length() > m_follSpeed){
+		m_toBPVec.y = 0.0f;
+		m_toBPVec.Normalize();
+		m_position += m_toBPVec * m_follSpeed;
 	}
 }
 
@@ -69,9 +68,11 @@ void Enemy::Update(Player* player)
 	case eState_Haikai:
 		//úpújíÜ
 		move();
-		if (m_toPlayerVec.Length() < m_tuisekiLength && EnemyManager::GetInstance()->GetEnemyTcount() < 5) {
-			EnemyManager::GetInstance()->AddEnemyTrackingCount(1);		//í«ê’èÛë‘Ç÷ÅB
-			m_state = eState_TuisekiPlayer;
+		if (m_toPlayerVec.Length() < m_tuisekiLength ) {
+			m_battlePoint = EnemyManager::GetInstance()->TryGetBattlePoint(m_position);
+			if(m_battlePoint!= nullptr){
+				m_state = eState_TuisekiPlayer;
+			}
 		}
 		break;
 	case eState_TuisekiPlayer:
@@ -79,7 +80,6 @@ void Enemy::Update(Player* player)
 		Follow(player);
 		//âìÇ≠Ç»Ç¡ÇΩÇÃÇ≈úpújà íuÇ…ñﬂÇÈ
 		if (m_toPlayerVec.Length() > m_ReturnLength) {
-			EnemyManager::GetInstance()->AddEnemyTrackingCount(-1);
 			m_state = eState_Haikai;
 		}
 		break;

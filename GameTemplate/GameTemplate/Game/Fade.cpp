@@ -20,36 +20,32 @@ void Fade::Update()
 		//何もない
 		break;
 	case Fade::Fadein:
-		{
-		//フェードイン
-			CVector4 mulColor = m_sptite->GetMulColor();
+	//フェードイン
+		mulColorin = m_sptite->GetMulColor();
 
-			mulColor.w += 0.005f;
-			if (mulColor.w > 1.0f) {
-				mulColor.w = 1.0f;
-				m_sptite->SetMulColor(mulColor);
-				return;
-			}
-			else {
-				m_sptite->SetMulColor(mulColor);
-			}
-		}
-	break;
-	case Fade::FadeOut:
-	{
-		//フェードアウト
-		CVector4 mulColor = m_sptite->GetMulColor();
-
-		mulColor.w -= 0.05f;
-		if (mulColor.w < 0.0f) {
-			mulColor.w = 0.0f;
-			m_sptite->SetMulColor(mulColor);
+		mulColorin.w += 0.005f;
+		if (mulColorin.w > 1.0f) {
+			mulColorin.w = 1.0f;
+			m_sptite->SetMulColor(mulColorin);
 			return;
 		}
 		else {
-			m_sptite->SetMulColor(mulColor);
+			m_sptite->SetMulColor(mulColorin);
 		}
-	}
+	break;
+	case Fade::FadeOut:
+	//フェードアウト
+		mulColorout = m_sptite->GetMulColor();
+
+		mulColorout.w -= 0.05f;
+		if (mulColorout.w < 0.0f) {
+			mulColorout.w = 0.0f;
+			m_sptite->SetMulColor(mulColorout);
+			return;
+		}
+		else {
+			m_sptite->SetMulColor(mulColorout);
+		}
 	break;
 	}
 }

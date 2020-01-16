@@ -67,6 +67,9 @@
     <Filter Include="gimmick">
       <UniqueIdentifier>{296469b4-326c-402a-8a53-8735d3ad7382}</UniqueIdentifier>
     </Filter>
+    <Filter Include="fade">
+      <UniqueIdentifier>{4ea41b5e-cd79-4b6f-943e-9e568262d923}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -202,7 +205,9 @@
     <ClCompile Include="Gimmick.cpp">
       <Filter>gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="Fade.cpp" />
+    <ClCompile Include="Fade.cpp">
+      <Filter>fade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -346,7 +351,9 @@
     <ClInclude Include="Gimmick.h">
       <Filter>gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="Fade.h" />
+    <ClInclude Include="Fade.h">
+      <Filter>fade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">

@@ -26,5 +26,8 @@ public:
 private:
 	Sprite* m_sptite;		//スプライト。
 	State m_state = None;
+	CVector4 mulColorin;
+	CVector4 mulColorout;
+
 };
 

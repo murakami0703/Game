@@ -19,9 +19,6 @@
 
 Camera2D g_camera2D;	//2Dカメラ
 
-Sprite g_sprite;		//スプライト。
-CVector3 g_spritePos = CVector3::Zero();	//スプライトの座標。
-
 
 
 /// ///////////////////////////////////////////////////////////////////
@@ -77,8 +74,97 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
 	m_eneMane.RegistEnemy(enemy);
 
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+	enemy = new Enemy;
+	enemy->SetPosition({ 100.0f,30.0f,-250.0f });
+	m_eneMane.RegistEnemy(enemy);
+
+
 	}
 	Sprite g_Main;		//スプライト。
+
+	Sprite g_sprite;		//スプライト。
+	CVector3 g_spritePos = CVector3::Zero();	//スプライトの座標。
+
 	//試し
 	Fade fad;
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
@@ -98,7 +184,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	);
 
 	//sprite
-	g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
+	//g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
 	//フレームバッファのレンダリングターゲット。
 	ID3D11RenderTargetView* oldRenderTargetView;
@@ -160,11 +246,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			g_camera2D.Update();
 
 			//フード
-			if (g_pad[0].IsTrigger(enButtonA)) {
+			/*if (g_pad[0].IsTrigger(enButtonA)) {
 				fad.SetSprite(g_sprite);
 				fad.SetState(Fade::Fadein);
 			}
-			fad.Update();
+			fad.Update();*/
 
 			//シャドウキャスターを登録。
 			m_shadowMap.RegistShadowCaster(player->GetPlayerSkinModel());
@@ -242,9 +328,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					g_Main.Draw();
 
 					//SpriteのDraw関数を呼び出す。
-					g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
+					//g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
 					
-					g_sprite.Draw();
+					//g_sprite.Draw();
 					//カメラの更新。
 					//g_camera3D.Update();
 

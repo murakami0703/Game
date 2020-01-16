@@ -1,6 +1,12 @@
 #pragma once
 #include "Enemy.h"
 
+struct BattlePoint
+{
+	CVector3 position = CVector3::Zero();
+	int enemyCount = 0;
+
+};
 class EnemyManager
 {
 public:
@@ -8,17 +14,12 @@ public:
 	~EnemyManager();
 	void Update(Player* player);
 	void Draw(EnRenderMode renderMode);
-	void AddEnemyTrackingCount(int x) {
-		//引数に設定した値を加算する　負の数を設定したら減少する
-		m_enemyTcount += x;
-		if (m_enemyTcount < 0) {
-			m_enemyTcount = 0;
-		}
-
-		if (m_enemycount < m_enemyTcount) {
-			m_enemyTcount = m_enemycount;
-		}
-	}
+	/// <summary>
+	/// 一番近いバトルポイントを取得できるかどうか検索します。
+	/// </summary>
+	/// <param name="result">バトルポイントの位置</param>
+	/// <param name="position">エネミーの座標</param>
+	BattlePoint* TryGetBattlePoint(CVector3 position);
 	void RegistEnemy(Enemy* en)
 	{
 		m_enemys.push_back(en);
@@ -42,8 +43,15 @@ public:
 private:
 	static EnemyManager* m_instance ;
 	std::vector<Enemy*> m_enemys;
+	static const int NUM_POINT = 8;
+	BattlePoint m_battlepoint[NUM_POINT];
 
 	const int m_enemycount = 5;		//エネミの最大集合個数
 	int m_enemyTcount = 0;	//追跡しているエネミの数
+
+	const float m_pointdistance = 100.0f;	//ポイントまでの距離
+	float m_toBPLeng[NUM_POINT];
+	float m_BPMinLeng = 0;		//一番近いバトルポイントの長さ
+
 };
 
