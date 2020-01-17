@@ -11,6 +11,8 @@ public:
 
 	enum enAnimationClip {
 		enewalk,
+		eneAttack_1,
+		eneAttack_2,
 		num
 	};
 	void Update(Player* player);
@@ -47,12 +49,12 @@ private:
 	AnimationClip  m_animClips[num];
 
 	//移動関連
-	int m_moveCount = 0;
+	int m_moveCount = 0;				//巡回用カウント
 	float m_moveSpeed = 0.6f;			//エネミの移動速度。
 	const float m_plFollow = 100.0f;	//追尾する距離。
 	const float m_follSpeed = 0.7f;		//追尾中の移動速度。
 	const float m_tuisekiLength = 300.0f;		//追尾する距離。
 	const float m_ReturnLength = 400.0f;		//徘徊位置に戻る距離。
-	BattlePoint* m_battlePoint = nullptr;
+	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 };
 

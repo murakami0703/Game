@@ -113,6 +113,22 @@ public:
 		m_viewVolumeHeight = h;
 	}
 
+	/// <summary>
+	/// ビューボリュームの幅を取得。
+	/// </summary>
+	float SetViewVolumeWidth()
+	{
+		return m_viewVolumeWidth;
+	}
+
+	/// <summary>
+	/// ビューボリュームの高さを取得。
+	/// </summary>
+	float GetViewVolumeHeight()
+	{
+		return m_viewVolumeHeight;
+	}
+
 private:
 	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。
 	CMatrix m_projMatrix = CMatrix::Identity();		//プロジェクション行列。

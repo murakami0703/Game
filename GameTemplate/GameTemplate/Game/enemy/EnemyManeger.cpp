@@ -31,11 +31,14 @@ BattlePoint* EnemyManager::TryGetBattlePoint(CVector3 position)
 			}
 		}
 
+		//BPにエネミはいなかったので
+		//指定された番号のBPに行くぅ
 		if (NUM_BPMin != -1) {
 			m_battlepoint[NUM_BPMin].enemyCount++;
 			return &m_battlepoint[NUM_BPMin];
 		}
-		return nullptr;
+
+		return nullptr;		//使用中
 
 }
 void EnemyManager::Update(Player* player)

@@ -28,7 +28,8 @@ void Player::Move()
 {
 	m_move.x = 0.0f;
 	m_move.z = 0.0f;
-	//十字移動。
+
+	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
 		m_move.x -= m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
@@ -49,9 +50,13 @@ void Player::Move()
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationD);
 
 	}
+	else if (g_pad[0].IsTrigger(enButtonA) && m_characon.IsOnGround() == false) {
+		//ジャンプ
+		m_move.y += m_jumpPos;
+	}
 
-	//重力
 	if (m_characon.IsOnGround()) {
+		//重力ストップ
 		m_move.y = 0.0f;
 	}
 
@@ -64,15 +69,13 @@ void Player::Update()
 	PlAnimation();	//アニメーション遷移
 
 	m_animation.Update(0.05f);//アニメーション再生
-	//回転
-
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	m_model.Update();
 }
 void Player::PlAnimation()
 {
-	//攻撃
+	//攻撃アニメーション再生用
 	if (g_pad[0].IsTrigger(enButtonA)) {
 		Atcount++;
 		if (Atcount == 1) {
@@ -84,6 +87,8 @@ void Player::PlAnimation()
 			attackflag = true;
 		}
 	}
+
+
 
 	switch (m_anime)
 	{
@@ -101,6 +106,7 @@ void Player::PlAnimation()
 		break;
 	case Player::Animation_Walk:
 		m_animation.Play(Animation_Walk);//歩き
+		//十字キーが押されていない時待機アニメーション再生
 		if ((g_pad[0].IsPress(enButtonLeft) ||
 			g_pad[0].IsPress(enButtonRight) ||
 			g_pad[0].IsPress(enButtonUp) ||

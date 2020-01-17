@@ -32,23 +32,21 @@ public:
 			delete en;
 		}
 	}
+	/// <summary>
+	/// インスタンスの取得。
+	/// </summary>
+	/// <returns>インスタンス</returns>
 	static EnemyManager* GetInstance()
 	{
 		return m_instance;
 	}
-	int EnemyManager::GetEnemyTcount()
-	{
-		return m_enemyTcount;
-	}
 private:
 	static EnemyManager* m_instance ;
-	std::vector<Enemy*> m_enemys;
-	static const int NUM_POINT = 8;
+	std::vector<Enemy*> m_enemys;	//エネミ用の動的配列
+	static const int NUM_POINT = 8;	//最大バトルポイント
 	BattlePoint m_battlepoint[NUM_POINT];
 
-	const int m_enemycount = 5;		//エネミの最大集合個数
-	int m_enemyTcount = 0;	//追跡しているエネミの数
-
+	//バトルポイント関連
 	const float m_pointdistance = 100.0f;	//ポイントまでの距離
 	float m_toBPLeng[NUM_POINT];
 	float m_BPMinLeng = 0;		//一番近いバトルポイントの長さ

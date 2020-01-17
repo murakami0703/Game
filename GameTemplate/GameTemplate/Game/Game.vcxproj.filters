@@ -67,7 +67,10 @@
     <Filter Include="gimmick">
       <UniqueIdentifier>{296469b4-326c-402a-8a53-8735d3ad7382}</UniqueIdentifier>
     </Filter>
-    <Filter Include="fade">
+    <Filter Include="graphics\font">
+      <UniqueIdentifier>{2afff652-8f6c-4f80-8d01-35d2f3a35c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sprite\fade">
       <UniqueIdentifier>{4ea41b5e-cd79-4b6f-943e-9e568262d923}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -206,7 +209,10 @@
       <Filter>gimmick</Filter>
     </ClCompile>
     <ClCompile Include="Fade.cpp">
-      <Filter>fade</Filter>
+      <Filter>sprite\fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>graphics\font</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,7 +358,10 @@
       <Filter>gimmick</Filter>
     </ClInclude>
     <ClInclude Include="Fade.h">
-      <Filter>fade</Filter>
+      <Filter>sprite\fade</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>graphics\font</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

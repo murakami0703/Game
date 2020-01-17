@@ -1,20 +1,19 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "EnemyManeger.h"
+
 Enemy::Enemy()
 {
-
 	//cmoƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İB
 	m_enemy.Init(L"Assets/modelData/enemy.cmo");
 	m_oldPos = m_position;
 	m_scale = { 5.0f,5.0f,5.0f };
-
 }
-
 
 Enemy::~Enemy()
 {
 }
+
 void Enemy::Follow(Player* player)
 {
 	//’Ç”ö‚¿‚ã
@@ -31,6 +30,7 @@ void Enemy::move()
 	//œpœj’†
 	m_moveCount++;
 	m_position.z += m_moveSpeed;
+	//ã‰ºœpœj
 	if (m_moveCount == 100) {
 		m_moveSpeed = -m_moveSpeed;
 	}
