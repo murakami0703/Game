@@ -12,6 +12,8 @@
 #include "enemy/EnemyManeger.h"
 #include "ItemManeger.h"
 #include "Fade.h"
+#include "Font.h"
+
 /// <summary>
 /// グローバル変数
 /// </summary>
@@ -167,6 +169,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//試し
 	Fade fad;
+	Font font;
+
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 
 
@@ -329,10 +333,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 					//SpriteのDraw関数を呼び出す。
 					//g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
-					
 					//g_sprite.Draw();
 					//カメラの更新。
 					//g_camera3D.Update();
+					//文字出してみマフ
+					//font.Draw();
 
 					//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
 					oldRenderTargetView->Release();

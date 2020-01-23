@@ -52,6 +52,7 @@ void Enemy::Return()
 }
 void Enemy::Dead(Player* player)
 {
+	//Ž€–S
 	if (player->GetAttackflag() == true) {
 		if (m_toPlayerVec.Length() < 60.0f) {
 			EnemyManager::GetInstance()->DeleteEnemy(this);
@@ -64,6 +65,7 @@ void Enemy::Update(Player* player)
 	
 	p_pos = player->GetPosition();
 	m_toPlayerVec = p_pos - m_position;
+
 	switch (m_state) {
 	case eState_Haikai:
 		//œpœj’†

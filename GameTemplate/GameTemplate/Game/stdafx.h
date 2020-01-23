@@ -47,6 +47,7 @@
 #include "Fade.h"
 #include "gameObject/GameObjectManager.h"
 
+#include "Font.h"
 #include "graphics/SkinModelRender.h"
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。

@@ -102,6 +102,7 @@
     <ClCompile Include="enemy\EnemyManeger.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="graphics\camera2D\Camera2D.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="enemy\EnemyManeger.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="graphics\camera2D\Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />

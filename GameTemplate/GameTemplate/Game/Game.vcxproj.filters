@@ -214,6 +214,7 @@
     <ClCompile Include="Font.cpp">
       <Filter>graphics\font</Filter>
     </ClCompile>
+    <ClCompile Include="GameData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -363,6 +364,7 @@
     <ClInclude Include="Font.h">
       <Filter>graphics\font</Filter>
     </ClInclude>
+    <ClInclude Include="GameData.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">
