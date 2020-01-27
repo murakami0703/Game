@@ -336,7 +336,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					//g_sprite.Draw();
 					//カメラの更新。
 					//g_camera3D.Update();
-					//文字出してみマフ
+					//文字出してみ
 					//font.Draw();
 
 					//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
