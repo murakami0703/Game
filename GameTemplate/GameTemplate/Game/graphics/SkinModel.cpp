@@ -183,12 +183,28 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 		// ライトカメラのビュー、プロジェクション行列を送る。
 		vsCb.mLightProj = shadowMap->GetLightProjMatrix();
 		vsCb.mLightView = shadowMap->GetLightViewMatrix();
+
 		if (m_isShadowReciever == true) {
 			vsCb.isShadowReciever = 1;
 		}
 		else {
 			vsCb.isShadowReciever = 0;
 		}
+		//法線マップを使用するかどうかのフラグを送る。
+		if (m_normalMapSRV != nullptr) {
+			vsCb.isHasNormalMap = true;
+		}
+		else {
+			vsCb.isHasNormalMap = false;
+		}
+		//スぺキュラマップを使用するかどうかのフラグを送る。
+		if (m_specularSRV != nullptr) {
+			vsCb.isHasSpecularMap = true;
+		}
+		else {
+			vsCb.isHasSpecularMap = false;
+		}
+
 		//定数バッファの更新
 		d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
 		//視点の設定。
@@ -215,6 +231,14 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 			auto modelMaterial = reinterpret_cast<SkinModelEffect*>(material);
 			modelMaterial->SetRenderMode(m_renderMode);
 		});
+		if (m_normalMapSRV != nullptr) {
+			//法線マップが設定されていたらをレジスタt2に設定する。
+			d3dDeviceContext->PSSetShaderResources(2, 1, &m_normalMapSRV);
+		}
+		if (m_specularSRV != nullptr) {
+			//キュラマップが設定されていたらをレジスタt3に設定する。
+			d3dDeviceContext->PSSetShaderResources(3, 1, &m_specularSRV);
+		}
 
 		//描画。
 		m_modelDx->Draw(

@@ -93,6 +93,22 @@ public:
 	{
 		m_isShadowReciever = flag;
 	}
+	/// <summary>
+	/// 法線マップの設定。
+	/// </summary>
+	void SetNormalMap(ID3D11ShaderResourceView* srv)
+	{
+		m_normalMapSRV = srv;
+	}
+
+	/// <summary>
+	/// スぺキュラマップの設定。
+	/// </summary>
+	void SetSpecularMap(ID3D11ShaderResourceView* srv)
+	{
+		m_specularSRV = srv;
+	}
+
 private:
 	/*!
 	*@brief	サンプラステートの初期化。
@@ -126,6 +142,8 @@ private:
 		CMatrix mLightView;		// ライトビュー行列。
 		CMatrix mLightProj;		// ライトプロジェクション行列。
 		int isShadowReciever;	// シャドウレシーバーのフラグ。
+		int isHasNormalMap;		//法線マップのフラグ
+		int isHasSpecularMap;		//スぺキュラマップのフラグ
 
 	};
 	//ディレクションライトの定数バッファ
@@ -154,7 +172,10 @@ private:
 	ID3D11Buffer*		m_lightCb = nullptr;				//!<ライト用の定数バッファ。
 	SLight				m_light;						//!<ライトの構造体。
 	ID3D11Buffer*		m_shadowMapcb = nullptr;					//!<シャドウマップ用の定数バッファ。
+
 	ID3D11ShaderResourceView* m_albedoTextureSRV = nullptr;	//!<アルベドテクスチャのSRV
+	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップのSRV
+	ID3D11ShaderResourceView* m_specularSRV = nullptr;		//スぺマップのSRV
 
 	bool m_isShadowReciever = false;						//シャドウレシーバーのフラグ。
 

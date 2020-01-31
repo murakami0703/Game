@@ -190,6 +190,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//sprite
 	//g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
+
 	//フレームバッファのレンダリングターゲット。
 	ID3D11RenderTargetView* oldRenderTargetView;
 	ID3D11DepthStencilView* oldDepthStencilView;

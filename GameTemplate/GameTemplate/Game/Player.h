@@ -62,6 +62,9 @@ private:
 	Animation	m_animation;					//アニメーション
 	AnimationClip m_animClips[AnimationClip_Num];	//アニメーションクリップ
 
+	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
+	ID3D11ShaderResourceView* g_speculaasMapSRV = nullptr;	//スぺキュラマップ用
+
 	//攻撃関連
 	bool attackflag = false;	//攻撃判定用。
 };
