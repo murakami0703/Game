@@ -379,10 +379,16 @@
     <MeshContentTask Include="Assets\modelData\pp.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\mikyan.jpg">
       <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\Normal.png">
+      <Filter>Assets\modelData</Filter>
     </ImageContentTask>
   </ItemGroup>
 </Project>

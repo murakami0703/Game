@@ -9,8 +9,8 @@
 //アルベドテクスチャ。
 Texture2D<float4> albedoTexture : register(t0);	
 Texture2D<float4> g_shadowMap : register(t2);		//シャドウマップ。
-Texture2D<float4> g_normalMap : register(t2);		//	法線マップ。
-Texture2D<float4> g_specularMap : register(t3);		//	スぺキュラマップ。
+Texture2D<float4> g_normalMap : register(t3);		//	法線マップ。
+Texture2D<float4> g_specularMap : register(t4);		//	スぺキュラマップ。
 
 //ボーン行列
 StructuredBuffer<float4x4> boneMatrix : register(t1);
@@ -33,8 +33,8 @@ cbuffer VSPSCb : register(b0){
 	float4x4 mLightView;	//ライトビュー行列。
 	float4x4 mLightProj;	//ライトプロジェクション行列。
 	int isShadowReciever;	//シャドウレシーバーフラグ。
-	int isHasNormalMap;		//法線マップフラグ
-	int isHasSpecularMap;		//スぺキュラマップフラグ
+	int isHasNormalMap;		//法線マップフラグ。
+	int isHasSpecularMap;	//スぺキュラマップフラグ。
 };
 
 /// <summary>
@@ -200,15 +200,36 @@ float4 PSMain( PSInput In ) : SV_Target0
 {
 	//albedoテクスチャからカラーをフェッチする。
 	float4 albedoColor = albedoTexture.Sample(Sampler, In.TexCoord);
-	/*//ディレクションライトの拡散反射光を計算する。
+
+	//法線を計算する。
+	float3 normal = 0;
+	if (isHasNormalMap == 1) {	//１なら法線マップが設定されている。
+		//従法線の計算
+		//外積を使う。
+		float3 biNormal = cross(In.Normal, In.Tangent);
+		//従法線を正規化する。
+		biNormal = normalize(biNormal);
+		//法線マップからローカル法線をとってくる。
+		float4 normalMap = g_normalMap.Sample(Sampler, In.TexCoord);
+		//-1.0～1.0の範囲に変換する。
+		normalMap = (normalMap * 2.0f) - 1.0f;
+		//ローカル法線をワールド法線にする。
+		normal = normalMap.x * In.Tangent + normalMap.y * biNormal + normalMap.z * In.Normal;
+	}
+	else{
+		//ない。
+		normal = In.Normal;
+	}
+
+	//ディレクションライトの拡散反射光を計算する。
 	float3 lig = 0.0f;
 	for (int i = 0; i < Dcolor; i++) {
-		lig += max(0.0f, dot(In.Normal * -1.0f, directionLight.dligDirection[i])) * directionLight.dligColor[i];
+		lig += max(0.0f, dot(normal * -1.0f, directionLight.dligDirection[i])) * directionLight.dligColor[i];
 
 		//ディレクションライトの鏡面反射光を計算する。
 		{
 			//反射ベクトルを求める。
-			float3 r = directionLight.dligDirection[i] + (2 * dot(In.Normal, -directionLight.dligDirection[i]))* In.Normal;
+			float3 r = directionLight.dligDirection[i] + (2 * dot(normal, -directionLight.dligDirection[i]))* normal;
 
 			//視点からライトを当てる物体に伸びるベクトルを求める。
 			float3 e = normalize(In.worldPos - eyePos);
@@ -240,21 +261,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 			lig *= 0.5f;
 		}
 	}
-	*/
-
-	//法線を計算する。
-	float3 normal = Normal(In.Normal, In.tangent, In.TexCoord);
-
-	float3 lig = 0.0f;
-
-	//ディフューズライトを加算。
-	lig += DiffuseLight(normal);
-
-	//スペキュラライトを加算。
-	lig += SpecularLight(normal, In.posInWorld, In.TexCoord);
-
-	//デプスシャドウマップを使って影を落とす。
-	Shadow(lig, In.posInLVP);
+	
 
 	//環境光を当てる。
 	lig += EnvironmentLight;
@@ -290,95 +297,4 @@ float4 PSMain_ShadowMap(PSInput_ShadowMap In) : SV_Target0
 {
 	//射影空間でのZ値を返す。
 	return In.Position.z / In.Position.w;
-}
-/// <summary>
-/// 拡散反射光の計算
-/// </summary>
-float3 DiffuseLight(float3 normal)
-{
-	float3 lig = 0.0f;
-	for (int i = 0; i < Dcolor; i++) {
-		//ラインバート拡散反射
-		lig += max(0.0f, dot(normal * -1.0f, directionLight.dligDirection[i])) * directionLight.dligColor[i];
-	}
-	return lig;
-}
-
-/// <summary>
-/// スぺキュラライトの計算
-/// </summary>
-float4 SpecularLight(float3 normal, float3 worldPos, float2 uv)
-{
-	float3 lig = 0.0f;
-	for (int i = 0; i < Dcolor; i++) {
-
-		//視点からライトを当てる物体に伸びるベクトルを求める。
-		float3 EyeDir = normalize(eyePos - worldPos);
-
-		//反射ベクトルを求める。
-		float3 reEyeDir = -EyeDir + 2 * dot(normal, EyeDir) * normal;
-
-		//反射ベクトルとディレクションライトの内積を取って、スペキュラの強さを計算。
-		float specInside = max(0, dot(-directionLight.dligDirection[i], reEyeDir));
-
-		//スぺキュラの絞り
-		float specPower = 1.0f;
-		if (isHasSpecularMap) {
-			specPower= g_specularMap.Sample(Sampler, uv).r;
-		}
-
-		//スぺキュラ反射をライトに加算する。
-		lig = pow(specInside, 2.0f) * directionLight.dligColor[i] * specPower * 7.0f;
-	}
-
-	return lig;
-}
-
-/// <summary>
-/// シャドウマップの影を計算。
-/// </summary>
-void Shadow(inout float3 lig, float4 posInLvp)
-{
-	if (isShadowReciever == 1) {
-		//シャドウレシーバー。
-	//LVP空間から見た時の最も手前の深度値をシャドウマップから取得する。
-		float2 shadowMapUV = posInLVP.xy / posInLVP.w;
-		shadowMapUV *= float2(0.5f, -0.5f);
-		shadowMapUV += 0.5f;
-		//シャドウマップの範囲内かどうかを判定する。
-
-		///LVP空間での深度値を計算。
-		float zInLVP = posInLVP.z / posInLVP.w;
-		//シャドウマップに書き込まれている深度値を取得。
-		float zInShadowMap = g_shadowMap.Sample(Sampler, shadowMapUV);
-
-		if ((shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f) && zInLVP > zInShadowMap + 0.01f) {
-			//影が落ちているので、光を弱くする
-			lig *= 0.5f;
-		}
-	}
-}
-
-/// <summary>
-/// 法線マップの計算。
-/// </summary>
-float3 Normal(float3 normal, float3 tangent, float2 uv)
-{
-	float3 worldSpaceNormal;
-	if (isHasNormalMap == 1) {
-		//法線マップがある。
-		//法線と接ベクトルの外積を計算して、従ベクトルを計算する。
-		float3 biNormal = cross(normal, tangent);
-		float3 tangentSpaceNormal = g_normalMap.Sample(g_sampler, uv);
-		//0.0～1.0の範囲になっているタンジェントスペース法線を
-		//-1.0～1.0の範囲に変換する。
-		tangentSpaceNormal = (tangentSpaceNormal * 2.0f) - 1.0f;
-		//法線をタンジェントスペースから、ワールドスペースに変換する。
-		worldSpaceNormal = tangent * tangentSpaceNormal.x + biNormal * tangentSpaceNormal.y + normal * tangentSpaceNormal.z;
-	}
-	else {
-		//ない。
-		worldSpaceNormal = normal;
-	}
-	return worldSpaceNormal;
 }

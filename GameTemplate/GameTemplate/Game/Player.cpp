@@ -17,17 +17,6 @@ Player::Player()
 	m_model.Init(L"Assets/modelData/pp.cmo");
 	m_position = { 0.0f,60.0f,0.0f };
 
-	//法線マップとスぺキュラマップつけますか
-	//こんな感じです。
-	/*DirectX::CreateDDSTextureFromFileEx(
-		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/utc_nomal.dds", 0,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		false, nullptr, &g_normalMapSRV
-	);
-	//モデルに法線マップを設定する。
-	m_model.SetNormalMap(g_normalMapSRV);
-	*/
-
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 	m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化

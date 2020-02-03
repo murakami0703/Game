@@ -56,5 +56,7 @@ private:
 	const float m_tuisekiLength = 300.0f;		//追尾する距離。
 	const float m_ReturnLength = 400.0f;		//徘徊位置に戻る距離。
 	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
+
+
 };
 

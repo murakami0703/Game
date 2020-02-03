@@ -2,16 +2,34 @@
 #include "Enemy.h"
 #include "EnemyManeger.h"
 
+ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
+
 Enemy::Enemy()
 {
 	//cmoファイルの読み込み。
-	m_enemy.Init(L"Assets/modelData/enemy.cmo");
+	m_enemy.Init(L"Assets/modelData/Footman_Default.cmo");
 	m_oldPos = m_position;
-	m_scale = { 5.0f,5.0f,5.0f };
+	m_scale = { 2.0f,2.0f,2.0f };
+
+	//法線マップつけます
+	DirectX::CreateDDSTextureFromFileEx(
+	g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Normal.dds", 0,
+	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+	false, nullptr, &g_normalMapSRV
+	);
+	//モデルに法線マップを設定する。
+	m_enemy.SetNormalMap(g_normalMapSRV);
+
+
 }
 
 Enemy::~Enemy()
 {
+	// 法線マップを解放。
+	if (g_normalMapSRV != nullptr) {
+		g_normalMapSRV->Release();
+	}
+
 }
 
 void Enemy::Follow(Player* player)
@@ -66,7 +84,7 @@ void Enemy::Update(Player* player)
 	p_pos = player->GetPosition();
 	m_toPlayerVec = p_pos - m_position;
 
-	switch (m_state) {
+	/*switch (m_state) {
 	case eState_Haikai:
 		//徘徊中
 		move();
@@ -88,7 +106,7 @@ void Enemy::Update(Player* player)
 	case eState_Return:
 		//徘徊位置に戻る
 		Return();
-	}
+	}*/
 	Dead(player);
 	//ワールド行列の更新。
 	m_enemy.UpdateWorldMatrix(m_position, CQuaternion::Identity(), m_scale);

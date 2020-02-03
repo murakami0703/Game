@@ -232,12 +232,12 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 			modelMaterial->SetRenderMode(m_renderMode);
 		});
 		if (m_normalMapSRV != nullptr) {
-			//法線マップが設定されていたらをレジスタt2に設定する。
-			d3dDeviceContext->PSSetShaderResources(2, 1, &m_normalMapSRV);
+			//法線マップが設定されていたらをレジスタt3に設定する。
+			d3dDeviceContext->PSSetShaderResources(3, 1, &m_normalMapSRV);
 		}
-		if (m_specularSRV != nullptr) {
-			//キュラマップが設定されていたらをレジスタt3に設定する。
-			d3dDeviceContext->PSSetShaderResources(3, 1, &m_specularSRV);
+		if (m_normalMapSRV != nullptr) {
+			//スぺキュラマップが設定されていたらをレジスタt4に設定する。
+			d3dDeviceContext->PSSetShaderResources(4, 1, &m_normalMapSRV);
 		}
 
 		//描画。
