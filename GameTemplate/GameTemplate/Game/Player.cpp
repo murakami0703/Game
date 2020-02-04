@@ -53,7 +53,7 @@ void Player::Move()
 	}
 	else if (g_pad[0].IsTrigger(enButtonA) && m_characon.IsOnGround() == false) {
 		//ƒWƒƒƒ“ƒv
-		m_move.y += m_jumpPos;
+		//m_move.y = m_jumpPos;
 	}
 
 	if (m_characon.IsOnGround()) {

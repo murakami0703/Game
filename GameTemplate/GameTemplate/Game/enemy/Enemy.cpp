@@ -2,14 +2,24 @@
 #include "Enemy.h"
 #include "EnemyManeger.h"
 
-ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
 
 Enemy::Enemy()
 {
+
+	//アニメーションクリップのロード。
+	m_animClips[eneidle].Load(L"Assets/animData/eneIdle.tka");
+	m_animClips[enewalk].Load(L"Assets/animData/eneWalk.tka");
+	m_animClips[eneAttack_1].Load(L"Assets/animData/eneAT1.tka");
+	m_animClips[eneDead].Load(L"Assets/animData/eneDeath.tka");
+
+	//ループフラグの設定。
+	m_animClips[eneidle].SetLoopFlag(true);
+	m_animClips[enewalk].SetLoopFlag(true);
+
 	//cmoファイルの読み込み。
 	m_enemy.Init(L"Assets/modelData/Footman_Default.cmo");
 	m_oldPos = m_position;
-	m_scale = { 2.0f,2.0f,2.0f };
+	m_scale = { 50.0f,50.0f,50.0f };
 
 	//法線マップつけます
 	DirectX::CreateDDSTextureFromFileEx(
@@ -17,9 +27,25 @@ Enemy::Enemy()
 	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
 	false, nullptr, &g_normalMapSRV
 	);
-	//モデルに法線マップを設定する。
-	m_enemy.SetNormalMap(g_normalMapSRV);
+	//スぺキュラマップつけます
+	DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Specular.dds", 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_specularMapSRV
+	);
+	//アンビエントマップつけます
+	DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/AO.dds", 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_ambientMapSRV
+	);
 
+	//モデルに法線マップ、スぺキュラマップ、アンビエントマップを設定する。
+	m_enemy.SetNormalMap(g_normalMapSRV);
+	//m_enemy.SetSpecularMap(g_specularMapSRV);
+	//m_enemy.SetAmbientMap(g_ambientMapSRV);
+
+	m_animation.Init(m_enemy, m_animClips, num);	//アニメーションの初期化
 
 }
 
@@ -41,6 +67,17 @@ void Enemy::Follow(Player* player)
 		m_toBPVec.Normalize();
 		m_position += m_toBPVec * m_follSpeed;
 	}
+	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
+
+	//　向かせたい方向のベクトルを計算する。
+	CVector3 targetVector = player->GetPosition() - m_position;
+	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
+	targetVector.y = 0.0f;
+	targetVector.Normalize();
+	CQuaternion qRot;
+	qRot.SetRotation(enemyForward, targetVector);
+	m_rotation = qRot;
+
 }
 
 void Enemy::move()
@@ -56,7 +93,22 @@ void Enemy::move()
 		m_moveSpeed = m_moveSpeed;
 		m_moveCount = 0;
 	}
+
+
 }
+void Enemy::Attack()
+{
+	m_animation.Play(eneAttack_1);//歩き
+	if (m_animation.IsPlaying() == false) {
+		if (m_battlePoint != nullptr) {
+			m_state = eState_TuisekiPlayer;
+		}
+		else {
+			m_state = eState_Haikai;
+		}
+	}
+}
+
 void Enemy::Return()
 {
 	//徘徊位置に戻る。
@@ -67,14 +119,23 @@ void Enemy::Return()
 	if (diff.Length() < 1.0f) {
 		m_state = eState_Haikai;
 	}
+
+	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
+	//　向かせたい方向のベクトルを計算する。
+	CVector3 targetVector = m_oldPos - m_position;
+	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
+	targetVector.y = 0.0f;
+	targetVector.Normalize();
+	CQuaternion qRot;
+	qRot.SetRotation(enemyForward, targetVector);
+	m_rotation = qRot;
+
 }
-void Enemy::Dead(Player* player)
+void Enemy::Dead()
 {
-	//死亡
-	if (player->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 60.0f) {
-			EnemyManager::GetInstance()->DeleteEnemy(this);
-		}
+	m_animation.Play(eneDead);//歩き
+	if (m_animation.IsPlaying() == false) {
+		EnemyManager::GetInstance()->DeleteEnemy(this);
 	}
 }
 
@@ -84,9 +145,18 @@ void Enemy::Update(Player* player)
 	p_pos = player->GetPosition();
 	m_toPlayerVec = p_pos - m_position;
 
-	/*switch (m_state) {
+	if (player->GetAttackflag() == true) {
+		if (m_toPlayerVec.Length() < 60.0f) {
+			m_state = eState_Dead;
+		}
+	}
+
+	m_animation.Update(0.05f);//アニメーション再生
+
+	switch (m_state) {
 	case eState_Haikai:
 		//徘徊中
+		m_animation.Play(enewalk);//歩き
 		move();
 		if (m_toPlayerVec.Length() < m_tuisekiLength ) {
 			m_battlePoint = EnemyManager::GetInstance()->TryGetBattlePoint(m_position);
@@ -95,9 +165,20 @@ void Enemy::Update(Player* player)
 			}
 		}
 		break;
+	case eState_Attack:
+		Attack();
+		break;
 	case eState_TuisekiPlayer:
 		//プレイヤーを追跡
+		m_animation.Play(enewalk);//歩き
 		Follow(player);
+		//近いので攻撃
+		if (m_battlePoint != nullptr) {
+			if(m_battlePoint)
+			if (m_toPlayerVec.Length() < 80.0f) {
+				m_state = eState_Attack;
+			}
+		}
 		//遠くなったので徘徊位置に戻る
 		if (m_toPlayerVec.Length() > m_ReturnLength) {
 			m_state = eState_Haikai;
@@ -105,11 +186,17 @@ void Enemy::Update(Player* player)
 		break;
 	case eState_Return:
 		//徘徊位置に戻る
+		m_animation.Play(enewalk);//歩き
 		Return();
-	}*/
-	Dead(player);
+		break;
+	case eState_Dead:
+		//死
+		Dead();
+		break;
+	}
+
 	//ワールド行列の更新。
-	m_enemy.UpdateWorldMatrix(m_position, CQuaternion::Identity(), m_scale);
+	m_enemy.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	m_enemy.Update();
 
 }

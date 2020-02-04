@@ -52,7 +52,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	GameCamera Gcamera;
 	//エネミ
 	EnemyManager m_eneMane;
-	/*{Enemy* enemy = new Enemy;
+	{Enemy* enemy = new Enemy;
 	enemy->SetPosition({ 150.0f,30.0f,200.0f });
 	m_eneMane.RegistEnemy(enemy);
 
@@ -161,7 +161,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	m_eneMane.RegistEnemy(enemy);
 
 
-	}*/
+	}
 	Enemy* enemy = new Enemy;
 	enemy->SetPosition({ 150.0f,30.0f,200.0f });
 	m_eneMane.RegistEnemy(enemy);
@@ -174,9 +174,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Fade fad;
 	Font font;
 
+	//Effekseerマネージャ管理。
+	Effekseer::Manager*	m_effekseerManager = nullptr;
+	EffekseerRenderer::Renderer*	m_effekseerRenderer = nullptr;
+
+	Effekseer::Effect* m_sampleEffect = nullptr;
+	Effekseer::Handle m_playEffectHandle = -1;
+	
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
-
-
 	//メインレンダリングターゲットの初期化。
 	m_mainRenderTarget.Create(
 		FRAME_BUFFER_W,

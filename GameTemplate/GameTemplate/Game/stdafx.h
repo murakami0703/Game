@@ -20,6 +20,13 @@
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
+//Effekseerのヘッダーファイルをインクルード。
+#include "Effekseer.h"
+#include "EffekseerRendererDX11.h"
+
+#include "btBulletDynamicsCommon.h"
+#include "BulletCollision\CollisionDispatch\btGhostObject.h"
+
 //DirectXTKのインクルードファイル。
 #include "DirectXTK/Inc/Model.h"
 #include "DirectXTK/Inc/Effects.h"	

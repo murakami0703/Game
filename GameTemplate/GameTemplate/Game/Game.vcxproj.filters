@@ -390,5 +390,11 @@
     <ImageContentTask Include="Assets\modelData\Normal.png">
       <Filter>Assets\modelData</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\Specular.png">
+      <Filter>Assets\modelData</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\AO.png">
+      <Filter>Assets\modelData</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

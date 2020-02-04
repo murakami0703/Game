@@ -107,6 +107,13 @@ public:
 	{
 		m_normalMapSRV = srv;
 	}
+	/// <summary>
+	/// アンビエントマップの設定。
+	/// </summary>
+	void SetAmbientMap(ID3D11ShaderResourceView* srv)
+	{
+		m_ambientSRV = srv;
+	}
 
 private:
 	/*!
@@ -143,6 +150,7 @@ private:
 		int isShadowReciever;	// シャドウレシーバーのフラグ。
 		int isHasNormalMap;		//法線マップのフラグ
 		int isHasSpecularMap;	//スぺキュラマップのフラグ。
+		int isHasAmbientMap;	//アンビエントマップのフラグ
 	};
 	//ディレクションライトの定数バッファ
 	struct SDirectionLight {
@@ -174,6 +182,7 @@ private:
 	ID3D11ShaderResourceView* m_albedoTextureSRV = nullptr;	//!<アルベドテクスチャのSRV
 	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップのSRV
 	ID3D11ShaderResourceView* m_specularSRV = nullptr;		//スぺキュラマップのSRV
+	ID3D11ShaderResourceView* m_ambientSRV = nullptr;		//アンビエントマップのSRV
 
 	bool m_isShadowReciever = false;						//シャドウレシーバーのフラグ。
 

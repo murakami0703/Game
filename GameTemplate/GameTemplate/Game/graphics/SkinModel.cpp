@@ -204,6 +204,13 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 		else {
 			vsCb.isHasSpecularMap = false;
 		}
+		//アンビエントマップを使用するかどうかのフラグを送る。
+		if (m_ambientSRV != nullptr) {
+			vsCb.isHasAmbientMap = true;
+		}
+		else {
+			vsCb.isHasAmbientMap = false;
+		}
 
 		//定数バッファの更新
 		d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
@@ -235,9 +242,13 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 			//法線マップが設定されていたらをレジスタt3に設定する。
 			d3dDeviceContext->PSSetShaderResources(3, 1, &m_normalMapSRV);
 		}
-		if (m_normalMapSRV != nullptr) {
+		if (m_specularSRV != nullptr) {
 			//スぺキュラマップが設定されていたらをレジスタt4に設定する。
-			d3dDeviceContext->PSSetShaderResources(4, 1, &m_normalMapSRV);
+			d3dDeviceContext->PSSetShaderResources(4, 1, &m_specularSRV);
+		}
+		if (m_ambientSRV != nullptr) {
+			//アンビエントマップが設定されていたらをレジスタt5に設定する。
+			d3dDeviceContext->PSSetShaderResources(5, 1, &m_ambientSRV);
 		}
 
 		//描画。
