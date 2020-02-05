@@ -62,10 +62,14 @@ void Enemy::Follow(Player* player)
 {
 	//’Ç”ö‚¿‚ã
 	CVector3 m_toBPVec = m_battlePoint->position - m_position;
-	if (m_toBPVec.Length() > m_follSpeed){
+	if (m_toBPVec.Length() > 10.0f){
 		m_toBPVec.y = 0.0f;
 		m_toBPVec.Normalize();
 		m_position += m_toBPVec * m_follSpeed;
+	}
+	else if (m_toBPVec.Length() < 10.0f) {
+		//BP‚¢‚Ü‚·‚æ
+		m_battlePosflag = true;
 	}
 	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
 
@@ -174,10 +178,11 @@ void Enemy::Update(Player* player)
 		Follow(player);
 		//‹ß‚¢‚Ì‚ÅUŒ‚
 		if (m_battlePoint != nullptr) {
-			if(m_battlePoint)
-			if (m_toPlayerVec.Length() < 80.0f) {
-				m_state = eState_Attack;
-			}
+			//if (m_battlePoint != false) {
+				if (m_toPlayerVec.Length() < 80.0f) {
+					m_state = eState_Attack;
+				}
+			//}
 		}
 		//‰“‚­‚È‚Á‚½‚Ì‚ÅœpœjˆÊ’u‚É–ß‚é
 		if (m_toPlayerVec.Length() > m_ReturnLength) {
