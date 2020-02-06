@@ -154,6 +154,8 @@ void Sprite::Draw()
 	cb.WVP.Mul(cb.WVP, g_camera2D.GetViewMatrix());
 	cb.WVP.Mul(cb.WVP, g_camera2D.GetProjectionMatrix());
 	cb.mulColor = m_mulColor;
+	cb.alpha = m_alpha;
+
 	deviceContext->UpdateSubresource(m_cb, 0, NULL, &cb, 0, 0);
 	deviceContext->VSSetConstantBuffers(0, 1, &m_cb);
 	deviceContext->PSSetConstantBuffers(0, 1, &m_cb);

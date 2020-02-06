@@ -5,6 +5,7 @@
 cbuffer cd : register(b0) {
 	float4x4 mvp;	//ワールドビュープロジェクション行列
 	float4 mulColor;	//乗算カラー。
+	float alpha;		//α値。
 };
 struct VSInput {
 	float4 pos : SV_Position;
@@ -28,5 +29,9 @@ PSInput VSMain(VSInput In) {
 float4 PSMain(PSInput In) : SV_Target0
 {
 	float4 texColor = colorTexture.Sample(Sampler,In.uv);
-	return texColor * mulColor;
+	//乗算カラー
+	texColor = texColor * mulColor;
+	//CPUから転送されたα値を使用。
+	texColor.a *= alpha;
+	return texColor;
 }
