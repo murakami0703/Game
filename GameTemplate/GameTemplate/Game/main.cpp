@@ -196,7 +196,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	);
 
 	//sprite
-	//g_sprite.Init(L"Assets/sprite/mikyan.dds", 240.0f, 240.0f);
+	g_sprite.Init(L"Assets/sprite/test.dds", 240.0f, 240.0f);
 	g_spritePos = { -200.0f,50.0f,0.0f };
 
 	//フレームバッファのレンダリングターゲット。
@@ -340,9 +340,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 					g_Main.Draw();
 
+					float blendFactor[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+					//半透明合成のブレンドステートを設定する。
+					d3dDeviceContext->OMSetBlendState(
+						g_sprite.GetID3D11BlendState(),	//設定するブレンディングステート
+						blendFactor,				//ブレンディングファクター。気にしなくてよい
+						0xffffffff					//サンプリングマスク。気にしなくてよい。
+					);
+
 					//SpriteのDraw関数を呼び出す。
-					//g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
-					//g_sprite.Draw();
+					g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
+					g_sprite.Draw();
 					//カメラの更新。
 					//g_camera3D.Update();
 					//文字出してみ

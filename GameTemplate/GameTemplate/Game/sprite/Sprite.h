@@ -53,6 +53,23 @@ public:
 	}
 
 	/// <summary>
+	/// a値の設定
+	/// </summary>
+	/// <param name="mulColor">乗算カラー</param>
+	void SetAlpha(const float& alpha)
+	{
+		m_alpha = alpha;
+	}
+	/// <summary>
+	/// a値を取得
+	/// </summary>
+	/// <param name="mulColor">乗算カラー</param>
+	float GetAlpha()
+	{
+		return m_alpha;
+	}
+
+	/// <summary>
 	/// α値を変位させる
 	/// </summary>
 	/// <param name="delta">乗算αを変位させる量</param>
@@ -67,6 +84,19 @@ public:
 			m_alpha = 0.0f;
 		}
 	}
+
+	/// <summary>
+	/// ブレンドステートを取得。
+	/// </summary>
+	/// <returns></returns>
+	ID3D11BlendState* GetID3D11BlendState()
+	{
+		return m_translucentBlendState;
+	}
+
+
+
+
 	struct ConstantBuffer {
 		CMatrix WVP;		//ワールドビュープロジェクション行列。
 		CVector4 mulColor;	//乗算カラー。
@@ -87,6 +117,8 @@ public:
 	ID3D11Buffer*				m_cb = nullptr;							//定数バッファ。
 	bool						m_isInited = false;				//!<初期化フラグ。
 	float						m_alpha = 1.0f;							//スプライトのα値。
+	ID3D11BlendState* m_translucentBlendState = nullptr;	//半透明合成用のブレンドステート。
+
 private:
 	/*!
 	 *@brief	定数バッファの初期化。
@@ -96,6 +128,11 @@ private:
 	/// 初期化の共通処理。
 	/// </summary>
 	void InitCommon(float w, float h);
+
+	/// <summary>
+	/// ブレンドステートの初期化
+	/// </summary>
+	void InitTranslucentBlendState();
 
 };
 

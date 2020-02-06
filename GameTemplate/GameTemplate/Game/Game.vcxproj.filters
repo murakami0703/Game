@@ -396,5 +396,8 @@
     <ImageContentTask Include="Assets\modelData\AO.png">
       <Filter>Assets\modelData</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\test.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>
