@@ -240,6 +240,12 @@
     <ImageContentTask Include="Assets\sprite\HPWaku.png" />
     <ImageContentTask Include="Assets\sprite\ItemSetLog.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\honoo.png" />
+    <ImageContentTask Include="Assets\sprite\kinomi.png" />
+    <ImageContentTask Include="Assets\sprite\light.png" />
+    <ImageContentTask Include="Assets\sprite\yimestop.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

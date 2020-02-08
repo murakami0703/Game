@@ -102,7 +102,6 @@ public:
 		m_activeFlag = flag;
 	}
 
-
 	struct ConstantBuffer {
 		CMatrix WVP;		//ワールドビュープロジェクション行列。
 		CVector4 mulColor;	//乗算カラー。

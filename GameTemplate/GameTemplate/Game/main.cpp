@@ -13,6 +13,7 @@
 #include "ItemManeger.h"
 #include "Fade.h"
 #include "Font.h"
+#include "GameUI.h"
 
 /// <summary>
 /// グローバル変数
@@ -173,6 +174,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//試し
 	Fade fad;
 	Font font;
+	GameUI ui;
+
 
 	//Effekseerマネージャ管理。
 	Effekseer::Manager*	m_effekseerManager = nullptr;
@@ -257,6 +260,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			g_sprite.Update(g_spritePos, CQuaternion::Identity(), CVector3::One());
 			g_Main.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 			g_camera2D.Update();
+
+			ui.Update();
 
 			//フード
 			/*if (g_pad[0].IsTrigger(enButtonA)) {
@@ -351,6 +356,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					//SpriteのDraw関数を呼び出す。
 					g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
 					g_sprite.Draw();
+					ui.Draw();
 					//カメラの更新。
 					//g_camera3D.Update();
 					//文字出してみ
