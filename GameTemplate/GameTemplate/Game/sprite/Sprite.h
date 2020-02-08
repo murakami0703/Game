@@ -55,7 +55,6 @@ public:
 	/// <summary>
 	/// a値の設定
 	/// </summary>
-	/// <param name="mulColor">乗算カラー</param>
 	void SetAlpha(const float& alpha)
 	{
 		m_alpha = alpha;
@@ -63,7 +62,6 @@ public:
 	/// <summary>
 	/// a値を取得
 	/// </summary>
-	/// <param name="mulColor">乗算カラー</param>
 	float GetAlpha()
 	{
 		return m_alpha;
@@ -94,7 +92,15 @@ public:
 		return m_translucentBlendState;
 	}
 
-
+	/// <summary>
+	/// 表示の設定
+	/// </summary>
+	/// <param name="flag">false(非表示)</param>
+	/// <param name="flag">true(表示)</param>
+	void SetActiveFlag(bool& flag)
+	{
+		m_activeFlag = flag;
+	}
 
 
 	struct ConstantBuffer {
@@ -118,6 +124,7 @@ public:
 	bool						m_isInited = false;				//!<初期化フラグ。
 	float						m_alpha = 1.0f;							//スプライトのα値。
 	ID3D11BlendState* m_translucentBlendState = nullptr;	//半透明合成用のブレンドステート。
+	bool						m_activeFlag = true;				//表示しますか？
 
 private:
 	/*!

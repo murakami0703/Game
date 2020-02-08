@@ -73,6 +73,9 @@
     <Filter Include="sprite\fade">
       <UniqueIdentifier>{4ea41b5e-cd79-4b6f-943e-9e568262d923}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{bcd1fcb9-9023-4b06-bc07-719c195d1b73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -215,6 +218,9 @@
       <Filter>graphics\font</Filter>
     </ClCompile>
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="GameUI.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -365,6 +371,9 @@
       <Filter>graphics\font</Filter>
     </ClInclude>
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameUI.h">
+      <Filter>ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">
@@ -397,6 +406,15 @@
       <Filter>Assets\modelData</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\test.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\HPWaku.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\HP.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\ItemSetLog.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>

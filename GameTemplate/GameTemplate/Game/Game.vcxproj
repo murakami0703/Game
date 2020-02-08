@@ -103,6 +103,7 @@
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="graphics\camera2D\Camera2D.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameUI.h" />
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="graphics\camera2D\Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />
@@ -232,6 +234,11 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\HP.png" />
+    <ImageContentTask Include="Assets\sprite\HPWaku.png" />
+    <ImageContentTask Include="Assets\sprite\ItemSetLog.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
