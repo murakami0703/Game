@@ -7,14 +7,14 @@ Player::Player()
 	//アニメーションクリップのロード。
 	m_animClips[Animation_Idel].Load(L"Assets/animData/tes.tka");
 	m_animClips[Animation_Walk].Load(L"Assets/animData/tesIdle.tka");
-	m_animClips[Animation_Attack1].Load(L"Assets/animData/tesAttack1.tka");
+	m_animClips[Animation_Attack1].Load(L"Assets/animData/playAttack.tka");
 	m_animClips[Animation_Attack2].Load(L"Assets/animData/tesAttack2.tka");
 	
 	//ループフラグの設定。
 	m_animClips[Animation_Idel].SetLoopFlag(true);
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 
-	m_model.Init(L"Assets/modelData/pp.cmo");
+	m_model.Init(L"Assets/modelData/play.cmo");
 	m_position = { 0.0f,60.0f,0.0f };
 
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン

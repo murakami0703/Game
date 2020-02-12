@@ -76,6 +76,9 @@
     <Filter Include="ui">
       <UniqueIdentifier>{bcd1fcb9-9023-4b06-bc07-719c195d1b73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\Item">
+      <UniqueIdentifier>{76b5f704-9abb-43b0-9d34-8021151d97d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -391,6 +394,9 @@
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Play.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\mikyan.jpg">
@@ -417,17 +423,22 @@
     <ImageContentTask Include="Assets\sprite\ItemSetLog.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\honoo.png">
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\ItemSelect.png">
       <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\kinomi.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\light.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\yimestop.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
+    </Image>
+    <Image Include="Assets\sprite\Item\kinomi.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Item\light.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Item\yimestop.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Item\honoo.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </Image>
   </ItemGroup>
 </Project>

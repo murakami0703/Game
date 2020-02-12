@@ -216,6 +216,7 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\enemy.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
+    <MeshContentTask Include="Assets\modelData\Play.fbx" />
     <MeshContentTask Include="Assets\modelData\pp.fbx" />
     <MeshContentTask Include="Assets\modelData\test.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
@@ -241,10 +242,13 @@
     <ImageContentTask Include="Assets\sprite\ItemSetLog.png" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\honoo.png" />
-    <ImageContentTask Include="Assets\sprite\kinomi.png" />
-    <ImageContentTask Include="Assets\sprite\light.png" />
-    <ImageContentTask Include="Assets\sprite\yimestop.png" />
+    <ImageContentTask Include="Assets\sprite\ItemSelect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Item\honoo.png" />
+    <ImageContentTask Include="Assets\sprite\Item\kinomi.png" />
+    <ImageContentTask Include="Assets\sprite\Item\light.png" />
+    <ImageContentTask Include="Assets\sprite\Item\yimestop.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
