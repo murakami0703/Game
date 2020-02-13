@@ -25,6 +25,21 @@ public:
 	{
 		m_position = pos;
 	}
+	/// <summary>
+	/// エネミのポジションを返す関数。
+	/// </summary>
+	/// <returns>座標</returns>
+	CVector3 Enemy::GetPosition() {
+		return m_position;
+	}
+	/// <summary>
+	/// 攻撃判定
+	/// </summary>
+	/// <returns>trueなら攻撃中</returns>
+	bool Enemy::GetAttackflag() {
+		return EneAttackflag;
+	}
+
 private:
 	/// <summary>
 	/// 状態
@@ -40,7 +55,7 @@ private:
 
 	void Follow(Player* player);
 	void move();
-	void Attack();
+	void Attack(Player* player);
 	void Return();
 	void Dead();
 
@@ -64,6 +79,8 @@ private:
 	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
 
 	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
+	//攻撃判定
+	bool EneAttackflag = false;
 
 	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
 	ID3D11ShaderResourceView* g_specularMapSRV = nullptr;

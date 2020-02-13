@@ -13,9 +13,15 @@ public:
 		Animation_Walk,
 		Animation_Attack1,
 		Animation_Attack2,
+		Animation_Dead,
 		AnimationClip_Num
 	};
 
+	enum EState {
+		Idle,
+		Walk,
+		Dead,
+	};
 	void Update();
 	void Draw(EnRenderMode renderMode);
 	/// <summary>
@@ -40,7 +46,9 @@ public:
 		return attackflag;
 	}
 private:
+	void Idel();
 	void Move();						//移動。
+	void Dead();
 	void PlAnimation();					//アニメーション
 
 	SkinModel m_model;		//スキンモデル
@@ -49,7 +57,7 @@ private:
 	CVector3 m_scale = CVector3().One();			//拡大率
 	CVector3 m_move;	//移動
 	CharacterController m_characon;		//キャラコン
-
+	EState m_state = Idle;
 	//移動関連
 	float m_movespeed = 200.0f;			//移動速度
 	const float m_rotationLR = 80.0f;	//左右の回転角度
@@ -61,7 +69,6 @@ private:
 	PAnimation m_anime = Animation_Idel;		//アニメーション状態
 	Animation	m_animation;					//アニメーション
 	AnimationClip m_animClips[AnimationClip_Num];	//アニメーションクリップ
-
 
 	//攻撃関連
 	bool attackflag = false;	//攻撃判定用。

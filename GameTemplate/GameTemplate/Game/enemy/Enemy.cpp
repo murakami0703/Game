@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "EnemyManeger.h"
+#include "GameData.h"
 
 
 Enemy::Enemy()
@@ -21,29 +22,32 @@ Enemy::Enemy()
 	m_oldPos = m_position;
 	m_scale = { 50.0f,50.0f,50.0f };
 
-	//法線マップつけます
-	DirectX::CreateDDSTextureFromFileEx(
-	g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Normal.dds", 0,
-	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-	false, nullptr, &g_normalMapSRV
-	);
-	//スぺキュラマップつけます
-	DirectX::CreateDDSTextureFromFileEx(
-		g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Specular.dds", 0,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		false, nullptr, &g_specularMapSRV
-	);
-	//アンビエントマップつけます
-	DirectX::CreateDDSTextureFromFileEx(
-		g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/AO.dds", 0,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		false, nullptr, &g_ambientMapSRV
-	);
+	//まっぷ
+	{
+		//法線マップつけます
+		DirectX::CreateDDSTextureFromFileEx(
+			g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Normal.dds", 0,
+			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+			false, nullptr, &g_normalMapSRV
+		);
+		//スぺキュラマップつけます
+		DirectX::CreateDDSTextureFromFileEx(
+			g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Specular.dds", 0,
+			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+			false, nullptr, &g_specularMapSRV
+		);
+		//アンビエントマップつけます
+		DirectX::CreateDDSTextureFromFileEx(
+			g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/AO.dds", 0,
+			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+			false, nullptr, &g_ambientMapSRV
+		);
 
-	//モデルに法線マップ、スぺキュラマップ、アンビエントマップを設定する。
-	m_enemy.SetNormalMap(g_normalMapSRV);
-	//m_enemy.SetSpecularMap(g_specularMapSRV);
-	//m_enemy.SetAmbientMap(g_ambientMapSRV);
+		//モデルに法線マップ、スぺキュラマップ、アンビエントマップを設定する。
+		m_enemy.SetNormalMap(g_normalMapSRV);
+		//m_enemy.SetSpecularMap(g_specularMapSRV);
+		//m_enemy.SetAmbientMap(g_ambientMapSRV);
+	}
 
 	m_animation.Init(m_enemy, m_animClips, num);	//アニメーションの初期化
 
@@ -100,10 +104,18 @@ void Enemy::move()
 
 
 }
-void Enemy::Attack()
+
+void Enemy::Attack(Player* player)
 {
-	m_animation.Play(eneAttack_1);//歩き
+	m_animation.Play(eneAttack_1);//攻撃
+	//次の行動へ。。
 	if (m_animation.IsPlaying() == false) {
+		if ((player->GetPosition() - m_position).Length() < 80.0f) {
+			//近距離で攻撃したら
+			//HP減らす
+			GameData::GetInstance()->HPCalc(-0.5f);
+		}
+
 		if (m_battlePoint != nullptr) {
 			m_state = eState_TuisekiPlayer;
 		}
@@ -170,7 +182,7 @@ void Enemy::Update(Player* player)
 		}
 		break;
 	case eState_Attack:
-		Attack();
+		Attack(player);
 		break;
 	case eState_TuisekiPlayer:
 		//プレイヤーを追跡
@@ -178,11 +190,10 @@ void Enemy::Update(Player* player)
 		Follow(player);
 		//近いので攻撃
 		if (m_battlePoint != nullptr) {
-			//if (m_battlePoint != false) {
 				if (m_toPlayerVec.Length() < 80.0f) {
+					EneAttackflag = true;
 					m_state = eState_Attack;
 				}
-			//}
 		}
 		//遠くなったので徘徊位置に戻る
 		if (m_toPlayerVec.Length() > m_ReturnLength) {

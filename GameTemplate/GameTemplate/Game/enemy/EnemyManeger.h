@@ -41,7 +41,7 @@ public:
 		return m_instance;
 	}
 private:
-	static EnemyManager* m_instance ;
+	static EnemyManager* m_instance;
 	std::vector<Enemy*> m_enemys;	//エネミ用の動的配列
 	static const int NUM_POINT = 8;	//最大バトルポイント
 	BattlePoint m_battlepoint[NUM_POINT];

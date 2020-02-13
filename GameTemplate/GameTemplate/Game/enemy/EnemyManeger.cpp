@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EnemyManeger.h"
 #include "Enemy.h"
+#include "GameData.h"
 
 EnemyManager* EnemyManager::m_instance = nullptr;
 

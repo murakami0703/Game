@@ -30,7 +30,7 @@ public:
 	}
 
 	//引数に設定した値を体力に加算する　負の数を設定したら減少する
-	void  GameData::tiryokugennsyou(int x) {
+	void  GameData::HPCalc(float x) {
 		HP += x;
 		if (HP < 0) {
 			HP = 0;
@@ -49,8 +49,8 @@ public:
 		return m_instance;
 	}
 
-private:
 	static GameData* m_instance;
+private:
 
 	float HP = 3.0f;	//デフォルトHP
 	const float MAXHP = 12.0f;	//最大HP

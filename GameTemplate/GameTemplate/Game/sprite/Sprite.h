@@ -84,6 +84,15 @@ public:
 	}
 
 	/// <summary>
+	/// 拡大率を取得。
+	/// </summary>
+	/// <returns></returns>
+	CVector3 GetScale()
+	{
+		return m_scale;
+	}
+
+	/// <summary>
 	/// ブレンドステートを取得。
 	/// </summary>
 	/// <returns></returns>

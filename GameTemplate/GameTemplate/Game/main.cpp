@@ -14,6 +14,7 @@
 #include "Fade.h"
 #include "Font.h"
 #include "GameUI.h"
+#include "GameData.h"
 
 /// <summary>
 /// グローバル変数
@@ -51,6 +52,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Map* map = new Map;
 	//ゲームカメラ
 	GameCamera Gcamera;
+	//ゲームデータ
+	GameData* date = new GameData;
 	//エネミ
 	EnemyManager m_eneMane;
 	{Enemy* enemy = new Enemy;

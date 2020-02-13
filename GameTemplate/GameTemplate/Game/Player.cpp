@@ -1,28 +1,34 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "ShadowMap.h"
+#include "GameData.h"
 
 Player::Player()
 {
 	//アニメーションクリップのロード。
-	m_animClips[Animation_Idel].Load(L"Assets/animData/tes.tka");
-	m_animClips[Animation_Walk].Load(L"Assets/animData/tesIdle.tka");
+	m_animClips[Animation_Idel].Load(L"Assets/animData/playIdel.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/playwalk.tka");
 	m_animClips[Animation_Attack1].Load(L"Assets/animData/playAttack.tka");
-	m_animClips[Animation_Attack2].Load(L"Assets/animData/tesAttack2.tka");
-	
+	m_animClips[Animation_Attack2].Load(L"Assets/animData/playAttack2.tka");
+	m_animClips[Animation_Dead].Load(L"Assets/animData/playdead.tka");
+
 	//ループフラグの設定。
 	m_animClips[Animation_Idel].SetLoopFlag(true);
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 
 	m_model.Init(L"Assets/modelData/play.cmo");
 	m_position = { 0.0f,60.0f,0.0f };
-
+	m_scale = { 0.4f,0.4f,0.4f };
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 	m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化
 }
 Player::~Player()
 {
+}
+void Player::Idel()
+{
+	//待機状態
 }
 
 void Player::Move()
@@ -64,8 +70,21 @@ void Player::Move()
 	m_position = m_characon.Execute(m_caraTime, m_move);
 
 }
+void Player::Dead()
+{
+
+}
 void Player::Update()
 {
+	switch (m_state)
+	{
+	case Player::Idle:
+		break;
+	case Player::Walk:
+		break;
+	default:
+		break;
+	}
 	Move();		//十字移動
 	PlAnimation();	//アニメーション遷移
 
@@ -77,7 +96,8 @@ void Player::Update()
 void Player::PlAnimation()
 {
 	//攻撃アニメーション再生用
-	if (g_pad[0].IsTrigger(enButtonA)) {
+	if (g_pad[0].IsTrigger(enButtonA) &&
+		GameData::GetInstance()->GetHitPoint() >= 0.0f) {
 		Atcount++;
 		if (Atcount == 1) {
 			m_anime = Animation_Attack1;
@@ -89,7 +109,11 @@ void Player::PlAnimation()
 		}
 	}
 
-
+	//死亡判定。
+	if (GameData::GetInstance()->GetHitPoint() == 0.0f) {
+		//HP0なので死。
+		m_anime = Animation_Dead;
+	}
 
 	switch (m_anime)
 	{
@@ -119,21 +143,26 @@ void Player::PlAnimation()
 		//移動中
 		break;
 	case Player::Animation_Attack1:
-    			m_animation.Play(Animation_Attack1,0.5f); // 攻撃1
+		// 攻撃1
+    			m_animation.Play(Animation_Attack1,0.5f);
 			if (m_animation.IsPlaying() == false) {
 				Atcount = 0;
 				attackflag = false;
 				m_anime = Animation_Idel;
-
 		}
 		break;
 	case Player::Animation_Attack2:
-			m_animation.Play(Animation_Attack2, 0.5f);//攻撃2
+		//攻撃2
+			m_animation.Play(Animation_Attack2, 0.5f);
 			if (m_animation.IsPlaying() == false) {
 				Atcount = 0;
 				attackflag = false;
 				m_anime = Animation_Idel;
 			}
+		break;
+	case Player::Animation_Dead:
+		//死亡
+		m_animation.Play(Animation_Dead, 0.5f);
 		break;
 	default:
 		break;

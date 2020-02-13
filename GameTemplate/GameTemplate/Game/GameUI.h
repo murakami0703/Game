@@ -23,6 +23,16 @@ public:
 	void HPAdd();
 
 	/// <summary>
+	/// spriteの拡大処理
+	/// </summary>
+	void SpriteScaleUp(Sprite* sprite, CVector3 size);
+	/// <summary>
+	/// spriteの縮小処理
+	/// </summary>
+	void SpriteScaleDown(Sprite* sprite, CVector3 size);
+
+
+	/// <summary>
 	/// インスタンスの取得。
 	/// </summary>
 	/// <returns>インスタンス</returns>
@@ -43,7 +53,6 @@ private:
 		SPtime,
 		Num,
 	};
-
 	enum HPState {
 		HP_1,
 		HP_2,
@@ -53,12 +62,13 @@ private:
 	};
 
 	//HP関連
-	Sprite m_hpHartFrame;		//HPの枠
+	Sprite m_hpHartFrame1;		//HPの枠1
+	Sprite m_hpHartFrame2;		//HPの枠2
+	Sprite m_hpHartFrame3;		//HPの枠3
+
 	Sprite m_hpHart1;		//HP1
 	Sprite m_hpHart2;		//HP2
 	Sprite m_hpHart3;		//HP3
-	Sprite m_hpHart4;		//HP4
-	Sprite m_hpHart5;		//HP5
 
 	CVector3 m_hpHFPos = CVector3().Zero();			//HPの枠の座標
 	CVector3 m_hpHPos = CVector3().Zero();			//HPの座標
@@ -91,7 +101,8 @@ private:
 	//アイテム選択関連
 	CVector3					m_nowSelect = { 0.75f,0.75f,0.75f };				//選択中の大きさ
 	CVector3					m_NoSelect = { 0.4f,0.4f,0.4f };				//選択中の大きさ
-
+	int							m_changeTime = 0;								//選択sprite拡大縮小時間
+	const int					m_changeSetTime = 30;								//選択sprite拡大縮小時間
 	SelectItemState m_SIstate = Fire;	//選択中のアイテム
 	//HP増減関連
 	HPState m_HPstate;

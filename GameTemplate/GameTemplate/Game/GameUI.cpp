@@ -9,7 +9,7 @@ GameUI::GameUI()
 	m_instance = this;
 
 	//HPの枠
-	m_hpHartFrame.Init(L"Assets/sprite/HPWaku.dds", 200.0f, 200.0f);
+	m_hpHartFrame1.Init(L"Assets/sprite/HPWaku.dds", 200.0f, 200.0f);
 	m_hpHFPos = { -610.0f,340.0f,0.0f };
 	m_hpHFScale = { 0.2f,0.2f,0.2f };
 	//HP
@@ -21,9 +21,9 @@ GameUI::GameUI()
 	m_itemSLPos = { 470.0f,310.0f,0.0f };
 	m_itemSLScale = { 0.85f,0.85f,0.85f };
 	//アイテム選択矢印
-	m_itemSelect.Init(L"Assets/sprite/ItemSelect.dds", 150.0f, 100.0f);
+	/*m_itemSelect.Init(L"Assets/sprite/ItemSelect.dds", 150.0f, 100.0f);
 	m_itemSPos = { 600.0f,315.0f,0.0f };
-	m_itemSScale = m_nowSelect;
+	m_itemSScale = m_nowSelect;*/
 
 	//アイテム(炎)	
 	m_itemFire.Init(L"Assets/sprite/Item/honoo.dds", 100.0f, 100.0f);
@@ -120,6 +120,29 @@ void GameUI::ItemSelect()
 	}
 	m_SIstate;
 }
+
+void GameUI::SpriteScaleUp(Sprite* sprite, CVector3 size)
+{
+	//spriteのサイズを大きくします。
+	CVector3 ScaleUp = sprite->GetScale();
+	ScaleUp += (size / 30.0f);
+	m_changeTime++;
+	if (m_changeTime > m_changeSetTime) {
+
+	}
+}
+void GameUI::SpriteScaleDown(Sprite* sprite, CVector3 size)
+{
+	//spriteのサイズを小さくします。
+	CVector3 ScaleUp = sprite->GetScale();
+	ScaleUp -= (size / 30.0f);
+	m_changeTime++;
+	if (m_changeTime > m_changeSetTime) {
+
+	}
+
+}
+
 void GameUI::HPAdd()
 {
 	//HPの増減で表示を変えます
@@ -133,10 +156,10 @@ void GameUI::Update()
 	//更新
 	ItemSelect();	//アイテム選択
 
-	m_hpHartFrame.Update(m_hpHFPos, CQuaternion::Identity(), m_hpHFScale);
+	m_hpHartFrame1.Update(m_hpHFPos, CQuaternion::Identity(), m_hpHFScale);
 	m_hpHart1.Update(m_hpHPos, CQuaternion::Identity(), m_hpScale);
 	m_itemSetLog.Update(m_itemSLPos, CQuaternion::Identity(), m_itemSLScale);
-	m_itemSelect.Update(m_itemSPos, CQuaternion::Identity(), m_itemSScale);
+	//m_itemSelect.Update(m_itemSPos, CQuaternion::Identity(), m_itemSScale);
 	//アイテム
 	m_itemFire.Update(m_itemFPos, CQuaternion::Identity(), itemFScale);
 	m_itemKinomi.Update(m_itemKPos, CQuaternion::Identity(), m_itemKScale);
@@ -146,10 +169,10 @@ void GameUI::Update()
 void GameUI::Draw()
 {
 	//描画処理
-	m_hpHartFrame.Draw();
+	m_hpHartFrame1.Draw();
 	m_hpHart1.Draw();
 	m_itemSetLog.Draw();
-	m_itemSelect.Draw();
+	//m_itemSelect.Draw();
 	//アイテム
 	m_itemFire.Draw();
 	m_itemKinomi.Draw();
