@@ -180,13 +180,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	GameUI ui;
 
 
-	//Effekseerマネージャ管理。
-	Effekseer::Manager*	m_effekseerManager = nullptr;
-	EffekseerRenderer::Renderer*	m_effekseerRenderer = nullptr;
-
-	Effekseer::Effect* m_sampleEffect = nullptr;
-	Effekseer::Handle m_playEffectHandle = -1;
-	
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 	//メインレンダリングターゲットの初期化。
 	m_mainRenderTarget.Create(

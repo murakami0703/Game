@@ -18,10 +18,12 @@ public:
 	};
 
 	enum EState {
-		Idle,
-		Walk,
-		Dead,
+		Player_Idle,
+		Player_Walk,
+		Player_Attack,
+		Player_Dead
 	};
+
 	void Update();
 	void Draw(EnRenderMode renderMode);
 	/// <summary>
@@ -48,8 +50,8 @@ public:
 private:
 	void Idel();
 	void Move();						//移動。
+	void Attack();
 	void Dead();
-	void PlAnimation();					//アニメーション
 
 	SkinModel m_model;		//スキンモデル
 	CVector3 m_position = CVector3().Zero();			//座標
@@ -57,7 +59,7 @@ private:
 	CVector3 m_scale = CVector3().One();			//拡大率
 	CVector3 m_move;	//移動
 	CharacterController m_characon;		//キャラコン
-	EState m_state = Idle;
+	EState m_state = Player_Idle;
 	//移動関連
 	float m_movespeed = 200.0f;			//移動速度
 	const float m_rotationLR = 80.0f;	//左右の回転角度

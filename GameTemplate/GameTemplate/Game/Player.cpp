@@ -28,7 +28,7 @@ Player::~Player()
 }
 void Player::Idel()
 {
-	//待機状態
+	//待機状態なにもしない
 }
 
 void Player::Move()
@@ -70,103 +70,81 @@ void Player::Move()
 	m_position = m_characon.Execute(m_caraTime, m_move);
 
 }
+void Player::Attack()
+{
+	Atcount++;
+	if (Atcount == 1) {
+		//攻撃1回目
+		m_animation.Play(Animation_Attack1, 0.5f);
+		attackflag = true;
+		if (m_animation.IsPlaying() == false) {
+			//再生終了したら待機に戻る
+			Atcount = 0;
+			attackflag = false;
+			m_state = Player_Idle;
+		}
+	}
+	if (Atcount >= 2) {
+		//攻撃2回目
+		m_animation.Play(Animation_Attack2, 0.5f);
+		attackflag = true;
+		if (m_animation.IsPlaying() == false) {
+			//再生終了したら待機に戻る
+			Atcount = 0;
+			attackflag = false;
+			m_anime = Animation_Idel;
+		}
+
+	}
+}
 void Player::Dead()
 {
-
+	//死亡
+	m_animation.Play(Animation_Dead, 0.5f);
 }
 void Player::Update()
 {
-	switch (m_state)
-	{
-	case Player::Idle:
-		break;
-	case Player::Walk:
-		break;
-	default:
-		break;
-	}
-	Move();		//十字移動
-	PlAnimation();	//アニメーション遷移
 
-	m_animation.Update(0.05f);//アニメーション再生
-	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
-	m_model.Update();
-}
-void Player::PlAnimation()
-{
-	//攻撃アニメーション再生用
 	if (g_pad[0].IsTrigger(enButtonA) &&
 		GameData::GetInstance()->GetHitPoint() >= 0.0f) {
-		Atcount++;
-		if (Atcount == 1) {
-			m_anime = Animation_Attack1;
-			attackflag = true;
-		}
-		if (Atcount >= 2) {
-			m_anime = Animation_Attack2;
-			attackflag = true;
-		}
+		m_state = Player_Attack;
 	}
 
-	//死亡判定。
-	if (GameData::GetInstance()->GetHitPoint() == 0.0f) {
-		//HP0なので死。
-		m_anime = Animation_Dead;
-	}
-
-	switch (m_anime)
+	switch (m_state)
 	{
-	case Player::Animation_Idel:
-		m_animation.Play(Animation_Idel);//待機
-		//待機中
-		//十字キーが押されたら移動アニメーション再生
+	case Player::Player_Idle:
+		//待機
 		if (g_pad[0].IsPress(enButtonLeft) ||
 			g_pad[0].IsPress(enButtonRight) ||
 			g_pad[0].IsPress(enButtonUp) ||
 			g_pad[0].IsPress(enButtonDown))
 		{
-			m_anime = Animation_Walk;
+			m_state = Player_Walk;
 		}
 		break;
-	case Player::Animation_Walk:
-		m_animation.Play(Animation_Walk);//歩き
-		//十字キーが押されていない時待機アニメーション再生
-		if ((g_pad[0].IsPress(enButtonLeft) ||
-			g_pad[0].IsPress(enButtonRight) ||
-			g_pad[0].IsPress(enButtonUp) ||
-			g_pad[0].IsPress(enButtonDown))==false)
-		{
-			m_anime = Animation_Idel;
-		}
-
-		//移動中
+	case Player::Player_Walk:
+		Move();
 		break;
-	case Player::Animation_Attack1:
-		// 攻撃1
-    			m_animation.Play(Animation_Attack1,0.5f);
-			if (m_animation.IsPlaying() == false) {
-				Atcount = 0;
-				attackflag = false;
-				m_anime = Animation_Idel;
-		}
+	case Player::Player_Attack:
+		Attack();
 		break;
-	case Player::Animation_Attack2:
-		//攻撃2
-			m_animation.Play(Animation_Attack2, 0.5f);
-			if (m_animation.IsPlaying() == false) {
-				Atcount = 0;
-				attackflag = false;
-				m_anime = Animation_Idel;
-			}
-		break;
-	case Player::Animation_Dead:
-		//死亡
-		m_animation.Play(Animation_Dead, 0.5f);
+	case Player::Player_Dead:
+		Dead();
 		break;
 	default:
 		break;
 	}
+
+	//死亡判定。
+	if (GameData::GetInstance()->GetHitPoint() == 0.0f) {
+		//HP0なので死。
+		m_state = Player_Dead;
+	}
+
+	m_animation.Update(0.05f);//アニメーション再生
+	//ワールド行列の更新。
+	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+	m_model.Update();
 }
 
 void Player::Draw(EnRenderMode renderMode)
