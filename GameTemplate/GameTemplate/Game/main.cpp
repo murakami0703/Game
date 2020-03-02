@@ -179,6 +179,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Font font;
 	GameUI ui;
 
+	//Effekseerマネージャ管理。
+	Effekseer::Manager*	m_effekseerManager = nullptr;
+	EffekseerRenderer::Renderer*	m_effekseerRenderer = nullptr;
+
+	Effekseer::Effect* m_sampleEffect = nullptr;
+	Effekseer::Handle m_playEffectHandle = -1;
+
 
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 	//メインレンダリングターゲットの初期化。
@@ -193,6 +200,29 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
 	);
+
+
+	//レンダラーを初期化。
+	m_effekseerRenderer = EffekseerRendererDX11::Renderer::Create(
+		g_graphicsEngine->GetD3DDevice(),			//D3Dデバイス。
+		g_graphicsEngine->GetD3DDeviceContext(),	//D3Dデバイスコンテキスト。
+		20000										//板ポリの最大数。
+	);
+	//エフェクトマネージャを初期化。
+	m_effekseerManager = Effekseer::Manager::Create(10000);
+
+	// 描画用インスタンスから描画機能を設定
+	m_effekseerManager->SetSpriteRenderer(m_effekseerRenderer->CreateSpriteRenderer());
+	m_effekseerManager->SetRibbonRenderer(m_effekseerRenderer->CreateRibbonRenderer());
+	m_effekseerManager->SetRingRenderer(m_effekseerRenderer->CreateRingRenderer());
+	m_effekseerManager->SetTrackRenderer(m_effekseerRenderer->CreateTrackRenderer());
+	m_effekseerManager->SetModelRenderer(m_effekseerRenderer->CreateModelRenderer());
+
+	// 描画用インスタンスからテクスチャの読込機能を設定
+	// 独自拡張可能、現在はファイルから読み込んでいる。
+	m_effekseerManager->SetTextureLoader(m_effekseerRenderer->CreateTextureLoader());
+	m_effekseerManager->SetModelLoader(m_effekseerRenderer->CreateModelLoader());
+
 
 	//sprite
 	g_sprite.Init(L"Assets/sprite/test.dds", 240.0f, 240.0f);
@@ -227,7 +257,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	ID3D11DepthStencilState* depthStencilState;
 	d3ddevice->CreateDepthStencilState(&desc, &depthStencilState);
 
-	
+	//サンプルのエフェクトをロードする。
+	m_sampleEffect = Effekseer::Effect::Create(m_effekseerManager, (const EFK_CHAR*)L"Assets/effect/test.efk");
+	//エフェクトを再生する。
+	m_playEffectHandle = m_effekseerManager->Play(m_sampleEffect, 0.0f, 0.0f, 0.0f);
+
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
@@ -258,6 +292,19 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			g_camera2D.Update();
 
 			ui.Update();
+
+			//Effekseerカメラ行列を設定。
+			//まずはEffeseerの行列型の変数に、カメラ行列とプロジェクション行列をコピー。
+			Effekseer::Matrix44 efCameraMat;
+			g_camera3D.GetViewMatrix().CopyTo(efCameraMat);
+			Effekseer::Matrix44 efProjMat;
+			g_camera3D.GetProjectionMatrix().CopyTo(efProjMat);
+			//カメラ行列とプロジェクション行列を設定。
+			m_effekseerRenderer->SetCameraMatrix(efCameraMat);
+			m_effekseerRenderer->SetProjectionMatrix(efProjMat);
+			//Effekseerを更新。
+			m_effekseerManager->Update();
+
 
 			//フード
 			/*if (g_pad[0].IsTrigger(enButtonA)) {
@@ -324,6 +371,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					player->Draw(enRenderMode_silhouette);
 					//通常描画
 					player->Draw(enRenderMode_Normal);
+
+
 				}
 				// ポストレンダリング
 				{
@@ -353,6 +402,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
 					g_sprite.Draw();
 					ui.Draw();
+
+					//エフェクトは不透明オブジェクトを描画した後で描画する。
+					m_effekseerRenderer->BeginRendering();
+					m_effekseerManager->Draw();
+					m_effekseerRenderer->EndRendering();
+
+
 					//カメラの更新。
 					//g_camera3D.Update();
 					//文字出してみ
