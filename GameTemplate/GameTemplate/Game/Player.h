@@ -47,6 +47,7 @@ public:
 	bool Player::GetAttackflag() {
 		return attackflag;
 	}
+
 private:
 	void Idel();
 	void Move();						//ˆÚ“®B

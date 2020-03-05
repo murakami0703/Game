@@ -12,7 +12,7 @@
 class Skeleton;
 class SkinModel;
 
-
+using AnimationEventListener = std::function<void(const wchar_t* clipName, const wchar_t* eventName)>;
 /*!
 * @brief	アニメーションクラス。
 */
@@ -54,8 +54,26 @@ public:
 	* ユーザーは使用しないでください。
 	*@param[in]	deltaTime		アニメーションを進める時間(単位：秒)。
 	*/
-	void Update(float deltaTime);
+	CVector3 Update(float deltaTime);
 	
+	/// <summary>
+	/// アニメーションイベントリスナーを登録
+	/// </summary>
+	/// <param name="eventlistener"></param>
+	void AddAnimationEventListener(AnimationEventListener eventListener)
+	{
+		m_animationEventListeners.push_back(eventListener);
+	}
+	/// <summary>
+	/// アニメーションイベントをリスナーに通知。
+	/// </summary>
+	void NotifyAnimationEventToListener(const wchar_t* clipName, const wchar_t* eventName)
+	{
+		for (auto& listener : m_animationEventListeners) {
+			listener(clipName, eventName);
+		}
+	}
+
 private:
 	void PlayCommon(AnimationClip* nextClip, float interpolateTime)
 	{
@@ -84,7 +102,7 @@ private:
 	/*!
 		* @brief	グローバルポーズの更新。
 		*/
-	void UpdateGlobalPose();
+	CVector3 UpdateGlobalPose();
 		
 private:
 		
@@ -114,5 +132,6 @@ private:
 	float m_interpolateTime = 0.0f;
 	float m_interpolateTimeEnd = 0.0f;
 	bool m_isInterpolate = false;				//!<補間中？
-
+	int m_footStepBoneNo = -1;				//footstepの骨番号。
+	std::vector<AnimationEventListener> m_animationEventListeners; //アニメーションイベントリスナーのリスト
 };

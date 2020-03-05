@@ -3,22 +3,32 @@
 #include "ShadowMap.h"
 #include "GameData.h"
 
+
 Player::Player()
 {
+
 	//アニメーションクリップのロード。
-	m_animClips[Animation_Idel].Load(L"Assets/animData/playIdel.tka");
+	m_animClips[Animation_Idel].Load(L"Assets/animData/eneIdle.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/eneWalk.tka");
+	m_animClips[Animation_Attack1].Load(L"Assets/animData/eneAT1.tka");
+	m_animClips[Animation_Dead].Load(L"Assets/animData/eneDeath.tka");
+
+	//アニメーションクリップのロード。
+	/*m_animClips[Animation_Idel].Load(L"Assets/animData/playIdel.tka");
 	m_animClips[Animation_Walk].Load(L"Assets/animData/playwalk.tka");
 	m_animClips[Animation_Attack1].Load(L"Assets/animData/playAttack.tka");
-	m_animClips[Animation_Attack2].Load(L"Assets/animData/playAttack2.tka");
+	//m_animClips[Animation_Attack2].Load(L"Assets/animData/playAttack2.tka");
 	m_animClips[Animation_Dead].Load(L"Assets/animData/playdead.tka");
-
+	*/
 	//ループフラグの設定。
 	m_animClips[Animation_Idel].SetLoopFlag(true);
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 
-	m_model.Init(L"Assets/modelData/play.cmo");
-	m_position = { 0.0f,60.0f,0.0f };
+	m_model.Init(L"Assets/modelData/Footman_Default.cmo");
+	/*m_position = { 0.0f,60.0f,0.0f };
 	m_scale = { 0.4f,0.4f,0.4f };
+	*/
+	m_scale = { 50.0f, 50.0f, 50.0f};
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 	m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化
@@ -29,6 +39,11 @@ Player::~Player()
 void Player::Idel()
 {
 	//待機状態なにもしない
+	if (g_pad[0].IsPressAnyKey())
+	{
+		m_state = Player_Walk;
+	}
+
 }
 
 void Player::Move()
@@ -66,13 +81,12 @@ void Player::Move()
 		//重力ストップ
 		m_move.y = 0.0f;
 	}
-
+	m_animation.Play(Animation_Walk, 0.5f);
 	m_position = m_characon.Execute(m_caraTime, m_move);
 
 }
 void Player::Attack()
 {
-	Atcount++;
 	if (Atcount == 1) {
 		//攻撃1回目
 		m_animation.Play(Animation_Attack1, 0.5f);
@@ -84,7 +98,7 @@ void Player::Attack()
 			m_state = Player_Idle;
 		}
 	}
-	if (Atcount >= 2) {
+	/*if (Atcount >= 2) {
 		//攻撃2回目
 		m_animation.Play(Animation_Attack2, 0.5f);
 		attackflag = true;
@@ -95,7 +109,7 @@ void Player::Attack()
 			m_anime = Animation_Idel;
 		}
 
-	}
+	}*/
 }
 void Player::Dead()
 {
@@ -107,6 +121,7 @@ void Player::Update()
 
 	if (g_pad[0].IsTrigger(enButtonA) &&
 		GameData::GetInstance()->GetHitPoint() >= 0.0f) {
+		Atcount++;
 		m_state = Player_Attack;
 	}
 
@@ -114,13 +129,7 @@ void Player::Update()
 	{
 	case Player::Player_Idle:
 		//待機
-		if (g_pad[0].IsPress(enButtonLeft) ||
-			g_pad[0].IsPress(enButtonRight) ||
-			g_pad[0].IsPress(enButtonUp) ||
-			g_pad[0].IsPress(enButtonDown))
-		{
-			m_state = Player_Walk;
-		}
+		Idel();
 		break;
 	case Player::Player_Walk:
 		Move();
@@ -130,8 +139,6 @@ void Player::Update()
 		break;
 	case Player::Player_Dead:
 		Dead();
-		break;
-	default:
 		break;
 	}
 

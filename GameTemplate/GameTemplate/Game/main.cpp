@@ -15,6 +15,8 @@
 #include "Font.h"
 #include "GameUI.h"
 #include "GameData.h"
+#include "Anima.h"
+#include "AnimaManeger.h"
 
 /// <summary>
 /// グローバル変数
@@ -56,7 +58,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	GameData* date = new GameData;
 	//エネミ
 	EnemyManager m_eneMane;
-	{Enemy* enemy = new Enemy;
+	AnimaManeger m_aniMane;
+
+	/*{Enemy* enemy = new Enemy;
 	enemy->SetPosition({ 150.0f,30.0f,200.0f });
 	m_eneMane.RegistEnemy(enemy);
 
@@ -165,7 +169,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	m_eneMane.RegistEnemy(enemy);
 
 
-	}
+	}*/
 	Enemy* enemy = new Enemy;
 	enemy->SetPosition({ 150.0f,30.0f,200.0f });
 	m_eneMane.RegistEnemy(enemy);
@@ -178,7 +182,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	Fade fad;
 	Font font;
 	GameUI ui;
-
 	//Effekseerマネージャ管理。
 	Effekseer::Manager*	m_effekseerManager = nullptr;
 	EffekseerRenderer::Renderer*	m_effekseerRenderer = nullptr;
@@ -276,12 +279,20 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			//物理エンジンの更新。
 			g_physics.Update();
 
+			if (m_eneMane.GetInstance()->DeadFlag() == true) {
+				Anima* anima = new Anima;
+				anima->SetPosition({ m_eneMane.GetPosition() });
+				m_aniMane.RegistAnima(anima);
+				m_eneMane.GetInstance()->EndFlag();
+			}
+
 			//プレイヤーの更新。
 			player->Update();
 			//マップの描画。
 			map->Update();
 			//敵の描画と更新。
 			m_eneMane.Update(player);
+			m_aniMane.Update(player);
 
 			//ゲームカメラの更新
 			Gcamera.Update(player);
@@ -367,6 +378,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 					map->Draw(enRenderMode_Normal);
 					m_eneMane.Draw(enRenderMode_Normal);
+					m_aniMane.Draw(enRenderMode_Normal);
 					//シルエット描画
 					player->Draw(enRenderMode_silhouette);
 					//通常描画
@@ -399,10 +411,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					);
 
 					//SpriteのDraw関数を呼び出す。
-					g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
-					g_sprite.Draw();
+					/*g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
+					g_sprite.Draw();*/
 					ui.Draw();
-
 					//エフェクトは不透明オブジェクトを描画した後で描画する。
 					m_effekseerRenderer->BeginRendering();
 					m_effekseerManager->Draw();

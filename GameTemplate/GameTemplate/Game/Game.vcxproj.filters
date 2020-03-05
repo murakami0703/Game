@@ -230,6 +230,10 @@
     <ClCompile Include="Effect.cpp">
       <Filter>graphics\effect</Filter>
     </ClCompile>
+    <ClCompile Include="Anima.cpp" />
+    <ClCompile Include="AnimaManeger.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -386,6 +390,10 @@
     <ClInclude Include="Effect.h">
       <Filter>graphics\effect</Filter>
     </ClInclude>
+    <ClInclude Include="Anima.h" />
+    <ClInclude Include="AnimaManeger.h">
+      <Filter>manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">
@@ -404,6 +412,12 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Play.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\11.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Anima.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

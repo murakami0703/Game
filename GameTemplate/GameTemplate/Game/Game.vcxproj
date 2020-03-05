@@ -99,6 +99,8 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Anima.cpp" />
+    <ClCompile Include="AnimaManeger.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="enemy\EnemyManeger.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -158,6 +160,8 @@
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Anima.h" />
+    <ClInclude Include="AnimaManeger.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="enemy\EnemyManeger.h" />
     <ClInclude Include="Fade.h" />
@@ -216,6 +220,8 @@
     <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\11.FBX" />
+    <MeshContentTask Include="Assets\modelData\Anima.FBX" />
     <MeshContentTask Include="Assets\modelData\enemy.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
     <MeshContentTask Include="Assets\modelData\Play.fbx" />

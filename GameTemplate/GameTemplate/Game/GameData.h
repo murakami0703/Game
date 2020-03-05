@@ -39,7 +39,20 @@ public:
 			HP = MAXHP;
 		}
 	}
+	//////////////魂///////////////////
+	void  GameData::AnimaCalc(float x) {
+		Anima += x;
+		if (Anima < 0) {
+			Anima = 0;
+		}
+		if (MAXAnima < Anima) {
+			Anima = MAXAnima;
+		}
+		Anima;
+	}
 
+
+	/////////////////////////////////// 
 	/// <summary>
 	/// インスタンスの取得。
 	/// </summary>
@@ -60,8 +73,9 @@ private:
 	float ATK = 30.0f;	//基礎攻撃力
 
 	//たましい
-	float Soul = 0.0f;	//雑魚から貰える魂
-	int BigSoul = 0;	//ボスから貰える魂
+	float Anima = 0.0f;	//雑魚から貰える魂
+	const float MAXAnima = 999.0f;	//最大Anima
+	int BigAnima = 0;	//ボスから貰える魂
 
 };
 

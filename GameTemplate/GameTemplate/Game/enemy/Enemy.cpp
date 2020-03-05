@@ -2,6 +2,8 @@
 #include "Enemy.h"
 #include "EnemyManeger.h"
 #include "GameData.h"
+#include "Anima.h"
+#include "AnimaManeger.h"
 
 
 Enemy::Enemy()
@@ -149,8 +151,9 @@ void Enemy::Return()
 }
 void Enemy::Dead()
 {
-	m_animation.Play(eneDead);//•à‚«
+	m_animation.Play(eneDead);//Ž€
 	if (m_animation.IsPlaying() == false) {
+		//Ž€‚É‚Ü‚µ‚½
 		EnemyManager::GetInstance()->DeleteEnemy(this);
 	}
 }
