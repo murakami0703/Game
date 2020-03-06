@@ -127,8 +127,10 @@
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
+    <ClCompile Include="HPManeger.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManeger.cpp" />
+    <ClCompile Include="LevelSet.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
     <ClCompile Include="main.cpp" />
@@ -142,6 +144,7 @@
     <ClCompile Include="physics\CapsuleCollider.cpp" />
     <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerHP.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="graphics\SkinModelRender.cpp" />
@@ -189,8 +192,10 @@
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
+    <ClInclude Include="HPManeger.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManeger.h" />
+    <ClInclude Include="LevelSet.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
     <ClInclude Include="Map.h" />
@@ -205,6 +210,7 @@
     <ClInclude Include="physics\CollisionAttr.h" />
     <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerHP.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="graphics\SkinModelRender.h" />
@@ -247,16 +253,12 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\HP.png" />
     <ImageContentTask Include="Assets\sprite\HPWaku.png" />
-    <ImageContentTask Include="Assets\sprite\ItemSetLog.png" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\ItemSelect.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Item\honoo.png" />
-    <ImageContentTask Include="Assets\sprite\Item\kinomi.png" />
-    <ImageContentTask Include="Assets\sprite\Item\light.png" />
-    <ImageContentTask Include="Assets\sprite\Item\yimestop.png" />
+    <ImageContentTask Include="Assets\sprite\Item\case1.png" />
+    <ImageContentTask Include="Assets\sprite\Item\case2.png" />
+    <ImageContentTask Include="Assets\sprite\Item\case3.png" />
+    <ImageContentTask Include="Assets\sprite\Item\case4.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

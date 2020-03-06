@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GameUI.h"
 #include "GameData.h"
+#include "PlayerHP.h"
+#include "HPManeger.h"
 
 GameUI* GameUI::m_instance = nullptr;
 
@@ -8,40 +10,8 @@ GameUI::GameUI()
 {
 	m_instance = this;
 
-	//HPの枠
-	m_hpHartFrame1.Init(L"Assets/sprite/HPWaku.dds", 200.0f, 200.0f);
-	m_hpHFPos = { -610.0f,340.0f,0.0f };
-	m_hpHFScale = { 0.2f,0.2f,0.2f };
-	//HP
-	m_hpHart1.Init(L"Assets/sprite/HP.dds", 200.0f, 200.0f);
-	m_hpHPos = { -610.0f,340.0f,0.0f };
-	m_hpScale = { 0.2f,0.2f,0.2f };
-	//アイテム用の枠
-	m_itemSetLog.Init(L"Assets/sprite/ItemSetLog.dds", 400.0f, 100.0f);
-	m_itemSLPos = { 470.0f,310.0f,0.0f };
-	m_itemSLScale = { 0.85f,0.85f,0.85f };
-	//アイテム選択矢印
-	/*m_itemSelect.Init(L"Assets/sprite/ItemSelect.dds", 150.0f, 100.0f);
-	m_itemSPos = { 600.0f,315.0f,0.0f };
-	m_itemSScale = m_nowSelect;*/
-
-	//アイテム(炎)	
-	m_itemFire.Init(L"Assets/sprite/Item/honoo.dds", 100.0f, 100.0f);
-	m_itemFPos = { 600.0f,315.0f,0.0f };
-	itemFScale = m_nowSelect;
-	//アイテム(木の実)
-	m_itemKinomi.Init(L"Assets/sprite/Item/kinomi.dds", 100.0f, 100.0f);
-	m_itemKPos = { 520.0f,315.0f,0.0f };
-	m_itemKScale = m_nowSelect;
-	//アイテム(ランプ)	
-	m_itemLight.Init(L"Assets/sprite/Item/light.dds", 100.0f, 100.0f);
-	m_itemLPos = { 440.0f,315.0f,0.0f };
-	m_itemLScale = m_nowSelect;
-	//アイテム(時間停止)	
-	m_itemTimeSP.Init(L"Assets/sprite/Item/yimestop.dds", 100.0f, 100.0f);
-	m_itemTSPos = { 360.0f,315.0f,0.0f };
-	m_itemTSScale = m_nowSelect;
-	
+	//アイテム枠
+	CaseSet();
 }
 
 
@@ -49,10 +19,24 @@ GameUI::~GameUI()
 {
 
 }
+void GameUI::CaseSet()
+{
+	//アイテム枠
+	//1
+	m_itemCase1.Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
+	//2
+	m_itemCase2.Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
+	//3
+	m_itemCase3.Init(L"Assets/sprite/case3.dds", 204.0f, 204.0f);
+	//4
+	m_itemCase4.Init(L"Assets/sprite/case4.dds", 148.0f, 148.0f);
+
+
+}
 
 void GameUI::ItemSelect()
 {
-	//あるアイテムの選択
+	/*//あるアイテムの選択
 	//選択中は大きい。それ以外は小さくなります。
 	switch (m_SIstate)
 	{
@@ -118,64 +102,41 @@ void GameUI::ItemSelect()
 
 		break;
 	}
-	m_SIstate;
+	m_SIstate;*/
 }
 
-void GameUI::SpriteScaleUp(Sprite* sprite, CVector3 size)
-{
-	//spriteのサイズを大きくします。
-	CVector3 ScaleUp = sprite->GetScale();
-	ScaleUp += (size / 30.0f);
-	m_changeTime++;
-	if (m_changeTime > m_changeSetTime) {
-
-	}
-}
-void GameUI::SpriteScaleDown(Sprite* sprite, CVector3 size)
-{
-	//spriteのサイズを小さくします。
-	CVector3 ScaleUp = sprite->GetScale();
-	ScaleUp -= (size / 30.0f);
-	m_changeTime++;
-	if (m_changeTime > m_changeSetTime) {
-
-	}
-
-}
 
 void GameUI::HPAdd()
 {
-	//HPの増減で表示を変えます
-	//最初はHP3から。最大12まで。
-	HP = GameData::GetInstance()->GetHitPoint();
+//	//HPの増減で表示を変えます
+////最初はHP3から。最大12まで。
+//	HP = GameData::GetInstance()->GetHitPoint();
+//	if (m_hpCount < HP) {
+//			PlayerHP* pHP = new PlayerHP;
+//			m_hpPoint = HPManeger::GetInstance()->HpSetPoint(m_hpCount);
+//			pHP->SetHPPosition({ m_hpPoint->position });
+//			HPManeger::GetInstance()->RegistAnima(pHP);
+//			m_hpCount++;
+//	}
 
 }
 
 void GameUI::Update()
 {
 	//更新
-	ItemSelect();	//アイテム選択
+	//アイテム枠
+	m_itemCase1.Update(m_itemC1Pos, CQuaternion::Identity(), m_itemC1Scale);
+	m_itemCase2.Update(m_itemC2Pos, CQuaternion::Identity(), m_itemC24Scale);
+	m_itemCase3.Update(m_itemC3Pos, CQuaternion::Identity(), m_itemC24Scale);
+	m_itemCase4.Update(m_itemC4Pos, CQuaternion::Identity(), m_itemC24Scale);
 
-	m_hpHartFrame1.Update(m_hpHFPos, CQuaternion::Identity(), m_hpHFScale);
-	m_hpHart1.Update(m_hpHPos, CQuaternion::Identity(), m_hpScale);
-	m_itemSetLog.Update(m_itemSLPos, CQuaternion::Identity(), m_itemSLScale);
-	//m_itemSelect.Update(m_itemSPos, CQuaternion::Identity(), m_itemSScale);
-	//アイテム
-	m_itemFire.Update(m_itemFPos, CQuaternion::Identity(), itemFScale);
-	m_itemKinomi.Update(m_itemKPos, CQuaternion::Identity(), m_itemKScale);
-	m_itemLight.Update(m_itemLPos, CQuaternion::Identity(), m_itemLScale);
-	m_itemTimeSP.Update(m_itemTSPos, CQuaternion::Identity(), m_itemTSScale);
 }
 void GameUI::Draw()
 {
 	//描画処理
-	m_hpHartFrame1.Draw();
-	m_hpHart1.Draw();
-	m_itemSetLog.Draw();
-	//m_itemSelect.Draw();
-	//アイテム
-	m_itemFire.Draw();
-	m_itemKinomi.Draw();
-	m_itemLight.Draw();
-	m_itemTimeSP.Draw();
+	m_itemCase1.Draw();
+	m_itemCase2.Draw();
+	m_itemCase3.Draw();
+	m_itemCase4.Draw();
+
 }

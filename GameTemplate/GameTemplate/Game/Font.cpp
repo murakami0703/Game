@@ -18,8 +18,8 @@ CVector2 pivot)
 	DirectX::XMFLOAT2 tkFloat2Zero(0, 0);
 	//座標系をスプライトと合わせる。
 	CVector2 pos = position;
-	float frameBufferHalfWidth;
-	float frameBufferHalfHeight;
+	float frameBufferHalfWidth = FRAME_BUFFER_W * 0.5f;
+	float frameBufferHalfHeight = FRAME_BUFFER_H * 0.5f;
 	pos.x += frameBufferHalfWidth;
 	pos.y = -pos.y + frameBufferHalfHeight;
 

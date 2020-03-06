@@ -1,4 +1,6 @@
 #pragma once
+//class HPSetPoint;
+
 class GameUI
 {
 public:
@@ -22,15 +24,6 @@ public:
 	/// </summary>
 	void HPAdd();
 
-	/// <summary>
-	/// spriteの拡大処理
-	/// </summary>
-	void SpriteScaleUp(Sprite* sprite, CVector3 size);
-	/// <summary>
-	/// spriteの縮小処理
-	/// </summary>
-	void SpriteScaleDown(Sprite* sprite, CVector3 size);
-
 
 	/// <summary>
 	/// インスタンスの取得。
@@ -40,74 +33,38 @@ public:
 	{
 		return m_instance;
 	}
+	float GameUI::GetCount()
+	{
+		return m_hpCount;		//表示HPカウント。
+
+	}
+private:
+	// アイテム選択枠の設定
+	void CaseSet();
+
 
 private:
 
 	static GameUI* m_instance;
 
-	enum SelectItemState
-	{
-		Fire,
-		Nuts,
-		Lanp,
-		SPtime,
-		Num,
-	};
-	enum HPState {
-		HP_1,
-		HP_2,
-		HP_3,
-		HP_4,
-		HP_5,
-	};
-
-	//HP関連
-	Sprite m_hpHartFrame1;		//HPの枠1
-	Sprite m_hpHartFrame2;		//HPの枠2
-	Sprite m_hpHartFrame3;		//HPの枠3
-
-	Sprite m_hpHart1;		//HP1
-	Sprite m_hpHart2;		//HP2
-	Sprite m_hpHart3;		//HP3
-
-	CVector3 m_hpHFPos = CVector3().Zero();			//HPの枠の座標
-	CVector3 m_hpHPos = CVector3().Zero();			//HPの座標
-
-	CVector3 m_hpHFScale = CVector3().Zero();			//HPの枠の座標
-	CVector3 m_hpScale = CVector3().Zero();			//HPの座標
-
 	//アイテム関連
-	Sprite m_itemSetLog;		//枠
-	Sprite m_itemSelect;		//アイテム選択
-	Sprite m_itemFire;		//(炎)
-	Sprite m_itemKinomi;		//(木の実)
-	Sprite m_itemLight;		//(ランプ)
-	Sprite m_itemTimeSP;		//(時間停止)
+	Sprite m_itemCase1;		//枠1
+	Sprite m_itemCase2;		//枠2
+	Sprite m_itemCase3;		//枠3
+	Sprite m_itemCase4;		//枠4
 
-	CVector3 m_itemSLPos = CVector3().Zero();			//枠の座標
-	CVector3 m_itemSPos = CVector3().Zero();			//アイテム選択の座標
-	CVector3 m_itemFPos = CVector3().Zero();			//(炎)の座標
-	CVector3 m_itemKPos = CVector3().Zero();			//(木の実)の座標
-	CVector3 m_itemLPos = CVector3().Zero();			//(ランプ)の座標
-	CVector3 m_itemTSPos = CVector3().Zero();			//(時間停止)の座標
+	CVector3 m_itemC1Pos = { 460.0f,-240.0f,0.0f };			//枠1の座標
+	CVector3 m_itemC2Pos = { 560.0f,-120.0f,0.0f };		//枠2の座標
+	CVector3 m_itemC3Pos = { 475.0f,-50.0f,0.0f };		//枠3の座標
+	CVector3 m_itemC4Pos = { 545.0f,-3.0f,0.0f };	//枠4の座標
 
-	CVector3					m_itemSLScale = CVector3::One();				//拡大率
-	CVector3					m_itemSScale = CVector3::One();				//拡大率
-	CVector3					itemFScale = CVector3::One();				//拡大率
-	CVector3					m_itemKScale = CVector3::One();				//拡大率
-	CVector3					m_itemLScale = CVector3::One();				//拡大率
-	CVector3					m_itemTSScale = CVector3::One();				//拡大率
+	CVector3					m_itemC1Scale = { 0.8f,0.8f,0.8f };				//枠1拡大率
+	CVector3					m_itemC24Scale = { 0.7f,0.7f,0.7f };				//枠4拡大率
 
-	//アイテム選択関連
-	CVector3					m_nowSelect = { 0.75f,0.75f,0.75f };				//選択中の大きさ
-	CVector3					m_NoSelect = { 0.4f,0.4f,0.4f };				//選択中の大きさ
-	int							m_changeTime = 0;								//選択sprite拡大縮小時間
-	const int					m_changeSetTime = 30;								//選択sprite拡大縮小時間
-	SelectItemState m_SIstate = Fire;	//選択中のアイテム
-	//HP増減関連
-	HPState m_HPstate;
+	//HPSetPoint* m_hpPoint = nullptr;		//ポイント先
+
 	float HP = 0.0f;		//現在のHPをもらう。
-	float m_hpCount = 0.0f;		//現在のHPをもらう。
+	float m_hpCount = 0.0f;		//表示HPカウント。
 
 };
 

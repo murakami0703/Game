@@ -82,6 +82,12 @@
     <Filter Include="graphics\effect">
       <UniqueIdentifier>{46d61319-d978-4013-a21e-b5e36393fe44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="anima">
+      <UniqueIdentifier>{f9529674-c482-4ded-9f84-ebd8e2370e10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{93d2c609-dbd2-4cbd-95a1-3a081b3bee9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -223,17 +229,28 @@
     <ClCompile Include="Font.cpp">
       <Filter>graphics\font</Filter>
     </ClCompile>
-    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameUI.cpp">
       <Filter>ui</Filter>
     </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>graphics\effect</Filter>
     </ClCompile>
-    <ClCompile Include="Anima.cpp" />
     <ClCompile Include="AnimaManeger.cpp">
       <Filter>manager</Filter>
     </ClCompile>
+    <ClCompile Include="Anima.cpp">
+      <Filter>anima</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHP.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="HPManeger.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -383,17 +400,28 @@
     <ClInclude Include="Font.h">
       <Filter>graphics\font</Filter>
     </ClInclude>
-    <ClInclude Include="GameData.h" />
     <ClInclude Include="GameUI.h">
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>graphics\effect</Filter>
     </ClInclude>
-    <ClInclude Include="Anima.h" />
     <ClInclude Include="AnimaManeger.h">
       <Filter>manager</Filter>
     </ClInclude>
+    <ClInclude Include="Anima.h">
+      <Filter>anima</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHP.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="HPManeger.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSet.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\test.FBX">
@@ -443,13 +471,17 @@
     <ImageContentTask Include="Assets\sprite\HP.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\ItemSetLog.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\Item\case1.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\ItemSelect.png" />
-    <ImageContentTask Include="Assets\sprite\Item\honoo.png" />
-    <ImageContentTask Include="Assets\sprite\Item\kinomi.png" />
-    <ImageContentTask Include="Assets\sprite\Item\light.png" />
-    <ImageContentTask Include="Assets\sprite\Item\yimestop.png" />
+    <ImageContentTask Include="Assets\sprite\Item\case2.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case3.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case4.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

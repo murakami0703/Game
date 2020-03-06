@@ -3,14 +3,6 @@
 
 Map::Map()
 {
-	//levelで置きますわよ。
-	/*m_level.Init(L"level/level_01.tkl", [&](LevelObjectData& objData) {
-		//ステージ
-
-		//エネミー
-
-		return false;
-	});*/
 	//cmoファイルの読み込み。
 	m_mapModel.Init(L"Assets/modelData/test.cmo");
 	m_mapModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
@@ -26,7 +18,6 @@ Map::~Map()
 void Map::Update()
 {
 	m_mapModel.Update();
-
 }
 void Map::Draw(EnRenderMode renderMode)
 {

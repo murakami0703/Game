@@ -17,6 +17,7 @@
 #include "GameData.h"
 #include "Anima.h"
 #include "AnimaManeger.h"
+#include "HPManeger.h"
 
 /// <summary>
 /// グローバル変数
@@ -59,6 +60,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//エネミ
 	EnemyManager m_eneMane;
 	AnimaManeger m_aniMane;
+	//HPManeger m_hpMane;
 
 	/*{Enemy* enemy = new Enemy;
 	enemy->SetPosition({ 150.0f,30.0f,200.0f });
@@ -278,7 +280,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			}
 			//物理エンジンの更新。
 			g_physics.Update();
-
+			//魂出す
 			if (m_eneMane.GetInstance()->DeadFlag() == true) {
 				Anima* anima = new Anima;
 				anima->SetPosition({ m_eneMane.GetPosition() });
@@ -413,6 +415,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					//SpriteのDraw関数を呼び出す。
 					/*g_sprite.SetMulColor({ 1.0f,1.0f,1.0f,1.0f });
 					g_sprite.Draw();*/
+
 					ui.Draw();
 					//エフェクトは不透明オブジェクトを描画した後で描画する。
 					m_effekseerRenderer->BeginRendering();
@@ -423,8 +426,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					//カメラの更新。
 					//g_camera3D.Update();
 					//文字出してみ
-					//font.Draw(L"");
-
+					/*wchar_t text[256];
+					swprintf(text, L"ざんきボーナス");
+					font.Draw(text, { 0.0f,0.0f });
+					*/
 					//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
 					oldRenderTargetView->Release();
 					oldDepthStencilView->Release();

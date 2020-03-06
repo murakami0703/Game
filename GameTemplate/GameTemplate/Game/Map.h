@@ -2,7 +2,6 @@
 
 #include "physics/PhysicsStaticObject.h"
 #include "ShadowMap.h"
-#include "level/Level.h"
 
 class Map
 {
@@ -19,9 +18,22 @@ public:
 	SkinModel* GetMapSkinModel() {
 		return &m_mapModel;
 	}
-private:
-	Level m_level;	//レベルデータ。
+	/// <summary>
+	/// 座標を設定。
+	/// </summary>
+	void Map::SetPosition(CVector3 pos)
+	{
+		m_position = pos;
+	}
+	/// <summary>
+	/// 回転を設定。
+	/// </summary>
+	void Map::SetRotation(CQuaternion rot)
+	{
+		m_rotation = rot;
+	}
 
+private:
 	SkinModel m_mapModel;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();		//座標
 	CQuaternion m_rotation = CQuaternion().Identity();		//回転

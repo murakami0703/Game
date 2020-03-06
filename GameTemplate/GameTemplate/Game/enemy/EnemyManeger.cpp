@@ -26,8 +26,11 @@ BattlePoint* EnemyManager::TryGetBattlePoint(CVector3 position)
 		m_BPMinLeng = 100000.0f;
 		int NUM_BPMin = -1;
 		for (int i = 0; i < NUM_POINT; i++) {
+			//バトルポイントを探して空いている
+			//一番近い場所を探す
 			if (m_BPMinLeng > m_toBPLeng[i] && m_battlepoint[i].enemyCount < 1) {
 				m_BPMinLeng = m_toBPLeng[i];
+				//空いてた
 				NUM_BPMin = i;
 			}
 		}
