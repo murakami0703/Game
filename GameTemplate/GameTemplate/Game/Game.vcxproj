@@ -226,14 +226,12 @@
     <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\11.FBX" />
     <MeshContentTask Include="Assets\modelData\Anima.FBX" />
     <MeshContentTask Include="Assets\modelData\enemy.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
     <MeshContentTask Include="Assets\modelData\Play.fbx" />
     <MeshContentTask Include="Assets\modelData\pp.fbx" />
     <MeshContentTask Include="Assets\modelData\test.FBX" />
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\mikyan.jpg" />

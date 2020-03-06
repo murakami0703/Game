@@ -427,9 +427,6 @@
     <MeshContentTask Include="Assets\modelData\test.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\enemy.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -440,9 +437,6 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Play.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\11.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Anima.FBX">
