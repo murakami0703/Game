@@ -67,16 +67,24 @@ public:
 		m_scale = scl;
 	}
 	/// <summary>
-	/// 更新前に呼ばれる関数。
+	/// 拡大率を設定。
 	/// </summary>
-	bool Start();
+	/// <param name="scl">拡大率</param>
+	void SetSilhouette(bool flag)
+	{
+		m_silhouetteflag = flag;
+	}
 
 	/// <summary>
 	/// 更新。
 	/// </summary>
 	void Update();
-	
-private:
+	/// <summary>
+	/// 描画。
+	/// </summary>
+	void Render();
+
+ private:
 	CVector3 m_position;			//座標。
 	CQuaternion m_rotation;			//回転。
 	CVector3 m_scale = CVector3().One();			//拡大率。
@@ -85,5 +93,6 @@ private:
 	SkinModel					m_skinModel;						//スキンモデル。
 	Animation					m_animation;						//アニメーション。
 
+	bool m_silhouetteflag = false;
 };
 

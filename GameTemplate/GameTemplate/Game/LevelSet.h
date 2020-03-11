@@ -1,6 +1,6 @@
 #pragma once
 #include "level/Level.h"
-class LevelSet
+class LevelSet : public IGameObject
 {
 	static LevelSet* m_instance;
 public:
@@ -12,6 +12,9 @@ public:
 	static LevelSet* LevelSet::GetInstance() {
 		return m_instance;
 	}
+
+	void Update();
+	void Render();
 
 private:
 	Level m_level;	//レベルデータ。

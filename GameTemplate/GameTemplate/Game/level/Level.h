@@ -2,13 +2,14 @@
 
 
 class MapChip;
-
+class MapChipRender;
 /*!
 * @brief	オブジェクト名。
 */
 struct LevelObjectData {
 	CVector3 position;		//<座標。
 	CQuaternion rotation;	//!<回転。
+	CVector3 scale;		//<座標。
 	const wchar_t* name;	//!<名前。
 
 			/*!
@@ -51,6 +52,7 @@ public :
 	* 尽きると自動的に破棄されます。
 	*/
 	using MapChipPtr = std::unique_ptr<MapChip>;
+	using MapChipRenderPtr = std::unique_ptr<MapChipRender>;
 	/*!
 	* @brief	オブジェクトをビルドする時にフックする関数オブジェクトの型の別名定義。
 	*@details
@@ -75,7 +77,12 @@ public :
 	/*!
 	* @brief	レベルを描画。
 	*/
-	void Draw(EnRenderMode renderMode);
+	void Draw();
+	//マップチップレンダーの作成
+private:
+	MapChipRender* MapChipRenderOrAddRenderObject(const LevelObjectData& objData);
 private:
 	std::vector<MapChipPtr> m_mapChipArray;		//!<マップチップの可変長配列。
+	std::map< unsigned int, MapChipRender*> m_mapChipRenderArray;		//!<マップチップレンダーの可変長配列。
+
 };

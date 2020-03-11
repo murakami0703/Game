@@ -1,8 +1,11 @@
 #pragma once
 #include "IGameObject.h"
+
 class GameObjectManager
 {
 public:
+
+	void Start();
 	/// <summary>
 	/// 更新。
 	/// </summary>
@@ -38,5 +41,30 @@ public:
 
 private:
 	std::vector< IGameObject* > m_goList;
+	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
+	Sprite g_mainSprite;		//スプライト。
+private:
+	/// <summary>
+	/// プリレンダリング。
+	/// </summary>
+	void PreRender();
+	/// <summary>
+	/// フォワードレンダリング。
+	/// </summary>
+	void ForwordRender();
+	/// <summary>
+	/// ポストレンダリング。
+	/// </summary>
+	void PostRender();
+	bool isStartflag = false;
+private:
+	//フレームバッファのレンダリングターゲット。
+	ID3D11RenderTargetView* oldRenderTargetView;
+	ID3D11DepthStencilView* oldDepthStencilView;
+	//フレームバッファののビューポート
+	D3D11_VIEWPORT oldViewports;
+	D3D11_DEPTH_STENCIL_DESC desc = { 0 };
+	ID3D11DepthStencilState* depthStencilState;
+
 };
 extern GameObjectManager g_goMgr;

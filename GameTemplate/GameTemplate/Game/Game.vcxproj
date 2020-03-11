@@ -135,6 +135,7 @@
     <ClCompile Include="level\MapChip.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapChipRender.cpp" />
     <ClCompile Include="math\kMath.cpp" />
     <ClCompile Include="math\Matrix.cpp" />
     <ClCompile Include="math\Vector.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapChipRender.h" />
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
@@ -226,14 +228,9 @@
     <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\11.FBX" />
     <MeshContentTask Include="Assets\modelData\Anima.FBX" />
-    <MeshContentTask Include="Assets\modelData\enemy.FBX" />
+    <MeshContentTask Include="Assets\modelData\Floor.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
-    <MeshContentTask Include="Assets\modelData\Play.fbx" />
-    <MeshContentTask Include="Assets\modelData\pp.fbx" />
-    <MeshContentTask Include="Assets\modelData\test.FBX" />
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\mikyan.jpg" />

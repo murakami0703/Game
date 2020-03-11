@@ -88,6 +88,9 @@
     <Filter Include="data">
       <UniqueIdentifier>{93d2c609-dbd2-4cbd-95a1-3a081b3bee9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\modelData\stage1">
+      <UniqueIdentifier>{ef6dce0a-46da-4925-bca6-5a1b29101848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -251,6 +254,9 @@
       <Filter>ui</Filter>
     </ClCompile>
     <ClCompile Include="LevelSet.cpp" />
+    <ClCompile Include="MapChipRender.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -422,31 +428,19 @@
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="LevelSet.h" />
+    <ClInclude Include="MapChipRender.h">
+      <Filter>level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\test.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\unityChan.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\enemy.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\pp.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Play.fbx">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\11.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Anima.FBX">
       <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Floor.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>

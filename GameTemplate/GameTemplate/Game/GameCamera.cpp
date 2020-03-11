@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameCamera.h"
+#include "Player.h"
 
 GameCamera::GameCamera()
 {
@@ -11,16 +12,16 @@ GameCamera::~GameCamera()
 {
 }
 
-void GameCamera::Update(Player* player)
+void GameCamera::Update()
 {
 	/// <summary>
 	/// カメラの更新
 	/// </summary>
 	
-	CVector3 p_pos = player->GetPosition();
+	CVector3 p_pos = Player::GetInstance()->GetPosition();
 	//視点の計算。
 	cameraPos.x = p_pos.x;
-	cameraPos.y = p_pos.y + 300.0f;
+	cameraPos.y = p_pos.y + 1200.0f;
 	cameraPos.z = p_pos.z - 300.0f;
 	//注視点の計算。
 	cameraTarget.x = p_pos.x;
@@ -32,4 +33,6 @@ void GameCamera::Update(Player* player)
 
 	g_camera3D.Update();
 }
+void GameCamera::Render(){}
+
 

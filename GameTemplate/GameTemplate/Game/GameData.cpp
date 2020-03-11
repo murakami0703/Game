@@ -13,3 +13,5 @@ GameData::GameData()
 GameData::~GameData()
 {
 }
+void GameData::Update(){}
+void GameData::Render(){}

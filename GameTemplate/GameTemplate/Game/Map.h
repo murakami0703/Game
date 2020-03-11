@@ -1,23 +1,15 @@
 #pragma once
 
 #include "physics/PhysicsStaticObject.h"
-#include "ShadowMap.h"
 
-class Map
+class Map : public IGameObject
 {
 public:
 	Map();
 	~Map();
 	void Update();
-	void Draw(EnRenderMode renderMode);
+	void Render();
 
-	/// <summary>
-	/// Mapのモデルを取得。
-	/// </summary>
-	/// <returns>Mapのスキンモデル</returns>
-	SkinModel* GetMapSkinModel() {
-		return &m_mapModel;
-	}
 	/// <summary>
 	/// 座標を設定。
 	/// </summary>
@@ -32,9 +24,16 @@ public:
 	{
 		m_rotation = rot;
 	}
+	/// <summary>
+	/// 回転率を設定。
+	/// </summary>
+	void Map::SetScale(CVector3 sca)
+	{
+		m_scale = sca;
+	}
 
 private:
-	SkinModel m_mapModel;									//スキンモデル。
+	SkinModelRender* m_mapModel;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();		//座標
 	CQuaternion m_rotation = CQuaternion().Identity();		//回転
 	CVector3 m_scale = CVector3().One();		//拡大率

@@ -1,5 +1,5 @@
 #pragma once
-class GameData
+class GameData : public IGameObject
 {
 	/// <summary>
 	/// データ。
@@ -7,6 +7,9 @@ class GameData
 public:
 	GameData();
 	~GameData();
+
+	void Update();
+	void Render();
 
 	//体力取得
 	float GameData::GetHitPoint() {

@@ -4,10 +4,13 @@
 Map::Map()
 {
 	//cmoファイルの読み込み。
-	m_mapModel.Init(L"Assets/modelData/test.cmo");
-	m_mapModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
-	m_phyStaticObject.CreateMeshObject(m_mapModel, m_position, m_rotation);
-	m_mapModel.SetShadowReciever(true);
+	m_mapModel = g_goMgr.NewGameObject<SkinModelRender>();
+	m_mapModel->Init(L"Assets/modelData/Floor.cmo");
+	m_mapModel->SetPosition(m_position);
+	m_mapModel->SetRotation(m_rotation);
+	m_mapModel->SetScale(m_scale);
+	m_phyStaticObject.CreateMeshObject(m_mapModel->GetSkinModel(), m_position, m_rotation);
+	//m_mapModel.SetShadowReciever(true);
 }
 
 
@@ -17,13 +20,8 @@ Map::~Map()
 
 void Map::Update()
 {
-	m_mapModel.Update();
+	m_mapModel->Update();
 }
-void Map::Draw(EnRenderMode renderMode)
+void Map::Render()
 {
-	m_mapModel.Draw(
-		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix(),
-		renderMode
-	);
 }

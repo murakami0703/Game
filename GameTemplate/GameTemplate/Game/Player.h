@@ -1,8 +1,7 @@
 #pragma once
 #include "character/CharacterController.h"
-#include "ShadowMap.h"
 
-class Player 
+class Player  : public IGameObject
 {
 public:
 	Player();
@@ -25,7 +24,7 @@ public:
 	};
 
 	void Update();
-	void Draw(EnRenderMode renderMode);
+	void Render();
 	/// <summary>
 	/// プレイヤーのポジションを返す関数。
 	/// </summary>
@@ -37,9 +36,9 @@ public:
 	/// プレイヤーのモデルを取得。
 	/// </summary>
 	/// <returns>プレイヤーのスキンモデル</returns>
-	SkinModel* GetPlayerSkinModel() {
+	/*SkinModel* GetPlayerSkinModel() {
 		return &m_model;
-	}
+	}*/
 	/// <summary>
 	/// 攻撃判定
 	/// </summary>
@@ -47,14 +46,19 @@ public:
 	bool Player::GetAttackflag() {
 		return attackflag;
 	}
+	//インスタンスの取得
+	static Player* GetInstance() {
+		return m_instance;
+	}
 
 private:
+	static Player* m_instance;
 	void Idel();
 	void Move();						//移動。
 	void Attack();
 	void Dead();
 
-	SkinModel m_model;		//スキンモデル
+	SkinModelRender* m_model;		//スキンモデル
 	CVector3 m_position = CVector3().Zero();			//座標
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転
 	CVector3 m_scale = CVector3().One();			//拡大率
@@ -62,7 +66,7 @@ private:
 	CharacterController m_characon;		//キャラコン
 	EState m_state = Player_Idle;
 	//移動関連
-	float m_movespeed = 200.0f;			//移動速度
+	float m_movespeed = 500.0f;			//移動速度
 	const float m_rotationLR = 80.0f;	//左右の回転角度
 	const float m_rotationD = 110.0f;	//下の回転角度
 	float m_caraTime = (1.0f / 60.0f);	//キャラコンの経過時間

@@ -3,35 +3,31 @@
 #include "ShadowMap.h"
 #include "GameData.h"
 
+Player* Player::m_instance = nullptr;
 
 Player::Player()
 {
+	m_instance = this;
 
 	//アニメーションクリップのロード。
 	m_animClips[Animation_Idel].Load(L"Assets/animData/eneIdle.tka");
 	m_animClips[Animation_Walk].Load(L"Assets/animData/eneWalk.tka");
 	m_animClips[Animation_Attack1].Load(L"Assets/animData/eneAT1.tka");
 	m_animClips[Animation_Dead].Load(L"Assets/animData/eneDeath.tka");
-
-	//アニメーションクリップのロード。
-	/*m_animClips[Animation_Idel].Load(L"Assets/animData/playIdel.tka");
-	m_animClips[Animation_Walk].Load(L"Assets/animData/playwalk.tka");
-	m_animClips[Animation_Attack1].Load(L"Assets/animData/playAttack.tka");
-	//m_animClips[Animation_Attack2].Load(L"Assets/animData/playAttack2.tka");
-	m_animClips[Animation_Dead].Load(L"Assets/animData/playdead.tka");
-	*/
 	//ループフラグの設定。
 	m_animClips[Animation_Idel].SetLoopFlag(true);
 	m_animClips[Animation_Walk].SetLoopFlag(true);
+	
+	m_model = g_goMgr.NewGameObject<SkinModelRender>();
+	m_model->Init(L"Assets/modelData/Footman_Default.cmo");
+	m_position= { 0.0f, 125.0f, 800.0f };
+	m_model->SetPosition(m_position);
 
-	m_model.Init(L"Assets/modelData/Footman_Default.cmo");
-	/*m_position = { 0.0f,60.0f,0.0f };
-	m_scale = { 0.4f,0.4f,0.4f };
-	*/
 	m_scale = { 50.0f, 50.0f, 50.0f};
+	m_model->SetScale(m_scale);
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
-	m_animation.Init(m_model, m_animClips, AnimationClip_Num);	//アニメーションの初期化
+	m_animation.Init(m_model->GetSkinModel(), m_animClips, AnimationClip_Num);	//アニメーションの初期化
 }
 Player::~Player()
 {
@@ -118,9 +114,8 @@ void Player::Dead()
 }
 void Player::Update()
 {
-
-	if (g_pad[0].IsTrigger(enButtonA) &&
-		GameData::GetInstance()->GetHitPoint() >= 0.0f) {
+	
+	if (g_pad[0].IsTrigger(enButtonA) ) {
 		Atcount++;
 		m_state = Player_Attack;
 	}
@@ -143,22 +138,13 @@ void Player::Update()
 	}
 
 	//死亡判定。
-	if (GameData::GetInstance()->GetHitPoint() == 0.0f) {
-		//HP0なので死。
-		m_state = Player_Dead;
-	}
 
 	m_animation.Update(0.05f);//アニメーション再生
 	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
-	m_model.Update();
+	m_model->SetPosition(m_position);
+	m_model->SetRotation(m_rotation);
 }
 
-void Player::Draw(EnRenderMode renderMode)
+void Player::Render()
 {
-	m_model.Draw(
-		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix(),
-		renderMode
-	);
 }

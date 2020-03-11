@@ -1,8 +1,12 @@
 #pragma once
-class Game
+class Game : public IGameObject
 {
 public:
 	Game();
 	~Game();
+
+	void Update();
+	void Render();
+
 };
 

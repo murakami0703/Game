@@ -1,7 +1,6 @@
 #pragma once
-#include "Player.h"
 
-class GameCamera
+class GameCamera : public IGameObject
 {
 public:
 	GameCamera();
@@ -10,7 +9,8 @@ public:
 	/// 更新。
 	/// </summary>
 	/// <param name="player">プレイヤーの検索</param>
-	void Update(Player* player);
+	void Update();
+	void Render();
 	CVector3 cameraPos;			//視点。
 	CVector3 cameraTarget;		//注視点。
 

@@ -10,6 +10,7 @@ enum EnRenderMode {
 	enRenderMode_CreateShadowMap,	//シャドウマップ生成。
 	enRenderMode_Num,				//レンダリングモードの数。
 };
+class RenderTarget;
 
 /*!
  *@brief	グラフィックスエンジン。
@@ -65,6 +66,15 @@ public:
 	 *@brief	描画終了。
 	 */
 	void EndRender();
+
+	/// <summary>
+	/// レンダリングターゲットの切り替え
+	/// </summary>
+	/// <param name="renderTarget">レンダリングターゲット</param>
+	/// <param name="viewport">ビューポート</param>
+	void ChangeRenderTarget(RenderTarget* renderTarget, D3D11_VIEWPORT* viewport);
+	void ChangeRenderTarget(ID3D11RenderTargetView* renderTarget, ID3D11DepthStencilView* depthStensil, D3D11_VIEWPORT* viewport);
+
 private:
 	D3D_FEATURE_LEVEL		m_featureLevel;				//Direct3D デバイスのターゲットとなる機能セット。
 	ID3D11Device*			m_pd3dDevice = NULL;		//D3D11デバイス。

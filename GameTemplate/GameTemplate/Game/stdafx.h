@@ -52,10 +52,15 @@
 #include "sprite/SpriteStandby.h"
 #include "sprite/Sprite.h"
 #include "Fade.h"
+
+#include "ShadowMap.h"
+#include "RenderTarget.h"
+
 #include "gameObject/GameObjectManager.h"
 
 #include "Font.h"
 #include "graphics/SkinModelRender.h"
+
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
