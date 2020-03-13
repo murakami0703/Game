@@ -254,9 +254,6 @@
       <Filter>ui</Filter>
     </ClCompile>
     <ClCompile Include="LevelSet.cpp" />
-    <ClCompile Include="MapChipRender.cpp">
-      <Filter>level</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -428,9 +425,6 @@
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="LevelSet.h" />
-    <ClInclude Include="MapChipRender.h">
-      <Filter>level</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -440,6 +434,33 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Floor.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_2.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_3.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_4.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_5.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_boss.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_start.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_bridge.FBX">
+      <Filter>Assets\modelData\stage1</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_longbridge.FBX">
       <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
   </ItemGroup>

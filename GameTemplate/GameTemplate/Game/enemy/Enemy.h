@@ -1,9 +1,9 @@
 #pragma once
 #include "Player.h"
-class BattlePoint;
+//class BattlePoint;
 
 
-class Enemy
+class Enemy : public IGameObject
 {
 public:
 	Enemy();
@@ -16,15 +16,30 @@ public:
 		eneDead,
 		num
 	};
-	void Update(Player* player);
-	void Draw(EnRenderMode renderMode);
+	void Update();
+	void Render();
 	/// <summary>
 	/// 座標をを設定。
 	/// </summary>
-	void SetPosition(CVector3 pos)
+	void Enemy::SetPosition(CVector3 pos)
 	{
 		m_position = pos;
 	}
+	/// <summary>
+	/// 回転を設定。
+	/// </summary>
+	void Enemy::SetRotation(CQuaternion rot)
+	{
+		m_rotation = rot;
+	}
+	/// <summary>
+	/// 回転率を設定。
+	/// </summary>
+	void Enemy::SetScale(CVector3 sca)
+	{
+		m_scale = sca;
+	}
+
 	/// <summary>
 	/// エネミのポジションを返す関数。
 	/// </summary>
@@ -53,13 +68,13 @@ private:
 
 	};
 
-	void Follow(Player* player);
+	void Follow();
 	void move();
-	void Attack(Player* player);
+	void Attack();
 	void Return();
 	void Dead();
 
-	SkinModel m_enemy;									//スキンモデル。
+	SkinModelRender* m_enemy;									//スキンモデル。
 	CVector3 m_position = CVector3().Zero();			//座標
 	CVector3 m_oldPos = CVector3().Zero();			//座標
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転
@@ -78,7 +93,7 @@ private:
 	Animation	m_animation;					//アニメーション
 	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
 
-	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
+	//BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 	//攻撃判定
 	bool EneAttackflag = false;
 

@@ -12,8 +12,8 @@ class EnemyManager
 public:
 	EnemyManager();
 	~EnemyManager();
-	void Update(Player* player);
-	void Draw(EnRenderMode renderMode);
+	void Update();
+	void Draw();
 	/// <summary>
 	/// 一番近いバトルポイントを取得できるかどうか検索します。
 	/// </summary>

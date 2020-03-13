@@ -61,6 +61,9 @@
 #include "Font.h"
 #include "graphics/SkinModelRender.h"
 
+//#include "level/Level.h"
+//#include "level/Mapchip.h"
+
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。

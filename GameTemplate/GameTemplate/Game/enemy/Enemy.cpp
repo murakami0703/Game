@@ -20,10 +20,11 @@ Enemy::Enemy()
 	m_animClips[enewalk].SetLoopFlag(true);
 
 	//cmoファイルの読み込み。
-	m_enemy.Init(L"Assets/modelData/Footman_Default.cmo");
+	m_enemy = g_goMgr.NewGameObject<SkinModelRender>();
+	m_enemy->Init(L"Assets/modelData/Footman_Default.cmo");
 	m_oldPos = m_position;
-	m_scale = { 50.0f,50.0f,50.0f };
-
+	//m_scale = { 10,50.0f,50.0f };
+	m_enemy->SetScale(m_scale);
 	//まっぷ
 	{
 		//法線マップつけます
@@ -46,12 +47,12 @@ Enemy::Enemy()
 		);
 
 		//モデルに法線マップ、スぺキュラマップ、アンビエントマップを設定する。
-		m_enemy.SetNormalMap(g_normalMapSRV);
+		//m_enemy.SetNormalMap(g_normalMapSRV);
 		//m_enemy.SetSpecularMap(g_specularMapSRV);
 		//m_enemy.SetAmbientMap(g_ambientMapSRV);
 	}
 
-	m_animation.Init(m_enemy, m_animClips, num);	//アニメーションの初期化
+	m_animation.Init(m_enemy->GetSkinModel(), m_animClips, num);	//アニメーションの初期化
 
 }
 
@@ -64,9 +65,9 @@ Enemy::~Enemy()
 
 }
 
-void Enemy::Follow(Player* player)
+void Enemy::Follow()
 {
-	//追尾ちゅ
+	/*//追尾ちゅ
 	CVector3 m_toBPVec = m_battlePoint->position - m_position;
 	if (m_toBPVec.Length() > 10.0f){
 		m_toBPVec.y = 0.0f;
@@ -87,7 +88,7 @@ void Enemy::Follow(Player* player)
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
-
+	*/
 }
 
 void Enemy::move()
@@ -103,13 +104,13 @@ void Enemy::move()
 		m_moveSpeed = m_moveSpeed;
 		m_moveCount = 0;
 	}
-
+	
 
 }
 
-void Enemy::Attack(Player* player)
+void Enemy::Attack()
 {
-	m_animation.Play(eneAttack_1);//攻撃
+	/*m_animation.Play(eneAttack_1);//攻撃
 	//次の行動へ。。
 	if (m_animation.IsPlaying() == false) {
 		if ((player->GetPosition() - m_position).Length() < 80.0f) {
@@ -124,12 +125,12 @@ void Enemy::Attack(Player* player)
 		else {
 			m_state = eState_Haikai;
 		}
-	}
+	}*/
 }
 
 void Enemy::Return()
 {
-	//徘徊位置に戻る。
+	/*//徘徊位置に戻る。
 	CVector3 diff = m_position - m_oldPos;
 	diff.y = 0.0f;
 	diff.Normalize();
@@ -147,7 +148,7 @@ void Enemy::Return()
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
-
+	*/
 }
 void Enemy::Dead()
 {
@@ -158,10 +159,10 @@ void Enemy::Dead()
 	}
 }
 
-void Enemy::Update(Player* player)
+void Enemy::Update()
 {
 	
-	p_pos = player->GetPosition();
+	/*p_pos = player->GetPosition();
 	m_toPlayerVec = p_pos - m_position;
 
 	if (player->GetAttackflag() == true) {
@@ -169,10 +170,10 @@ void Enemy::Update(Player* player)
 			m_state = eState_Dead;
 		}
 	}
-
+	*/
 	m_animation.Update(0.05f);//アニメーション再生
 
-	switch (m_state) {
+	/*switch (m_state) {
 	case eState_Haikai:
 		//徘徊中
 		m_animation.Play(enewalk);//歩き
@@ -212,18 +213,13 @@ void Enemy::Update(Player* player)
 		//死
 		Dead();
 		break;
-	}
+	}*/
 
 	//ワールド行列の更新。
-	m_enemy.UpdateWorldMatrix(m_position, m_rotation, m_scale);
-	m_enemy.Update();
+	m_enemy->SetPosition(m_position);
+	m_enemy->SetRotation(m_rotation);
 
 }
-void Enemy::Draw(EnRenderMode m_renderMode)
+void Enemy::Render()
 {
-	m_enemy.Draw(
-		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix(),
-		m_renderMode
-	);
 }

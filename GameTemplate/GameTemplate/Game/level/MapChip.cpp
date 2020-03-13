@@ -14,6 +14,9 @@ MapChip::MapChip(const LevelObjectData& objData)
 
 void MapChip::Draw()
 {
-	m_model.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), EnRenderMode::enRenderMode_silhouette
+	m_model.Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix(),
+		EnRenderMode::enRenderMode_Normal
 	);
 }

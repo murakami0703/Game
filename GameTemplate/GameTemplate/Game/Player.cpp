@@ -20,10 +20,10 @@ Player::Player()
 	
 	m_model = g_goMgr.NewGameObject<SkinModelRender>();
 	m_model->Init(L"Assets/modelData/Footman_Default.cmo");
-	m_position= { 0.0f, 125.0f, 800.0f };
+	m_position= { 0.0f, 400.0f, 500.0f };
 	m_model->SetPosition(m_position);
 
-	m_scale = { 50.0f, 50.0f, 50.0f};
+	m_scale = { 50.0f, 50.0f, 50.0f };
 	m_model->SetScale(m_scale);
 	m_characon.Init(20.0f, 30.0f, m_position);//ƒLƒƒƒ‰ƒRƒ“
 	m_move = m_position;

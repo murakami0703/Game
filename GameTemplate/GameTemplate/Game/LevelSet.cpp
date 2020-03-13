@@ -2,6 +2,8 @@
 #include "LevelSet.h"
 
 #include "Map.h"
+//エネミー
+#include "enemy/Enemy.h"
 
 LevelSet* LevelSet::m_instance = nullptr;
 LevelSet::LevelSet()
@@ -11,6 +13,7 @@ LevelSet::LevelSet()
 	}
 	m_instance = this;
 
+	//レベルセット
 	LevelSetting();
 }
 
@@ -23,7 +26,7 @@ LevelSet::~LevelSet()
 void LevelSet::LevelSetting()
 {
 	//levelで置きますわよ。
-	m_level.Init(L"level/stage_00.tkl", [&](LevelObjectData& objData) {
+	m_level.Init(L"Assets/level/stage_00.tkl", [&](LevelObjectData& objData) {
 		//ステージ
 		if (objData.EqualObjectName(L"Floor")) {
 			Map* m_map = g_goMgr.NewGameObject<Map>();
@@ -34,6 +37,13 @@ void LevelSet::LevelSetting()
 		}
 
 		//エネミー
+		if (objData.EqualObjectName(L"Floor")) {
+			Enemy* m_enemy = g_goMgr.NewGameObject<Enemy>();
+			m_enemy->SetPosition(objData.position);
+			m_enemy->SetRotation(objData.rotation);
+			m_enemy->SetScale(objData.scale);
+			return true;
+		}
 
 		return false;
 	});

@@ -66,7 +66,7 @@ private:
 	CharacterController m_characon;		//キャラコン
 	EState m_state = Player_Idle;
 	//移動関連
-	float m_movespeed = 500.0f;			//移動速度
+	float m_movespeed = 1500.0f;			//移動速度
 	const float m_rotationLR = 80.0f;	//左右の回転角度
 	const float m_rotationD = 110.0f;	//下の回転角度
 	float m_caraTime = (1.0f / 60.0f);	//キャラコンの経過時間
