@@ -27,11 +27,21 @@ void SkinModelRender::InitAnimation(AnimationClip* animationClips, int numAnimat
 		m_animation.Init(m_skinModel, m_animationClips, m_numAnimationClips);
 	}
 }
+
+void SkinModelRender::SetShadowReciever(bool flag)
+{
+	m_skinModel.SetShadowReciever(flag);
+}
+
 /// <summary>
 /// 更新
 /// </summary>
 void SkinModelRender::Update()
 {
+	if (m_shadowMapFlag = true) {
+		//trueならシャドウキャスターに登録。
+		g_goMgr->GetShadowMap()->RegistShadowCaster(&m_skinModel);
+	}
 	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	m_skinModel.Update();
 
@@ -54,5 +64,6 @@ void SkinModelRender::Render()
 
 	}
 }
+void SkinModelRender::PostRender(){}
 
 

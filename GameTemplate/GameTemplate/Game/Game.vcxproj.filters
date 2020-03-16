@@ -229,9 +229,6 @@
     <ClCompile Include="Fade.cpp">
       <Filter>sprite\fade</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>graphics\font</Filter>
-    </ClCompile>
     <ClCompile Include="GameUI.cpp">
       <Filter>ui</Filter>
     </ClCompile>
@@ -254,6 +251,9 @@
       <Filter>ui</Filter>
     </ClCompile>
     <ClCompile Include="LevelSet.cpp" />
+    <ClCompile Include="Font.cpp">
+      <Filter>graphics\font</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -400,9 +400,6 @@
     <ClInclude Include="Fade.h">
       <Filter>sprite\fade</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>graphics\font</Filter>
-    </ClInclude>
     <ClInclude Include="GameUI.h">
       <Filter>ui</Filter>
     </ClInclude>
@@ -425,6 +422,9 @@
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="LevelSet.h" />
+    <ClInclude Include="Font.h">
+      <Filter>graphics\font</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">

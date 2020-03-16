@@ -18,7 +18,7 @@ Player::Player()
 	m_animClips[Animation_Idel].SetLoopFlag(true);
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 	
-	m_model = g_goMgr.NewGameObject<SkinModelRender>();
+	m_model = g_goMgr->NewGameObject<SkinModelRender>();
 	m_model->Init(L"Assets/modelData/Footman_Default.cmo");
 	m_position= { 0.0f, 400.0f, 500.0f };
 	m_model->SetPosition(m_position);
@@ -28,6 +28,7 @@ Player::Player()
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 	m_animation.Init(m_model->GetSkinModel(), m_animClips, AnimationClip_Num);	//アニメーションの初期化
+	m_model->SetShadowMap(true);
 }
 Player::~Player()
 {
@@ -145,6 +146,5 @@ void Player::Update()
 	m_model->SetRotation(m_rotation);
 }
 
-void Player::Render()
-{
-}
+void Player::Render(){}
+void Player::PostRender(){}

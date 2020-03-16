@@ -18,6 +18,8 @@ public:
 	};
 	void Update();
 	void Render();
+	void PostRender();
+
 	/// <summary>
 	/// À•W‚ğ‚ğİ’èB
 	/// </summary>

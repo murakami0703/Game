@@ -67,13 +67,26 @@ public:
 		m_scale = scl;
 	}
 	/// <summary>
-	/// 拡大率を設定。
+	/// シルエット描画フラグ
 	/// </summary>
-	/// <param name="scl">拡大率</param>
+	/// <param name="flag">trueなら描画</param>
 	void SetSilhouette(bool flag)
 	{
 		m_silhouetteflag = flag;
 	}
+	/// <summary>
+	/// シャドウマップ描画フラグ
+	/// </summary>
+	/// <param name="flag">trueなら描画</param>
+	void SetShadowMap(bool flag)
+	{
+		m_shadowMapFlag = flag;
+	}
+	/// <summary>
+	/// シャドウレシーバーのフラグを設定。
+	/// </summary>
+	/// <param name="flag"></param>
+	void SetShadowReciever(bool flag);
 
 	/// <summary>
 	/// 更新。
@@ -83,6 +96,7 @@ public:
 	/// 描画。
 	/// </summary>
 	void Render();
+	void PostRender();
 
  private:
 	CVector3 m_position;			//座標。
@@ -93,6 +107,7 @@ public:
 	SkinModel					m_skinModel;						//スキンモデル。
 	Animation					m_animation;						//アニメーション。
 
-	bool m_silhouetteflag = false;
+	bool m_shadowMapFlag = false;		//シャドウマップ描画フラグ
+	bool m_silhouetteflag = false;		//シルエット描画フラグ
 };
 

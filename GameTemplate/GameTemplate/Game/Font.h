@@ -7,7 +7,13 @@ class Font
 public:
 	Font();
 	~Font();
-
+	/// <summary>
+	/// フォントを設定。
+	/// </summary>
+	/// <param name="font">差し替えたいフォント</param>
+	void SetFont(DirectX::SpriteFont* font) {
+		m_spriteFont = font;
+	}
 	/// <summary>
 	/// 描画
 	/// </summary>

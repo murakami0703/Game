@@ -28,6 +28,8 @@ public:
 	
 	virtual void Render() = 0;
 
+	virtual void PostRender() = 0;
+
 	/// <summary>
 	/// Às—Dæ“x‚ğæ“¾
 	/// </summary>

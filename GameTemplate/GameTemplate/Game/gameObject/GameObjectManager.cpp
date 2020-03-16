@@ -2,7 +2,7 @@
 #include "GameObjectManager.h"
 
 //GameObjectManagerクラスのインスタンス。
-GameObjectManager g_goMgr;
+GameObjectManager* g_goMgr = nullptr;
 
 void GameObjectManager::Start()
 {
@@ -59,6 +59,11 @@ void GameObjectManager::Update()
 		g_mainSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 		g_camera2D.Update();
 
+		//シャドウマップを更新。
+		m_shadowMap.Update(
+			{ 0.0f, 1000.0f, 0.0f },
+			{ 0.0f, 0.0f, 0.0f }
+		);
 	}
 	//登録されているゲームオブジェクトの描画関数を呼ぶ。
 		{
@@ -104,7 +109,8 @@ void GameObjectManager::Update()
 /// </summary>
 void GameObjectManager::PreRender()
 {
-
+	//シャドウマップにレンダリング
+	m_shadowMap.RenderToShadowMap();
 }
 /// <summary>
 /// フォワードレンダリング。
@@ -141,6 +147,10 @@ void GameObjectManager::PostRender()
 	);
 	//2D描画
 	g_mainSprite.Draw();
+
+	for (auto go : m_goList) {
+		go->PostRender();
+	}
 
 	//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
 	oldRenderTargetView->Release();

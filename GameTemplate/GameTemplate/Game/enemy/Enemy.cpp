@@ -20,7 +20,7 @@ Enemy::Enemy()
 	m_animClips[enewalk].SetLoopFlag(true);
 
 	//cmoファイルの読み込み。
-	m_enemy = g_goMgr.NewGameObject<SkinModelRender>();
+	m_enemy = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemy->Init(L"Assets/modelData/Footman_Default.cmo");
 	m_oldPos = m_position;
 	//m_scale = { 10,50.0f,50.0f };
@@ -222,4 +222,9 @@ void Enemy::Update()
 }
 void Enemy::Render()
 {
+}
+
+void Enemy::PostRender()
+{
+
 }

@@ -38,11 +38,21 @@ public:
 			}
 		}
 	}
+	/// <summary>
+	/// シャドウマップを取得。
+	/// </summary>
+	/// <returns></returns>
+	ShadowMap* GetShadowMap()
+	{
+		return &m_shadowMap;
+	}
 
 private:
 	std::vector< IGameObject* > m_goList;
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
+	ShadowMap m_shadowMap;
 	Sprite g_mainSprite;		//スプライト。
+
 private:
 	/// <summary>
 	/// プリレンダリング。
@@ -67,4 +77,4 @@ private:
 	ID3D11DepthStencilState* depthStencilState;
 
 };
-extern GameObjectManager g_goMgr;
+extern GameObjectManager* g_goMgr;

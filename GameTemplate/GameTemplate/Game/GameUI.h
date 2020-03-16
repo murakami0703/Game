@@ -1,7 +1,7 @@
 #pragma once
 //class HPSetPoint;
 
-class GameUI
+class GameUI : public IGameObject
 {
 public:
 	GameUI();
@@ -13,7 +13,8 @@ public:
 	/// <summary>
 	/// 描画処理。
 	/// </summary>
-	void Draw();
+	void Render();
+	void PostRender();
 
 	/// <summary>
 	/// アイテム選択処理
@@ -45,6 +46,7 @@ private:
 
 private:
 
+	//FontRender* m_font;
 	static GameUI* m_instance;
 
 	//アイテム関連

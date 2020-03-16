@@ -11,9 +11,11 @@ Font::~Font()
 {
 }
 
-void Font::Draw(wchar_t const* text,const CVector2& position,const CVector4& color,float rotation,float scale,
-CVector2 pivot)
+void Font::Draw(wchar_t const* text,const CVector2& position,const CVector4& color,float rotation,float scale,CVector2 pivot)
 {
+	if (text == nullptr) {
+		return;
+	}
 	pivot.y = 1.0f - pivot.y;
 	DirectX::XMFLOAT2 tkFloat2Zero(0, 0);
 	//座標系をスプライトと合わせる。

@@ -325,7 +325,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 	//デプスシャドウマップを使って影を落とす。。
 	ShadowCalc(lig, In.posInLVP);
-
+	
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;
 	return finalColor;

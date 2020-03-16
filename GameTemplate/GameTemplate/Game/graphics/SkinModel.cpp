@@ -174,13 +174,23 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 		ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
 		DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 
+		auto shadowMap = g_goMgr->GetShadowMap();
 		//定数バッファの内容を更新。
 		SVSConstantBuffer vsCb;
 		vsCb.mWorld = m_worldMatrix;
 		vsCb.mProj = projMatrix;
 		vsCb.mView = viewMatrix;
 		// ライトカメラのビュー、プロジェクション行列を送る。
+		vsCb.mLightProj = shadowMap->GetLightProjMatrix();
+		vsCb.mLightView = shadowMap->GetLightViewMatrix();
 
+		//シャドウマップを使用するかどうか
+		if (m_isShadowReciever == true) {
+			vsCb.isShadowReciever = 1;
+		}
+		else {
+			vsCb.isShadowReciever = 0;
+		}
 		//法線マップを使用するかどうかのフラグを送る。
 		if (m_normalMapSRV != nullptr) {
 			vsCb.isHasNormalMap = true;
@@ -214,13 +224,17 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 		d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
 		//定数バッファをシェーダースロットに設定。
 		d3dDeviceContext->PSSetConstantBuffers(1, 1, &m_lightCb);
+		d3dDeviceContext->PSSetConstantBuffers(2, 1, &m_shadowMapcb);
 
 		//サンプラステートを設定。
 		d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 		//ボーン行列をGPUに転送。
 		m_skeleton.SendBoneMatrixArrayToGPU();
 		//アルベドテクスチャを設定する。
+		ID3D11ShaderResourceView* m_shadowMapSRV = g_goMgr->GetShadowMap()->GetShadowMapSRV();
 		d3dDeviceContext->PSSetShaderResources(0, 1, &m_albedoTextureSRV);
+		d3dDeviceContext->PSSetShaderResources(2, 1, &m_shadowMapSRV);
+
 		//エフェクトにクエリを行う。
 		m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
 			auto modelMaterial = reinterpret_cast<SkinModelEffect*>(material);

@@ -22,11 +22,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera2D.SetViewVolumeHeight(FRAME_BUFFER_H);
 	g_camera2D.SetViewVolumeWidth(FRAME_BUFFER_W);
 
-	g_goMgr.NewGameObject<Game>();
+	g_goMgr->NewGameObject<Game>();
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
-		g_goMgr.Update();
+		g_goMgr->Update();
 	}
 };

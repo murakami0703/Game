@@ -11,6 +11,7 @@ public:
 	/// <param name="player">プレイヤーの検索</param>
 	void Update();
 	void Render();
+	void PostRender();
 	CVector3 cameraPos;			//視点。
 	CVector3 cameraTarget;		//注視点。
 

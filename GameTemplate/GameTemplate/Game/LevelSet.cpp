@@ -29,7 +29,7 @@ void LevelSet::LevelSetting()
 	m_level.Init(L"Assets/level/stage_00.tkl", [&](LevelObjectData& objData) {
 		//ステージ
 		if (objData.EqualObjectName(L"Floor")) {
-			Map* m_map = g_goMgr.NewGameObject<Map>();
+			Map* m_map = g_goMgr->NewGameObject<Map>();
 			m_map->SetPosition(objData.position);
 			m_map->SetRotation(objData.rotation);
 			m_map->SetScale(objData.scale);
@@ -38,7 +38,7 @@ void LevelSet::LevelSetting()
 
 		//エネミー
 		if (objData.EqualObjectName(L"Floor")) {
-			Enemy* m_enemy = g_goMgr.NewGameObject<Enemy>();
+			Enemy* m_enemy = g_goMgr->NewGameObject<Enemy>();
 			m_enemy->SetPosition(objData.position);
 			m_enemy->SetRotation(objData.rotation);
 			m_enemy->SetScale(objData.scale);
@@ -57,3 +57,4 @@ void LevelSet::Render()
 {
 	m_level.Draw();
 }
+void LevelSet::PostRender(){}
