@@ -9,8 +9,8 @@ GameUI* GameUI::m_instance = nullptr;
 GameUI::GameUI()
 {
 	m_instance = this;
-	//m_font = g_goMgr->NewGameObject<FontRender>();
-	//m_font->SetText(L"‚±‚ñ‚É‚¿‚Í");
+	m_font = g_goMgr->NewGameObject<FontRender>();
+	m_font->SetText(L"‚±‚ñ‚É‚¿‚Í");
 	//ƒAƒCƒeƒ€˜g
 	CaseSet();
 }

@@ -46,9 +46,8 @@ private:
 
 private:
 
-	//FontRender* m_font;
 	static GameUI* m_instance;
-
+	FontRender* m_font;
 	//アイテム関連
 	Sprite m_itemCase1;		//枠1
 	Sprite m_itemCase2;		//枠2

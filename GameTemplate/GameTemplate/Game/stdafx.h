@@ -52,13 +52,14 @@
 #include "sprite/SpriteStandby.h"
 #include "sprite/Sprite.h"
 #include "Fade.h"
-
+#include "Font.h"
 #include "ShadowMap.h"
 #include "RenderTarget.h"
 
 #include "gameObject/GameObjectManager.h"
-
+//‚±‚±‚©‚ç‰º‚ÉrenderƒNƒ‰ƒX‚©‚­
 #include "graphics/SkinModelRender.h"
+#include "FontRender.h"
 
 
 

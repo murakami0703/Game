@@ -254,6 +254,7 @@
     <ClCompile Include="Font.cpp">
       <Filter>graphics\font</Filter>
     </ClCompile>
+    <ClCompile Include="FontRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -425,6 +426,7 @@
     <ClInclude Include="Font.h">
       <Filter>graphics\font</Filter>
     </ClInclude>
+    <ClInclude Include="FontRender.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
