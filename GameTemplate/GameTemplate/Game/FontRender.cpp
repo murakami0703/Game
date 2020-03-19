@@ -15,6 +15,7 @@ void FontRender::Update(){}
 void FontRender::Render(){}
 void FontRender::PostRender()
 {
+	m_font.Begin();
 	const wchar_t* text = nullptr;
 
 	if (m_text.c_str() != nullptr) {
@@ -29,4 +30,5 @@ void FontRender::PostRender()
 		m_scale,
 		m_pivot
 	);
+	m_font.End();
 }

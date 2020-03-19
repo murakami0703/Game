@@ -14,6 +14,11 @@ public:
 	void SetFont(DirectX::SpriteFont* font) {
 		m_spriteFont = font;
 	}
+	//描画開始。
+	void Begin();
+	//描画終了。。
+	void End();
+
 	/// <summary>
 	/// 描画
 	/// </summary>
@@ -35,6 +40,7 @@ public:
 private:
 	DirectX::SpriteBatch*	m_spriteBatch = nullptr;	//スプライトバッチ。
 	DirectX::SpriteFont*	m_spriteFont = nullptr;		//スプライトフォント。
+	CMatrix m_scaleMat;
 
 };
 

@@ -10,6 +10,22 @@ Font::Font()
 Font::~Font()
 {
 }
+void Font::Begin()
+{
+	m_spriteBatch->Begin(
+		DirectX::SpriteSortMode_Deferred,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		m_scaleMat
+	);
+}
+void Font::End()
+{
+	m_spriteBatch->End();
+}
 
 void Font::Draw(wchar_t const* text,const CVector2& position,const CVector4& color,float rotation,float scale,CVector2 pivot)
 {

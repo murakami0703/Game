@@ -231,15 +231,33 @@
     <MeshContentTask Include="Assets\modelData\Anima.FBX" />
     <MeshContentTask Include="Assets\modelData\Floor.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
-    <MeshContentTask Include="Assets\modelData\stage1_1.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_1_2.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_1_3.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_1_4.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_1_5.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_boss.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_bridge.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_longbridge.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage1_start.FBX" />
+    <MeshContentTask Include="Assets\modelData\stage1_1.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_2.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_3.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_4.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_1_5.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_boss.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_bridge.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_longbridge.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\stage1_start.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\mikyan.jpg" />
