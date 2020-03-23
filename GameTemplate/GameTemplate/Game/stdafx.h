@@ -32,6 +32,7 @@
 #include "DirectXTK/Inc/Effects.h"	
 #include "DirectXTK/Inc/CommonStates.h"
 #include "DirectXTK/Inc/SpriteFont.h"
+//#include "DirectXTK/Inc/SpriteBatch.h"
 #include "DirectXTK/Inc/DDSTextureLoader.h"
 
 #include "physics/Physics.h"
@@ -52,7 +53,6 @@
 #include "sprite/SpriteStandby.h"
 #include "sprite/Sprite.h"
 #include "Fade.h"
-#include "Font.h"
 #include "ShadowMap.h"
 #include "RenderTarget.h"
 

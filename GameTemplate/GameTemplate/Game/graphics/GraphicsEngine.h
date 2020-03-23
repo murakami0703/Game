@@ -58,6 +58,21 @@ public:
 	{
 		return m_backBuffer;
 	}
+	/// <summary>
+	/// SpriteBatchの取得
+	/// </summary>
+	DirectX::SpriteBatch* GetSpriteBatch() const
+	{
+		return m_spriteBatch.get();
+	}
+	/// <summary>
+	/// SpriteFontの取得。
+	/// </summary>
+	DirectX::SpriteFont* GetSpriteFont() const
+	{
+		return m_spriteFont.get();
+	}
+
 	/*!
 	 *@brief	描画開始。
 	 */
@@ -84,6 +99,9 @@ private:
 	ID3D11RasterizerState*	m_rasterizerState = NULL;	//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;		//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;	//デプスステンシルビュー。
+
+	std::unique_ptr<DirectX::SpriteBatch>	m_spriteBatch;				//!<スプライトバッチ。
+	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;				//!<スプライトフォント。
 
 };
 
