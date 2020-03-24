@@ -1,5 +1,4 @@
 #pragma once
-//class HPSetPoint;
 
 class GameUI : public IGameObject
 {
@@ -47,9 +46,10 @@ private:
 private:
 
 	static GameUI* m_instance;
+
 	FontRender* m_font;
 	//アイテム関連
-	Sprite m_itemCase1;		//枠1
+	SpriteRender* m_itemCase1;		//枠1
 	Sprite m_itemCase2;		//枠2
 	Sprite m_itemCase3;		//枠3
 	Sprite m_itemCase4;		//枠4
@@ -62,7 +62,6 @@ private:
 	CVector3					m_itemC1Scale = { 0.8f,0.8f,0.8f };				//枠1拡大率
 	CVector3					m_itemC24Scale = { 0.7f,0.7f,0.7f };				//枠4拡大率
 
-	//HPSetPoint* m_hpPoint = nullptr;		//ポイント先
 
 	float HP = 0.0f;		//現在のHPをもらう。
 	float m_hpCount = 0.0f;		//表示HPカウント。

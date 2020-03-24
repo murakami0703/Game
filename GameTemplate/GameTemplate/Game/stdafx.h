@@ -32,7 +32,6 @@
 #include "DirectXTK/Inc/Effects.h"	
 #include "DirectXTK/Inc/CommonStates.h"
 #include "DirectXTK/Inc/SpriteFont.h"
-//#include "DirectXTK/Inc/SpriteBatch.h"
 #include "DirectXTK/Inc/DDSTextureLoader.h"
 
 #include "physics/Physics.h"
@@ -59,6 +58,7 @@
 #include "gameObject/GameObjectManager.h"
 //‚±‚±‚©‚ç‰º‚ÉrenderƒNƒ‰ƒX‚©‚­
 #include "graphics/SkinModelRender.h"
+#include "sprite/SpriteRender.h"
 #include "FontRender.h"
 
 

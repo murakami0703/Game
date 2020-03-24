@@ -1,16 +1,21 @@
 #include "stdafx.h"
 #include "GameUI.h"
 #include "GameData.h"
-#include "PlayerHP.h"
-#include "HPManeger.h"
 
 GameUI* GameUI::m_instance = nullptr;
 
 GameUI::GameUI()
 {
 	m_instance = this;
+
+	//1
+	m_itemCase1 = g_goMgr->NewGameObject<SpriteRender>();
+	m_itemCase1->Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
+	//m_itemCase1->SetPosition(m_itemC1Pos);
+	//m_itemCase1->SetScale(m_itemC1Scale);
+
 	m_font = g_goMgr->NewGameObject<FontRender>();
-	m_font->SetText(L"こんにちは");
+	m_font->SetText(L"あいう");
 	//アイテム枠
 	CaseSet();
 }
@@ -23,15 +28,13 @@ GameUI::~GameUI()
 void GameUI::CaseSet()
 {
 	//アイテム枠
-	//1
-	m_itemCase1.Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
 	//2
-	m_itemCase2.Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
+	/*m_itemCase2.Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
 	//3
 	m_itemCase3.Init(L"Assets/sprite/case3.dds", 204.0f, 204.0f);
 	//4
 	m_itemCase4.Init(L"Assets/sprite/case4.dds", 148.0f, 148.0f);
-
+	*/
 
 }
 
@@ -124,22 +127,9 @@ void GameUI::HPAdd()
 
 void GameUI::Update()
 {
-	//更新
-	//アイテム枠
-	m_itemCase1.Update(m_itemC1Pos, CQuaternion::Identity(), m_itemC1Scale);
-	m_itemCase2.Update(m_itemC2Pos, CQuaternion::Identity(), m_itemC24Scale);
-	m_itemCase3.Update(m_itemC3Pos, CQuaternion::Identity(), m_itemC24Scale);
-	m_itemCase4.Update(m_itemC4Pos, CQuaternion::Identity(), m_itemC24Scale);
-
 }
 void GameUI::Render(){}
 void GameUI::PostRender()
 {
-	//描画処理
-	m_itemCase1.Draw();
-	m_itemCase2.Draw();
-	m_itemCase3.Draw();
-	m_itemCase4.Draw();
 
-	m_font->PostRender();
 }

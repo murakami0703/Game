@@ -4,6 +4,10 @@ class SpriteRender : public IGameObject
 	/// <summary>
 	/// スプライトレンダラー
 	/// </summary>
+	
+	void Update();
+	void Render();
+	void PostRender();
 public:
 	/// <summary>
 	/// 初期化。
@@ -68,8 +72,6 @@ public:
 	{
 		m_sprite.SetMulColor(mulColor);
 	}
-	void Update();
-
 private:
 	Sprite	m_sprite;				//スプライト。
 	CVector3 m_position;			//座標。
