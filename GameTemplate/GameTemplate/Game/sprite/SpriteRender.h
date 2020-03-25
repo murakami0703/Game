@@ -16,6 +16,13 @@ public:
 	/// <param name="w">幅</param>
 	/// <param name="h">高さ</param>
 	void Init(const wchar_t* texFilePath, float w, float h);
+	/// <summary>
+	/// テクスチャのSRVを指定して初期化。
+	/// </summary>
+	/// <param name="srv"></param>
+	/// <param name="w"></param>
+	/// <param name="h"></param>
+	void Init(ID3D11ShaderResourceView* srv, float w, float h);
 
 	/// <summary>
 	/// 座標を設定。
@@ -72,10 +79,35 @@ public:
 	{
 		m_sprite.SetMulColor(mulColor);
 	}
+	/// <summary>
+	/// 乗算カラーを取得
+	/// </summary>
+	/// <returns>乗算カラー</returns>
+	CVector4 GetMulColor()
+	{
+		return m_sprite.GetMulColor();
+	}
+
+	/// <summary>
+	/// a値の設定
+	/// </summary>
+	void SetAlpha(const float& alpha)
+	{
+		m_sprite.SetAlpha(alpha);
+	}
+	/// <summary>
+	/// a値を取得
+	/// </summary>
+	float GetAlpha()
+	{
+		return m_sprite.GetAlpha();
+	}
+
+
 private:
 	Sprite	m_sprite;				//スプライト。
-	CVector3 m_position;			//座標。
-	CQuaternion m_rotation;			//回転。
+	CVector3 m_position = CVector3().Zero();			//座標
+	CQuaternion m_rotation = CQuaternion().Identity();	//回転
 	CVector3 m_scale = CVector3().One();			//拡大率。
 	CVector2 m_pivot = { 0.5f,0.5f };	// ピボット。
 

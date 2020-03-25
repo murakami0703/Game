@@ -33,38 +33,28 @@ public:
 	{
 		return m_instance;
 	}
-	float GameUI::GetCount()
-	{
-		return m_hpCount;		//表示HPカウント。
-
-	}
-private:
-	// アイテム選択枠の設定
-	void CaseSet();
-
-
 private:
 
 	static GameUI* m_instance;
+	
+	std::vector<SpriteRender*> m_spriteRender;
+	SpriteRender* r;
 
 	FontRender* m_font;
 	//アイテム関連
-	SpriteRender* m_itemCase1;		//枠1
-	Sprite m_itemCase2;		//枠2
-	Sprite m_itemCase3;		//枠3
-	Sprite m_itemCase4;		//枠4
-
-	CVector3 m_itemC1Pos = { 460.0f,-240.0f,0.0f };			//枠1の座標
+	CVector3 m_itemC1Pos = { 460.0f,-240.0f,0.0f };		//枠1の座標
 	CVector3 m_itemC2Pos = { 560.0f,-120.0f,0.0f };		//枠2の座標
 	CVector3 m_itemC3Pos = { 475.0f,-50.0f,0.0f };		//枠3の座標
-	CVector3 m_itemC4Pos = { 545.0f,-3.0f,0.0f };	//枠4の座標
+	CVector3 m_itemC4Pos = { 545.0f,-3.0f,0.0f };		//枠4の座標
 
-	CVector3					m_itemC1Scale = { 0.8f,0.8f,0.8f };				//枠1拡大率
-	CVector3					m_itemC24Scale = { 0.7f,0.7f,0.7f };				//枠4拡大率
+	CVector3 m_itemC1Scale = { 0.8f,0.8f,0.8f };		//枠1拡大率
+	CVector3 m_itemC24Scale = { 0.7f,0.7f,0.7f };		//枠4拡大率
 
-
-	float HP = 0.0f;		//現在のHPをもらう。
-	float m_hpCount = 0.0f;		//表示HPカウント。
-
+	//HP関連
+	CVector3 m_hpPos = { -600.0f,330.0f,0.0f };		//HPの固定座標
+	CVector3 m_hpScale = { 0.15f,0.15f,0.15f };		//HPの拡大率
+	const float m_hpvAddXPos = 50.0f;					//HP2以上のX座標の変化値
+	float m_setHP = 0.0f;		//最初のHP量
+	float m_hp = 0.0f;			//現在のHPを格納
 };
 

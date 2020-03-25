@@ -275,14 +275,14 @@
     <ImageContentTask Include="Assets\sprite\test.png" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\HP.png" />
-    <ImageContentTask Include="Assets\sprite\HPWaku.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Item\case1.png" />
     <ImageContentTask Include="Assets\sprite\Item\case2.png" />
     <ImageContentTask Include="Assets\sprite\Item\case3.png" />
     <ImageContentTask Include="Assets\sprite\Item\case4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Hp.png" />
+    <ImageContentTask Include="Assets\sprite\HpFrame.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

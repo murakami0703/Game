@@ -8,33 +8,65 @@ GameUI::GameUI()
 {
 	m_instance = this;
 
-	//1
-	m_itemCase1 = g_goMgr->NewGameObject<SpriteRender>();
-	m_itemCase1->Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
-	//m_itemCase1->SetPosition(m_itemC1Pos);
-	//m_itemCase1->SetScale(m_itemC1Scale);
-
-	m_font = g_goMgr->NewGameObject<FontRender>();
-	m_font->SetText(L"あいう");
 	//アイテム枠
-	CaseSet();
+	{
+		//1番→ItemCase1
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
+		r->SetPosition(m_itemC1Pos);
+		r->SetScale(m_itemC1Scale);
+		m_spriteRender.push_back(r);
+		//2番→ItemCase2
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
+		r->SetPosition(m_itemC2Pos);
+		r->SetScale(m_itemC24Scale);
+		m_spriteRender.push_back(r);
+		//3番→ItemCase3
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/case3.dds", 204.0f, 204.0f);
+		r->SetPosition(m_itemC3Pos);
+		r->SetScale(m_itemC24Scale);
+		m_spriteRender.push_back(r);
+		//4番→ItemCase4
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/case4.dds", 148.0f, 148.0f);
+		r->SetPosition(m_itemC4Pos);
+		r->SetScale(m_itemC24Scale);
+		m_spriteRender.push_back(r);
+	}
+	//HP
+	{
+		//HPを配置する。
+		m_setHP = GameData::GetInstance()->GetHitPoint();
+		for (int i = 0; i < m_setHP; i++) {
+			if (i >= 1) {
+				//6～16番→HP2～12
+				r = g_goMgr->NewGameObject<SpriteRender>();
+				r->Init(L"Assets/sprite/Hp.dds", 350.0f, 350.0f);
+				m_hpPos.x += m_hpvAddXPos;
+				r->SetPosition(m_hpPos);
+				r->SetScale(m_hpScale);
+				m_spriteRender.push_back(r);
+			}
+			else {
+				//5番→HP1
+				r = g_goMgr->NewGameObject<SpriteRender>();
+				r->Init(L"Assets/sprite/Hp.dds", 350.0f, 350.0f);
+				r->SetPosition(m_hpPos);
+				r->SetScale(m_hpScale);
+				m_spriteRender.push_back(r);
+			}
+		}
+	}
+	//ふぉんと
+	m_font = g_goMgr->NewGameObject<FontRender>();
+	m_font->SetText(L"abc");
 }
 
 
 GameUI::~GameUI()
 {
-
-}
-void GameUI::CaseSet()
-{
-	//アイテム枠
-	//2
-	/*m_itemCase2.Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
-	//3
-	m_itemCase3.Init(L"Assets/sprite/case3.dds", 204.0f, 204.0f);
-	//4
-	m_itemCase4.Init(L"Assets/sprite/case4.dds", 148.0f, 148.0f);
-	*/
 
 }
 
@@ -112,17 +144,10 @@ void GameUI::ItemSelect()
 
 void GameUI::HPAdd()
 {
-//	//HPの増減で表示を変えます
-////最初はHP3から。最大12まで。
-//	HP = GameData::GetInstance()->GetHitPoint();
-//	if (m_hpCount < HP) {
-//			PlayerHP* pHP = new PlayerHP;
-//			m_hpPoint = HPManeger::GetInstance()->HpSetPoint(m_hpCount);
-//			pHP->SetHPPosition({ m_hpPoint->position });
-//			HPManeger::GetInstance()->RegistAnima(pHP);
-//			m_hpCount++;
-//	}
-
+	//HPの増減させるよ
+	m_hp = GameData::GetInstance()->GetHitPoint();
+	//消えまーすよ
+	m_spriteRender[4 + m_hp]->SetAlpha(0.0f);
 }
 
 void GameUI::Update()
@@ -131,5 +156,4 @@ void GameUI::Update()
 void GameUI::Render(){}
 void GameUI::PostRender()
 {
-
 }
