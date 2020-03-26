@@ -42,7 +42,6 @@ void Player::Idel()
 	}
 
 }
-
 void Player::Move()
 {
 	m_move.x = 0.0f;
@@ -112,6 +111,7 @@ void Player::Dead()
 {
 	//死亡
 	m_animation.Play(Animation_Dead, 0.5f);
+	m_model->IsRequestDelete();
 }
 void Player::Update()
 {
@@ -128,18 +128,18 @@ void Player::Update()
 		Idel();
 		break;
 	case Player::Player_Walk:
+		//移動
 		Move();
 		break;
 	case Player::Player_Attack:
+		//攻撃
 		Attack();
 		break;
 	case Player::Player_Dead:
+		//死亡
 		Dead();
 		break;
 	}
-
-	//死亡判定。
-
 	m_animation.Update(0.05f);//アニメーション再生
 	//ワールド行列の更新。
 	m_model->SetPosition(m_position);

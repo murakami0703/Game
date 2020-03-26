@@ -11,7 +11,9 @@ FontRender::~FontRender()
 {
 }
 
-void FontRender::Update(){}
+void FontRender::Update()
+{
+}
 void FontRender::Render(){}
 void FontRender::PostRender()
 {
@@ -25,7 +27,7 @@ void FontRender::PostRender()
 	
 	m_font.Draw(
 		text,
-		m_pivot,
+		m_position,
 		m_color,
 		m_rotation,
 		m_scale,

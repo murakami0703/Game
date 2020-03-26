@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.h"
-//class BattlePoint;
 
 
 class Enemy : public IGameObject

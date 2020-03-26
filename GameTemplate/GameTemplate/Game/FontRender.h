@@ -80,7 +80,7 @@ public:
 	/// ピボットを設定。
 	/// </summary>
 	/// <param name="pibot">ピボット</param>
-	void SetPibot(const CVector2& pivot)
+	void SetPivot(const CVector2& pivot)
 	{
 		m_pivot.x = pivot.x;
 		m_pivot.y = pivot.y;
@@ -125,7 +125,7 @@ private:
 	CVector2 m_position = CVector2::Zero();	//座標。
 	float m_rotation = 0.0f;		//回転。
 	float m_scale = 1.0f;			//拡大率。
-	CVector2 m_pivot;				//ピボット。
+	CVector2 m_pivot = { 0.5f,0.5f };			//ピボット。
 	CVector4 m_color = CVector4::White();	//カラー。
 
 	//だんだん表示システム

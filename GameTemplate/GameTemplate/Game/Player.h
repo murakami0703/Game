@@ -35,13 +35,6 @@ public:
 		return m_position;
 	}
 	/// <summary>
-	/// プレイヤーのモデルを取得。
-	/// </summary>
-	/// <returns>プレイヤーのスキンモデル</returns>
-	/*SkinModel* GetPlayerSkinModel() {
-		return &m_model;
-	}*/
-	/// <summary>
 	/// 攻撃判定
 	/// </summary>
 	/// <returns>trueなら攻撃中</returns>
