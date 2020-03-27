@@ -34,6 +34,30 @@ GameUI::GameUI()
 		r->SetPosition(m_itemC4Pos);
 		r->SetScale(m_itemC24Scale);
 		m_spriteRender.push_back(r);
+		//5番→Itemwaku
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/waku.dds", 363.0f, 362.0f);
+		r->SetPosition(m_itemSCPos);
+		r->SetScale(m_itemZSCScale);
+		m_spriteRender.push_back(r);
+		//6番→Itemhasi
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/hasi.dds", 70.0f, 63.0f);
+		r->SetPosition(m_itemHPos);
+		r->SetScale(m_itemHScale);
+		m_spriteRender.push_back(r);
+		//7番→ItemL
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/L.dds", 100.0f, 148.0f);
+		r->SetPosition(m_itemLPos);
+		r->SetScale(m_itemLScale);
+		m_spriteRender.push_back(r);
+		//8番→ItemZL
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/ZL.dds", 102.0f, 79.0f);
+		r->SetPosition(m_itemZLPos);
+		r->SetScale(m_itemZSCScale);
+		m_spriteRender.push_back(r);
 	}
 	//HP
 	{
@@ -41,7 +65,7 @@ GameUI::GameUI()
 		m_setHP = GameData::GetInstance()->GetHitPoint();
 		for (int i = 0; i < m_setHP; i++) {
 			if (i >= 1) {
-				//6～16番→HP2～12
+				//10～20番→HP2～12
 				r = g_goMgr->NewGameObject<SpriteRender>();
 				r->Init(L"Assets/sprite/Hp.dds", 350.0f, 350.0f);
 				m_hpPos.x += m_hpvAddXPos;
@@ -50,7 +74,7 @@ GameUI::GameUI()
 				m_spriteRender.push_back(r);
 			}
 			else {
-				//5番→HP1
+				//9番→HP1
 				r = g_goMgr->NewGameObject<SpriteRender>();
 				r->Init(L"Assets/sprite/Hp.dds", 350.0f, 350.0f);
 				r->SetPosition(m_hpPos);
@@ -60,18 +84,32 @@ GameUI::GameUI()
 		}
 	}
 	//ふぉんと
-	m_font = g_goMgr->NewGameObject<FontRender>();
+	/*m_font = g_goMgr->NewGameObject<FontRender>();
 	const wchar_t* str = L"「あなただけのデッサン人形」 を作成しポーズを取らせよう！\nデザインドールは3D空間の人体モデルを自在に操るソフトウェアです。\n人物モデルのポーズ集 や 3Dモデルエクスポータ としても\nご利用いただけるソフトウェアです。";
 	m_font->SetText(str);
 	m_font->SetPosition({ -500.0f,0.0f });
-
-	m_font->SetPivot({ 0.2f,0.2f });
+	
+	m_font->SetPivot({ 0.2f,0.2f });*/
 }
 
 
 GameUI::~GameUI()
 {
 
+}
+void GameUI::ScalingSelectCase() {
+	//選択枠の拡大縮小
+	if (m_scalingCount > m_smallCountValue) {
+		m_scalingCount = 0;
+	}
+	else if (m_scalingCount <= m_bigCountValue) {
+		m_itemZSCScale += m_scalingValue;
+	}
+	else{
+		m_itemZSCScale -= m_scalingValue;
+	}
+	m_scalingCount++;
+	m_spriteRender[4]->SetScale(m_itemZSCScale);
 }
 
 void GameUI::ItemSelect()
@@ -151,11 +189,11 @@ void GameUI::HPAdd()
 	//HPの増減させるよ
 	m_hp = GameData::GetInstance()->GetHitPoint();
 	//消えまーすよ
-	m_spriteRender[4 + m_hp]->SetAlpha(0.0f);
 }
 
 void GameUI::Update()
 {
+		ScalingSelectCase();
 }
 void GameUI::Render(){}
 void GameUI::PostRender()

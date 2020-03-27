@@ -33,11 +33,11 @@ void Animation::Init(SkinModel& skinModel, AnimationClip animClipList[], int num
 	int numBone = m_skeleton->GetNumBones();
 	for (int boneNo = 0; boneNo < numBone; boneNo++) {
 		auto bone = m_skeleton->GetBone(boneNo);
-		if (wcscmp(bone->GetName(), L"footstep") == 0) {
+		/*if (wcscmp(bone->GetName(), L"footstep") == 0) {
 			//footstepƒ{[ƒ“‚ªŒ©‚Â‚©‚Á‚½B
 			m_footStepBoneNo = boneNo;
 			break;
-		}
+		}*/
 	}
 	for (int i = 0; i < numAnimClip; i++) {
 		m_animationClips.push_back(&animClipList[i]);

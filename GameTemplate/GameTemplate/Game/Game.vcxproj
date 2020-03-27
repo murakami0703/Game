@@ -230,6 +230,7 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Anima.FBX" />
     <MeshContentTask Include="Assets\modelData\Floor.FBX" />
+    <MeshContentTask Include="Assets\modelData\fo.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
     <MeshContentTask Include="Assets\modelData\stage1_1.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -282,7 +283,12 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Hp.png" />
-    <ImageContentTask Include="Assets\sprite\HpFrame.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Item\hasi.png" />
+    <ImageContentTask Include="Assets\sprite\Item\L.png" />
+    <ImageContentTask Include="Assets\sprite\Item\waku.png" />
+    <ImageContentTask Include="Assets\sprite\Item\ZL.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

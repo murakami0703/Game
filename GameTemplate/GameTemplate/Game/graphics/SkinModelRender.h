@@ -99,12 +99,12 @@ public:
 	void PostRender();
 
  private:
-	CVector3 m_position;			//座標。
-	CQuaternion m_rotation;			//回転。
+	SkinModel					m_skinModel;						//スキンモデル。
+	CVector3 m_position = CVector3().Zero();			//座標
+	CQuaternion m_rotation = CQuaternion().Identity();	//回転
 	CVector3 m_scale = CVector3().One();			//拡大率。
 	AnimationClip*				m_animationClips = nullptr;			//アニメーションクリップ。
 	int							m_numAnimationClips = 0;			//アニメーションクリップの数。
-	SkinModel					m_skinModel;						//スキンモデル。
 	Animation					m_animation;						//アニメーション。
 
 	bool m_shadowMapFlag = false;		//シャドウマップ描画フラグ

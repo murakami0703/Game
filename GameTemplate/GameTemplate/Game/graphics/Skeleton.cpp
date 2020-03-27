@@ -206,17 +206,17 @@ void Skeleton::Update(const CMatrix& mWorld)
 		//親の行列とローカル行列を乗算して、ワールド行列を計算する。
 		mBoneWorld.Mul(localMatrix, mWorld);
 		bone->SetWorldMatrix(mBoneWorld);
-		/*if (bone->GetParentId() != -1) {
+		if (bone->GetParentId() != -1) {
 			continue;
-		}*/
+		}
 		//ルートが見つかったので、ボーンのワールド行列を計算していく。
 		UpdateBoneWorldMatrix(*bone, mWorld);
 	}
-	////footstepの1f分の移動量を全てのボーンから引いている。xとzのみ適応
+	/*////footstepの1f分の移動量を全てのボーンから引いている。xとzのみ適応
 	m_FrameStepBone.m[3][0] = m_stepBoneMatrix.m[3][0] - m_laststepBoneMatrix.m[3][0];
 	m_FrameStepBone.m[3][2] = m_stepBoneMatrix.m[3][2] - m_laststepBoneMatrix.m[3][2];
 	m_laststepBoneMatrix = m_stepBoneMatrix;
-
+	*/
 	//ボーン行列を計算
 	for (int boneNo = 0; boneNo < m_bones.size(); boneNo++) {
 		Bone* bone = m_bones[boneNo];

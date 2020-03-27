@@ -6,9 +6,9 @@ class MapChip;
 * @brief	オブジェクト名。
 */
 struct LevelObjectData {
-	CVector3 position;		//<座標。
-	CQuaternion rotation;	//!<回転。
-	CVector3 scale;		//<座標。
+	CVector3 position = CVector3().Zero();			//座標
+	CQuaternion rotation = CQuaternion().Identity();	//回転
+	CVector3 scale = CVector3().One();			//拡大率
 	const wchar_t* name;	//!<名前。
 
 			/*!

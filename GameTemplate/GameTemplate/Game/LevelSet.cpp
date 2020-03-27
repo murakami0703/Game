@@ -35,16 +35,6 @@ void LevelSet::LevelSetting()
 			m_map->SetScale(objData.scale);
 			return true;
 		}
-
-		//エネミー
-		if (objData.EqualObjectName(L"Floor")) {
-			Enemy* m_enemy = g_goMgr->NewGameObject<Enemy>();
-			m_enemy->SetPosition(objData.position);
-			m_enemy->SetRotation(objData.rotation);
-			m_enemy->SetScale(objData.scale);
-			return true;
-		}
-
 		return false;
 	});
 

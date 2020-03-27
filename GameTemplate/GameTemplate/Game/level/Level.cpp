@@ -35,7 +35,6 @@ void Level::Init(const wchar_t* levelDataFilePath, Level::HookWhenBuildObjectFun
 			objData.rotation.z = -t;
 			objData.name = bone->GetName();
 
-			//std::swap(objData.scale.y, objData.scale.z);
 
 			auto isHook = false;
 			if (hookFunc != nullptr) {
