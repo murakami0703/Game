@@ -15,24 +15,28 @@ GameUI::GameUI()
 		r->Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
 		r->SetPosition(m_itemC1Pos);
 		r->SetScale(m_itemC1Scale);
+		r->SetAlpha(0.9f);
 		m_spriteRender.push_back(r);
 		//2”Ô¨ItemCase2
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
 		r->SetPosition(m_itemC2Pos);
 		r->SetScale(m_itemC24Scale);
+		r->SetAlpha(0.6f);
 		m_spriteRender.push_back(r);
 		//3”Ô¨ItemCase3
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case3.dds", 204.0f, 204.0f);
 		r->SetPosition(m_itemC3Pos);
 		r->SetScale(m_itemC24Scale);
+		r->SetAlpha(0.4f);
 		m_spriteRender.push_back(r);
 		//4”Ô¨ItemCase4
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case4.dds", 148.0f, 148.0f);
 		r->SetPosition(m_itemC4Pos);
 		r->SetScale(m_itemC24Scale);
+		r->SetAlpha(0.2f);
 		m_spriteRender.push_back(r);
 		//5”Ô¨Itemwaku
 		r = g_goMgr->NewGameObject<SpriteRender>();

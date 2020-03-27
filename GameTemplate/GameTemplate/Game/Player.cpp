@@ -20,7 +20,7 @@ Player::Player()
 	
 	m_model = g_goMgr->NewGameObject<SkinModelRender>();
 	m_model->Init(L"Assets/modelData/Footman_Default.cmo");
-	//m_position= { 0.0f, 400.0f, 500.0f };
+	m_position= { -4500.0f, 400.0f, -2500.0f };
 	m_model->SetPosition(m_position);
 
 	m_scale = { 50.0f, 50.0f, 50.0f };
@@ -72,7 +72,7 @@ void Player::Move()
 		//ジャンプ
 		//m_move.y = m_jumpPos;
 	}
-
+	m_move.y -= 1.0f;
 	if (m_characon.IsOnGround()) {
 		//重力ストップ
 		m_move.y = 0.0f;

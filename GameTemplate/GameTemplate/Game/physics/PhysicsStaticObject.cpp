@@ -15,10 +15,13 @@ PhysicsStaticObject::~PhysicsStaticObject()
 	g_physics.RemoveRigidBody(m_rigidBody);
 }
 
-void PhysicsStaticObject::CreateMeshObject(SkinModel& skinModel, CVector3 pos, CQuaternion rot)
+void PhysicsStaticObject::CreateMeshObject(SkinModel& skinModel, CVector3 pos, CQuaternion rot, CVector3 scale)
 {
 	//メッシュコライダーを作成。
-	m_meshCollider.CreateFromSkinModel(skinModel, nullptr);
+	CMatrix mScale;
+	mScale.MakeScaling(scale);
+	m_meshCollider.CreateFromSkinModel(skinModel, &mScale);
+
 	//剛体を作成、
 	RigidBodyInfo rbInfo;
 	rbInfo.collider = &m_meshCollider; //剛体に形状(コライダー)を設定する。
