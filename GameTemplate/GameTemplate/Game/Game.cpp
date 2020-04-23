@@ -6,7 +6,7 @@
 #include "LevelSet.h"
 #include "GameUI.h"
 
-#include "Map.h"
+#include "enemy/Enemy.h"
 
 Camera2D g_camera2D;	//2DƒJƒƒ‰
 
@@ -18,6 +18,7 @@ Game::Game()
 	g_goMgr->NewGameObject<GameData>();
 	g_goMgr->NewGameObject<LevelSet>();
 	g_goMgr->NewGameObject<GameUI>();
+	g_goMgr->NewGameObject<Enemy>();
 
 }
 

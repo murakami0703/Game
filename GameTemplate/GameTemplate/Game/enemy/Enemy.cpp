@@ -10,7 +10,7 @@ Enemy::Enemy()
 {
 
 	//アニメーションクリップのロード。
-	m_animClips[eneidle].Load(L"Assets/animData/eneIdle.tka");
+	/*m_animClips[eneidle].Load(L"Assets/animData/eneIdle.tka");
 	m_animClips[enewalk].Load(L"Assets/animData/eneWalk.tka");
 	m_animClips[eneAttack_1].Load(L"Assets/animData/eneAT1.tka");
 	m_animClips[eneDead].Load(L"Assets/animData/eneDeath.tka");
@@ -18,15 +18,14 @@ Enemy::Enemy()
 	//ループフラグの設定。
 	m_animClips[eneidle].SetLoopFlag(true);
 	m_animClips[enewalk].SetLoopFlag(true);
-
+	*/
 	//cmoファイルの読み込み。
 	m_enemy = g_goMgr->NewGameObject<SkinModelRender>();
-	m_enemy->Init(L"Assets/modelData/Footman_Default.cmo");
+	m_enemy->Init(L"Assets/modelData/slime.cmo");
 	m_oldPos = m_position;
-	//m_scale = { 10,50.0f,50.0f };
-	m_enemy->SetScale(m_scale);
+	m_enemy->SetPosition({ -4500.0f, 400.0f, -2500.0f });
 	//まっぷ
-	{
+	/*{
 		//法線マップつけます
 		DirectX::CreateDDSTextureFromFileEx(
 			g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Normal.dds", 0,
@@ -51,18 +50,18 @@ Enemy::Enemy()
 		//m_enemy.SetSpecularMap(g_specularMapSRV);
 		//m_enemy.SetAmbientMap(g_ambientMapSRV);
 	}
-
-	m_animation.Init(m_enemy->GetSkinModel(), m_animClips, num);	//アニメーションの初期化
+	*/
+	//m_animation.Init(m_enemy->GetSkinModel(), m_animClips, num);	//アニメーションの初期化
 
 }
 
 Enemy::~Enemy()
 {
 	// 法線マップを解放。
-	if (g_normalMapSRV != nullptr) {
+	/*if (g_normalMapSRV != nullptr) {
 		g_normalMapSRV->Release();
 	}
-
+	*/
 }
 
 void Enemy::Follow()
@@ -152,11 +151,11 @@ void Enemy::Return()
 }
 void Enemy::Dead()
 {
-	m_animation.Play(eneDead);//死
+	/*m_animation.Play(eneDead);//死
 	if (m_animation.IsPlaying() == false) {
 		//死にました
 		EnemyManager::GetInstance()->DeleteEnemy(this);
-	}
+	}*/
 }
 
 void Enemy::Update()
@@ -171,7 +170,7 @@ void Enemy::Update()
 		}
 	}
 	*/
-	m_animation.Update(0.05f);//アニメーション再生
+	//m_animation.Update(0.05f);//アニメーション再生
 
 	/*switch (m_state) {
 	case eState_Haikai:

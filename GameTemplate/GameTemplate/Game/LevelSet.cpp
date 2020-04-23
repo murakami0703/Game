@@ -26,7 +26,7 @@ LevelSet::~LevelSet()
 void LevelSet::LevelSetting()
 {
 	//levelで置きますわよ。
-	m_level.Init(L"Assets/level/stage_00.tkl", [&](LevelObjectData& objData) {
+	m_level.Init(L"Assets/level/stage_02.tkl", [&](LevelObjectData& objData) {
 		//ステージ
 		if (objData.EqualObjectName(L"Floor")) {
 			Map* m_map = g_goMgr->NewGameObject<Map>();
@@ -35,6 +35,15 @@ void LevelSet::LevelSetting()
 			m_map->SetScale(objData.scale);
 			return true;
 		}
+		//スライム
+		/*if (objData.EqualObjectName(L"slime")) {
+			Enemy* m_enemy = g_goMgr->NewGameObject<Enemy>();
+			m_enemy->SetPosition(objData.position);
+			m_enemy->SetRotation(objData.rotation);
+			m_enemy->SetScale(objData.scale);
+			return true;
+		}*/
+
 		return false;
 	});
 
