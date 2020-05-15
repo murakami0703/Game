@@ -4,6 +4,7 @@
 #include "GameData.h"
 #include "Anima.h"
 #include "AnimaManeger.h"
+#include "Player.h"
 
 
 Enemy::Enemy()
@@ -23,44 +24,12 @@ Enemy::Enemy()
 	m_enemy = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemy->Init(L"Assets/modelData/ghosts.cmo");
 	m_oldPos = m_position;
-	//まっぷ
-	/*{
-		//法線マップつけます
-		DirectX::CreateDDSTextureFromFileEx(
-			g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Normal.dds", 0,
-			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-			false, nullptr, &g_normalMapSRV
-		);
-		//スぺキュラマップつけます
-		DirectX::CreateDDSTextureFromFileEx(
-			g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/Specular.dds", 0,
-			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-			false, nullptr, &g_specularMapSRV
-		);
-		//アンビエントマップつけます
-		DirectX::CreateDDSTextureFromFileEx(
-			g_graphicsEngine->GetD3DDevice(), L"Assets/sprite/AO.dds", 0,
-			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-			false, nullptr, &g_ambientMapSRV
-		);
-
-		//モデルに法線マップ、スぺキュラマップ、アンビエントマップを設定する。
-		//m_enemy.SetNormalMap(g_normalMapSRV);
-		//m_enemy.SetSpecularMap(g_specularMapSRV);
-		//m_enemy.SetAmbientMap(g_ambientMapSRV);
-	}
-	*/
 	//m_animation.Init(m_enemy->GetSkinModel(), m_animClips, num);	//アニメーションの初期化
 
 }
 
 Enemy::~Enemy()
 {
-	// 法線マップを解放。
-	/*if (g_normalMapSRV != nullptr) {
-		g_normalMapSRV->Release();
-	}
-	*/
 }
 
 void Enemy::Follow()
@@ -155,63 +124,46 @@ void Enemy::Dead()
 		//死にました
 		EnemyManager::GetInstance()->DeleteEnemy(this);
 	}*/
+	g_goMgr->DeleteGameObject(this);
+	g_goMgr->DeleteGameObject(m_enemy);
+
 }
 
 void Enemy::Update()
 {
 	
-	/*p_pos = player->GetPosition();
+	p_pos = Player::GetInstance()->GetPosition();
 	m_toPlayerVec = p_pos - m_position;
 
-	if (player->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 60.0f) {
+	if (Player::GetInstance()->GetAttackflag() == true) {
+		if (m_toPlayerVec.Length() < 200.0f) {
 			m_state = eState_Dead;
 		}
 	}
-	*/
+	
 	//m_animation.Update(0.05f);//アニメーション再生
 
-	/*switch (m_state) {
+	switch (m_state) {
 	case eState_Haikai:
 		//徘徊中
-		m_animation.Play(enewalk);//歩き
 		move();
-		if (m_toPlayerVec.Length() < m_tuisekiLength ) {
-			m_battlePoint = EnemyManager::GetInstance()->TryGetBattlePoint(m_position);
-			if(m_battlePoint!= nullptr){
-				m_state = eState_TuisekiPlayer;
-			}
-		}
 		break;
 	case eState_Attack:
-		Attack(player);
+		Attack();
 		break;
 	case eState_TuisekiPlayer:
 		//プレイヤーを追跡
-		m_animation.Play(enewalk);//歩き
-		Follow(player);
-		//近いので攻撃
-		if (m_battlePoint != nullptr) {
-				if (m_toPlayerVec.Length() < 80.0f) {
-					EneAttackflag = true;
-					m_state = eState_Attack;
-				}
-		}
-		//遠くなったので徘徊位置に戻る
-		if (m_toPlayerVec.Length() > m_ReturnLength) {
-			m_state = eState_Haikai;
-		}
+		Follow();
 		break;
 	case eState_Return:
 		//徘徊位置に戻る
-		m_animation.Play(enewalk);//歩き
 		Return();
 		break;
 	case eState_Dead:
 		//死
 		Dead();
 		break;
-	}*/
+	}
 
 	//ワールド行列の更新。
 	m_enemy->SetPosition(m_position);
