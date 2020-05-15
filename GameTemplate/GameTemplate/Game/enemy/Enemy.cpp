@@ -34,7 +34,7 @@ Enemy::~Enemy()
 
 void Enemy::Follow()
 {
-	/*//追尾ちゅ
+	//追尾ちゅ
 	CVector3 m_toBPVec = m_battlePoint->position - m_position;
 	if (m_toBPVec.Length() > 10.0f){
 		m_toBPVec.y = 0.0f;
@@ -45,17 +45,17 @@ void Enemy::Follow()
 		//BPいますよ
 		m_battlePosflag = true;
 	}
-	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
+	CVector3 enemyForward = { 0.0f, 0.0f, -1.0f };
 
 	//　向かせたい方向のベクトルを計算する。
-	CVector3 targetVector = player->GetPosition() - m_position;
+	CVector3 targetVector = Player::GetInstance()->GetPosition() - m_position;
 	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
 	targetVector.y = 0.0f;
 	targetVector.Normalize();
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
-	*/
+	
 }
 
 void Enemy::move()
@@ -77,10 +77,8 @@ void Enemy::move()
 
 void Enemy::Attack()
 {
-	/*m_animation.Play(eneAttack_1);//攻撃
 	//次の行動へ。。
-	if (m_animation.IsPlaying() == false) {
-		if ((player->GetPosition() - m_position).Length() < 80.0f) {
+		if ((Player::GetInstance()->GetPosition() - m_position).Length() < 80.0f) {
 			//近距離で攻撃したら
 			//HP減らす
 			GameData::GetInstance()->HPCalc(-0.5f);
@@ -92,12 +90,11 @@ void Enemy::Attack()
 		else {
 			m_state = eState_Haikai;
 		}
-	}*/
 }
 
 void Enemy::Return()
 {
-	/*//徘徊位置に戻る。
+	//徘徊位置に戻る。
 	CVector3 diff = m_position - m_oldPos;
 	diff.y = 0.0f;
 	diff.Normalize();
@@ -106,7 +103,7 @@ void Enemy::Return()
 		m_state = eState_Haikai;
 	}
 
-	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
+	CVector3 enemyForward = { 1.0f, 0.0f, 0.0f };
 	//　向かせたい方向のベクトルを計算する。
 	CVector3 targetVector = m_oldPos - m_position;
 	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
@@ -115,7 +112,7 @@ void Enemy::Return()
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
-	*/
+	
 }
 void Enemy::Dead()
 {
@@ -147,6 +144,12 @@ void Enemy::Update()
 	case eState_Haikai:
 		//徘徊中
 		move();
+		if (m_toPlayerVec.Length() < m_tuisekiLength) {
+			m_battlePoint = EnemyManager::GetInstance()->TryGetBattlePoint(m_position);
+			if (m_battlePoint != nullptr) {
+				m_state = eState_TuisekiPlayer;
+			}
+		}
 		break;
 	case eState_Attack:
 		Attack();
@@ -154,9 +157,21 @@ void Enemy::Update()
 	case eState_TuisekiPlayer:
 		//プレイヤーを追跡
 		Follow();
+		//近いので攻撃
+		if (m_battlePoint != nullptr) {
+			if (m_toPlayerVec.Length() < 200.0f) {
+				EneAttackflag = true;
+				m_state = eState_Attack;
+			}
+		}
+		//遠くなったので徘徊位置に戻る
+		if (m_toPlayerVec.Length() > m_ReturnLength) {
+			m_state = eState_Haikai;
+		}
 		break;
 	case eState_Return:
 		//徘徊位置に戻る
+		m_animation.Play(enewalk);//歩き
 		Return();
 		break;
 	case eState_Dead:

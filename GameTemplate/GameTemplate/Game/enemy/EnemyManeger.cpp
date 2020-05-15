@@ -47,9 +47,6 @@ BattlePoint* EnemyManager::TryGetBattlePoint(CVector3 position)
 }
 void EnemyManager::Update()
 {
-	for (auto& en : m_enemys) {
-		en->Update();
-	}
 	//バトルフィールドの座標を計算
 	{
 		CVector3 PlayerPos = Player::GetInstance()->GetPosition();
@@ -78,6 +75,11 @@ void EnemyManager::Update()
 		m_battlepoint[7].position.x = m_battlepoint[7].position.x - m_pointdistance;
 	}
 }
-void EnemyManager::Draw()
+void EnemyManager::Render()
 {
+}
+
+void EnemyManager::PostRender()
+{
+
 }

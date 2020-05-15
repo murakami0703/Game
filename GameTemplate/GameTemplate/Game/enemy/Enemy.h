@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
 
-
+class BattlePoint;
 class Enemy : public IGameObject
 {
 public:
@@ -90,11 +90,11 @@ private:
 	float m_moveSpeed = 0.6f;			//エネミの移動速度。
 	const float m_follSpeed = 1.9f;		//追尾中の移動速度。
 	const float m_tuisekiLength = 300.0f;		//追尾する距離。
-	const float m_ReturnLength = 400.0f;		//徘徊位置に戻る距離。
+	const float m_ReturnLength = 1000.0f;		//徘徊位置に戻る距離。
 	Animation	m_animation;					//アニメーション
 	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
 
-	//BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
+	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 	//攻撃判定
 	bool EneAttackflag = false;
 
