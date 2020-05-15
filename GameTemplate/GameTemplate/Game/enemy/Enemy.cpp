@@ -21,9 +21,8 @@ Enemy::Enemy()
 	*/
 	//cmoファイルの読み込み。
 	m_enemy = g_goMgr->NewGameObject<SkinModelRender>();
-	m_enemy->Init(L"Assets/modelData/slime.cmo");
+	m_enemy->Init(L"Assets/modelData/ghosts.cmo");
 	m_oldPos = m_position;
-	m_enemy->SetPosition({ -4500.0f, 400.0f, -2500.0f });
 	//まっぷ
 	/*{
 		//法線マップつけます
@@ -217,7 +216,7 @@ void Enemy::Update()
 	//ワールド行列の更新。
 	m_enemy->SetPosition(m_position);
 	m_enemy->SetRotation(m_rotation);
-
+	m_enemy->SetScale(m_scale);
 }
 void Enemy::Render()
 {

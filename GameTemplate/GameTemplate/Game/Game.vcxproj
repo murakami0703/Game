@@ -232,6 +232,7 @@
     <MeshContentTask Include="Assets\modelData\Floor.FBX" />
     <MeshContentTask Include="Assets\modelData\fo.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
+    <MeshContentTask Include="Assets\modelData\ghosts.fbx" />
     <MeshContentTask Include="Assets\modelData\slime.FBX" />
     <MeshContentTask Include="Assets\modelData\stage1_1.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

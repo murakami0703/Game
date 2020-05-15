@@ -18,7 +18,6 @@ Game::Game()
 	g_goMgr->NewGameObject<GameData>();
 	g_goMgr->NewGameObject<LevelSet>();
 	g_goMgr->NewGameObject<GameUI>();
-	g_goMgr->NewGameObject<Enemy>();
 
 }
 

@@ -36,13 +36,13 @@ void LevelSet::LevelSetting()
 			return true;
 		}
 		//ƒXƒ‰ƒCƒ€
-		/*if (objData.EqualObjectName(L"slime")) {
+		if (objData.EqualObjectName(L"ghosts")) {
 			Enemy* m_enemy = g_goMgr->NewGameObject<Enemy>();
 			m_enemy->SetPosition(objData.position);
 			m_enemy->SetRotation(objData.rotation);
 			m_enemy->SetScale(objData.scale);
 			return true;
-		}*/
+		}
 
 		return false;
 	});
