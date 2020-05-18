@@ -42,6 +42,9 @@ void SkinModelRender::Update()
 		//trueならシャドウキャスターに登録。
 		g_goMgr->GetShadowMap()->RegistShadowCaster(&m_skinModel);
 	}
+	if (m_animationClips != nullptr) {
+		m_animation.Update(0.1f);
+	}
 	m_skinModel.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	m_skinModel.Update();
 

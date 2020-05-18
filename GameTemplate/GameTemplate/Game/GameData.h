@@ -43,6 +43,23 @@ public:
 			HP = MAXHP;
 		}
 	}
+
+	//////////////“G///////////////////
+	//“G‚Ì”‚ğæ“¾
+	int GameData::GetEnemyCount() {
+		return EnemyCount;
+	}
+	//“G‚Ì”‚ğŒ¸­
+	void GameData::EnemyReduce() 
+	{
+			EnemyCount--;
+	}
+
+	//ˆø”‚ğƒGƒlƒ~[ƒJƒEƒ“ƒg‚É‘ã“ü
+	void GameData::SetEnemyCount(int x)
+	{
+		EnemyCount = x;
+	}
 	//////////////°///////////////////
 	void  GameData::AnimaCalc(float x) {
 		Anima += x;
@@ -55,6 +72,15 @@ public:
 		Anima;
 	}
 
+	void  GameData::SetResultFlag(bool flag)
+	{
+		resultflag = flag;
+	}
+
+	bool  GameData::ResultFlag()
+	{
+		return resultflag;
+	}
 
 	/////////////////////////////////// 
 	/// <summary>
@@ -76,10 +102,14 @@ private:
 
 	float ATK = 30.0f;	//Šî‘bUŒ‚—Í
 
+	//“G
+	int EnemyCount = 0;	//“G‚Ì”
+
 	//‚½‚Ü‚µ‚¢
 	float Anima = 0.0f;	//G‹›‚©‚ç–á‚¦‚é°
 	const float MAXAnima = 999.0f;	//Å‘åAnima
 	int BigAnima = 0;	//ƒ{ƒX‚©‚ç–á‚¦‚é°
 
+	bool resultflag = true;
 };
 

@@ -46,9 +46,6 @@
     <Filter Include="gameobject">
       <UniqueIdentifier>{3d104487-5cfb-4d01-9449-b4db18e2c782}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Enemy">
-      <UniqueIdentifier>{41395a16-8d77-4e4a-a304-0f88d490b82e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Player">
       <UniqueIdentifier>{dda85d33-ecb3-4a78-a976-244537885439}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,9 @@
     </Filter>
     <Filter Include="Assets\modelData\stage1">
       <UniqueIdentifier>{ef6dce0a-46da-4925-bca6-5a1b29101848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enemy">
+      <UniqueIdentifier>{4b3edcb1-cd8e-4412-9f42-0e119efb3832}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -193,9 +193,6 @@
     <ClCompile Include="graphics\SkinModelRender.cpp">
       <Filter>graphics</Filter>
     </ClCompile>
-    <ClCompile Include="enemy\Enemy.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="gameObject\GameObjectManager.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
@@ -218,9 +215,6 @@
       <Filter>item</Filter>
     </ClCompile>
     <ClCompile Include="ItemManeger.cpp">
-      <Filter>manager</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy\EnemyManeger.cpp">
       <Filter>manager</Filter>
     </ClCompile>
     <ClCompile Include="Gimmick.cpp">
@@ -257,6 +251,14 @@
     <ClCompile Include="FontRender.cpp">
       <Filter>graphics\font</Filter>
     </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SiegePoint.cpp" />
+    <ClCompile Include="Result.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -367,9 +369,6 @@
     <ClInclude Include="graphics\SkinModelRender.h">
       <Filter>graphics</Filter>
     </ClInclude>
-    <ClInclude Include="enemy\Enemy.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="gameObject\GameObjectManager.h">
       <Filter>gameobject</Filter>
     </ClInclude>
@@ -392,9 +391,6 @@
       <Filter>item</Filter>
     </ClInclude>
     <ClInclude Include="ItemManeger.h">
-      <Filter>manager</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy\EnemyManeger.h">
       <Filter>manager</Filter>
     </ClInclude>
     <ClInclude Include="Gimmick.h">
@@ -431,6 +427,14 @@
     <ClInclude Include="FontRender.h">
       <Filter>graphics\font</Filter>
     </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SiegePoint.h" />
+    <ClInclude Include="Result.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -463,18 +467,6 @@
     <MeshContentTask Include="Assets\modelData\stage1_start.FBX">
       <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\stage1_bridge.FBX">
-      <Filter>Assets\modelData\stage1</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\stage1_longbridge.FBX">
-      <Filter>Assets\modelData\stage1</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\fo.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\slime.FBX">
-      <Filter>Assets\modelData</Filter>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\ghosts.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
@@ -482,15 +474,6 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\mikyan.jpg">
       <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\modelData\Normal.png">
-      <Filter>Assets\modelData</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\modelData\Specular.png">
-      <Filter>Assets\modelData</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\modelData\AO.png">
-      <Filter>Assets\modelData</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\test.png">
       <Filter>Assets\sprite</Filter>

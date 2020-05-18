@@ -1,5 +1,4 @@
 #pragma once
-#include "Ghosts.h"
 
 struct BattlePoint
 {

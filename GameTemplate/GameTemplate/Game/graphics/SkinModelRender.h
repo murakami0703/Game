@@ -25,6 +25,15 @@ public:
 	{
 		m_animation.Play(animNo, interpolateTime);
 	}
+	/// <summary>
+	/// アニメーションの再生中？
+	/// </summary>
+	/// <returns>true	アニメーションを再生中。</returns>
+	/// <returns>false	アニメーションは再生していない。</returns>
+	bool IsPlayingAnimation() const
+	{
+		return m_animation.IsPlaying();
+	}
 
 	/// <summary>
 	/// アニメーションの初期化。
@@ -106,7 +115,6 @@ public:
 	AnimationClip*				m_animationClips = nullptr;			//アニメーションクリップ。
 	int							m_numAnimationClips = 0;			//アニメーションクリップの数。
 	Animation					m_animation;						//アニメーション。
-
 	bool m_shadowMapFlag = false;		//シャドウマップ描画フラグ
 	bool m_silhouetteflag = false;		//シルエット描画フラグ
 };

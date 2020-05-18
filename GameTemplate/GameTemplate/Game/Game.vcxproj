@@ -102,16 +102,16 @@
     <ClCompile Include="Anima.cpp" />
     <ClCompile Include="AnimaManeger.cpp" />
     <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="enemy\EnemyManeger.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameUI.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="graphics\camera2D\Camera2D.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
-    <ClCompile Include="enemy\Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="gameObject\GameObjectManager.cpp" />
@@ -147,8 +147,10 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerHP.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="graphics\SkinModelRender.cpp" />
+    <ClCompile Include="SiegePoint.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
@@ -167,16 +169,16 @@
     <ClInclude Include="Anima.h" />
     <ClInclude Include="AnimaManeger.h" />
     <ClInclude Include="Effect.h" />
-    <ClInclude Include="enemy\EnemyManeger.h" />
+    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameUI.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="graphics\camera2D\Camera2D.h" />
     <ClInclude Include="character\CharacterController.h" />
-    <ClInclude Include="enemy\Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="gameObject\GameObjectManager.h" />
@@ -214,8 +216,10 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerHP.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="graphics\SkinModelRender.h" />
+    <ClInclude Include="SiegePoint.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />
@@ -230,10 +234,8 @@
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Anima.FBX" />
     <MeshContentTask Include="Assets\modelData\Floor.FBX" />
-    <MeshContentTask Include="Assets\modelData\fo.FBX" />
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
     <MeshContentTask Include="Assets\modelData\ghosts.fbx" />
-    <MeshContentTask Include="Assets\modelData\slime.FBX" />
     <MeshContentTask Include="Assets\modelData\stage1_1.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
@@ -252,27 +254,12 @@
     <MeshContentTask Include="Assets\modelData\stage1_boss.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\stage1_bridge.FBX">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\stage1_longbridge.FBX">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\stage1_start.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\mikyan.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\modelData\Normal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\modelData\Specular.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\modelData\AO.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\test.png" />

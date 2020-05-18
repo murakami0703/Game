@@ -19,4 +19,6 @@ public:
 
 private:
 	Level m_level;	//レベルデータ。
+
+	int m_enemyCount = 0;	//エネミーの数
 };

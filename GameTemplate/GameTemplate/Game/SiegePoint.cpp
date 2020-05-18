@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SiegePoint.h"
-#include "Ghosts.h"
+#include "Ghost.h"
 #include "Player.h"
 
 SiegePoint* SiegePoint::m_instance = nullptr;
@@ -78,4 +78,6 @@ void SiegePoint::Update()
 
 void SiegePoint::Render(){}
 void SiegePoint::PostRender() {}
+
+
 

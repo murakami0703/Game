@@ -5,9 +5,9 @@
 #include "GameData.h"
 #include "LevelSet.h"
 #include "GameUI.h"
+#include "Result.h"
 
-#include "enemy/Enemy.h"
-#include "enemy/EnemyManeger.h"
+#include "SiegePoint.h"
 
 Camera2D g_camera2D;	//2DƒJƒƒ‰
 
@@ -20,7 +20,7 @@ Game::Game()
 	g_goMgr->NewGameObject<LevelSet>();
 	g_goMgr->NewGameObject<GameUI>();
 
-	g_goMgr->NewGameObject<EnemyManager>();
+	g_goMgr->NewGameObject<SiegePoint>();
 
 }
 
@@ -31,6 +31,11 @@ Game::~Game()
 
 void Game::Update() {
 
+	GameData* m_gamedate = GameData::GetInstance();
+	if (m_gamedate->GetEnemyCount() <= 0 && m_gamedate->ResultFlag() == true) {
+			g_goMgr->NewGameObject<Result>();
+			m_gamedate->SetResultFlag(false);
+	}
 }
 void Game::Render(){}
 void Game::PostRender(){}

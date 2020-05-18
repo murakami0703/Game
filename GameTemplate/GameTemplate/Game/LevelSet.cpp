@@ -3,8 +3,9 @@
 
 #include "Map.h"
 //エネミー
-#include "enemy/Enemy.h"
+#include "Ghost.h"
 
+#include "GameData.h"
 LevelSet* LevelSet::m_instance = nullptr;
 LevelSet::LevelSet()
 {
@@ -37,15 +38,20 @@ void LevelSet::LevelSetting()
 		}
 		//スライム
 		if (objData.EqualObjectName(L"ghosts")) {
-			Enemy* m_enemy = g_goMgr->NewGameObject<Enemy>();
-			m_enemy->SetPosition(objData.position);
-			m_enemy->SetRotation(objData.rotation);
-			m_enemy->SetScale(objData.scale);
+			Ghost* m_ghost = g_goMgr->NewGameObject<Ghost>();
+			m_ghost->SetPosition(objData.position);
+			m_ghost->SetRotation(objData.rotation);
+			m_ghost->SetScale(objData.scale);
+
+			m_enemyCount++;
+
 			return true;
 		}
-
 		return false;
 	});
+	//敵の数をGameDataに教える
+	GameData* m_gamedate = GameData::GetInstance();
+	m_gamedate->SetEnemyCount(m_enemyCount);
 
 }
 void LevelSet::Update()
