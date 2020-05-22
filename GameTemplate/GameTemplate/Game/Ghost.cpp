@@ -19,8 +19,8 @@ Ghost::Ghost()
 	//cmoファイルの読み込み。
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemyModelRender->Init(L"Assets/modelData/ghosts.cmo", m_animClips, eAnimation_Num);
-	m_oldPos = m_position;
 
+	m_oldPos = m_position;		//初期座標をm_oldPosに設定。
 }
 
 Ghost::~Ghost()
@@ -67,7 +67,7 @@ void Ghost::Follow()
 
 }
 
-void Ghost::move()
+void Ghost::Loitering()
 {
 	//徘徊中
 	/*m_moveCount++;
@@ -104,12 +104,12 @@ void Ghost::Attack()
 		*/
 	if (m_battlePoint != nullptr) {
 
-		m_state = eState_TuisekiPlayer;
+		m_state = eState_Follow;
 	}
 	else {
 		m_battlePoint->enemyCount = 0;
 		m_battlePoint = nullptr;
-		m_state = eState_Haikai;
+		m_state = eState_Loitering;
 	}
 }
 
@@ -120,8 +120,10 @@ void Ghost::Return()
 	diff.y = 0.0f;
 	diff.Normalize();
 	m_position += diff * m_moveSpeed;
+
 	if (diff.Length() < 1.0f) {
-		m_state = eState_Haikai;
+		//初期位置付近なので徘徊に戻る。
+		m_state = eState_Loitering;
 	}
 
 	CVector3 enemyForward = { 1.0f, 0.0f, 0.0f };
@@ -139,10 +141,11 @@ void Ghost::Dead()
 {
 	m_enemyModelRender->PlayAnimation(2);
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
-		//死にました
+		//アニメーションの再生が終わったので消しま
 		//エネミーの数減らします
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();
+		//消えなさい。
 		g_goMgr->DeleteGameObject(this);
 		g_goMgr->DeleteGameObject(m_enemyModelRender);
 	}
@@ -151,36 +154,35 @@ void Ghost::Dead()
 
 void Ghost::Update()
 {
+	//プレイヤーとの距離を調べる。
+	m_playerPos = Player::GetInstance()->GetPosition();
+	m_toPlayerVec = m_playerPos - m_position;
 
-	p_pos = Player::GetInstance()->GetPosition();
-	m_toPlayerVec = p_pos - m_position;
-
+	//攻撃が当たったので死ぬ。
 	if (Player::GetInstance()->GetAttackflag() == true) {
 		if (m_toPlayerVec.Length() < 200.0f) {
 			m_state = eState_Dead;
 		}
 	}
+
 	switch (m_state) {
-	case eState_Haikai:
-		//徘徊中
-		move();
+	case Ghost::eState_Loitering:
+		Loitering();		//徘徊中
 		break;
-	case eState_Attack:
-		Attack();
+	case Ghost::eState_Follow:
+		Follow();			//プレイヤーを追跡
 		break;
-	case eState_TuisekiPlayer:
-		//プレイヤーを追跡
-		Follow();
+	case Ghost::eState_Attack:
+		Attack();			//攻撃
 		break;
-	case eState_Return:
-		//徘徊位置に戻る
-		Return();
+	case Ghost::eState_Return:
+		Return();			//徘徊位置に戻る
 		break;
-	case eState_Dead:
-		//死
-		Dead();
+	case Ghost::eState_Dead:
+		Dead();				//死
 		break;
 	}
+
 	//ワールド行列の更新。
 	m_enemyModelRender->SetPosition(m_position);
 	m_enemyModelRender->SetRotation(m_rotation);

@@ -101,6 +101,7 @@
   <ItemGroup>
     <ClCompile Include="Anima.cpp" />
     <ClCompile Include="AnimaManeger.cpp" />
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="graphics\SkinModelRender.cpp" />
     <ClCompile Include="SiegePoint.cpp" />
+    <ClCompile Include="Slaim.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
@@ -168,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="Anima.h" />
     <ClInclude Include="AnimaManeger.h" />
+    <ClInclude Include="Bat.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Fade.h" />
@@ -220,6 +223,7 @@
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="graphics\SkinModelRender.h" />
     <ClInclude Include="SiegePoint.h" />
+    <ClInclude Include="Slaim.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />
@@ -233,7 +237,9 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Anima.FBX" />
-    <MeshContentTask Include="Assets\modelData\Floor.FBX" />
+    <MeshContentTask Include="Assets\modelData\Floor.FBX">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
     <MeshContentTask Include="Assets\modelData\ghosts.fbx" />
     <MeshContentTask Include="Assets\modelData\stage1_1.FBX">

@@ -12,7 +12,7 @@ Result::Result()
 
 	//ふぉんと
 	m_font = g_goMgr->NewGameObject<FontRender>();
-	const wchar_t* str = L"「あなただけのデッサン人形」 を作成しポーズを取らせよう！\nデザインドールは3D空間の人体モデルを自在に操るソフトウェアです。\n人物モデルのポーズ集 や 3Dモデルエクスポータ としても\nご利用いただけるソフトウェアです。";
+	const wchar_t* str = L"おわり～～～～～～～";
 	m_font->SetText(str);
 	m_font->SetPosition({ -500.0f,0.0f });
 

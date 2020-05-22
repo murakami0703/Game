@@ -259,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="SiegePoint.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="Slaim.cpp">
+      <Filter>enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -435,6 +441,12 @@
     </ClInclude>
     <ClInclude Include="SiegePoint.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="Slaim.h">
+      <Filter>enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
