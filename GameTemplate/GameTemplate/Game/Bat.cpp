@@ -14,8 +14,6 @@ Bat::Bat()
 Bat::~Bat()
 {
 }
-void Bat::Idle()
-{}
 void Bat::Loitering()
 {}
 void Bat::Follow()
@@ -33,9 +31,6 @@ void Bat::Update()
 {
 	switch (m_state)
 	{
-	case Bat::eState_Idle:
-		Idle();				//‘Ò‹@
-		break;
 	case Bat::eState_Loitering:
 		Loitering();		//œpœj’†
 		break;

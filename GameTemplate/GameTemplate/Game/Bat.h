@@ -14,7 +14,6 @@ public:
 private:
 	// 状態
 	enum EState {
-		eState_Idle,	//待機。
 		eState_Loitering,	//徘徊。
 		eState_Follow,		//プレイヤーを追跡。
 		eState_Premove,		//予備動作。
@@ -25,13 +24,12 @@ private:
 
 private:
 
-	void Idle();
-	void Loitering();
-	void Follow();
-	void Premove();
-	void Attack();
-	void Return();
-	void Dead();
+	void Loitering();	//徘徊。
+	void Follow();		//プレイヤーを追跡。
+	void Premove();		//予備動作。
+	void Attack();		//攻撃。
+	void Return();		//徘徊位置に戻る。
+	void Dead();		//死。
 
 private:
 
@@ -41,7 +39,7 @@ private:
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
 
-	EState m_state = eState_Idle;					//状態。
+	EState m_state = eState_Loitering;					//状態。
 
 };
 

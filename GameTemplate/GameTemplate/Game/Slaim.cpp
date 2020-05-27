@@ -13,6 +13,8 @@ Slaim::Slaim()
 Slaim::~Slaim()
 {
 }
+void Slaim::Idle()
+{}
 
 void Slaim::Loitering()
 {}
@@ -22,6 +24,9 @@ void Slaim::Premove()
 {}
 void Slaim::Attack()
 {}
+void Slaim::Vertigo()
+{}
+
 void Slaim::Return()
 {}
 void Slaim::Dead()
@@ -31,6 +36,9 @@ void Slaim::Update()
 {
 	switch (m_state)
 	{
+	case Slaim::eState_Idle:
+		Idle();
+		break;
 	case Slaim::eState_Loitering:
 		Loitering();		//úpújíÜ
 		break;
@@ -42,6 +50,9 @@ void Slaim::Update()
 		break;
 	case Slaim::eState_Attack:
 		Attack();			//çUåÇ
+		break;
+	case Slaim::eState_Vertigo:
+		Vertigo();
 		break;
 	case Slaim::eState_Return:
 		Return();			//úpújà íuÇ…ñﬂÇÈ

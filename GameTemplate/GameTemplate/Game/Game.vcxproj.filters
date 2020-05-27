@@ -91,6 +91,9 @@
     <Filter Include="enemy">
       <UniqueIdentifier>{4b3edcb1-cd8e-4412-9f42-0e119efb3832}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\modelData\enemy">
+      <UniqueIdentifier>{fb74b3b1-4129-4b73-9fae-f5abd7d266c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -480,7 +483,7 @@
       <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\ghosts.fbx">
-      <Filter>Assets\modelData</Filter>
+      <Filter>Assets\modelData\enemy</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
