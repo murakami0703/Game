@@ -9,8 +9,6 @@ public:
 	~GameData();
 
 	void Update();
-	void Render();
-	void PostRender();
 
 	//�̗͎擾
 	float GameData::GetHitPoint() {

@@ -13,7 +13,6 @@ public:
 	/// <summary>
 	/// •`‰æB
 	/// </summary>
-	void Render();
 	void PostRender();
 
 public:

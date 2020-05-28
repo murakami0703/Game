@@ -22,5 +22,3 @@ Map::~Map()
 void Map::Update()
 {
 }
-void Map::Render(){}
-void Map::PostRender(){}

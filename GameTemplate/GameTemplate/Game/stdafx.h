@@ -44,13 +44,14 @@
 #include "graphics/SkinModel.h"
 #include "graphics/Skeleton.h"
 
+#include "sprite/SpriteStandby.h"
+#include "sprite/Sprite.h"
+
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/Camera.h"
 #include "graphics/camera2D/Camera2D.h"
 
-#include "sprite/SpriteStandby.h"
-#include "sprite/Sprite.h"
 #include "Fade.h"
 #include "ShadowMap.h"
 #include "RenderTarget.h"
@@ -67,5 +68,4 @@ const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
 
 static const int MAX_BONE = 512;	//!<ボーンの最大数。
-extern Camera2D g_camera2D;	//2Dカメラ
 

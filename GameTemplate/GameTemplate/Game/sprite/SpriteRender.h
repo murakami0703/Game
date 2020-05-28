@@ -6,7 +6,6 @@ class SpriteRender : public IGameObject
 	/// </summary>
 	
 	void Update();
-	void Render();
 	void PostRender();
 public:
 	/// <summary>

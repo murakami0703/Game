@@ -76,8 +76,5 @@ void SiegePoint::Update()
 	}
 }
 
-void SiegePoint::Render(){}
-void SiegePoint::PostRender() {}
-
 
 

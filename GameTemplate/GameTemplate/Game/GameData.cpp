@@ -14,5 +14,3 @@ GameData::~GameData()
 {
 }
 void GameData::Update(){}
-void GameData::Render(){}
-void GameData::PostRender(){}

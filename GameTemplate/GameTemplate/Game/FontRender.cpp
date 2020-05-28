@@ -14,7 +14,6 @@ FontRender::~FontRender()
 void FontRender::Update()
 {
 }
-void FontRender::Render(){}
 void FontRender::PostRender()
 {
 	m_font.Begin();

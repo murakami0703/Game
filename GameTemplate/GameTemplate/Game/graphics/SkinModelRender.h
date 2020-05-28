@@ -105,7 +105,6 @@ public:
 	/// 描画。
 	/// </summary>
 	void Render();
-	void PostRender();
 
  private:
 	SkinModel					m_skinModel;						//スキンモデル。

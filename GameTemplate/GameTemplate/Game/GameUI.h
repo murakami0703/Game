@@ -9,11 +9,6 @@ public:
 	/// 更新処理。
 	/// </summary>
 	void Update();
-	/// <summary>
-	/// 描画処理。
-	/// </summary>
-	void Render();
-	void PostRender();
 
 	/// <summary>
 	/// アイテム選択処理
@@ -37,8 +32,8 @@ private:
 
 	static GameUI* m_instance;
 	
-	void ScalingSelectCase();	//選択枠の拡大縮小
-	std::vector<SpriteRender*> m_spriteRender;
+	void ScalingSelectCase();					//選択枠の拡大縮小
+	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
 	SpriteRender* r;
 	FontRender* m_font;
 	

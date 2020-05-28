@@ -7,11 +7,6 @@ Effect::Effect()
 	//Effekseerを初期化。
 	InitEffekseer();
 
-	//サンプルのエフェクトをロードする。
-	m_sampleEffect = Effekseer::Effect::Create(m_effekseerManager, (const EFK_CHAR*)L"Assets/effect/test.efk");
-	//エフェクトの再生する。
-	m_playEffectHandle = m_effekseerManager->Play(m_sampleEffect, 0.0f, 0.0f, 0.0f);
-
 }
 
 Effect::~Effect()
@@ -21,7 +16,7 @@ Effect::~Effect()
 void Effect::InitEffekseer()
 {
 	//Effekseerの初期化。
-		//レンダラーを初期化。
+	//レンダラーを初期化。
 	m_effekseerRenderer = EffekseerRendererDX11::Renderer::Create(
 		g_graphicsEngine->GetD3DDevice(),			//D3Dデバイス。
 		g_graphicsEngine->GetD3DDeviceContext(),	//D3Dデバイスコンテキスト。

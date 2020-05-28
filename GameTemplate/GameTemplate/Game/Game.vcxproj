@@ -129,9 +129,7 @@
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
-    <ClCompile Include="HPManeger.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="ItemManeger.cpp" />
     <ClCompile Include="LevelSet.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
@@ -146,7 +144,6 @@
     <ClCompile Include="physics\CapsuleCollider.cpp" />
     <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerHP.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
@@ -199,9 +196,7 @@
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
-    <ClInclude Include="HPManeger.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="ItemManeger.h" />
     <ClInclude Include="LevelSet.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
@@ -217,7 +212,6 @@
     <ClInclude Include="physics\CollisionAttr.h" />
     <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerHP.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="ShadowMap.h" />
@@ -274,19 +268,22 @@
     <ImageContentTask Include="Assets\sprite\test.png" />
   </ItemGroup>
   <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Hp.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Item\case1.png" />
     <ImageContentTask Include="Assets\sprite\Item\case2.png" />
     <ImageContentTask Include="Assets\sprite\Item\case3.png" />
     <ImageContentTask Include="Assets\sprite\Item\case4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Hp.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Item\hasi.png" />
     <ImageContentTask Include="Assets\sprite\Item\L.png" />
     <ImageContentTask Include="Assets\sprite\Item\waku.png" />
     <ImageContentTask Include="Assets\sprite\Item\ZL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\title\light.png" />
+    <ImageContentTask Include="Assets\sprite\title\star_chips.png" />
+    <ImageContentTask Include="Assets\sprite\title\title.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

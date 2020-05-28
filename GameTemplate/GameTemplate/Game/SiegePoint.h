@@ -14,8 +14,6 @@ public:
 	~SiegePoint();
 
 	void Update();
-	void Render();
-	void PostRender();
 
 
 	/// <summary>

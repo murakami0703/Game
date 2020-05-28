@@ -188,11 +188,3 @@ void Ghost::Update()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 }
-void Ghost::Render()
-{
-}
-
-void Ghost::PostRender()
-{
-
-}

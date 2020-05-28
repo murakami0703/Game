@@ -143,3 +143,6 @@ private:
 
 };
 
+extern Camera2D g_camera2D;	//2DƒJƒƒ‰
+
+

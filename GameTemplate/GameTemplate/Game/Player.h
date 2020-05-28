@@ -8,9 +8,6 @@ public:
 	~Player();
 
 	void Update();
-	void Render();
-	void PostRender();
-
 	/// <summary>
 	/// プレイヤーのポジションを返す関数。
 	/// </summary>

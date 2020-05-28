@@ -26,9 +26,9 @@ public:
 	/// •`‰æB
 	/// </summary>
 	
-	virtual void Render() = 0;
+	virtual void Render() {}
 
-	virtual void PostRender() = 0;
+	virtual void PostRender(){}
 
 	/// <summary>
 	/// Às—Dæ“x‚ğæ“¾

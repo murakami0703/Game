@@ -13,8 +13,6 @@ public:
 	}
 
 	void Update();
-	void Render();
-	void PostRender();
 
 private:
 	FontRender* m_font;

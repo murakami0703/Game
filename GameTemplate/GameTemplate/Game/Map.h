@@ -8,8 +8,6 @@ public:
 	Map();
 	~Map();
 	void Update();
-	void Render();
-	void PostRender();
 	/// <summary>
 	/// À•W‚ğİ’èB
 	/// </summary>

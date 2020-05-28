@@ -6,8 +6,6 @@ public:
 	~Game();
 
 	void Update();
-	void Render();
-	void PostRender();
 
 };
 

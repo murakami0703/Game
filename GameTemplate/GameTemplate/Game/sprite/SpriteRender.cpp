@@ -18,7 +18,6 @@
 	{
 		m_sprite.Update(m_position, m_rotation, m_scale);
 	}
-	void SpriteRender::Render(){}
 	void SpriteRender::PostRender()
 	{
 		m_sprite.Draw();

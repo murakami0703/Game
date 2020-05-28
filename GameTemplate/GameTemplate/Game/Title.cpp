@@ -10,3 +10,7 @@ Title::Title()
 Title::~Title()
 {
 }
+
+void Title::Update()
+{
+}

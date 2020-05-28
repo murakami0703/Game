@@ -122,5 +122,3 @@ void Bat::Update()
 	m_enemyModelRender->SetScale(m_scale);
 
 }
-void Bat::Render(){}
-void Bat::PostRender(){}

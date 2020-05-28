@@ -80,8 +80,3 @@ void Slaim::Update()
 
 }
 
-void Slaim::Render()
-{
-}
-void Slaim::PostRender()
-{}

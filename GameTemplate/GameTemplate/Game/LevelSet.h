@@ -15,7 +15,6 @@ public:
 
 	void Update();
 	void Render();
-	void PostRender();
 
 private:
 	Level m_level;	//レベルデータ。

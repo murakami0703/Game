@@ -28,8 +28,3 @@ void Result::Update()
 {
 
 }
-void Result::Render()
-{
-}
-
-void Result::PostRender() {}

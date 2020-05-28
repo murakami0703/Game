@@ -126,7 +126,7 @@ void GameObjectManager::ForwordRender()
 	m_mainRenderTarget.ClearRenderTarget(clearColor);
 
 	//手前に描画を行うデプスステンシルステートを設定する。
-	g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
+	//g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
 
 	for (auto go : m_goList) {
 		go->Render();

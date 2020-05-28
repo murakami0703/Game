@@ -62,4 +62,3 @@ void LevelSet::Render()
 {
 	m_level.Draw();
 }
-void LevelSet::PostRender(){}

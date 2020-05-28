@@ -199,7 +199,3 @@ void GameUI::Update()
 {
 		ScalingSelectCase();
 }
-void GameUI::Render(){}
-void GameUI::PostRender()
-{
-}

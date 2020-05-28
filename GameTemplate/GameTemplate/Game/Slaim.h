@@ -8,8 +8,6 @@ public:
 	/// ƒWƒƒƒ“ƒvUŒ‚
 	/// </summary>
 	void Update();
-	void Render();
-	void PostRender();
 
 private:
 

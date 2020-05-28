@@ -137,5 +137,3 @@ void Player::Update()
 	m_skinModelRender->SetRotation(m_rotation);
 }
 
-void Player::Render(){}
-void Player::PostRender(){}

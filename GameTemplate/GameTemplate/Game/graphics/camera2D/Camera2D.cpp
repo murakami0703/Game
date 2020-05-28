@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Camera2D.h"
 
+Camera2D g_camera2D;	//2DƒJƒƒ‰
 
 Camera2D::Camera2D()
 {

@@ -67,6 +67,5 @@ void SkinModelRender::Render()
 
 	}
 }
-void SkinModelRender::PostRender(){}
 
 
