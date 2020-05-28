@@ -1,4 +1,5 @@
 #pragma once
+
 class Bat : public IGameObject
 {
 public:
@@ -18,8 +19,15 @@ private:
 		eState_Follow,		//プレイヤーを追跡。
 		eState_Premove,		//予備動作。
 		eState_Attack,		//攻撃。
-		eState_Return,	//徘徊位置に戻る。
 		eState_Dead	//死。
+	};
+
+	enum EAnimationClip {
+		eAnimation_Walk,
+		eAnimation_Premove,
+		eAnimation_Attack,
+		eAnimation_Death,
+		eAnimation_Num
 	};
 
 private:
@@ -28,7 +36,6 @@ private:
 	void Follow();		//プレイヤーを追跡。
 	void Premove();		//予備動作。
 	void Attack();		//攻撃。
-	void Return();		//徘徊位置に戻る。
 	void Dead();		//死。
 
 private:
@@ -39,7 +46,18 @@ private:
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
 
+	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
+	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+
 	EState m_state = eState_Loitering;					//状態。
+	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+	
+	//移動関連
+	const float m_toPlyaerLength = 250.0f;	//追従距離
+	const float m_returnLength = 800.0f;	//追従状態から徘徊状態に戻る距離
+
+	//攻撃判定
+	bool EneAttackflag = false;					//攻撃中ですか？
 
 };
 

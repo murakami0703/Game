@@ -237,11 +237,14 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Anima.FBX" />
+    <MeshContentTask Include="Assets\modelData\bat.fbx" />
     <MeshContentTask Include="Assets\modelData\Floor.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
     <MeshContentTask Include="Assets\modelData\ghosts.fbx" />
+    <MeshContentTask Include="Assets\modelData\slaim.fbx" />
+    <MeshContentTask Include="Assets\modelData\slaim_dead.fbx" />
     <MeshContentTask Include="Assets\modelData\stage1_1.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </MeshContentTask>

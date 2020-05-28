@@ -12,6 +12,7 @@ public:
 	void PostRender();
 
 private:
+
 	// 状態
 	enum EState {
 		eState_Idle,	//待機。
@@ -25,8 +26,12 @@ private:
 	};
 
 	enum EAnimationClip {
+		eAnimation_Idle,
 		eAnimation_Walk,
+		eAnimation_Premove,
+		eAnimation_Premove2,
 		eAnimation_Attack,
+		eAnimation_Vertigo,
 		eAnimation_Death,
 		eAnimation_Num
 	};
@@ -51,6 +56,7 @@ private:
 	CVector3 m_scale = CVector3().One();				//拡大率。
 
 	EState m_state = eState_Idle;					//状態。
+	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 
 };
 

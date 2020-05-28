@@ -4,9 +4,20 @@
 
 Slaim::Slaim()
 {
+	//アニメーションクリップのロードとループフラグの設定。
+	m_animClips[eAnimation_Idle].Load(L"Assets/animData/slaim/slaim_idle.tka");
+	m_animClips[eAnimation_Idle].SetLoopFlag(true);
+	m_animClips[eAnimation_Walk].Load(L"Assets/animData/slaim/slaim_walk.tka");
+	m_animClips[eAnimation_Walk].SetLoopFlag(true);
+	m_animClips[eAnimation_Premove].Load(L"Assets/animData/slaim/slaim_premove.tka");
+	m_animClips[eAnimation_Premove2].Load(L"Assets/animData/slaim/slaim_premove2.tka");
+	m_animClips[eAnimation_Attack].Load(L"Assets/animData/slaim/slaim_attack.tka");
+	m_animClips[eAnimation_Vertigo].Load(L"Assets/animData/slaim/slaim_vertigo.tka");
+	m_animClips[eAnimation_Death].Load(L"Assets/animData/slaim/slaim_death.tka");
+
 	//cmoファイルの読み込み。
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
-	m_enemyModelRender->Init(L"Assets/modelData/ghosts.cmo");
+	m_enemyModelRender->Init(L"Assets/modelData/slaim.cmo", m_animClips, eAnimation_Num);
 }
 
 
@@ -61,6 +72,12 @@ void Slaim::Update()
 		Dead();				//死
 		break;
 	}
+
+	//ワールド行列の更新。
+	m_enemyModelRender->SetPosition(m_position);
+	m_enemyModelRender->SetRotation(m_rotation);
+	m_enemyModelRender->SetScale(m_scale);
+
 }
 
 void Slaim::Render()

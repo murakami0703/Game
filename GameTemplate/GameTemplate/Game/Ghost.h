@@ -50,9 +50,8 @@ public:
 	}
 
 private:
-	/// <summary>
-	/// 状態
-	/// </summary>
+
+	// 状態
 	enum EState {
 		eState_Loitering,	//徘徊。
 		eState_Follow,		//プレイヤーを追跡。
@@ -95,8 +94,8 @@ private:
 	const float m_follSpeed = 3.0f;				//追尾中の移動速度。
 	const float m_tuisekiLength = 300.0f;		//追尾する距離。
 	const float m_ReturnLength = 1000.0f;		//徘徊位置に戻る距離。
-	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
 
+	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
 	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 	//攻撃判定
 	bool EneAttackflag = false;					//攻撃中ですか？
