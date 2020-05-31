@@ -5,7 +5,7 @@ class GameObjectManager
 {
 public:
 
-	void Start();
+	void Init();
 	/// <summary>
 	/// 更新。
 	/// </summary>
@@ -46,13 +46,14 @@ public:
 	{
 		return &m_shadowMap;
 	}
-
-private:
-	std::vector< IGameObject* > m_goList;
-	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
-	ShadowMap m_shadowMap;
-	Sprite g_mainSprite;		//スプライト。
-
+	/// <summary>
+	/// メインレンダリングターゲットを取得。
+	/// </summary>
+	/// <returns></returns>
+	RenderTarget* GetMainRenderTarget()
+	{
+		return &m_mainRenderTarget;
+	}
 private:
 	/// <summary>
 	/// プリレンダリング。
@@ -65,16 +66,23 @@ private:
 	/// <summary>
 	/// ポストレンダリング。
 	/// </summary>
-	void PostRender();
-	bool isStartflag = false;
+	void Post2DRender();
+
+private:
+	std::vector< IGameObject* > m_goList;
+	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
+	ShadowMap m_shadowMap;					//シャドウマップ。
+	Sprite m_copyMainRtToFrameBufferSprite;			//メインレンダリングターゲットに描かれた絵をフレームバッファにコピーするためのスプライト。
+
 private:
 	//フレームバッファのレンダリングターゲット。
-	ID3D11RenderTargetView* oldRenderTargetView;
-	ID3D11DepthStencilView* oldDepthStencilView;
-	//フレームバッファののビューポート
+	ID3D11RenderTargetView* oldRenderTargetView;	//フレームバッファのレンダリングターゲットビュー。
+	ID3D11DepthStencilView* oldDepthStencilView;	//フレームバッファのデプスステンシルビュー。
+	//フレームバッファのビューポート
 	D3D11_VIEWPORT oldViewports;
 	D3D11_DEPTH_STENCIL_DESC desc = { 0 };
 	ID3D11DepthStencilState* depthStencilState;
+
 
 };
 extern GameObjectManager* g_goMgr;

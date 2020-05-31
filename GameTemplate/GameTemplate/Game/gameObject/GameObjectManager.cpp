@@ -4,16 +4,17 @@
 //GameObjectManagerクラスのインスタンス。
 GameObjectManager* g_goMgr = nullptr;
 
-void GameObjectManager::Start()
+//カメラを初期化。
+void GameObjectManager::Init()
 {
-	//メインレンダリングターゲットの初期化。
+	//メインレンダリングターゲットの作成。
 	m_mainRenderTarget.Create(
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H,
-		DXGI_FORMAT_R8G8B8A8_UNORM
+		DXGI_FORMAT_R16G16B16A16_FLOAT
 	);
 	//メインテクスチャの初期化。
-	g_mainSprite.Init(
+	m_copyMainRtToFrameBufferSprite.Init(
 		m_mainRenderTarget.GetRenderTargetSRV(),
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
@@ -32,20 +33,16 @@ void GameObjectManager::Start()
 	desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
 	desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
 	desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-
+	
 	//D3Dデバイスを取得。
 	auto d3ddevice = g_graphicsEngine->GetD3DDevice();
 
 	//デプスステンシルステートを作成。
 	d3ddevice->CreateDepthStencilState(&desc, &depthStencilState);
-	isStartflag = true;
 }
 
 void GameObjectManager::Update()
 {
-	if (isStartflag == false) {
-		Start();
-	}
 	//登録されているゲームオブジェクトの更新関数を呼ぶ。
 	{
 		for (auto& pad : g_pad) {
@@ -53,10 +50,11 @@ void GameObjectManager::Update()
 		}
 		//物理エンジンの更新。
 		g_physics.Update();
+
 		for (auto go : m_goList) {
 			go->Update();
 		}
-		g_mainSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
+		m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 		g_camera2D.Update();
 
 		//シャドウマップを更新。
@@ -66,8 +64,10 @@ void GameObjectManager::Update()
 		);
 	}
 	//登録されているゲームオブジェクトの描画関数を呼ぶ。
-		{
+	{
 			//描画開始。
+			//手前に描画を行うデプスステンシルステートを設定する。
+			g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
 			g_graphicsEngine->BegineRender();
 
 			auto d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
@@ -86,11 +86,11 @@ void GameObjectManager::Update()
 			// フォワードレンダリング。
 			ForwordRender();
 			// ポストレンダリング。
-			PostRender();
+			Post2DRender();
 
 			//描画終了。
 			g_graphicsEngine->EndRender();
-		}
+	}
 	//全てのゲームオブジェクトの1フレーム分の処理が終わってから、削除する。
 	for (auto it = m_goList.begin(); it != m_goList.end();) {
 		if ((*it)->IsRequestDelete()) {
@@ -125,8 +125,6 @@ void GameObjectManager::ForwordRender()
 	float clearColor[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	m_mainRenderTarget.ClearRenderTarget(clearColor);
 
-	//手前に描画を行うデプスステンシルステートを設定する。
-	//g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(depthStencilState, 0);
 
 	for (auto go : m_goList) {
 		go->Render();
@@ -135,7 +133,7 @@ void GameObjectManager::ForwordRender()
 /// <summary>
 /// ポストレンダリング。
 /// </summary>
-void GameObjectManager::PostRender()
+void GameObjectManager::Post2DRender()
 {
 	// ポストレンダリング。
 	//レンダリングターゲットをフレームバッファに戻す
@@ -146,11 +144,12 @@ void GameObjectManager::PostRender()
 		&oldViewports
 	);
 	//2D描画
-	g_mainSprite.Draw();
+	m_copyMainRtToFrameBufferSprite.Draw();
 
 	for (auto go : m_goList) {
 		go->PostRender();
 	}
+
 
 	//レンダリングターゲットとデプスステンシルの参照カウンタを下す。
 	oldRenderTargetView->Release();

@@ -44,23 +44,26 @@
 #include "graphics/SkinModel.h"
 #include "graphics/Skeleton.h"
 
-#include "sprite/SpriteStandby.h"
-#include "sprite/Sprite.h"
-
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/Camera.h"
 #include "graphics/camera2D/Camera2D.h"
 
-#include "Fade.h"
+#include "sprite/SpriteStandby.h"
+#include "sprite/Sprite.h"
+
 #include "ShadowMap.h"
 #include "RenderTarget.h"
 
+#include "Fade.h"
+
 #include "gameObject/GameObjectManager.h"
+
 //‚±‚±‚©‚ç‰º‚ÉrenderƒNƒ‰ƒX‚©‚­
 #include "graphics/SkinModelRender.h"
 #include "sprite/SpriteRender.h"
 #include "FontRender.h"
+
 
 
 

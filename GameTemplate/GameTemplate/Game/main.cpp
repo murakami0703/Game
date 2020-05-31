@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "system/system.h"
-#include "Game.h"
+#include "Title.h"
 
 
 /// ///////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera2D.SetViewVolumeHeight(FRAME_BUFFER_H);
 	g_camera2D.SetViewVolumeWidth(FRAME_BUFFER_W);
 
-	g_goMgr->NewGameObject<Game>();
+	g_goMgr->NewGameObject<Title>();
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)

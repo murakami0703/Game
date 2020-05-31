@@ -70,7 +70,7 @@ void Ghost::Follow()
 void Ghost::Loitering()
 {
 	//œpœj’†
-	/*m_moveCount++;
+	m_moveCount++;
 	m_position.z += m_moveSpeed;
 	//ã‰ºœpœj
 	if (m_moveCount == 100) {
@@ -86,10 +86,10 @@ void Ghost::Loitering()
 		m_battlePoint = SiegePoint::GetInstance()->TryGetBattlePoint(m_position);
 		//‹ó‚¢‚Ä‚éƒoƒgƒ‹ƒ|ƒCƒ“ƒg‚ÉŒü‚©‚Á‚Ä‚¢‚­‚£
 		if (m_battlePoint != nullptr) {
-			m_state = eState_TuisekiPlayer;
+			m_state = eState_Follow;
 		}
 	}
-	*/
+	
 	m_enemyModelRender->PlayAnimation(0);
 }
 

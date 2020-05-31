@@ -34,6 +34,8 @@ Player::~Player()
 }
 void Player::Idel()
 {
+	m_skinModelRender->PlayAnimation(0);
+
 	//待機状態なにもしない
 	if (g_pad[0].IsPressAnyKey())
 	{
@@ -77,14 +79,16 @@ void Player::Move()
 		m_move.y = 0.0f;
 	}
 	m_position = m_characon.Execute(m_caraTime, m_move);
+	m_skinModelRender->PlayAnimation(1);
 
 }
 void Player::Attack()
 {
-	/*if (Atcount == 1) {
+	if (Atcount == 1) {
 		//攻撃1回目
+		m_skinModelRender->PlayAnimation(2);
 		attackflag = true;
-		if (m_animation.IsPlaying() == false) {
+		if (m_skinModelRender->IsPlayingAnimation() == false) {
 			//再生終了したら待機に戻る
 			Atcount = 0;
 			attackflag = false;
@@ -112,7 +116,7 @@ void Player::Update()
 {
 	//攻撃します。
 	if (g_pad[0].IsTrigger(enButtonA) ) {
-		Atcount++;
+		Atcount = 1;
 		m_state = Player_Attack;
 	}
 
