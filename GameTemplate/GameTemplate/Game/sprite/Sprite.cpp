@@ -42,7 +42,46 @@ void Sprite::InitConstantBuffer()
 }
 void Sprite::InitCommon(float w, float h)
 {
+	{
+		//αブレンディング設定
+		D3D11_BLEND_DESC blendDesc;
+		ZeroMemory(&blendDesc, sizeof(blendDesc));
+		ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
 
+		blendDesc.RenderTarget[0].BlendEnable = true;
+		blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+		blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+		blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+		blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_RED | D3D11_COLOR_WRITE_ENABLE_BLUE | D3D11_COLOR_WRITE_ENABLE_GREEN;
+	
+
+		blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		pd3d->CreateBlendState(&blendDesc, &m_blendState);
+
+	}
+	{
+		//デプスステンシル
+		D3D11_DEPTH_STENCIL_DESC desc;
+		ZeroMemory(&desc, sizeof(desc));
+		ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
+		desc.DepthEnable = true;
+		desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
+		desc.StencilEnable = false;
+		desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+		desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+		desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+		desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+		desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+		desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
+		desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
+		desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
+
+		desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
+		pd3d->CreateDepthStencilState(&desc, &m_depthStencilState);
+	}
 	m_size.x = w;
 	m_size.y = h;
 	//頂点バッファの初期化。
@@ -187,7 +226,8 @@ void Sprite::Draw()
 								//今回は32bitなので、DXGI_FORMAT_R32_UINTでいい。
 		0						//オフセット0でいい。
 	);
-
+	deviceContext->OMSetBlendState(m_blendState, 0, 0xFFFFFFFF);
+	deviceContext->OMSetDepthStencilState(m_depthStencilState, 0);
 	//テクスチャを設定。
 	deviceContext->PSSetShaderResources(0, 1, &m_texture);
 	//サンプラステートを設定。

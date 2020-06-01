@@ -133,6 +133,9 @@ public:
 	float						m_alpha = 1.0f;							//スプライトのα値。
 	ID3D11BlendState* m_translucentBlendState = nullptr;	//半透明合成用のブレンドステート。
 	bool						m_activeFlag = true;				//表示しますか？
+	ID3D11RasterizerState*		m_rasterizeState = nullptr;			//ラスタライザステート。
+	ID3D11DepthStencilState*	m_depthStencilState = nullptr;
+	ID3D11BlendState*			m_blendState = nullptr;
 
 private:
 	/*!
