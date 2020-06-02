@@ -55,7 +55,6 @@
 #include "ShadowMap.h"
 #include "RenderTarget.h"
 
-#include "Fade.h"
 
 #include "gameObject/GameObjectManager.h"
 
@@ -64,6 +63,7 @@
 #include "sprite/SpriteRender.h"
 #include "FontRender.h"
 
+#include "Fade.h"
 
 
 

@@ -102,6 +102,15 @@ public:
 		return m_sprite.GetAlpha();
 	}
 
+	/// <summary>
+	/// α値を変位させる
+	/// </summary>
+	/// <param name="delta">乗算αを変位させる量</param>
+	void DeltaAlpha(float delta)
+	{
+		m_sprite.DeltaAlpha(delta);
+	}
+
 
 private:
 	Sprite	m_sprite;				//スプライト。

@@ -1,21 +1,23 @@
 #pragma once
-class Fade
+class Fade : public IGameObject
 {
 public:
 	Fade();
 	~Fade();
+
 	enum State {
 		None,
 		Fadein,		//フェードイン
 		FadeOut		//フェードアウト
 	};
+
 	void Update();
 	/// <summary>
 	/// スプライトの設定。
 	/// </summary>
 	/// <param name="sprite"></param>
-	void SetSprite(Sprite sprite) {
-		m_sptite = &sprite;
+	void SetSprite(SpriteRender sprite) {
+		m_sptiteRender = &sprite;
 	}
 	/// <summary>
 	/// ステートの設定
@@ -24,7 +26,7 @@ public:
 		m_state = state;
 	}
 private:
-	Sprite* m_sptite;		//スプライト。
+	SpriteRender* m_sptiteRender;		//スプライト。
 	State m_state = None;
 	CVector4 mulColorin;
 	CVector4 mulColorout;
