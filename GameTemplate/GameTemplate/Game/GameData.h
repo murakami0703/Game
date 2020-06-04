@@ -109,5 +109,11 @@ private:
 	int BigAnima = 0;	//ボスから貰える魂
 
 	bool resultflag = true;
+
+	//アイテム
+	int m_hpRecovery = 0;	//回復薬
+	int m_bum = 0;			//爆弾
+	int m_attackUp = 0;		//攻撃力UP
+	int m_speedUp = 0;		//移動速度UP
 };
 

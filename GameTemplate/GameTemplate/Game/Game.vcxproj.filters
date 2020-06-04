@@ -55,9 +55,6 @@
     <Filter Include="sound">
       <UniqueIdentifier>{e91662ef-364b-4c39-8f80-ac23b8a2dcb5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="item">
-      <UniqueIdentifier>{75eba650-fc6f-4b9d-aa05-98ef00eea70a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="manager">
       <UniqueIdentifier>{82c6d5b4-b07e-4d61-9fd7-993362951d8a}</UniqueIdentifier>
     </Filter>
@@ -216,9 +213,6 @@
     <ClCompile Include="sound\SoundSource.cpp">
       <Filter>sound</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
     <ClCompile Include="Gimmick.cpp">
       <Filter>gimmick</Filter>
     </ClCompile>
@@ -262,6 +256,9 @@
       <Filter>enemy</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Item.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -389,9 +386,6 @@
     <ClInclude Include="sound\SoundEngine.h">
       <Filter>sound</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>item</Filter>
-    </ClInclude>
     <ClInclude Include="Gimmick.h">
       <Filter>gimmick</Filter>
     </ClInclude>
@@ -435,6 +429,9 @@
       <Filter>enemy</Filter>
     </ClInclude>
     <ClInclude Include="Title.h" />
+    <ClInclude Include="Item.h">
+      <Filter>ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
