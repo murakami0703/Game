@@ -104,6 +104,7 @@
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="EffectPlay.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontRender.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="EffectPlay.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontRender.h" />
@@ -236,9 +238,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx" />
-    <MeshContentTask Include="Assets\modelData\ghosts.fbx" />
-    <MeshContentTask Include="Assets\modelData\slaim.fbx" />
-    <MeshContentTask Include="Assets\modelData\slaim_dead.fbx" />
+    <MeshContentTask Include="Assets\modelData\ghosts.fbx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\slaim.fbx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\slaim_dead.fbx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\stage1_1.FBX">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
@@ -265,9 +273,6 @@
     <ImageContentTask Include="Assets\sprite\mikyan.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\test.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Hp.png" />
   </ItemGroup>
   <ItemGroup>
@@ -292,7 +297,7 @@
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\title\game_title.png" />
+    <ImageContentTask Include="Assets\sprite\Item\test.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -53,8 +53,8 @@ private:
 	enum EState {
 		eState_Loitering,	//徘徊。
 		eState_Follow,		//プレイヤーを追跡。
+		eState_Premove,		//攻撃。
 		eState_Attack,		//攻撃。
-		eState_Return,		//徘徊位置に戻る。
 		eState_Dead			//死。
 
 	};
@@ -69,8 +69,8 @@ private:
 private:
 	void Loitering();	//徘徊。
 	void Follow();		//プレイヤーを追跡。
+	void Premove();		//予備動作。
 	void Attack();		//攻撃。
-	void Return();		//徘徊位置に戻る。
 	void Dead();		//死。
 
 private:

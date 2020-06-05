@@ -1,4 +1,6 @@
 #pragma once
+
+class BattlePoint;
 class Slaim : public IGameObject
 {
 public:
@@ -55,6 +57,20 @@ private:
 
 	EState m_state = eState_Idle;					//状態。
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+
+private:
+	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
+	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+
+	//移動関連
+	int m_moveCount = 0;						//巡回用カウント
+	float m_moveSpeed = 0.6f;					//エネミの移動速度。
+	const float m_follSpeed = 3.0f;				//追尾中の移動速度。
+	const float m_tuisekiLength = 300.0f;		//追尾する距離。
+	const float m_ReturnLength = 1000.0f;		//徘徊位置に戻る距離。
+
+	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
+	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 
 };
 

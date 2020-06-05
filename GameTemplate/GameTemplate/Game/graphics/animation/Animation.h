@@ -36,6 +36,7 @@ public:
 	*/
 	void Play(int clipNo, float interpolateTime = 0.0f)
 	{
+		m_animNo = clipNo;
 		PlayCommon(m_animationClips[clipNo], interpolateTime);
 	}
 	/*!
@@ -133,5 +134,6 @@ private:
 	float m_interpolateTimeEnd = 0.0f;
 	bool m_isInterpolate = false;				//!<補間中？
 	int m_footStepBoneNo = -1;				//footstepの骨番号。
+	int m_animNo = 0;
 	std::vector<AnimationEventListener> m_animationEventListeners; //アニメーションイベントリスナーのリスト
 };

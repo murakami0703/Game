@@ -103,7 +103,7 @@ public:
 		wchar_t hoge[256];
 		GetCurrentDirectoryW(256, hoge);
 		m_vsShader.Load("Assets/shader/model.fx", "VSMainSkin", Shader::EnType::VS);
-		m_vsShadowMap.Load("Assets/shader/model.fx", "VSMain_ShadowMap", Shader::EnType::VS);
+		m_vsShadowMap.Load("Assets/shader/model.fx", "VSMain_ShadowMapSkinModel", Shader::EnType::VS);
 		
 		m_pVSShader = &m_vsShader;
 		isSkining = true;

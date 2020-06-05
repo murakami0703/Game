@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
+#include "Player.h"
 
 //GameObjectManagerクラスのインスタンス。
 GameObjectManager* g_goMgr = nullptr;
@@ -58,9 +59,10 @@ void GameObjectManager::Update()
 		g_camera2D.Update();
 
 		//シャドウマップを更新。
+		CVector3 m_playerPos = Player::GetInstance()->GetPosition();
 		m_shadowMap.Update(
-			{ 0.0f, 1000.0f, 0.0f },
-			{ 0.0f, 0.0f, 0.0f }
+			{ m_playerPos.x + 400.0f,  (m_playerPos.y + 500.0f),  m_playerPos.z + 200.0f},
+			{ m_playerPos.x,  m_playerPos.y ,  m_playerPos.z }
 		);
 	}
 	//登録されているゲームオブジェクトの描画関数を呼ぶ。

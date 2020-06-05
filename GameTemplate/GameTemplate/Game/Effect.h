@@ -7,14 +7,14 @@ class Effect
 public:
 	Effect();
 	~Effect();
+	//更新
 	void Update();
-	void Drew();
+	//描画
+	void Render();
 
 	//Effekseerの初期化。
 	void InitEffekseer();
 
-	//Effectのセット。
-	void SetEffect();
 private:
 	//Effekseerマネージャ管理。
 	Effekseer::Manager*	m_effekseerManager = nullptr;

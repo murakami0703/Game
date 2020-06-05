@@ -52,17 +52,17 @@ void Ghost::Follow()
 	m_rotation = qRot;
 
 	//近いので攻撃
-	/*if (m_battlePoint != nullptr) {
-		if (m_toPlayerVec.Length() <= 150.0f) {
+	if (m_battlePoint != nullptr) {
+		if (m_toPlayerVec.Length() <= 500.0f) {
 			EneAttackflag = true;
 			m_state = eState_Attack;
 		}
-	}*/
-	//遠くなったので徘徊位置に戻る
+	}
+	//遠くなったのでその場で徘徊。
 	if (m_toPlayerVec.Length() > 1000.0f) {
 		m_battlePoint->enemyCount = 0;
 		m_battlePoint = nullptr;
-		m_state = eState_Return;
+		m_state = eState_Loitering;
 	}
 
 }
@@ -92,51 +92,41 @@ void Ghost::Loitering()
 	
 	m_enemyModelRender->PlayAnimation(0);
 }
-
+void Ghost::Premove()
+{	
+	m_enemyModelRender->PlayAnimation(1);		//予備動作アニメの再生。
+	//アニメが終わったので攻撃します。
+	if (m_enemyModelRender->IsPlayingAnimation() != true) {
+		m_state = eState_Attack;
+	}
+}
 void Ghost::Attack()
 {
-	//次の行動へ。。
-		/*if ((Player::GetInstance()->GetPosition() - m_position).Length() < 150.f) {
+	//攻撃するよ！！！
+
+	//急降下します
+
+
+
+
+
+
+		if (m_battlePoint != nullptr) {
+			m_state = eState_Follow;
+		}
+		else {
+			m_battlePoint->enemyCount = 0;
+			m_battlePoint = nullptr;
+			m_state = eState_Loitering;
+		}
+		if ((Player::GetInstance()->GetPosition() - m_position).Length() < 150.f) {
 			//近距離で攻撃したら
 			//HP減らす
 			GameData::GetInstance()->HPCalc(-0.5f);
 		}
-		*/
-	if (m_battlePoint != nullptr) {
-
-		m_state = eState_Follow;
-	}
-	else {
-		m_battlePoint->enemyCount = 0;
-		m_battlePoint = nullptr;
-		m_state = eState_Loitering;
-	}
-}
-
-void Ghost::Return()
-{
-	//徘徊位置に戻る。
-	CVector3 diff = m_position - m_oldPos;
-	diff.y = 0.0f;
-	diff.Normalize();
-	m_position += diff * m_moveSpeed;
-
-	if (diff.Length() < 1.0f) {
-		//初期位置付近なので徘徊に戻る。
-		m_state = eState_Loitering;
-	}
-
-	CVector3 enemyForward = { 1.0f, 0.0f, 0.0f };
-	//　向かせたい方向のベクトルを計算する。
-	CVector3 targetVector = m_oldPos - m_position;
-	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
-	targetVector.y = 0.0f;
-	targetVector.Normalize();
-	CQuaternion qRot;
-	qRot.SetRotation(enemyForward, targetVector);
-	m_rotation = qRot;
 
 }
+
 void Ghost::Dead()
 {
 	m_enemyModelRender->PlayAnimation(2);
@@ -172,11 +162,11 @@ void Ghost::Update()
 	case Ghost::eState_Follow:
 		Follow();			//プレイヤーを追跡
 		break;
+	case Ghost::eState_Premove:
+		Premove();			//徘徊位置に戻る
+		break;
 	case Ghost::eState_Attack:
 		Attack();			//攻撃
-		break;
-	case Ghost::eState_Return:
-		Return();			//徘徊位置に戻る
 		break;
 	case Ghost::eState_Dead:
 		Dead();				//死

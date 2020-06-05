@@ -49,6 +49,14 @@ public:
 		m_position.y = pos.y;
 	}
 	/// <summary>
+	/// 座標の取得。
+	/// </summary>
+	/// <returns></returns>
+	CVector2 GetPosition() {
+		return m_position;
+	}
+
+	/// <summary>
 	/// フォントのカラーを設定。
 	/// </summary>
 	/// <param name="color">色</param>

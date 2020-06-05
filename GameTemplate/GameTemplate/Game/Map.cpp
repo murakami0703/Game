@@ -10,8 +10,8 @@ Map::Map()
 	m_mapModel->SetRotation(m_rotation);
 	m_mapModel->SetScale(m_scale);
 	m_phyStaticObject.CreateMeshObject(m_mapModel->GetSkinModel(), m_position, m_rotation, m_scale);
-	//m_mapModel->SetShadowReciever(true);
-	//m_mapModel->SetShadowMap(true);
+	m_mapModel->SetShadowReciever(true);
+	m_mapModel->SetShadowMap(true);
 }
 
 

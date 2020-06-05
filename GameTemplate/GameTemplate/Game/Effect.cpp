@@ -38,6 +38,7 @@ void Effect::InitEffekseer()
 	m_effekseerManager->SetModelLoader(m_effekseerRenderer->CreateModelLoader());
 
 }
+
 void Effect::Update()
 {
 	//Effekseerカメラ行列を設定。
@@ -53,7 +54,7 @@ void Effect::Update()
 	m_effekseerManager->Update();
 
 }
-void Effect::Drew()
+void Effect::Render()
 {
 	//エフェクトは不透明オブジェクトを描画した後で描画する。
 	m_effekseerRenderer->BeginRendering();

@@ -186,6 +186,14 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 		//mulは乗算命令。
 	    pos = mul(skinning, In.Position);
 	}
+
+
+	if (isShadowReciever == 1) {
+		//続いて、ライトビュープロジェクション空間に変換。
+		psInput.posInLVP = mul(mLightView, pos);
+		psInput.posInLVP = mul(mLightProj, psInput.posInLVP);
+	}
+
 	psInput.Normal = normalize( mul(skinning, In.Normal) );
 	psInput.Tangent = normalize( mul(skinning, In.Tangent) );
 	
@@ -277,7 +285,7 @@ void ShadowCalc(inout float3 lig, float4 posInLvp)
 		//シャドウマップに書き込まれている深度値を取得。
 		float zInShadowMap = g_shadowMap.Sample(Sampler, shadowMapUV);
 
-		if ((shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f) && zInLVP > zInShadowMap + 0.01f) {
+		if ((shadowMapUV.x > 0.0f && shadowMapUV.x < 1.0f && shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f) && zInLVP > zInShadowMap + 0.001f) {
 			//影が落ちているので、光を弱くする
 			lig *= 0.5f;
 		}
@@ -350,6 +358,33 @@ PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
 	psInput.Position = pos;
 	return psInput;
 }
+/// <summary>
+/// スキンモデルありのシャドウマップ生成用の頂点シェーダー。
+/// </summary>
+PSInput_ShadowMap VSMain_ShadowMapSkinModel(VSInputNmTxWeights In)
+{
+	PSInput_ShadowMap psInput = (PSInput_ShadowMap)0;
+	float4x4 skinning = 0;
+	float w = 0.0f;
+	for (int i = 0; i < 3; i++)
+	{
+		//boneMatrixにボーン行列が設定されていて、
+		//In.indicesは頂点に埋め込まれた、関連しているボーンの番号。
+		//In.weightsは頂点に埋め込まれた、関連しているボーンのウェイト。
+		skinning += boneMatrix[In.Indices[i]] * In.Weights[i];
+		w += In.Weights[i];
+	}
+	//最後のボーンを計算する。
+	skinning += boneMatrix[In.Indices[3]] * (1.0f - w);
+
+	float4 pos = mul(skinning, In.Position);
+
+	pos = mul(mView, pos);
+	pos = mul(mProj, pos);
+	psInput.Position = pos;
+	return psInput;
+}
+
 /// <summary>
 /// シャドウマップ描画用ピクセルシェーダーのエントリ関数。
 /// </summary>

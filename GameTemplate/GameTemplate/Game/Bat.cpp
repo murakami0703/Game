@@ -11,12 +11,15 @@ Bat::Bat()
 	m_animClips[eAnimation_Walk].SetLoopFlag(true);
 	m_animClips[eAnimation_Premove].Load(L"Assets/animData/bat/bat_premove.tka");
 	m_animClips[eAnimation_Attack].Load(L"Assets/animData/bat/bat_attack.tka");
-	m_animClips[eAnimation_Death].Load(L"Assets/animData/bat/bat_death.tka");
-
+	m_animClips[eAnimation_Death].Load(L"Assets/animData/bat/bat_dead.tka");
 	//cmoファイルの読み込み。
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemyModelRender->Init(L"Assets/modelData/bat.cmo", m_animClips, eAnimation_Num);
 	m_enemyModelRender->PlayAnimation(0);
+	m_position = { -4500.0f, 450.0f, -2500.0f };
+	m_scale = { 5.0f,5.0f,5.0f };
+	m_enemyModelRender->SetShadowMap(true);
+
 }
 
 
@@ -25,7 +28,8 @@ Bat::~Bat()
 }
 void Bat::Loitering()
 {
-
+	m_enemyModelRender->PlayAnimation(0);
+	m_state = eState_Follow;
 }
 void Bat::Follow()
 {
@@ -59,6 +63,8 @@ void Bat::Follow()
 		m_state = eState_Loitering;
 	}
 
+	m_enemyModelRender->PlayAnimation(0);
+
 }
 void Bat::Premove()
 {
@@ -70,7 +76,6 @@ void Bat::Premove()
 		m_state = eState_Attack;
 
 	}
-
 }
 void Bat::Attack()
 {
@@ -78,6 +83,12 @@ void Bat::Attack()
 	m_enemyModelRender->PlayAnimation(2);	//攻撃アニメの再生。
 	//エフェクト再生（攻撃）
 
+	//アニメが終わったので徘徊状態に遷移。
+	if (m_enemyModelRender->IsPlayingAnimation() != true)
+	{
+		m_state = eState_Loitering;
+
+	}
 }
 void Bat::Dead()
 {
@@ -96,6 +107,13 @@ void Bat::Update()
 	//プレイヤーとの距離を調べる。
 	m_playerPos = Player::GetInstance()->GetPosition();
 	m_toPlayerVec = m_playerPos - m_position;
+
+	//攻撃が当たったので死ぬ。
+	if (Player::GetInstance()->GetAttackflag() == true) {
+		if (m_toPlayerVec.Length() < 200.0f) {
+			m_state = eState_Dead;
+		}
+	}
 
 	switch (m_state)
 	{
@@ -120,5 +138,5 @@ void Bat::Update()
 	m_enemyModelRender->SetPosition(m_position);
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
-
+	
 }

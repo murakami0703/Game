@@ -58,6 +58,24 @@ public:
 	{
 		EnemyCount = x;
 	}
+	//////////////アイテム///////////////////
+	//回復薬
+	int GameData::GetItemHpRecovery() {
+		return m_hpRecovery;
+	}
+	//爆弾
+	int GameData::GetItemBum() {
+		return m_bum;
+	}
+	//攻撃力up
+	int GameData::GetItemAttackUp() {
+		return m_attackUp;
+	}
+	//移動速度up
+	int GameData::GetItemSpeedUp() {
+		return m_speedUp;
+	}
+
 	//////////////魂///////////////////
 	void  GameData::AnimaCalc(float x) {
 		Anima += x;
