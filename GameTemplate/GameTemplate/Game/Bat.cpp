@@ -16,7 +16,7 @@ Bat::Bat()
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemyModelRender->Init(L"Assets/modelData/bat.cmo", m_animClips, eAnimation_Num);
 	m_enemyModelRender->PlayAnimation(0);
-	m_position = { -4500.0f, 450.0f, -2500.0f };
+	m_position = { -4200.0f, 450.0f, -2500.0f };
 	m_scale = { 5.0f,5.0f,5.0f };
 	m_enemyModelRender->SetShadowMap(true);
 
@@ -48,7 +48,7 @@ void Bat::Follow()
 		m_state = eState_Premove;
 	}
 	//モデルの前方向。
-	CVector3 enemyForward = { 0.0f, 0.0f, -1.0f };
+	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
 	//　向かせたい方向のベクトルを計算する。
 	CVector3 targetVector = Player::GetInstance()->GetPosition() - m_position;
 	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
@@ -86,7 +86,7 @@ void Bat::Attack()
 	//アニメが終わったので徘徊状態に遷移。
 	if (m_enemyModelRender->IsPlayingAnimation() != true)
 	{
-		m_state = eState_Loitering;
+		//m_state = eState_Loitering;
 
 	}
 }

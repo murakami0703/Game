@@ -23,17 +23,18 @@ EffectManager::~EffectManager()
 }
 
 //エフェクト再生くん
-void EffectManager::EffectPlayer(Effect EF, CVector3 position, CVector3 scale) {
+void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scale) {
 	//作成
-	EffectPlay* p = g_goMgr->NewGameObject<EffectPlay>();
+	EffectPlay* m_player = g_goMgr->NewGameObject<EffectPlay>();
 	//名前を引っ張ってくる
 	int len = (int)wcslen(DetaBase[EF]);
 	for (int x = 0; x < len+1; x++) {
 		EF_Name[x] = DetaBase[EF][x];
 	}
 	//設定
-	p->SetAnimation(EF_Name);
-	p->SetPosition(position);
-	p->SetScale(scale);
+	m_player->SetAnimation(EF_Name);
+	m_player->SetPosition(position);
+	m_player->SetScale(scale);
 	
 }
+void EffectManager::Update(){}

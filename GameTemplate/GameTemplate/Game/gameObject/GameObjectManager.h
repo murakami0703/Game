@@ -54,6 +54,10 @@ public:
 	{
 		return &m_mainRenderTarget;
 	}
+
+	void SetMainSpriteMulColor(CVector4 mul) {
+		m_copyMainRtToFrameBufferSprite.SetMulColor(mul);
+	}
 private:
 	/// <summary>
 	/// プリレンダリング。

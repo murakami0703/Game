@@ -1,5 +1,7 @@
 #pragma once
 
+#include "EffectEngine.h"
+
 /// <summary>
 /// レンダリングモード。
 /// </summary>
@@ -58,6 +60,15 @@ public:
 	{
 		return m_backBuffer;
 	}
+
+	/// <summary>
+	/// EffectEngineクラスのインスタンスを取得。
+	/// </summary>
+	EffectEngine& GetEffectEngine()
+	{
+		return m_effectEngine;
+	}
+
 	/// <summary>
 	/// SpriteBatchの取得
 	/// </summary>
@@ -99,6 +110,7 @@ private:
 	ID3D11RasterizerState*	m_rasterizerState = NULL;	//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;		//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;	//デプスステンシルビュー。
+	EffectEngine			m_effectEngine;								//!<エフェクトエンジン。
 
 	std::unique_ptr<DirectX::SpriteBatch>	m_spriteBatch;				//!<スプライトバッチ。
 	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;				//!<スプライトフォント。

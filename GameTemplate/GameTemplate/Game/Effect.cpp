@@ -4,8 +4,6 @@
 
 Effect::Effect()
 {
-	//Effekseerを初期化。
-	InitEffekseer();
 
 }
 
@@ -13,53 +11,44 @@ Effect::~Effect()
 {
 }
 
-void Effect::InitEffekseer()
-{
-	//Effekseerの初期化。
-	//レンダラーを初期化。
-	m_effekseerRenderer = EffekseerRendererDX11::Renderer::Create(
-		g_graphicsEngine->GetD3DDevice(),			//D3Dデバイス。
-		g_graphicsEngine->GetD3DDeviceContext(),	//D3Dデバイスコンテキスト。
-		20000										//板ポリの最大数。
-	);
-	//エフェクトマネージャを初期化。
-	m_effekseerManager = Effekseer::Manager::Create(10000);
-
-	// 描画用インスタンスから描画機能を設定
-	m_effekseerManager->SetSpriteRenderer(m_effekseerRenderer->CreateSpriteRenderer());
-	m_effekseerManager->SetRibbonRenderer(m_effekseerRenderer->CreateRibbonRenderer());
-	m_effekseerManager->SetRingRenderer(m_effekseerRenderer->CreateRingRenderer());
-	m_effekseerManager->SetTrackRenderer(m_effekseerRenderer->CreateTrackRenderer());
-	m_effekseerManager->SetModelRenderer(m_effekseerRenderer->CreateModelRenderer());
-
-	// 描画用インスタンスからテクスチャの読込機能を設定
-	// 独自拡張可能、現在はファイルから読み込んでいる。
-	m_effekseerManager->SetTextureLoader(m_effekseerRenderer->CreateTextureLoader());
-	m_effekseerManager->SetModelLoader(m_effekseerRenderer->CreateModelLoader());
-
-}
 
 void Effect::Update()
 {
-	//Effekseerカメラ行列を設定。
-	//まずはEffeseerの行列型の変数に、カメラ行列とプロジェクション行列をコピー。
-	Effekseer::Matrix44 efCameraMat;
-	g_camera3D.GetViewMatrix().CopyTo(efCameraMat);
-	Effekseer::Matrix44 efProjMat;
-	g_camera3D.GetProjectionMatrix().CopyTo(efProjMat);
-	//カメラ行列とプロジェクション行列を設定。
-	m_effekseerRenderer->SetCameraMatrix(efCameraMat);
-	m_effekseerRenderer->SetProjectionMatrix(efProjMat);
-	//Effekseerを更新。
-	m_effekseerManager->Update();
-
 }
-void Effect::Render()
+void Effect::Release()
 {
-	//エフェクトは不透明オブジェクトを描画した後で描画する。
-	m_effekseerRenderer->BeginRendering();
-	m_effekseerManager->Draw();
-	m_effekseerRenderer->EndRendering();
-
+	if (m_handle != -1) {
+		g_graphicsEngine->GetEffectEngine().Stop(m_handle);
+		m_handle = -1;
+	}
 }
 
+void Effect::Play(const wchar_t* filePath)
+{
+	//int nameKey = UtilMakeHash(filePath);
+
+	EffectEngine& ee = g_graphicsEngine->GetEffectEngine();
+	if (m_effect == nullptr) {
+		//未登録。
+		m_effect = ee.CreateEffekseerEffect(filePath);
+		if (m_effect == nullptr) {
+			char message[256];
+			sprintf(message, "エフェクトのロードに失敗しました。%ls", filePath);
+		}
+	}
+	m_handle = g_graphicsEngine->GetEffectEngine().Play(m_effect);
+}
+/*void Effect::Update()
+{
+	CMatrix mTrans, mRot, mScale, mBase;
+	mTrans.MakeTranslation(m_position);
+	mRot.MakeRotationFromQuaternion(m_rotation);
+	mScale.MakeScaling(m_scale);
+	mBase = mScale * mRot;
+	mBase = mBase * mTrans;
+	g_graphicsEngine->GetEffectEngine().GetEffekseerManager().SetBaseMatrix(m_handle, mBase);
+	if (IsPlay() == false) {
+		//再生完了したら終わる。
+		g_goMgr->DeleteGameObject(this);
+	}
+}*/

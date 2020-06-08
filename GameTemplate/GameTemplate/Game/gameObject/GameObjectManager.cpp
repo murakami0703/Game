@@ -58,6 +58,7 @@ void GameObjectManager::Update()
 		m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 		g_camera2D.Update();
 
+		g_graphicsEngine->GetEffectEngine().Update();
 		//シャドウマップを更新。
 		CVector3 m_playerPos = Player::GetInstance()->GetPosition();
 		m_shadowMap.Update(
@@ -151,6 +152,7 @@ void GameObjectManager::Post2DRender()
 	for (auto go : m_goList) {
 		go->PostRender();
 	}
+	g_graphicsEngine->GetEffectEngine().Render();
 
 
 	//レンダリングターゲットとデプスステンシルの参照カウンタを下す。

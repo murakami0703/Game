@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "ShadowMap.h"
 #include "GameData.h"
+#include "EffectManager.h"
+
 
 Player* Player::m_instance = nullptr;
 
@@ -28,6 +30,7 @@ Player::Player()
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 	m_skinModelRender->SetShadowMap(true);
+
 }
 Player::~Player()
 {
@@ -47,9 +50,12 @@ void Player::Move()
 {
 	m_move.x = 0.0f;
 	m_move.z = 0.0f;
+	EffectManager* effect = EffectManager::GetInstance();
 
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
+		effect->EffectPlayer(EffectManager::test, m_position, { 3.0f,3.0f,3.0f });
+
 		m_move.x -= m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
 

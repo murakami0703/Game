@@ -110,8 +110,16 @@ public:
 	{
 		m_sprite.DeltaAlpha(delta);
 	}
-
-
+	/// <summary>
+	/// 座標と拡大率をまとめて設定。
+	/// </summary>
+	/// <param name="position">座標</param>
+	/// <param name="scl">拡大率</param>
+	void SetPosScale(const CVector3& position, const CVector3& scl)
+	{
+		m_position = position;
+		m_scale = scl;
+	}
 private:
 	Sprite	m_sprite;				//スプライト。
 	CVector3 m_position = CVector3().Zero();			//座標

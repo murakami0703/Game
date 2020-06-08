@@ -10,6 +10,44 @@ Result::Result()
 		}
 	m_instance = this;
 
+	//ÉäÉUÉãÉg
+	{
+		//0î‘Å®R
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_R.dds", 220.0f, 760.0f);
+		m_itemSprite->SetPosition({ -500.0f,0.0f,0.0f });
+		m_spriteRender.push_back(m_itemSprite);
+
+		//1î‘Å®e
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_e.dds", 200.0f, 760.0f);
+		m_itemSprite->SetPosition({ -300.0f,0.0f,0.0f });
+		m_spriteRender.push_back(m_itemSprite);
+
+		//2î‘Å®s
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_s.dds", 210.0f, 760.0f);
+		m_itemSprite->SetPosition({ -100.0f,0.0f,0.0f });
+		m_spriteRender.push_back(m_itemSprite);
+
+		//3î‘Å®u
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_u.dds", 200.0f, 760.0f);
+		m_itemSprite->SetPosition({ 100.0f,0.0f,0.0f });
+		m_spriteRender.push_back(m_itemSprite);
+		//2î‘Å®l
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_l.dds", 200.0f, 760.0f);
+		m_itemSprite->SetPosition({ 300.0f,0.0f,0.0f });
+		m_spriteRender.push_back(m_itemSprite);
+
+		//3î‘Å®t
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_t.dds", 220.0f, 760.0f);
+		m_itemSprite->SetPosition({ 500.0f,0.0f,0.0f });
+		m_spriteRender.push_back(m_itemSprite);
+
+	}
 	//Ç”ÇßÇÒÇ∆
 	m_font = g_goMgr->NewGameObject<FontRender>();
 	const wchar_t* str = L"Ç®ÇÌÇËÅ`Å`Å`Å`Å`Å`Å`";
@@ -24,6 +62,11 @@ Result::~Result()
 	m_instance = nullptr;
 
 }
+void Result::SpriteBound(SpriteRender& m_sprite)
+{
+
+}
+
 void Result::Update()
 {
 

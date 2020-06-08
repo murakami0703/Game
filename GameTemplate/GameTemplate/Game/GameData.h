@@ -76,6 +76,11 @@ public:
 		return m_speedUp;
 	}
 
+	void GameData::ItemHpRecovery()
+	{
+		m_hpRecovery++;
+	}
+
 	//////////////ç∞///////////////////
 	void  GameData::AnimaCalc(float x) {
 		Anima += x;

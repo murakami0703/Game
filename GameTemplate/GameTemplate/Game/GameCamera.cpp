@@ -21,11 +21,11 @@ void GameCamera::Update()
 	CVector3 p_pos = Player::GetInstance()->GetPosition();
 	//視点の計算。
 	cameraPos.x = p_pos.x;
-	cameraPos.y = p_pos.y + 500.0f;
+	cameraPos.y = p_pos.y + 600.0f;
 	cameraPos.z = p_pos.z - 300.0f;
 	//注視点の計算。
 	cameraTarget.x = p_pos.x;
-	cameraTarget.y = p_pos.y + 120.0f;
+	cameraTarget.y = p_pos.y + 200.0f;
 	cameraTarget.z = p_pos.z;
 	//3Dカメラに注視点と視点を設定。
 	g_camera3D.SetTarget(cameraTarget);

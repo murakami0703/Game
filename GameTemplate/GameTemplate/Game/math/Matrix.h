@@ -29,6 +29,34 @@ public:
 	{
 		return DirectX::XMLoadFloat4x4(&mat);
 	}
+	/////////////////////////
+	operator Effekseer::Matrix44() const
+	{
+		Effekseer::Matrix44 eMat = *((Effekseer::Matrix44*)&mat);
+		return eMat;
+	}
+	operator Effekseer::Matrix43() const
+	{
+		Effekseer::Matrix43 eMat;
+		eMat.Value[0][0] = mat.m[0][0];
+		eMat.Value[0][1] = mat.m[0][1];
+		eMat.Value[0][2] = mat.m[0][2];
+
+		eMat.Value[1][0] = mat.m[1][0];
+		eMat.Value[1][1] = mat.m[1][1];
+		eMat.Value[1][2] = mat.m[1][2];
+
+		eMat.Value[2][0] = mat.m[2][0];
+		eMat.Value[2][1] = mat.m[2][1];
+		eMat.Value[2][2] = mat.m[2][2];
+
+		eMat.Value[3][0] = mat.m[3][0];
+		eMat.Value[3][1] = mat.m[3][1];
+		eMat.Value[3][2] = mat.m[3][2];
+
+		return eMat;
+	}
+	///////////////////////////
 	CMatrix() {
 
 	}
@@ -231,6 +259,17 @@ public:
 		mat = lm;
 	}
 	/*!
+	*@brief	行列の代入演算子
+	*@details
+	* this = this * _m;
+	*/
+	const CMatrix& operator*=(const CMatrix& _m)
+	{
+		Mul(*this, _m);
+		return *this;
+	}
+
+	/*!
 	 *@brief	逆行列を計算。
 	 *@param[in]	m	元になる行列。
 	 */
@@ -258,4 +297,18 @@ public:
 		);
 		return identity;
 	}
+
+
 };
+
+/*!
+*@brief	行列同士の乗算。
+*@details
+* 乗算は左から右に向かってかかっていく。
+*/
+static inline CMatrix operator*(const CMatrix& m1, const CMatrix m2)
+{
+	CMatrix mRet;
+	mRet.Mul(m1, m2);
+	return mRet;
+}

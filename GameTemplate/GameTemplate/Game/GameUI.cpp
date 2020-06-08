@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameUI.h"
 #include "GameData.h"
+#include "Item.h"
 
 GameUI* GameUI::m_instance = nullptr;
 
@@ -87,13 +88,8 @@ GameUI::GameUI()
 			}
 		}
 	}
-	//ふぉんと
-	/*m_font = g_goMgr->NewGameObject<FontRender>();
-	const wchar_t* str = L"「あなただけのデッサン人形」 を作成しポーズを取らせよう！\nデザインドールは3D空間の人体モデルを自在に操るソフトウェアです。\n人物モデルのポーズ集 や 3Dモデルエクスポータ としても\nご利用いただけるソフトウェアです。";
-	m_font->SetText(str);
-	m_font->SetPosition({ -500.0f,0.0f });
-	
-	m_font->SetPivot({ 0.2f,0.2f });*/
+	//アイテム
+	g_goMgr->NewGameObject<Item>();
 }
 
 
@@ -116,84 +112,8 @@ void GameUI::ScalingSelectCase() {
 	m_spriteRender[4]->SetScale(m_itemZSCScale);
 }
 
-void GameUI::ItemSelect()
-{
-	/*//あるアイテムの選択
-	//選択中は大きい。それ以外は小さくなります。
-	switch (m_SIstate)
-	{
-	case GameUI::Fire:
-		//炎選択中
-		itemFScale = m_nowSelect;
-		m_itemKScale = m_NoSelect;
-		m_itemLScale = m_NoSelect;
-		m_itemTSScale = m_NoSelect;
-		if (g_pad[0].IsTrigger(enButtonLB1)) {
-			//左隣
-			m_SIstate = Nuts;
-		}
-		else if (g_pad[0].IsTrigger(enButtonRB1)) {
-			//右隣
-			m_SIstate = SPtime;
-		}
-		break;
-	case GameUI::Nuts:
-		//木の実
-		itemFScale = m_NoSelect;
-		m_itemKScale = m_nowSelect;
-		m_itemLScale = m_NoSelect;
-		m_itemTSScale = m_NoSelect;
-		if (g_pad[0].IsTrigger(enButtonLB1)) {
-			//左隣
-			m_SIstate = Lanp;
-		}
-		else if (g_pad[0].IsTrigger(enButtonRB1)) {
-			//右のアイテム選択します
-			m_SIstate = Fire;
-		}
-		break;
-	case GameUI::Lanp:
-		//ランプ
-		itemFScale = m_NoSelect;
-		m_itemKScale = m_NoSelect;
-		m_itemLScale = m_nowSelect;
-		m_itemTSScale = m_NoSelect;
-		if (g_pad[0].IsTrigger(enButtonLB1)) {
-			//左隣
-			m_SIstate = SPtime;
-		}
-		else if (g_pad[0].IsTrigger(enButtonRB1)) {
-			//右隣
-			m_SIstate = Nuts;
-		}
-		break;
-	case GameUI::SPtime:
-		//時間停止
-		itemFScale = m_NoSelect;
-		m_itemKScale = m_NoSelect;
-		m_itemLScale = m_NoSelect;
-		m_itemTSScale = m_nowSelect;
-		if (g_pad[0].IsTrigger(enButtonLB1)) {
-			//左隣
-			m_SIstate = Fire;
-		}
-		else if (g_pad[0].IsTrigger(enButtonRB1)) {
-			//右隣
-			m_SIstate = Lanp;
-		}
-
-		break;
-	}
-	m_SIstate;*/
-}
 
 
-void GameUI::HPAdd()
-{
-	//HPの増減させるよ
-	m_hp = GameData::GetInstance()->GetHitPoint();
-	//消えまーすよ
-}
 
 void GameUI::Update()
 {

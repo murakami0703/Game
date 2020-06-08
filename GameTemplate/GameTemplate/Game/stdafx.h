@@ -51,7 +51,6 @@
 
 #include "sprite/SpriteStandby.h"
 #include "sprite/Sprite.h"
-#include "Effect.h"
 
 #include "ShadowMap.h"
 #include "RenderTarget.h"

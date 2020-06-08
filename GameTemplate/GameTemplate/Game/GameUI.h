@@ -11,16 +11,6 @@ public:
 	void Update();
 
 	/// <summary>
-	/// アイテム選択処理
-	/// </summary>
-	void ItemSelect();
-	/// <summary>
-	/// HP増減処理
-	/// </summary>
-	void HPAdd();
-
-
-	/// <summary>
 	/// インスタンスの取得。
 	/// </summary>
 	/// <returns>インスタンス</returns>
