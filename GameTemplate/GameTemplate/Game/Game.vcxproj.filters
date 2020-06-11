@@ -578,6 +578,15 @@
     <ImageContentTask Include="Assets\sprite\result\Result_u.png">
       <Filter>Assets\sprite\result</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Backgraund.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\jewelry_01.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\tesst.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

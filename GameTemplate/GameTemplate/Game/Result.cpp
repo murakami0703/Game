@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Result.h"
+#include "Gamedata.h"
 
 Result* Result::m_instance = nullptr;
 
@@ -9,93 +10,138 @@ Result::Result()
 			std::abort();//Ç∑Ç≈Ç…èoÇƒÇ¢ÇÈÇΩÇﬂÉNÉâÉbÉVÉÖ
 		}
 	m_instance = this;
-	//ÉäÉUÉãÉg
+
+	//îwåiÇ≈ìÆÇ©Ç∑texture
 	{
-		//0î‘Å®R
+		//0î‘Å®Result_Backgraund1
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/Result_R.dds", 220.0f, 760.0f);
-		m_itemSprite->SetPosition({ -m_startXPos3,m_startYPos,0.0f });
+		m_itemSprite->Init(L"Assets/sprite/Result_Backgraund.dds", 1280.0f, 720.0f);
+		m_itemSprite->SetAlpha(0.0f);
+		m_spriteRender.push_back(m_itemSprite);
+		//1î‘Å®Result_Backgraund2
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_Backgraund.dds", 1280.0f, 720.0f);
+		m_itemSprite->SetAlpha(0.0f);
+		m_spriteRender.push_back(m_itemSprite);
+	}
+	//2î‘Å®R
+	m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+	m_itemSprite->Init(L"Assets/sprite/tesst.dds", 1280, 720.0f);
+	m_itemSprite->SetPosition(m_bgStartPos);
+	m_itemSprite->SetAlpha(1.0f);
+	m_spriteRender.push_back(m_itemSprite);
+
+	//ÉäÉUÉãÉgï∂éö
+	{
+
+		//3î‘Å®R
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_R.dds", 200.0f, 760.0f);
+		m_itemSprite->SetPosScale(m_resultPos1, m_resultScale);
 		m_itemSprite->SetAlpha(0.0f);
 		m_spriteRender.push_back(m_itemSprite);
 
-		//1î‘Å®e
+		//4î‘Å®e
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/Result_e.dds", 200.0f, 760.0f);
-		m_itemSprite->SetPosition({ -m_startXPos2,m_startYPos,0.0f });
+		m_itemSprite->Init(L"Assets/sprite/Result_e.dds", 210.0f, 760.0f);
+		m_itemSprite->SetPosScale(m_resultPos2, m_resultScale);
 		m_itemSprite->SetAlpha(0.0f);
 		m_spriteRender.push_back(m_itemSprite);
 
-		//2î‘Å®s
+		//5î‘Å®s
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/Result_s.dds", 210.0f, 760.0f);
-		m_itemSprite->SetPosition({ -m_startXPos1,m_startYPos,0.0f });
+		m_itemSprite->Init(L"Assets/sprite/Result_s.dds", 200.0f, 760.0f);
+		m_itemSprite->SetPosScale(m_resultPos3, m_resultScale);
 		m_itemSprite->SetAlpha(0.0f);
 		m_spriteRender.push_back(m_itemSprite);
 
-		//3î‘Å®u
+		//6î‘Å®u
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_itemSprite->Init(L"Assets/sprite/Result_u.dds", 200.0f, 760.0f);
-		m_itemSprite->SetPosition({ m_startXPos1,m_startYPos,0.0f });
-		m_itemSprite->SetAlpha(0.0f);
-		m_spriteRender.push_back(m_itemSprite);
-		//2î‘Å®l
-		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/Result_l.dds", 200.0f, 760.0f);
-		m_itemSprite->SetPosition({ m_startXPos2,m_startYPos,0.0f });
+		m_itemSprite->SetPosScale(m_resultPos4, m_resultScale);
 		m_itemSprite->SetAlpha(0.0f);
 		m_spriteRender.push_back(m_itemSprite);
 
-		//3î‘Å®t
+		//7î‘Å®l
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/Result_l.dds", 220.0f, 760.0f);
+		m_itemSprite->SetPosScale(m_resultPos5, m_resultScale);
+		m_itemSprite->SetAlpha(0.0f);
+		m_spriteRender.push_back(m_itemSprite);
+
+		//8î‘Å®t
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_itemSprite->Init(L"Assets/sprite/Result_t.dds", 220.0f, 760.0f);
-		m_itemSprite->SetPosition({ m_startXPos3,m_startYPos,0.0f });
+		m_itemSprite->SetPosScale(m_resultPos6, m_resultScale);
 		m_itemSprite->SetAlpha(0.0f);
 		m_spriteRender.push_back(m_itemSprite);
 
 	}
-	//Ç”ÇßÇÒÇ∆
-	m_font = g_goMgr->NewGameObject<FontRender>();
-	const wchar_t* str = L"Ç®ÇÌÇËÅ`Å`Å`Å`Å`Å`Å`";
-	m_font->SetText(str);
-	m_font->SetPosition({ -500.0f,0.0f });
+	//ïÛêŒä÷òA
+	{
+		//8î‘Å®ïÛêŒ
+		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_itemSprite->Init(L"Assets/sprite/jewelry_01.png.dds", 400.0f, 600.0f);
+		m_itemSprite->SetAlpha(0.5f);
+		m_spriteRender.push_back(m_itemSprite);
 
-	m_font->SetPivot({ 0.2f,0.2f });
-	
+	}
+
+	//Ç”ÇßÇÒÇ∆
+	{
+		m_font = g_goMgr->NewGameObject<FontRender>();
+		const wchar_t* str = L"Ç®ÇÌÇËÅ`Å`Å`Å`Å`Å`Å`";
+		m_font->SetText(str);
+		m_font->SetPosition({ -500.0f,0.0f });
+
+		m_font->SetPivot({ 0.2f,0.2f });
+	}
 }
 Result::~Result()
 {
 	m_instance = nullptr;
 
 }
-void Result::SpriteBound(SpriteRender* m_sprite)
+void Result::SpriteMove(SpriteRender* m_sprite)
 {
-	CVector3 m_position = m_sprite->GetPosition();			//ç¿ïWÅB
-	float alpha = m_sprite->GetAlpha();			//ç¿ïWÅB
+	CVector3 m_position = m_sprite->GetPosition();	//ç¿ïWÅB
+	float m_alpha = m_sprite->GetAlpha();			//ìßñæìx
+	if (m_position.y > m_resultSetYPos) {
+			m_position.y -= 10.0f;
 
-	if (alpha <= 1.0f) {
-		alpha += (1.0f / 60.0);
 	}
-
-	if (m_position.y <= 0.0f) {
-		m_a = -m_a;
-	}
-	else if (m_position.y >= 250.0f) {
-			m_position.y -= m_a;
+	if (m_alpha < 1.0f) {
+		m_alpha += 0.1f;
 
 	}
 	m_sprite->SetPosition(m_position);
-	m_sprite->SetAlpha(alpha);
+	m_sprite->SetAlpha(m_alpha);
 
 }
 void  Result::Bound()
 {
-	//ResultspriteÇÉoÉEÉìÉhï\é¶ÅB
+	//BackgraundÇï\é¶ÅB
+	//âEÇ©ÇÁï\é¶Ç≥ÇπÇÈ
+	CVector3 m_position = m_spriteRender[2]->GetPosition();	//ç¿ïWÅB
+	if (m_position.x > 0.0f) {
+		m_position.x -= 20.0f;
+		m_spriteRender[2]->SetPosition(m_position);
 
-
+	}
+	else {
+		m_state = Result_SpriteMove;
+	}
+	
 }
 void  Result::TopLeft()
 {
 	//ResultspriteÇèkè¨ÅAç∂è„Ç…ÅB
+	SpriteMove(m_spriteRender[3]);
+	SpriteMove(m_spriteRender[4]);
+	SpriteMove(m_spriteRender[5]);
+	SpriteMove(m_spriteRender[6]);
+	SpriteMove(m_spriteRender[7]);
+	SpriteMove(m_spriteRender[8]);
 
 }
 void  Result::Soul()
@@ -115,15 +161,12 @@ void  Result::Jewelry()
 
 void Result::Update()
 {
-	SpriteBound(m_spriteRender[0]);
-	SpriteBound(m_spriteRender[1]);
-
 	switch (m_state)
 	{
-	case Result::Result_Bound:
+	case Result::Result_Background:
 		Bound();
 		break;
-	case Result::Result_TopLeft:
+	case Result::Result_SpriteMove:
 		TopLeft();
 		break;
 	case Result::Result_Soul:

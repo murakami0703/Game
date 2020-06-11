@@ -323,6 +323,13 @@
     <ImageContentTask Include="Assets\sprite\result\Result_t.png" />
     <ImageContentTask Include="Assets\sprite\result\Result_u.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\result\jewelry_01.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_Backgraund.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\result\tesst.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />
