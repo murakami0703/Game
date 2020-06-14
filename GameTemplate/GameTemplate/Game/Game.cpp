@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "GameCamera.h"
 #include "Player.h"
-#include "Bat.h"
+#include "Ghost.h"
 #include "GameData.h"
 #include "LevelSet.h"
 #include "GameUI.h"
@@ -22,7 +22,7 @@ Game::Game()
 	g_goMgr->NewGameObject<GameData>();
 	g_goMgr->NewGameObject<LevelSet>();
 	g_goMgr->NewGameObject<GameUI>();
-	g_goMgr->NewGameObject<Bat>();
+	g_goMgr->NewGameObject<Ghost>();
 
 
 	g_goMgr->NewGameObject<SiegePoint>();

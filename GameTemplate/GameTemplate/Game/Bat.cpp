@@ -18,7 +18,6 @@ Bat::Bat()
 	m_enemyModelRender->PlayAnimation(0);
 	m_position = { -4200.0f, 450.0f, -2500.0f };
 	m_scale = { 5.0f,5.0f,5.0f };
-	//m_characon.Init(20.0f, 30.0f, m_position);//ƒLƒƒƒ‰ƒRƒ“
 	m_enemyModelRender->SetShadowMap(true);
 
 }

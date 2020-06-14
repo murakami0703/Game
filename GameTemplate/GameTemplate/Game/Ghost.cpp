@@ -24,7 +24,6 @@ Ghost::Ghost()
 	m_scale = { 2.0f, 2.0f, 2.0f };
 
 	//m_oldPos = m_position;		//初期座標をm_oldPosに設定。
-	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_enemyModelRender->SetShadowMap(true);
 
 }
@@ -50,7 +49,7 @@ void Ghost::Follow()
 	if (m_toBPVec.Length() > 50.0f) {
 		m_toBPVec.y = 0.0f;
 		m_toBPVec.Normalize();
-		moveVec = m_toBPVec * 200.0f;
+		m_position += m_toBPVec * 2.0f;
 
 	}
 	/*else if (m_toBPVec.Length() < 10.0f) {
@@ -82,7 +81,6 @@ void Ghost::Follow()
 		m_battlePoint = nullptr;
 		m_state = eState_Loitering;
 	}
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(1);
 
 }
@@ -93,7 +91,6 @@ void Ghost::Loitering()
 	Player* player = Player::GetInstance();
 	CVector3 P_Position = player->GetPosition();
 	CVector3 diff = P_Position - m_position;
-	m_position;
 	count++;
 	if (flag == true) {
 		//ランダムで方向を決定して動きます
@@ -107,8 +104,7 @@ void Ghost::Loitering()
 	else if (count >= randomCount) {
 		flag = true;
 	}
-	moveVec = walkmove * randomSpeed;
-	m_position = m_characon.Execute(m_caraTime, moveVec);
+	m_position += walkmove * 5.0f;
 
 	if (diff.Length() < 500.0f) {
 		//プレイヤーとの距離が近くなったら追跡します
@@ -130,12 +126,14 @@ void Ghost::Premove()
 	diff.Normalize();
 
 	timer1++;
-	if (timer1 <= 20) {
-		moveVec = diff * 200.0f;
+	if (timer1 <= 10) {
+		m_position += diff * 2.0f;
+		m_position.y -= 2.0f;
+
 	}
-	else if (timer1 >= 20 && timer1 <= 50) {
-		moveVec += diff * 0.2f;
-		moveVec.y += 20.0f;
+	else if (timer1 >= 10 && timer1 <= 50) {
+		moveVec += diff * 10.0f;
+		m_position.y += 3.0f;
 	}
 	else {
 		timer1 = 0;
@@ -163,7 +161,6 @@ void Ghost::Premove()
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
 
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(2,0.5f);
 }
 void Ghost::Attack()
@@ -174,13 +171,8 @@ void Ghost::Attack()
 
 
 	if (m_position.y >= 400.0f) {
-		moveVec = dff * 1000.0f;
+		m_position += dff * 50.0f;
 	}
-	else {
-		moveVec = { 0.0f,0.0f,0.0f };
-
-	}
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 
 
 

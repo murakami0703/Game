@@ -38,11 +38,11 @@ void LevelSet::LevelSetting()
 		}
 		//ƒXƒ‰ƒCƒ€
 		if (objData.EqualObjectName(L"ghosts")) {
-			/*Ghost* m_ghost = g_goMgr->NewGameObject<Ghost>();
+			Ghost* m_ghost = g_goMgr->NewGameObject<Ghost>();
 			m_ghost->SetPosition(objData.position);
 			m_ghost->SetRotation(objData.rotation);
 			m_ghost->SetScale(objData.scale);
-			*/
+			
 			m_enemyCount++;
 
 			return true;
