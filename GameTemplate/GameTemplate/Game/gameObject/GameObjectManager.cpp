@@ -58,13 +58,14 @@ void GameObjectManager::Update()
 		m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 		g_camera2D.Update();
 
-		g_graphicsEngine->GetEffectEngine().Update();
 		//シャドウマップを更新。
 		CVector3 m_playerPos = Player::GetInstance()->GetPosition();
 		m_shadowMap.Update(
 			{ m_playerPos.x + 400.0f,  (m_playerPos.y + 500.0f),  m_playerPos.z + 200.0f},
 			{ m_playerPos.x,  m_playerPos.y ,  m_playerPos.z }
 		);
+
+		g_graphicsEngine->GetEffectEngine().Update();
 	}
 	//登録されているゲームオブジェクトの描画関数を呼ぶ。
 	{
@@ -152,7 +153,7 @@ void GameObjectManager::Post2DRender()
 	for (auto go : m_goList) {
 		go->PostRender();
 	}
-	g_graphicsEngine->GetEffectEngine().Render();
+	g_graphicsEngine->GetEffectEngine().EffektRender();
 
 
 	//レンダリングターゲットとデプスステンシルの参照カウンタを下す。

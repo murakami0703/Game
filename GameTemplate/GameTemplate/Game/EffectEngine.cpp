@@ -71,7 +71,7 @@ void EffectEngine::Update()
 	m_effekseerManager->Update();
 
 }
-void EffectEngine::Render()
+void EffectEngine::EffektRender()
 {
 	//エフェクトは不透明オブジェクトを描画した後で描画する。
 	m_effekseerRenderer->BeginRendering();

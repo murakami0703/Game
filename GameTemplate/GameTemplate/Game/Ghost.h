@@ -1,4 +1,5 @@
 #pragma once
+#include "character/CharacterController.h"
 
 class BattlePoint;
 class Ghost : public IGameObject
@@ -51,6 +52,7 @@ private:
 
 	// 状態
 	enum EState {
+		eState_Idle,	//待機。
 		eState_Loitering,	//徘徊。
 		eState_Follow,		//プレイヤーを追跡。
 		eState_Premove,		//攻撃。
@@ -60,13 +62,15 @@ private:
 	};
 
 	enum EAnimationClip {
+		eAnimation_Idle,
 		eAnimation_Walk,
-		eAnimation_Attack,
+		eAnimation_Premove,
 		eAnimation_Death,
 		eAnimation_Num
 	};
 
 private:
+	void Idle();	//待機。
 	void Loitering();	//徘徊。
 	void Follow();		//プレイヤーを追跡。
 	void Premove();		//予備動作。
@@ -80,9 +84,10 @@ private:
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
 
-	EState m_state = eState_Loitering;					//状態。
+	EState m_state = eState_Idle;					//状態。
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+	CharacterController m_characon;		//キャラコン
 
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 
@@ -97,6 +102,20 @@ private:
 	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 	//攻撃判定
 	bool EneAttackflag = false;					//攻撃中ですか？
+
+	CVector3 walkmove = CVector3().Zero();		// 座標。
+	int count = 0;							//移動用カウント
+	int wrandom = 0;						//移動の方向乱数
+	const int randomCount = 120;			//ランダムで移動方向切り替えタイマー
+	const float randomSpeed = 120.0f;			//移動速度
+
+	CVector3 moveVec = CVector3().Zero();			//座標。
+	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間
+	bool flag = true;
+	float a = 30.0f;
+	float timer = 0;
+	float timer1 = 0;
+	CVector3 dff = CVector3().Zero();
 
 };
 

@@ -14,9 +14,10 @@
 
 Game::Game()
 {
-	g_goMgr->NewGameObject<EffectManager>();
 
 	g_goMgr->NewGameObject<GameCamera>();
+	g_goMgr->NewGameObject<EffectManager>();
+
 	g_goMgr->NewGameObject<Player>();
 	g_goMgr->NewGameObject<GameData>();
 	g_goMgr->NewGameObject<LevelSet>();
@@ -35,8 +36,9 @@ Game::~Game()
 
 void Game::Update() {
 
+
 	GameData* m_gamedate = GameData::GetInstance();
-	if (m_gamedate->GetEnemyCount() <= 12 && m_gamedate->ResultFlag() == true) {
+	if (m_gamedate->GetEnemyCount() >= 12 && m_gamedate->ResultFlag() == true) {
 		g_goMgr->SetMainSpriteMulColor({ 0.3f,0.3f, 0.3f, 1.0f });
 		g_goMgr->NewGameObject<Result>();
 		m_gamedate->SetResultFlag(false);

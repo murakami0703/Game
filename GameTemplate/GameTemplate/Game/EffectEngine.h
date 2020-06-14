@@ -8,7 +8,7 @@ public:
 	//XV
 	void Update();
 	//•`‰æ
-	void Render();
+	void EffektRender();
 
 	//Effekseer‚Ì‰Šú‰»B
 	void InitEffekseer();

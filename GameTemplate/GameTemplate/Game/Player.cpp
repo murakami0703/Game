@@ -54,7 +54,7 @@ void Player::Move()
 
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
-		effect->EffectPlayer(EffectManager::test, m_position, { 3.0f,3.0f,3.0f });
+		//effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
 
 		m_move.x -= m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
@@ -79,6 +79,7 @@ void Player::Move()
 		//ジャンプ
 		//m_move.y = m_jumpPos;
 	}
+
 	m_move.y -= 1.0f;
 	if (m_characon.IsOnGround()) {
 		//重力ストップ

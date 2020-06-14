@@ -325,10 +325,23 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\result\jewelry_01.png" />
-    <ImageContentTask Include="Assets\sprite\result\Result_Backgraund.png" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\result\tesst.png" />
+    <ImageContentTask Include="Assets\sprite\soul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\result\Result_Backgraund.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_DotLine.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_Font1.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_Font2.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_Frame.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_Frame2.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_ItemFrame.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_Soulframe.png" />
+    <ImageContentTask Include="Assets\sprite\result\Result_Triangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\result\Result_Font3.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

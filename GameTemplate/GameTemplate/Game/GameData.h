@@ -82,7 +82,7 @@ public:
 	}
 
 	//////////////ç∞///////////////////
-	void  GameData::AnimaCalc(float x) {
+	void  GameData::AnimaCalc(int x) {
 		Anima += x;
 		if (Anima < 0) {
 			Anima = 0;
@@ -101,6 +101,10 @@ public:
 	bool  GameData::ResultFlag()
 	{
 		return resultflag;
+	}
+	//ëÃóÕéÊìæ
+	float GameData::GetAnima() {
+		return Anima;
 	}
 
 	/////////////////////////////////// 
@@ -127,8 +131,8 @@ private:
 	int EnemyCount = 0;	//ìGÇÃêî
 
 	//ÇΩÇ‹ÇµÇ¢
-	float Anima = 0.0f;	//éGãõÇ©ÇÁñ·Ç¶ÇÈç∞
-	const float MAXAnima = 999.0f;	//ç≈ëÂAnima
+	int Anima = 50;	//éGãõÇ©ÇÁñ·Ç¶ÇÈç∞
+	const int MAXAnima = 999;	//ç≈ëÂAnima
 	int BigAnima = 0;	//É{ÉXÇ©ÇÁñ·Ç¶ÇÈç∞
 
 	bool resultflag = true;
