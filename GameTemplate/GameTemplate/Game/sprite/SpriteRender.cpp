@@ -3,6 +3,10 @@
 
 
 
+	bool SpriteRender::Start()
+	{
+		return true;
+	}
 
 	void SpriteRender::Init(const wchar_t* texFilePath, float w, float h)
 	{

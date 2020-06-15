@@ -6,8 +6,7 @@ class IGameObject
 {
 public:
 	IGameObject() :
-		m_priority(0),
-		m_isStart(false)
+		m_priority(0)
 	{
 	}
 	/// <summary>
@@ -55,8 +54,17 @@ public:
 	bool IsRequestDelete() {
 		return isReqDelete;
 	}
+
+	bool IsStart() {
+		return m_isStart;
+	}
+
+	void StartFlag(bool flag) {
+		m_isStart = flag;
+	}
+
 private:
-	bool m_isStart;						//Startの開始フラグ。
+	bool m_isStart = false;			//Startの開始フラグ。
 	bool isReqDelete = false;		//削除リクエスト。
 	GameObjectPrio m_priority;		//実行優先度。
 	

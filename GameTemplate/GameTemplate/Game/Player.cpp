@@ -11,6 +11,14 @@ Player::Player()
 {
 	m_instance = this;
 
+}
+Player::~Player()
+{
+}
+
+bool Player::Start()
+{
+
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[Animation_Idel].Load(L"Assets/animData/eneIdle.tka");
 	m_animClips[Animation_Idel].SetLoopFlag(true);
@@ -22,7 +30,7 @@ Player::Player()
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_skinModelRender->Init(L"Assets/modelData/Footman_Default.cmo", m_animClips, AnimationClip_Num);
-	m_position= { -4500.0f, 400.0f, -2500.0f };
+	m_position = { -4300.0f, 400.0f, -3000.0f };
 	m_skinModelRender->SetPosition(m_position);
 
 	m_scale = { 50.0f, 50.0f, 50.0f };
@@ -31,10 +39,9 @@ Player::Player()
 	m_move = m_position;
 	m_skinModelRender->SetShadowMap(true);
 
+	return true;
 }
-Player::~Player()
-{
-}
+
 void Player::Idel()
 {
 	m_skinModelRender->PlayAnimation(0);

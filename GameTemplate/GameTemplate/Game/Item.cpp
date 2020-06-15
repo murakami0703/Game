@@ -4,6 +4,14 @@
 
 Item::Item()
 {
+}
+
+Item::~Item()
+{
+}
+
+bool Item::Start()
+{
 	//アイテム
 	{
 		//0番→回復薬
@@ -33,21 +41,19 @@ Item::Item()
 		m_itemSprite->SetPosition(m_item4Pos);
 		m_itemSprite->SetScale({ 0.15f,0.15f ,0.15f });
 		m_spriteRender.push_back(m_itemSprite);
-		
+
 	}
 	//アイテムカウントフォントの設定。
 	GameData* m_gamedate = GameData::GetInstance();
 	m_itemCountFont = g_goMgr->NewGameObject<FontRender>();
 	swprintf(ItemHpRecText, L"%02d", m_gamedate->GetItemHpRecovery());
-	m_itemCountFont->SetText(ItemHpRecText);	
-	m_itemCountFont->SetColor({0.5f,0.4f,0.0f});
-	m_itemCountFont->SetPosition({ 480.0f,-240.0f});
+	m_itemCountFont->SetText(ItemHpRecText);
+	m_itemCountFont->SetColor({ 0.5f,0.4f,0.0f });
+	m_itemCountFont->SetPosition({ 480.0f,-240.0f });
 
+	return true;
 }
 
-Item::~Item()
-{
-}
 void Item::ItemGet()
 {
 	//アイテム取得

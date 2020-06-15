@@ -5,6 +5,7 @@ public:
 	Item();
 	~Item();
 
+	bool Start();
 	void Update();
 private:
 	//‘I‘ğó‘Ô

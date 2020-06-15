@@ -9,6 +9,7 @@ public:
 	/// 更新。
 	/// </summary>
 	/// <param name="player">プレイヤーの検索</param>
+	bool Start();
 	void Update();
 	CVector3 cameraPos;			//視点。
 	CVector3 cameraTarget;		//注視点。

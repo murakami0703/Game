@@ -73,7 +73,7 @@ private:
 	void Post2DRender();
 
 private:
-	std::vector< IGameObject* > m_goList;
+	std::list< IGameObject* > m_goList;
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 	ShadowMap m_shadowMap;					//シャドウマップ。
 	Sprite m_copyMainRtToFrameBufferSprite;			//メインレンダリングターゲットに描かれた絵をフレームバッファにコピーするためのスプライト。

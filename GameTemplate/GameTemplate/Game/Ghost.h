@@ -1,4 +1,5 @@
 #pragma once
+#include "character/CharacterController.h"
 
 class BattlePoint;
 class Ghost : public IGameObject
@@ -6,6 +7,7 @@ class Ghost : public IGameObject
 public:
 	Ghost();
 	~Ghost();
+	bool Start();
 
 	void Update();
 
@@ -86,6 +88,7 @@ private:
 	EState m_state = eState_Idle;					//状態。
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+	CharacterController m_characon;		//キャラコン
 
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 
@@ -112,7 +115,9 @@ private:
 	bool flag = true;
 	float a = 30.0f;
 	float timer = 0;
-	float timer1 = 0;
+	float timer1 = 0;	
+	bool baund = true;
+
 	CVector3 dff = CVector3().Zero();
 
 };

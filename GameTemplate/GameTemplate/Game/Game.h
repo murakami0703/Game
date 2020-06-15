@@ -5,6 +5,7 @@ public:
 	Game();
 	~Game();
 
+	bool Start();
 	void Update();
 
 };

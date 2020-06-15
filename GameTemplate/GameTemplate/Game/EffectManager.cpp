@@ -22,6 +22,8 @@ EffectManager::~EffectManager()
 	m_instance = nullptr;
 }
 
+bool EffectManager::Start() { return true; }
+
 //エフェクト再生くん
 void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scale) {
 	//作成

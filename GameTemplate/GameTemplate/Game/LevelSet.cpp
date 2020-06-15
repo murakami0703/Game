@@ -4,6 +4,11 @@
 #include "Map.h"
 //エネミー
 #include "Ghost.h"
+#include "Bat.h"
+#include "Slaim.h"
+
+
+#include "TreasureBox.h"
 
 #include "GameData.h"
 LevelSet* LevelSet::m_instance = nullptr;
@@ -36,7 +41,7 @@ void LevelSet::LevelSetting()
 			m_map->SetScale(objData.scale);
 			return true;
 		}
-		//スライム
+		//ゴースト
 		if (objData.EqualObjectName(L"ghosts")) {
 			Ghost* m_ghost = g_goMgr->NewGameObject<Ghost>();
 			m_ghost->SetPosition(objData.position);
@@ -47,6 +52,35 @@ void LevelSet::LevelSetting()
 
 			return true;
 		}
+		//バット
+		if (objData.EqualObjectName(L"bat")) {
+			Bat* m_bat = g_goMgr->NewGameObject<Bat>();
+			m_bat->SetPosition(objData.position);
+			m_bat->SetRotation(objData.rotation);
+			m_bat->SetScale(objData.scale);
+
+			m_enemyCount++;
+
+			return true;
+		}
+		if (objData.EqualObjectName(L"slaim")) {
+			Slaim* m_slaim = g_goMgr->NewGameObject<Slaim>();
+			m_slaim->SetPosition(objData.position);
+			m_slaim->SetRotation(objData.rotation);
+			m_slaim->SetScale(objData.scale);
+
+			m_enemyCount++;
+
+			return true;
+		}
+		if (objData.EqualObjectName(L"Treasure_Box")) {
+		TreasureBox* m_treasurebox = g_goMgr->NewGameObject<TreasureBox>();
+		m_treasurebox->SetPosition(objData.position);
+		m_treasurebox->SetRotation(objData.rotation);
+		m_treasurebox->SetScale(objData.scale);
+		return true;
+	}
+
 		return false;
 	});
 	//敵の数をGameDataに教える

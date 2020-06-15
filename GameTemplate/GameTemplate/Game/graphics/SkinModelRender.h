@@ -97,6 +97,7 @@ public:
 	/// <param name="flag"></param>
 	void SetShadowReciever(bool flag);
 
+	bool Start();
 	/// <summary>
 	/// XVB
 	/// </summary>

@@ -28,7 +28,7 @@ Result::Result()
 	
 	//2”Ô¨ƒŠƒUƒ‹ƒg‚Ì‘äÀ
 	m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-	m_itemSprite->Init(L"Assets/sprite/tesst.dds", 1280, 720.0f);
+	m_itemSprite->Init(L"Assets/sprite/Result_Frame.dds", 1280, 720.0f);
 	m_itemSprite->SetPosition(m_bgStartPos);
 	m_itemSprite->SetAlpha(m_startAlpha);
 	m_spriteRender.push_back(m_itemSprite);

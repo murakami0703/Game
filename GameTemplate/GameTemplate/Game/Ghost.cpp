@@ -10,6 +10,14 @@
 
 Ghost::Ghost()
 {
+}
+
+Ghost::~Ghost()
+{
+}
+
+bool Ghost::Start()
+{
 
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[eAnimation_Idle].Load(L"Assets/animData/ghost/ghost_Idle.tka");
@@ -20,17 +28,16 @@ Ghost::Ghost()
 	//cmoファイルの読み込み。
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemyModelRender->Init(L"Assets/modelData/ghosts.cmo", m_animClips, eAnimation_Num);
-	m_position = { -4200.0f, 410.0f, -2500.0f };
-	m_scale = { 2.0f, 2.0f, 2.0f };
+	m_enemyModelRender->SetPosition(m_position);
+	m_enemyModelRender->SetRotation(m_rotation);
+	m_enemyModelRender->SetScale(m_scale);
 
-	//m_oldPos = m_position;		//初期座標をm_oldPosに設定。
+	m_characon.Init(20.0f, 20.0f, m_position);
 	m_enemyModelRender->SetShadowMap(true);
 
+	return true;
 }
 
-Ghost::~Ghost()
-{
-}
 void Ghost::Idle()
 {
 	//待機。
@@ -49,7 +56,7 @@ void Ghost::Follow()
 	if (m_toBPVec.Length() > 50.0f) {
 		m_toBPVec.y = 0.0f;
 		m_toBPVec.Normalize();
-		m_position += m_toBPVec * 2.0f;
+		moveVec = m_toBPVec * 20.0f;
 
 	}
 	/*else if (m_toBPVec.Length() < 10.0f) {
@@ -67,7 +74,7 @@ void Ghost::Follow()
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
 
-
+	m_position = m_characon.Execute(m_caraTime, moveVec);
 	//近いので攻撃
 	if (m_battlePoint != nullptr) {
 		if (m_toPlayerVec.Length() <= 200.0f) {
@@ -104,7 +111,7 @@ void Ghost::Loitering()
 	else if (count >= randomCount) {
 		flag = true;
 	}
-	m_position += walkmove * 5.0f;
+	moveVec = walkmove * 10.0f;
 
 	if (diff.Length() < 500.0f) {
 		//プレイヤーとの距離が近くなったら追跡します
@@ -115,7 +122,7 @@ void Ghost::Loitering()
 			m_state = eState_Follow;
 		}
 	}
-
+	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(1);
 	
 }
@@ -127,13 +134,13 @@ void Ghost::Premove()
 
 	timer1++;
 	if (timer1 <= 10) {
-		m_position += diff * 2.0f;
-		m_position.y -= 2.0f;
+		moveVec += diff * 20.0f;
+		moveVec.y -= 2.0f;
 
 	}
 	else if (timer1 >= 10 && timer1 <= 50) {
 		moveVec += diff * 10.0f;
-		m_position.y += 3.0f;
+		moveVec.y += 3.0f;
 	}
 	else {
 		timer1 = 0;
@@ -160,6 +167,7 @@ void Ghost::Premove()
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
+	m_position = m_characon.Execute(m_caraTime, moveVec);
 
 	m_enemyModelRender->PlayAnimation(2,0.5f);
 }
@@ -170,25 +178,28 @@ void Ghost::Attack()
 	//急降下します
 
 
-	if (m_position.y >= 400.0f) {
-		m_position += dff * 50.0f;
+	/*if (baund==true && m_position.y >= 400.0f) {
+		moveVec += dff * 50.0f;
 	}
-
-
-
-		/*if (m_battlePoint != nullptr) {
-			m_state = eState_Follow;
+	else {
+		baund = false;
+		if (m_position.y <= 450.0f) {
+			moveVec -= dff * 30.0f;
 		}
 		else {
+			baund = true;
 			m_battlePoint->enemyCount = 0;
 			m_battlePoint = nullptr;
 			m_state = eState_Loitering;
 		}
-		if ((Player::GetInstance()->GetPosition() - m_position).Length() < 150.f) {
-			//近距離で攻撃したら
-			//HP減らす
-			GameData::GetInstance()->HPCalc(-0.5f);
-		}*/
+	}
+	*/
+	if ((Player::GetInstance()->GetPosition() - m_position).Length() < 10.f) {
+		//近距離で攻撃したら
+		//HP減らす
+		GameData::GetInstance()->HPCalc(-0.5f);
+	}
+	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(0);
 
 }

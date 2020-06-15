@@ -4,7 +4,7 @@ class SpriteRender : public IGameObject
 	/// <summary>
 	/// スプライトレンダラー
 	/// </summary>
-	
+	bool Start();
 	void Update();
 	void PostRender();
 public:

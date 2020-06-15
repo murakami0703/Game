@@ -5,6 +5,8 @@ class GameUI : public IGameObject
 public:
 	GameUI();
 	~GameUI();
+
+	bool Start();
 	/// <summary>
 	/// XVˆ—B
 	/// </summary>
@@ -18,6 +20,8 @@ public:
 	{
 		return m_instance;
 	}
+private:
+	void HPCalc();
 private:
 
 	static GameUI* m_instance;
@@ -55,6 +59,6 @@ private:
 	CVector3 m_hpScale = { 0.15f,0.15f,0.15f };		//HP‚ÌŠg‘å—¦
 	const float m_hpvAddXPos = 50.0f;					//HP2ˆÈã‚ÌXÀ•W‚Ì•Ï‰»’l
 	float m_setHP = 0.0f;		//Å‰‚ÌHP—Ê
-	float m_hp = 0.0f;			//Œ»İ‚ÌHP‚ğŠi”[
+	float m_nowHp = 0.0f;			//Œ»İ‚ÌHP‚ğŠi”[
 };
 

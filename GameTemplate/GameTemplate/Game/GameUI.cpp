@@ -8,7 +8,15 @@ GameUI* GameUI::m_instance = nullptr;
 GameUI::GameUI()
 {
 	m_instance = this;
+}
 
+
+GameUI::~GameUI()
+{
+
+}
+bool GameUI::Start()
+{
 	//ƒAƒCƒeƒ€˜g
 	{
 		//1”Ô¨ItemCase1
@@ -87,16 +95,19 @@ GameUI::GameUI()
 				m_spriteRender.push_back(r);
 			}
 		}
+		//21”Ô¨HP”¼•ª
+		r = g_goMgr->NewGameObject<SpriteRender>();
+		r->Init(L"Assets/sprite/Hp_Half.dds", 350.0f, 350.0f);
+		r->SetAlpha(0.0f);
+		m_spriteRender.push_back(r);
+
 	}
 	//ƒAƒCƒeƒ€
 	g_goMgr->NewGameObject<Item>();
+
+	return true;
 }
 
-
-GameUI::~GameUI()
-{
-
-}
 void GameUI::ScalingSelectCase() {
 	//‘I‘ð˜g‚ÌŠg‘åk¬
 	if (m_scalingCount > m_smallCountValue) {
@@ -112,10 +123,20 @@ void GameUI::ScalingSelectCase() {
 	m_spriteRender[4]->SetScale(m_itemZSCScale);
 }
 
+void GameUI::HPCalc()
+{
+	//¡‚ÌHP—Ê‚ðŽæ“¾B
+	m_nowHp = GameData::GetInstance()->GetHitPoint();
+	if (m_nowHp) {
+
+	}
+}
+
 
 
 
 void GameUI::Update()
 {
-		ScalingSelectCase();
+	HPCalc();
+	ScalingSelectCase();
 }

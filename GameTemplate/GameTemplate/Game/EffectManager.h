@@ -23,6 +23,7 @@ public:
 		return m_instance;
 	}
 
+	bool Start();
 	void Update();
 private:
 

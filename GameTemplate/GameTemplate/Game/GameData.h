@@ -8,6 +8,7 @@ public:
 	GameData();
 	~GameData();
 
+	bool Start();
 	void Update();
 
 	//�̗͎擾

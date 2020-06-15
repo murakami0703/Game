@@ -7,6 +7,7 @@ public:
 	Player();
 	~Player();
 
+	bool Start();
 	void Update();
 	/// <summary>
 	/// プレイヤーのポジションを返す関数。
@@ -52,7 +53,7 @@ private:
 	void Dead();
 
 private:
-	SkinModelRender* m_skinModelRender;				//スキンモデルレンダー。
+	SkinModelRender* m_skinModelRender = nullptr;				//スキンモデルレンダー。
 	CVector3 m_position = CVector3().Zero();			//座標。
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。

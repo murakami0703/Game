@@ -52,8 +52,18 @@ void GameObjectManager::Update()
 		//物理エンジンの更新。
 		g_physics.Update();
 
+		//一回だけ呼ばれる処理
 		for (auto go : m_goList) {
-			go->Update();
+			if (!go->IsStart()) {
+				go->Start();
+				go->StartFlag(true);
+			}
+		}
+		//更新
+		for (auto go : m_goList) {
+			if (go->IsStart()) {
+				go->Update();
+			}
 		}
 		m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 		g_camera2D.Update();

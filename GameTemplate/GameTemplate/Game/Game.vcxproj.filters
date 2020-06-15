@@ -91,9 +91,6 @@
     <Filter Include="Assets\sprite\Item">
       <UniqueIdentifier>{a19a228c-d3a9-4654-896e-88b87dbc1acb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\sprite\title">
-      <UniqueIdentifier>{0ff067e1-5001-48cd-a9ba-d6c7ecae9c27}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\modelData\enemy_boss">
       <UniqueIdentifier>{66257367-ce0b-4362-9e7d-c4c346aa0f0c}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     </Filter>
     <Filter Include="Assets\sprite\result">
       <UniqueIdentifier>{de983342-c745-4a66-b888-6e41d14024a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\title">
+      <UniqueIdentifier>{0ff067e1-5001-48cd-a9ba-d6c7ecae9c27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +276,9 @@
     </ClCompile>
     <ClCompile Include="EffectPlay.cpp">
       <Filter>graphics\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="TreasureBox.cpp">
+      <Filter>gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -460,6 +463,9 @@
     <ClInclude Include="EffectPlay.h">
       <Filter>graphics\effect</Filter>
     </ClInclude>
+    <ClInclude Include="TreasureBox.h">
+      <Filter>gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -478,12 +484,6 @@
       <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\stage1_1_3.FBX">
-      <Filter>Assets\modelData\stage1</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\stage1_1_4.FBX">
-      <Filter>Assets\modelData\stage1</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\stage1_1_5.FBX">
       <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\stage1_boss.FBX">
@@ -507,13 +507,73 @@
     <MeshContentTask Include="Assets\modelData\Golem_Boss.fbx">
       <Filter>Assets\modelData\enemy_boss</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Treasure_Box.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Box.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\mikyan.jpg">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\result\jewelry_01.png">
+      <Filter>Assets\sprite\result</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Hp.png">
-      <Filter>Assets\sprite</Filter>
+    <ImageContentTask Include="Assets\sprite\result\Result_Backgraund.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_DotLine.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_e.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Font1.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Font2.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Font3.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Frame.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Frame2.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_ItemFrame.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_l.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_R.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_s.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Soulframe.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_t.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_Triangle.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\result\Result_u.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\soul.png">
+      <Filter>Assets\sprite\result</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\title.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\2.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Item\case1.png">
       <Filter>Assets\sprite\Item</Filter>
@@ -530,23 +590,17 @@
     <ImageContentTask Include="Assets\sprite\Item\hasi.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\L.png">
+    <ImageContentTask Include="Assets\sprite\Item\1.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\waku.png">
+    <ImageContentTask Include="Assets\sprite\Item\L.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Item\ZL.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\light.png">
-      <Filter>Assets\sprite\title</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\star_chips.png">
-      <Filter>Assets\sprite\title</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\title.png">
-      <Filter>Assets\sprite\title</Filter>
+    <ImageContentTask Include="Assets\sprite\Item\waku.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Item\test.png">
       <Filter>Assets\sprite\Item</Filter>
@@ -554,68 +608,25 @@
     <ImageContentTask Include="Assets\sprite\Item\spe.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\1.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\2.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_e.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_l.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_R.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_s.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_t.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_u.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\jewelry_01.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\soul.png">
+    <ImageContentTask Include="Assets\sprite\mikyan.jpg">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Backgraund.png">
-      <Filter>Assets\sprite\result</Filter>
+    <ImageContentTask Include="Assets\sprite\title\light.png">
+      <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_DotLine.png">
-      <Filter>Assets\sprite\result</Filter>
+    <ImageContentTask Include="Assets\sprite\title\star_chips.png">
+      <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Font1.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Font2.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Frame.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Frame2.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_ItemFrame.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Soulframe.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Triangle.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Result_Font3.png">
-      <Filter>Assets\sprite\result</Filter>
+    <ImageContentTask Include="Assets\sprite\Hp.png">
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\Hp_Half.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
   </ItemGroup>
 </Project>

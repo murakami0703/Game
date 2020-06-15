@@ -15,7 +15,3 @@ void Gimmick::Update()
 {
 
 }
-void Gimmick::Draw(EnRenderMode renderMode)
-{
-
-}

@@ -13,4 +13,7 @@ GameData::GameData()
 GameData::~GameData()
 {
 }
+bool GameData::Start() {
+	return true;
+}
 void GameData::Update(){}

@@ -9,6 +9,16 @@
 
 Slaim::Slaim()
 {
+}
+
+
+Slaim::~Slaim()
+{
+
+}
+
+bool Slaim::Start()
+{
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[eAnimation_Idle].Load(L"Assets/animData/slaim/slaim_idle.tka");
 	m_animClips[eAnimation_Idle].SetLoopFlag(true);
@@ -25,71 +35,74 @@ Slaim::Slaim()
 	//cmoファイルの読み込み。
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemyModelRender->Init(L"Assets/modelData/slaim.cmo", m_animClips, eAnimation_Num);
-	m_position = { -4200.0f, 410.0f, -2500.0f };
-	m_oldPos = m_position;
-	m_scale = { 2.0f, 2.0f, 2.0f };
+	m_enemyModelRender->SetPosition(m_position);
+	m_enemyModelRender->SetRotation(m_rotation);
+	m_enemyModelRender->SetScale(m_scale);
 
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_enemyModelRender->SetShadowMap(true);
 
+	return true;
 }
 
-
-Slaim::~Slaim()
-{
-
-}
 void Slaim::Idle()
 {
 	//待機。
-
-	 if (timer >= a) {
+	timer++;
+	//一定時間経つと徘徊します。
+	if (timer >= m_idleTime) {
+		m_timer = 0;
 		m_state = eState_Loitering;
 	}
-	timer++;
 	m_enemyModelRender->PlayAnimation(0);
 }
-
 void Slaim::Loitering()
 {
 	//徘徊。
-	Player* player = Player::GetInstance();
-	CVector3 P_Position = player->GetPosition();
-	CVector3 diff = P_Position - m_position;
-	count++;
-	if (flag == true) {
+	CVector3 diff = m_toPlayerVec;
+
+	//一定時間ごとに方向転換する。
+	if (m_timer == 0) {
 		//ランダムで方向を決定して動きます
-		wrandom = rand() % 360;
-		m_rotation.SetRotation(CVector3::AxisY(), (float)wrandom);
-		walkmove = { 0.0f, 0.0f,1.0f };
-		m_rotation.Multiply(walkmove);
-		count = 0;
+		m_randRot = rand() % 360;
+		m_rotation.SetRotation(CVector3::AxisY(), (float)m_randRot);
+		m_rotation.Multiply(m_enemyForward);
+		m_timer = 1;
 		flag = false;
 	}
-	else if (count >= randomCount) {
-		flag = true;
+	else if (m_timer > m_randTimer) {
+		m_timer = 0;
 	}
-	moveVec = walkmove * randomSpeed;
-	m_position = m_characon.Execute(m_caraTime,moveVec);
+	else {
+		m_timer++;
+	}
 
-	if (diff.Length() < 300.0f) {
-		flag = true;
-		m_state = eState_Follow;
+	//BPが空いてて、かつ距離が近いと追跡状態へ。
+	if (diff.Length() < m_followLength) {
+		m_battlePoint = SiegePoint::GetInstance()->TryGetBattlePoint(m_position);
+		//空いてるバトルポイントに向かっていくぅ
+		if (m_battlePoint != nullptr) {
+			m_timer = 0;
+			m_state = eState_Follow;
+		}
 	}
+	moveVec = m_enemyForward * m_loiteringSpeed;
+	m_position = m_characon.Execute(m_caraTime, moveVec);
 
 }
 void Slaim::Follow()
 {	
-	Player* player = Player::GetInstance();
-	CVector3 P_Position = player->GetPosition();
-	CVector3 diff = P_Position - m_position;
 	//追尾ちゅ
-	if (diff.Length() > 10.0f) {
-		diff.y = 0.0f;
-		diff.Normalize();
-		moveVec = diff * randomSpeed;
+	CVector3 m_toBPVec = m_battlePoint->position - m_position;
+	//バトルポイントに向かって移動しますぅ
+	if (m_toBPVec.Length() > m_toBPPos) {
+		m_toBPVec.y = 0.0f;
+		m_toBPVec.Normalize();
 	}
-	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
+	else {
+		//近いので移動無し
+		moveVec = {0.0f, 0.0f, 0.0f};
+	}
 
 	//　向かせたい方向のベクトルを計算する。
 	CVector3 targetVector = Player::GetInstance()->GetPosition() - m_position;
@@ -97,24 +110,30 @@ void Slaim::Follow()
 	targetVector.y = 0.0f;
 	targetVector.Normalize();
 	CQuaternion qRot;
-	qRot.SetRotation(enemyForward, targetVector);
+	qRot.SetRotation(m_enemyForward, targetVector);
 	m_rotation = qRot;
 
-	//近いので攻撃
-	if (m_toPlayerVec.Length() <= 100.0f) {
-		EneAttackflag = true;
-		m_state = eState_Premove;
+	moveVec = m_toBPVec * m_followSpeed;
+	m_position = m_characon.Execute(m_caraTime, moveVec);
+	//バトルポイントが決まってる！
+	if (m_battlePoint != nullptr) {
+		//距離が近いので、予備動作へ。
+		if (m_toPlayerVec.Length() <= m_toBPPos) {
+			m_state = eState_Premove;
+		}
 	}
-	//遠くなったのでその場で徘徊。
-	if (m_toPlayerVec.Length() > 500.0f) {
+	//距離が遠いので、徘徊に戻る。
+	if (m_toPlayerVec.Length() > m_loiteringLength) {
+		//
+		m_battlePoint = nullptr;
 		m_state = eState_Loitering;
 	}
 
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(1);
 }
 void Slaim::Premove()
 {
+	//予備動作その1
 	m_enemyModelRender->PlayAnimation(2);
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		m_state = eState_Premove2;
@@ -123,13 +142,15 @@ void Slaim::Premove()
 }
 void Slaim::Premove2()
 {
+	//予備動作その1
 	m_enemyModelRender->PlayAnimation(3,0.5f);
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
-		//離れまーーーーース
+		//プレイヤーの上に離れまーーーーース
 		dddd.Normalize();
 		moveVec = dddd * 4000.0f ;
 
 		//m_position.y += 50.0f;
+		//だいぶ上に行ったので攻撃しますぅ。
 		if (m_position.y >= 1000.0f) {
 			Player* player = Player::GetInstance();
 			CVector3 P_Position = player->GetPosition();

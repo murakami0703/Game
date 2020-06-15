@@ -6,6 +6,16 @@
 
 Bat::Bat()
 {
+
+}
+
+
+Bat::~Bat()
+{
+}
+
+bool Bat::Start()
+{
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[eAnimation_Walk].Load(L"Assets/animData/bat/bat_walk.tka");
 	m_animClips[eAnimation_Walk].SetLoopFlag(true);
@@ -16,16 +26,16 @@ Bat::Bat()
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_enemyModelRender->Init(L"Assets/modelData/bat.cmo", m_animClips, eAnimation_Num);
 	m_enemyModelRender->PlayAnimation(0);
-	m_position = { -4200.0f, 450.0f, -2500.0f };
-	m_scale = { 5.0f,5.0f,5.0f };
+	m_enemyModelRender->SetPosition(m_position);
+	m_enemyModelRender->SetRotation(m_rotation);
+	m_enemyModelRender->SetScale(m_scale);
+
+	m_characon.Init(20.0f, 50.0f, m_position);
 	m_enemyModelRender->SetShadowMap(true);
 
+	return true;
 }
 
-
-Bat::~Bat()
-{
-}
 void Bat::Loitering()
 {
 	m_enemyModelRender->PlayAnimation(0);
@@ -40,7 +50,7 @@ void Bat::Follow()
 	if (m_toEPVec.Length() > m_toPlyaerLength) {
 		m_toEPVec.y = 0.0f;
 		m_toEPVec.Normalize();
-		m_position += m_toEPVec * 1.0f;
+		moveVec += m_toEPVec * 1.0f;
 	}
 	//近づいたので予備動作状態に遷移します。
 	else if (m_toEPVec.Length() <= m_toPlyaerLength)
@@ -57,6 +67,7 @@ void Bat::Follow()
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
+	m_position = m_characon.Execute(m_caraTime, moveVec);
 
 	//遠くなったのでその場で徘徊する。
 	if (m_toPlayerVec.Length() > m_returnLength) {

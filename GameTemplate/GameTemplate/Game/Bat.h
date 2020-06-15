@@ -1,4 +1,5 @@
 #pragma once
+#include "character/CharacterController.h"
 
 class Bat : public IGameObject
 {
@@ -8,7 +9,30 @@ public:
 	/// <summary>
 	/// 遠距離攻撃
 	/// </summary>
+	bool Start();
 	void Update();
+
+	/// <summary>
+	/// 座標を設定。
+	/// </summary>
+	void Bat::SetPosition(CVector3 pos)
+	{
+		m_position = pos;
+	}
+	/// <summary>
+	/// 回転を設定。
+	/// </summary>
+	void Bat::SetRotation(CQuaternion rot)
+	{
+		m_rotation = rot;
+	}
+	/// <summary>
+	/// 回転率を設定。
+	/// </summary>
+	void Bat::SetScale(CVector3 sca)
+	{
+		m_scale = sca;
+	}
 
 private:
 	// 状態
@@ -48,6 +72,7 @@ private:
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
 
 	EState m_state = eState_Loitering;					//状態。
+	CharacterController m_characon;		//キャラコン
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 	
 	//移動関連
@@ -56,6 +81,9 @@ private:
 
 	//攻撃判定
 	bool EneAttackflag = false;					//攻撃中ですか？
+
+	CVector3 moveVec = CVector3().Zero();			//座標。
+	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間
 
 };
 

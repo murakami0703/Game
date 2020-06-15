@@ -5,7 +5,8 @@ public:
 	Gimmick();
 	~Gimmick();
 	void Update();
-	void Draw(EnRenderMode renderMode);
+
+private:
 
 };
 

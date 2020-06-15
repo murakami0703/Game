@@ -10,7 +10,31 @@ public:
 	/// <summary>
 	/// ジャンプ攻撃
 	/// </summary>
+	
+	bool Start();
 	void Update();
+
+	/// <summary>
+/// 座標を設定。
+/// </summary>
+	void Slaim::SetPosition(CVector3 pos)
+	{
+		m_position = pos;
+	}
+	/// <summary>
+	/// 回転を設定。
+	/// </summary>
+	void Slaim::SetRotation(CQuaternion rot)
+	{
+		m_rotation = rot;
+	}
+	/// <summary>
+	/// 回転率を設定。
+	/// </summary>
+	void Slaim::SetScale(CVector3 sca)
+	{
+		m_scale = sca;
+	}
 
 private:
 
@@ -52,21 +76,44 @@ private:
 
 private:
 
-	SkinModelRender* m_enemyModelRender;				//スキンモデルレンダー。
+	SkinModelRender* m_enemyModelRender;				//エネミースキンモデルレンダー。
 	CVector3 m_position = CVector3().Zero();			//座標。
-	CVector3 m_oldPos = CVector3().Zero();				//初期座標。
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
-	CharacterController m_characon;		//キャラコン
-
 	EState m_state = eState_Idle;					//状態。
+
+	CharacterController m_characon;		//キャラコン
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 
 private:
+
+	//共用
+	CVector3 moveVec = CVector3().Zero();			//座標。
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+	CVector3 m_enemyForward = { 0.0f, 0.0f, 1.0f };			//スライムの前ベクトル。
 
-	//移動関連
+	float m_timer = 0;
+
+	//待機関連
+	float m_idleTime = 30.0f;				//待機時間。
+
+	//徘徊関連
+	bool m_changeflag = true;				//方向転換。
+	const int m_randTimer = 120;			//方向転換する時間。
+	int m_randRot = 0;						//方向の乱数格納。
+	const float m_followLength = 300.0f;	//追跡を始める距離。
+	const float m_loiteringSpeed = 120.0f;	//徘徊速度。
+
+	//追尾関連
+	const float m_toBPPos = 100.0f;			//予備動作開始距離。
+	const float m_followSpeed = 20.0f;		//徘徊速度。
+	const float m_loiteringLength = 500.0f;	//徘徊に戻る距離。
+
+
+
+
+
 	int m_moveCount = 0;						//巡回用カウント
 	float m_moveSpeed = 0.6f;					//エネミの移動速度。
 	const float m_follSpeed = 3.0f;				//追尾中の移動速度。
@@ -79,10 +126,8 @@ private:
 	float timer = 0;
 
 
-	CVector3 moveVec = CVector3().Zero();			//座標。
 	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間
 
-	CVector3 walkmove = CVector3().Zero();		// 座標。
 	int count = 0;							//移動用カウント
 	int wrandom = 0;						//移動の方向乱数
 	const int randomCount = 120;			//ランダムで移動方向切り替えタイマー

@@ -10,6 +10,9 @@ SkinModelRender::SkinModelRender()
 SkinModelRender::~SkinModelRender()
 {
 }
+bool SkinModelRender::Start() {
+	return true;
+}
 
 void SkinModelRender::Init(const wchar_t* filePath, AnimationClip* animationClips , int numAnimationClips , EnFbxUpAxis fbxUpAxis)
 {
