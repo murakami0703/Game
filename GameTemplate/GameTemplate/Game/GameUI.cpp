@@ -127,8 +127,8 @@ void GameUI::HPCalc()
 {
 	//¡‚ÌHP—Ê‚ðŽæ“¾B
 	m_nowHp = GameData::GetInstance()->GetHitPoint();
-	if (m_nowHp) {
-
+	//HP”¼•ª•\Ž¦
+	if (fmod(m_nowHp, 1) <= 0.5f) {
 	}
 }
 

@@ -71,6 +71,8 @@ private:
 	};
 
 private:
+	void Horizon();		//視野角判定
+
 	void Idle();	//待機。
 	void Loitering();	//徘徊。
 	void Follow();		//プレイヤーを追跡。
@@ -81,16 +83,34 @@ private:
 private:
 	SkinModelRender* m_enemyModelRender;				//スキンモデルレンダー。
 	CVector3 m_position = CVector3().Zero();			//座標。
-	CVector3 m_oldPos = CVector3().Zero();				//初期座標。
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
-
 	EState m_state = eState_Idle;					//状態。
+
+	CharacterController m_characon;		//キャラコン
+	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+
+	//共用
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
-	CharacterController m_characon;		//キャラコン
+	CVector3 m_enemyForward = { 0.0f, 0.0f, -1.0f };			//ゴーストの前ベクトル。
 
-	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+	float m_timer = 0;
+	const float m_followLength = 500.0f;	//追跡を始める距離。
+
+	//視野角関連
+	const float horilong = 500.0f;	//視野角判定の距離
+	const float horiAngle = 90.0f;	//視野角判定の角度
+
+	//待機関連
+	float m_idleTime = 30.0f;		//待機時間。
+
+	//徘徊関連
+	const int m_randTimer = 120;			//方向転換する時間。
+	int m_randRot = 0;						//方向の乱数格納。
+	const float m_loiteringSpeed = 120.0f;	//徘徊速度。
+
+	//追尾関連
 
 	//移動関連
 	int m_moveCount = 0;						//巡回用カウント
@@ -113,7 +133,6 @@ private:
 	CVector3 moveVec = CVector3().Zero();			//座標。
 	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間
 	bool flag = true;
-	float a = 30.0f;
 	float timer = 0;
 	float timer1 = 0;	
 	bool baund = true;

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Ghost.h"
 #include "GameData.h"
-#include "Anima.h"
-#include "AnimaManeger.h"
 #include "Player.h"
 #include "SiegePoint.h"
 
@@ -32,21 +30,91 @@ bool Ghost::Start()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 
-	m_characon.Init(20.0f, 20.0f, m_position);
-	m_enemyModelRender->SetShadowMap(true);
+	m_characon.Init(50.0f, 100.0f, m_position);	//キャラコンの初期化。
+	m_enemyModelRender->SetShadowMap(true);		//シャドウマップに描画。
 
 	return true;
+}
+
+void Ghost::Horizon()
+{
+	//エネミーの前方方向を求める。
+	//前方方向は{0, 0, 1}のベクトルをm_rotationで回して求めてみる。
+	CVector3 enemyForward = { 0.0f, 0.0f, -1.0f };
+	m_rotation.Multiply(enemyForward);
+
+	//エネミーからプレイヤーに伸びるベクトルを求める。
+	CVector3 toPlayerDir = m_toPlayerVec;
+
+	//正規化を行う前に、プレイヤーまでの距離を求めておく。
+	float toPlayerLen = toPlayerDir.Length();
+	//正規化
+	toPlayerDir.Normalize();
+
+	//enemyForwardとtoPlayerDirとの内積を計算する。
+	float d = enemyForward.Dot(toPlayerDir);
+
+	//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
+	float angle = acos(d);
+
+
+	//視野角判定
+	//fabsfは絶対値を求める関数！
+	//角度はマイナスが存在するから、絶対値にする。
+	if (fabsf(angle) < CMath::DegToRad(horiAngle) && toPlayerLen < horilong)
+	{
+		//近い！！！！！
+		m_battlePoint = SiegePoint::GetInstance()->TryGetBattlePoint(m_position);
+		//空いてるバトルポイントに向かっていくぅ
+		if (m_battlePoint != nullptr) {
+			flag = true;
+			m_state = eState_Follow;
+		}
+
+	}
+
 }
 
 void Ghost::Idle()
 {
 	//待機。
-
-	if (timer >= a) {
+	m_timer++;
+	//一定時間経つと徘徊します。
+	if (m_timer >= m_idleTime) {
+		m_timer = 0;
 		m_state = eState_Loitering;
 	}
-	timer++;
+
+	Horizon();	//視野角判定
+
 	m_enemyModelRender->PlayAnimation(1);
+}
+void Ghost::Loitering()
+{
+	//徘徊。
+	//一定時間ごとに方向転換する。
+	if (m_timer == 0) {
+		//ランダムで方向を決定して動きます
+		m_randRot = rand() % 360;
+		m_rotation.SetRotation(CVector3::AxisY(), (float)m_randRot);
+		walkmove = { 0.0f, 0.0f,-1.0f };
+		m_rotation.Multiply(walkmove);
+		m_timer = 1;
+		flag = false;
+	}
+	else if (m_timer > m_randTimer) {
+		m_timer = 0;
+	}
+	else {
+		m_timer++;
+	}
+	moveVec = walkmove * randomSpeed;
+
+	Horizon();	//視野角判定
+
+	m_position = m_characon.Execute(m_caraTime, moveVec);
+	m_enemyModelRender->PlayAnimation(1);
+
 }
 
 void Ghost::Follow()
@@ -56,7 +124,7 @@ void Ghost::Follow()
 	if (m_toBPVec.Length() > 50.0f) {
 		m_toBPVec.y = 0.0f;
 		m_toBPVec.Normalize();
-		moveVec = m_toBPVec * 20.0f;
+		moveVec = m_toBPVec * 250.0f;
 
 	}
 	/*else if (m_toBPVec.Length() < 10.0f) {
@@ -74,7 +142,6 @@ void Ghost::Follow()
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
 
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 	//近いので攻撃
 	if (m_battlePoint != nullptr) {
 		if (m_toPlayerVec.Length() <= 200.0f) {
@@ -88,44 +155,11 @@ void Ghost::Follow()
 		m_battlePoint = nullptr;
 		m_state = eState_Loitering;
 	}
-	m_enemyModelRender->PlayAnimation(1);
-
-}
-
-void Ghost::Loitering()
-{
-	//徘徊。
-	Player* player = Player::GetInstance();
-	CVector3 P_Position = player->GetPosition();
-	CVector3 diff = P_Position - m_position;
-	count++;
-	if (flag == true) {
-		//ランダムで方向を決定して動きます
-		wrandom = rand() % 360;
-		m_rotation.SetRotation(CVector3::AxisY(), (float)wrandom);
-		walkmove = { 0.0f, 0.0f,-1.0f };
-		m_rotation.Multiply(walkmove);
-		count = 0;
-		flag = false;
-	}
-	else if (count >= randomCount) {
-		flag = true;
-	}
-	moveVec = walkmove * 10.0f;
-
-	if (diff.Length() < 500.0f) {
-		//プレイヤーとの距離が近くなったら追跡します
-		m_battlePoint = SiegePoint::GetInstance()->TryGetBattlePoint(m_position);
-		//空いてるバトルポイントに向かっていくぅ
-		if (m_battlePoint != nullptr) {
-			flag = true;
-			m_state = eState_Follow;
-		}
-	}
 	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(1);
-	
+
 }
+
 void Ghost::Premove()
 {	
 
@@ -134,15 +168,15 @@ void Ghost::Premove()
 
 	timer1++;
 	if (timer1 <= 10) {
-		moveVec += diff * 20.0f;
-		moveVec.y -= 2.0f;
+		moveVec = diff * 5.0f;
+		moveVec.y -= 5.0f;
 
 	}
 	else if (timer1 >= 10 && timer1 <= 50) {
-		moveVec += diff * 10.0f;
-		moveVec.y += 3.0f;
+		moveVec += diff * 5.0f;
+		moveVec.y += 15.0f;
 	}
-	else {
+	else if (timer1 >= 50 && timer1 <= 60) {
 		timer1 = 0;
 		dff = m_toPlayerVec;
 		dff.Normalize();
@@ -178,27 +212,33 @@ void Ghost::Attack()
 	//急降下します
 
 
-	/*if (baund==true && m_position.y >= 400.0f) {
-		moveVec += dff * 50.0f;
+	if (baund==true && m_characon.IsOnGround() == false) {
+		moveVec = dff * 2000.0f;
+		moveVec.y -= 5.0f;
 	}
 	else {
 		baund = false;
-		if (m_position.y <= 450.0f) {
-			moveVec -= dff * 30.0f;
+		m_timer++;
+		if (baund == false && m_position.y <= 440.0f) {
+			moveVec = dff * 200.0f;
+			moveVec.y += 200.0f;
+		}
+		else if (m_timer <= 100.0f) {
+			moveVec = {0.0f,0.0f,0.0f};
 		}
 		else {
+			m_timer = 0;
 			baund = true;
 			m_battlePoint->enemyCount = 0;
 			m_battlePoint = nullptr;
 			m_state = eState_Loitering;
 		}
 	}
-	*/
-	if ((Player::GetInstance()->GetPosition() - m_position).Length() < 10.f) {
+	/*if ((Player::GetInstance()->GetPosition() - m_position).Length() < 10.f) {
 		//近距離で攻撃したら
 		//HP減らす
 		GameData::GetInstance()->HPCalc(-0.5f);
-	}
+	}*/
 	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(0);
 
@@ -231,7 +271,6 @@ void Ghost::Update()
 			m_state = eState_Dead;
 		}
 	}
-
 	switch (m_state) {
 	case Ghost::eState_Idle:
 		Idle();
