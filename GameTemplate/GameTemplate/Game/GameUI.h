@@ -60,5 +60,6 @@ private:
 	const float m_hpvAddXPos = 50.0f;					//HP2以上のX座標の変化値
 	float m_setHP = 0.0f;		//最初のHP量
 	float m_nowHp = 0.0f;			//現在のHPを格納
+	int m_spriteNum = 7;			//ゲーム開始時のspriteの数を格納。
 };
 

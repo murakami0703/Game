@@ -52,9 +52,6 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{eada28bd-66d8-41f8-b7ed-23cb66d59f13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sound">
-      <UniqueIdentifier>{e91662ef-364b-4c39-8f80-ac23b8a2dcb5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="manager">
       <UniqueIdentifier>{82c6d5b4-b07e-4d61-9fd7-993362951d8a}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     </Filter>
     <Filter Include="Assets\sprite\title">
       <UniqueIdentifier>{0ff067e1-5001-48cd-a9ba-d6c7ecae9c27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sound">
+      <UniqueIdentifier>{e91662ef-364b-4c39-8f80-ac23b8a2dcb5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -624,5 +624,16 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\modelData\AO.png">
+      <Filter>Assets\modelData</Filter>
+    </Image>
+    <Image Include="Assets\modelData\MatallicSmoothness.png">
+      <Filter>Assets\modelData</Filter>
+    </Image>
+    <Image Include="Assets\modelData\Normal.png">
+      <Filter>Assets\modelData</Filter>
+    </Image>
   </ItemGroup>
 </Project>

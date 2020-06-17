@@ -10,7 +10,6 @@ Player* Player::m_instance = nullptr;
 Player::Player()
 {
 	m_instance = this;
-
 }
 Player::~Player()
 {
@@ -37,7 +36,34 @@ bool Player::Start()
 	m_skinModelRender->SetScale(m_scale);
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
+
+	//法線マップつけます
+	DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/Normal.dds", 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_normalMapSRV
+	);
+	//スぺキュラマップつけます
+	DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/MatallicSmoothness.dds", 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_specularMapSRV
+	);
+
+	//アンビエントマップつけます
+	DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/AO.dds", 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_ambientMapSRV
+	);
+	m_skinModelRender->SetNormalMap(g_normalMapSRV);
+	m_skinModelRender->SetSpecularMap(g_specularMapSRV);
+	m_skinModelRender->SetSpecularMap(g_ambientMapSRV);
+
 	m_skinModelRender->SetShadowMap(true);
+	//サウンドの読み込み
+	m_se.Init(L"Assets/sound/player_Attack.wav");
+
 
 	return true;
 }
@@ -62,7 +88,7 @@ void Player::Move()
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
 		//effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
-
+		//m_se.Play(false);
 		m_move.x -= m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
 

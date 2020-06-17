@@ -1,6 +1,8 @@
 #pragma once
 
 #include "EffectEngine.h"
+#include "sound/SoundEngine.h"
+#include "sound/SoundSource.h"
 
 /// <summary>
 /// レンダリングモード。
@@ -83,6 +85,13 @@ public:
 	{
 		return m_spriteFont.get();
 	}
+	/// <summary>
+	///SoundEngineを取得。
+	/// </summary>
+	CSoundEngine& GetSoundEngine()
+	{
+		return m_soundEngine;
+	}
 
 	/*!
 	 *@brief	描画開始。
@@ -110,7 +119,8 @@ private:
 	ID3D11RasterizerState*	m_rasterizerState = NULL;	//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;		//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;	//デプスステンシルビュー。
-	EffectEngine			m_effectEngine;								//!<エフェクトエンジン。
+	EffectEngine			m_effectEngine;				//!<エフェクトエンジン。
+	CSoundEngine			m_soundEngine;				//サウンドエンジン。
 
 	std::unique_ptr<DirectX::SpriteBatch>	m_spriteBatch;				//!<スプライトバッチ。
 	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;				//!<スプライトフォント。

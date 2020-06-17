@@ -105,17 +105,17 @@ void SkinModel::InitDirectionLight() {
 	m_light.directionLight.direction[0].Normalize();	//ê≥ãKâªÅB
 	m_light.directionLight.color[0] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
-	m_light.directionLight.direction[1] = { 1.0f, -1.0f, 0.0f, 0.0f };
+	m_light.directionLight.direction[1] = { -1.0f, -1.0f, 0.0f, 0.0f };
 	m_light.directionLight.direction[1].Normalize();	//ê≥ãKâªÅB
-	m_light.directionLight.color[1] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	m_light.directionLight.color[1] = { 0.2f, 0.2f, 0.2f, 1.0f };
 
-	m_light.directionLight.direction[2] = { 1.0f, -1.0f, 0.0f, 0.0f };
+	m_light.directionLight.direction[2] = { 0.0f, -1.0f, 1.0f, 0.0f };
 	m_light.directionLight.direction[2].Normalize();	//ê≥ãKâªÅB
-	m_light.directionLight.color[2] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	m_light.directionLight.color[2] = { 0.2f, 0.2f, 0.2f, 1.0f };
 
-	m_light.directionLight.direction[3] = { 1.0f, -1.0f, 0.0f, 0.0f };
+	m_light.directionLight.direction[3] = { 0.0f, -1.0f, -1.0f, 0.0f };
 	m_light.directionLight.direction[3].Normalize();	//ê≥ãKâªÅB
-	m_light.directionLight.color[3] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	m_light.directionLight.color[3] = { 0.2f, 0.2f, 0.2f, 1.0f };
 	//ãæñ îΩéÀåıÇÃçiÇËÅB
 	m_light.specPow = 10.0f;
 }

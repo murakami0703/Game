@@ -76,5 +76,11 @@ private:
 
 	//攻撃関連
 	bool attackflag = false;	//攻撃判定用。
+	//サウンド関係
+	CSoundSource m_se;						//se。
+
+	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
+	ID3D11ShaderResourceView* g_specularMapSRV = nullptr;
+	ID3D11ShaderResourceView* g_ambientMapSRV = nullptr;
 };
 

@@ -49,8 +49,13 @@ void GameObjectManager::Update()
 		for (auto& pad : g_pad) {
 			pad.Update();
 		}
+
+		//サウンドエンジンを更新。
+		g_soundEngine->Update();
+
 		//物理エンジンの更新。
 		g_physics.Update();
+
 
 		//一回だけ呼ばれる処理
 		for (auto go : m_goList) {
@@ -65,6 +70,7 @@ void GameObjectManager::Update()
 				go->Update();
 			}
 		}
+
 		m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 		g_camera2D.Update();
 

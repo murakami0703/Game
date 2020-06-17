@@ -97,6 +97,29 @@ public:
 	/// <param name="flag"></param>
 	void SetShadowReciever(bool flag);
 
+
+	/// <summary>
+	/// 法線マップの設定。
+	/// </summary>
+	void SetNormalMap(ID3D11ShaderResourceView* srv)
+	{
+		m_skinModel.SetNormalMap(srv);
+	}
+	/// <summary>
+	/// スぺキュラマップの設定。
+	/// </summary>
+	void SetSpecularMap(ID3D11ShaderResourceView* srv)
+	{
+		m_skinModel.SetSpecularMap(srv);
+	}
+	/// <summary>
+	/// アンビエントマップの設定。
+	/// </summary>
+	void SetAmbientMap(ID3D11ShaderResourceView* srv)
+	{
+		m_skinModel.SetAmbientMap(srv);
+	}
+
 	bool Start();
 	/// <summary>
 	/// 更新。

@@ -13,6 +13,8 @@
 
 Game::Game()
 {
+	m_bgm.Init(L"Assets/sound/stage1_BGM.wav");
+	m_bgm.Play(true);
 }
 
 
@@ -22,10 +24,11 @@ Game::~Game()
 
 bool Game::Start()
 {
-	g_goMgr->NewGameObject<GameCamera>();
+	
 	g_goMgr->NewGameObject<EffectManager>();
 
 	g_goMgr->NewGameObject<Player>();
+	g_goMgr->NewGameObject<GameCamera>();
 	g_goMgr->NewGameObject<GameData>();
 	g_goMgr->NewGameObject<LevelSet>();
 	g_goMgr->NewGameObject<GameUI>();

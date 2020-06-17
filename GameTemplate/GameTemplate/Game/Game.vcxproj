@@ -370,6 +370,20 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Hp_Half.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\modelData\AO.png">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\MatallicSmoothness.png">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\Normal.png">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(RelativeDir)/%(Filename).dds</ContentOutput>
+    </ImageContentTask>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

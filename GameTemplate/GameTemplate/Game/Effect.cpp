@@ -10,11 +10,10 @@ Effect::Effect()
 Effect::~Effect()
 {
 }
-
-
-void Effect::Update()
-{
+bool Effect::Start() {
+	return true;
 }
+
 void Effect::Release()
 {
 	if (m_handle != -1) {
@@ -38,7 +37,7 @@ void Effect::Play(const wchar_t* filePath)
 	}
 	m_handle = g_graphicsEngine->GetEffectEngine().Play(m_effect);
 }
-/*void Effect::Update()
+void Effect::Update()
 {
 	CMatrix mTrans, mRot, mScale, mBase;
 	mTrans.MakeTranslation(m_position);
@@ -51,4 +50,4 @@ void Effect::Play(const wchar_t* filePath)
 		//Ä¶Š®—¹‚µ‚½‚çI‚í‚éB
 		g_goMgr->DeleteGameObject(this);
 	}
-}*/
+}

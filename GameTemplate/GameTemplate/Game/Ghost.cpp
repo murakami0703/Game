@@ -3,6 +3,7 @@
 #include "GameData.h"
 #include "Player.h"
 #include "SiegePoint.h"
+#include "EffectManager.h"
 
 
 
@@ -247,6 +248,9 @@ void Ghost::Attack()
 void Ghost::Dead()
 {
 	m_enemyModelRender->PlayAnimation(3);
+	EffectManager* effect = EffectManager::GetInstance();
+	effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
+
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
 		//エネミーの数減らします
@@ -264,7 +268,6 @@ void Ghost::Update()
 	//プレイヤーとの距離を調べる。
 	m_playerPos = Player::GetInstance()->GetPosition();
 	m_toPlayerVec = m_playerPos - m_position;
-
 	//攻撃が当たったので死ぬ。
 	if (Player::GetInstance()->GetAttackflag() == true) {
 		if (m_toPlayerVec.Length() < 200.0f) {

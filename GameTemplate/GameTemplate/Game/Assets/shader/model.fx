@@ -47,6 +47,7 @@ static const int Dcolor = 4;
 struct SDirectionLight {
 	float3 dligDirection[Dcolor];
 	float4 dligColor[Dcolor];
+
 };
 /// <summary>
 /// ライト用の定数バッファ
@@ -256,7 +257,7 @@ float3 SpecularCalc(float3 normal, float3 worldPos, float2 uv)
 		//反射ベクトルとディレクションライトの方向との内積を取って、スペキュラの強さを計算。
 		float t = max(0.0f, dot(-directionLight.dligDirection[i], reflectEye));
 		//スぺキュラの絞り
-		float specPower = 1.0f;
+		float specPower = 0.0f;
 		if (isHasSpecularMap) {
 			specPower = g_specularMap.Sample(Sampler, uv).r;
 		}

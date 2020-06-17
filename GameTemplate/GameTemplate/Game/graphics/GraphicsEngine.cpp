@@ -159,6 +159,9 @@ void GraphicsEngine::Init(HWND hWnd)
 
 	//エフェクトエンジンの初期化。
 	m_effectEngine.InitEffekseer();
+	//サウンドエンジンを初期化。
+	g_soundEngine->Init();
+	//m_soundEngine.Init();
 
 }
 void GraphicsEngine::ChangeRenderTarget(RenderTarget* renderTarget, D3D11_VIEWPORT* viewport)

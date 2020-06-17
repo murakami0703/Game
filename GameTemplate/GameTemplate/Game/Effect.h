@@ -50,6 +50,7 @@ public:
 	/// <summary>
 	/// XVB
 	/// </summary>
+	bool Start();
 	void Update();
 private:
 	Effekseer::Effect*	m_effect = nullptr;

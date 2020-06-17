@@ -105,7 +105,7 @@ public:
 	/// </summary>
 	void SetSpecularMap(ID3D11ShaderResourceView* srv)
 	{
-		m_normalMapSRV = srv;
+		m_specularSRV = srv;
 	}
 	/// <summary>
 	/// アンビエントマップの設定。
