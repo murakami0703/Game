@@ -3,17 +3,21 @@
 
 EffectPlay::EffectPlay()
 {
-	//エフェクトのインスタンスの作成。
-	effect = g_goMgr->NewGameObject<Effect>();
-	effect->Play(animation.c_str());	//再生
-	effect->SetScale(scale);
-	effect->SetPosition(position);
-
 }
 
 
 EffectPlay::~EffectPlay()
 {
+}
+
+bool EffectPlay::Start()
+{
+	effect = g_goMgr->NewGameObject<Effect>();
+	effect->Play(animation.c_str());	//再生
+	effect->SetScale(scale);
+	effect->SetPosition(position);
+
+	return true;
 }
 
 void EffectPlay::Update() {

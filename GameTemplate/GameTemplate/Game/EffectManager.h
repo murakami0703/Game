@@ -30,7 +30,7 @@ private:
 	//エフェクトファイル名
 	wchar_t DetaBase[17][30]{
 		{ L"" },//Nullなので何もない
-		{ L"effect/test.efk" },
+		{ L"Assets/effect/test.efk" },
 	};
 
 	CVector3 m_scale = CVector3::One();

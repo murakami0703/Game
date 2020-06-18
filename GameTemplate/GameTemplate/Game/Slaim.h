@@ -107,7 +107,7 @@ private:
 
 	//追尾関連
 	const float m_toBPPos = 100.0f;			//予備動作開始距離。
-	const float m_followSpeed = 20.0f;		//徘徊速度。
+	const float m_followSpeed = 250.0f;		//徘徊速度。
 	const float m_loiteringLength = 500.0f;	//徘徊に戻る距離。
 
 
@@ -116,7 +116,7 @@ private:
 
 	int m_moveCount = 0;						//巡回用カウント
 	float m_moveSpeed = 0.6f;					//エネミの移動速度。
-	const float m_follSpeed = 3.0f;				//追尾中の移動速度。
+	const float m_follSpeed = 1000.0f;				//追尾中の移動速度。
 	const float m_tuisekiLength = 300.0f;		//追尾する距離。
 	const float m_ReturnLength = 1000.0f;		//徘徊位置に戻る距離。
 
@@ -131,11 +131,12 @@ private:
 	int count = 0;							//移動用カウント
 	int wrandom = 0;						//移動の方向乱数
 	const int randomCount = 120;			//ランダムで移動方向切り替えタイマー
-	const float randomSpeed = 120.0f;			//移動速度
+	const float randomSpeed = 300.0f;			//移動速度
 	bool flag = true;
 	bool flag1 = true;
 	int timer1 = 0;
 	int timer2 = 0;
+	float ko = 0;
 
 	CVector3 dddd= CVector3().Zero();
 	CVector3 walk1move = CVector3().Zero();		// 座標。

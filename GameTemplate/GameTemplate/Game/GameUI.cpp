@@ -102,7 +102,8 @@ bool GameUI::Start()
 			}
 		}
 	}
-	m_spriteNum = m_spriteNum + m_setHP;
+	m_spriteNum += m_setHP+1;
+
 	//アイテム
 	g_goMgr->NewGameObject<Item>();
 
@@ -127,10 +128,9 @@ void GameUI::ScalingSelectCase() {
 void GameUI::HPCalc()
 {
 	//今のHP量を取得。
-	m_spriteNum = (int)m_nowHp;
 	//HP半分表示
 	m_spriteRender[m_spriteNum]->SetAlpha(0.0f);
-	m_nowHp = m_setHP;
+	m_setHP -= 1.0f;
 }
 
 
@@ -139,6 +139,7 @@ void GameUI::HPCalc()
 void GameUI::Update()
 {
 	if (g_pad[0].IsTrigger(enButtonA)) {
+		m_spriteNum -= 1;
 		GameData::GetInstance()->HPCalc(-1.0f);
 	}
 	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {

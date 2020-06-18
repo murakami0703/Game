@@ -66,6 +66,7 @@ void Slaim::Loitering()
 		//ランダムで方向を決定して動きます
 		m_randRot = rand() % 360;
 		m_rotation.SetRotation(CVector3::AxisY(), (float)m_randRot);
+		m_enemyForward = { 0.0f, 0.0f, 1.0f };
 		m_rotation.Multiply(m_enemyForward);
 		m_timer = 1;
 		flag = false;
@@ -88,6 +89,7 @@ void Slaim::Loitering()
 	}
 	moveVec = m_enemyForward * m_loiteringSpeed;
 	m_position = m_characon.Execute(m_caraTime, moveVec);
+	m_enemyModelRender->PlayAnimation(1);
 
 }
 void Slaim::Follow()
@@ -101,14 +103,15 @@ void Slaim::Follow()
 	}
 	else {
 		//近いので移動無し
-		moveVec = {0.0f, 0.0f, 0.0f};
+		m_toBPVec = {0.0f, 0.0f, 0.0f};
 	}
 
 	//　向かせたい方向のベクトルを計算する。
-	CVector3 targetVector = Player::GetInstance()->GetPosition() - m_position;
+	CVector3 targetVector = m_toPlayerVec;
 	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
 	targetVector.y = 0.0f;
 	targetVector.Normalize();
+	m_enemyForward = { 0.0f, 0.0f, 1.0f };
 	CQuaternion qRot;
 	qRot.SetRotation(m_enemyForward, targetVector);
 	m_rotation = qRot;
@@ -144,19 +147,20 @@ void Slaim::Premove2()
 {
 	//予備動作その1
 	m_enemyModelRender->PlayAnimation(3,0.5f);
+
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//プレイヤーの上に離れまーーーーース
 		dddd.Normalize();
 		moveVec = dddd * 4000.0f ;
 
-		//m_position.y += 50.0f;
 		//だいぶ上に行ったので攻撃しますぅ。
 		if (m_position.y >= 1000.0f) {
 			Player* player = Player::GetInstance();
 			CVector3 P_Position = player->GetPosition();
-			P_Position.y += 500.0f;
+			//P_Position.y += 500.0f;
+			dddd = P_Position - m_position;
 
-			m_position = P_Position;
+
 			m_state = eState_Attack;
 		}
 	}
@@ -173,11 +177,9 @@ void Slaim::Premove2()
 
 void Slaim::Attack()
 {
+
 	if (m_position.y >= 450.0f) {
-		//Player* player = Player::GetInstance();
-		//Vector3 P_Position = player->GetPosition();
-		//dddd = P_Position - m_position;
-		dddd.y -= 2000.0f;
+		dddd.y -= 400.0f;
 		m_enemyModelRender->PlayAnimation(0);
 	}
 	else {
@@ -200,6 +202,8 @@ void Slaim::Vertigo()
 	m_enemyModelRender->PlayAnimation(5,0.5f);
 	timer2++;
 	if (timer2 >= 60) {
+		m_timer = 0;
+		timer2 = 0;
 		m_state = eState_Loitering;
 	}
 }

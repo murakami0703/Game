@@ -7,6 +7,7 @@ public:
 	EffectPlay();
 	~EffectPlay();
 
+	bool Start();
 	void Update();
 
 	void SetAnimation(std::wstring Animetion) {

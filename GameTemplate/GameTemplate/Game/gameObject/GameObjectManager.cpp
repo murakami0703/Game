@@ -51,7 +51,7 @@ void GameObjectManager::Update()
 		}
 
 		//サウンドエンジンを更新。
-		g_soundEngine->Update();
+		g_graphicsEngine->GetSoundEngine().Update();
 
 		//物理エンジンの更新。
 		g_physics.Update();

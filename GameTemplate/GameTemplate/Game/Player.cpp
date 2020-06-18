@@ -88,7 +88,6 @@ void Player::Move()
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
 		//effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
-		//m_se.Play(false);
 		m_move.x -= m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
 
@@ -127,6 +126,7 @@ void Player::Attack()
 	if (Atcount == 1) {
 		//攻撃1回目
 		m_skinModelRender->PlayAnimation(2);
+		//m_se.Play(false);
 		attackflag = true;
 		if (m_skinModelRender->IsPlayingAnimation() == false) {
 			//再生終了したら待機に戻る
