@@ -97,6 +97,12 @@ public:
 	/// <param name="flag"></param>
 	void SetShadowReciever(bool flag);
 
+	/// <summary>
+	/// ライトの設定。
+	/// </summary>
+	void SetLightColor(CVector4 color) {
+		m_skinModel.SetLightColor(color);
+	}
 
 	/// <summary>
 	/// 法線マップの設定。

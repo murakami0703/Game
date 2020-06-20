@@ -49,5 +49,8 @@ private:
 	//フォント位置
 	const CVector2 m_startFontPos = { -550.0f,-270.0f };	//「はじめる」の座標
 	const CVector2 m_loadFontPos = { 400.0f,-270.0f };		//「つづける」の座標
+
+	CSoundSource m_titleBgm;						//タイトルBGM。
+
 };
 

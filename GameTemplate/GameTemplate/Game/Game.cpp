@@ -13,8 +13,6 @@
 
 Game::Game()
 {
-	m_bgm.Init(L"Assets/sound/stage1_BGM.wav");
-	m_bgm.Play(true);
 }
 
 
@@ -43,10 +41,15 @@ void Game::Update() {
 
 
 	GameData* m_gamedate = GameData::GetInstance();
+	//敵を全部倒したのでリザルトへ
 	if (m_gamedate->GetEnemyCount() <= 0 && m_gamedate->ResultFlag() == true) {
 		g_goMgr->SetMainSpriteMulColor({ 0.3f,0.3f, 0.3f, 1.0f });
 		g_goMgr->NewGameObject<Result>();
 		m_gamedate->SetResultFlag(false);
+	}
+	//プレイヤーのHPがなくなったのでGAMEOVERです。
+	if (m_gamedate->GetHitPoint() <= 0.0f) {
+
 	}
 }
 

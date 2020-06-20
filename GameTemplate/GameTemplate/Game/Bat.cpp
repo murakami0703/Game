@@ -2,6 +2,7 @@
 #include "Bat.h"
 #include "Player.h"
 #include "SiegePoint.h"
+#include "EffectManager.h"
 
 
 Bat::Bat()
@@ -30,7 +31,6 @@ bool Bat::Start()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 
-	m_characon.Init(20.0f, 50.0f, m_position);
 	m_enemyModelRender->SetShadowMap(true);
 
 	return true;
@@ -67,7 +67,6 @@ void Bat::Follow()
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 
 	//‰“‚­‚È‚Á‚½‚Ì‚Å‚»‚Ìê‚Åœpœj‚·‚éB
 	if (m_toPlayerVec.Length() > m_returnLength) {
@@ -90,6 +89,9 @@ void Bat::Premove()
 }
 void Bat::Attack()
 {
+	EffectManager* effect = EffectManager::GetInstance();
+	effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
+
 	//UŒ‚B
 	m_enemyModelRender->PlayAnimation(2);	//UŒ‚ƒAƒjƒ‚ÌÄ¶B
 	//ƒGƒtƒFƒNƒgÄ¶iUŒ‚j
@@ -97,7 +99,7 @@ void Bat::Attack()
 	//ƒAƒjƒ‚ªI‚í‚Á‚½‚Ì‚Åœpœjó‘Ô‚É‘JˆÚB
 	if (m_enemyModelRender->IsPlayingAnimation() != true)
 	{
-		//m_state = eState_Loitering;
+		m_state = eState_Loitering;
 
 	}
 }

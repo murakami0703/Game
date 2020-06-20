@@ -94,6 +94,12 @@ public:
 		m_isShadowReciever = flag;
 	}
 	/// <summary>
+	/// ライトの設定。
+	/// </summary>
+	void SetLightColor(CVector4 color) {
+		m_light.directionLight.color[0] = color;
+	}
+	/// <summary>
 	/// 法線マップの設定。
 	/// </summary>
 	void SetNormalMap(ID3D11ShaderResourceView* srv)

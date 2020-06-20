@@ -60,11 +60,8 @@ bool Player::Start()
 	m_skinModelRender->SetSpecularMap(g_specularMapSRV);
 	m_skinModelRender->SetSpecularMap(g_ambientMapSRV);
 
+	m_nowHP = GameData::GetInstance()->GetHitPoint();
 	m_skinModelRender->SetShadowMap(true);
-	//サウンドの読み込み
-	m_se.Init(L"Assets/sound/player_Attack.wav");
-
-
 	return true;
 }
 
@@ -83,11 +80,9 @@ void Player::Move()
 {
 	m_move.x = 0.0f;
 	m_move.z = 0.0f;
-	EffectManager* effect = EffectManager::GetInstance();
 
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
-		//effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
 		m_move.x -= m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
 
@@ -123,9 +118,11 @@ void Player::Move()
 }
 void Player::Attack()
 {
-	if (Atcount == 1) {
+	EffectManager* effect = EffectManager::GetInstance();
+	if (Atcount == 1 && attackflag == false) {
 		//攻撃1回目
 		m_skinModelRender->PlayAnimation(2);
+		effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 10.0f,10.0f,10.0f });
 		//m_se.Play(false);
 		attackflag = true;
 		if (m_skinModelRender->IsPlayingAnimation() == false) {
@@ -152,14 +149,35 @@ void Player::Dead()
 {
 	//死亡
 }
+
+void Player::Damage()
+{
+	GameData* gamedata = GameData::GetInstance();
+	//ダメージ受けました。
+	//赤くしますよお
+	m_skinModelRender->SetLightColor({ 0.7f,0.0f,0.0f,1.0f });
+	m_damageTimer++;
+	//ちょっと時間経過したら元に戻す。
+	if (m_damageTimer>=10) {
+		m_skinModelRender->SetLightColor({ 0.7f,0.7f,0.7f,1.0f });
+		m_nowHP = gamedata->GetHitPoint();
+		m_state = Player_Idle;
+	}
+
+}
 void Player::Update()
 {
+	GameData* gamedata = GameData::GetInstance();
 	//攻撃します。
 	if (g_pad[0].IsTrigger(enButtonA) ) {
 		Atcount = 1;
 		m_state = Player_Attack;
 	}
-
+	/*//ダメージ受けましたわよ
+	if (gamedata->GetHitPoint() <= m_nowHP) {
+		m_state = Player_Damage;
+	}
+	*/
 	switch (m_state)
 	{
 	case Player::Player_Idle:
@@ -173,6 +191,9 @@ void Player::Update()
 		break;
 	case Player::Player_Dead:
 		Dead();			//死亡
+		break;
+	case Player::Player_Damage:
+		Damage();		//ダメージ受けましたぁ
 		break;
 	}
 

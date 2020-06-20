@@ -10,7 +10,6 @@ public:
 private:
 	//選択状態
 	enum eSelectState {
-		Item_Get,
 		Item_Use,
 		Item_Move,
 		Item_Now
@@ -25,7 +24,6 @@ private:
 private:
 	void ItemMoveSet(eItemState& m_State);	//アイテムspriteの移動拡大設定。
 
-	void ItemGet();		//アイテム取得
 	void ItemUse(eItemState& m_State);		//アイテム使用
 	void ItemMove(eItemState& m_State);	//アイテム移動
 	void ItemNow();		//現在選択されているアイテム

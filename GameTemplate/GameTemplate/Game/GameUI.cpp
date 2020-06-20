@@ -138,11 +138,8 @@ void GameUI::HPCalc()
 
 void GameUI::Update()
 {
-	if (g_pad[0].IsTrigger(enButtonA)) {
-		m_spriteNum -= 1;
-		GameData::GetInstance()->HPCalc(-1.0f);
-	}
 	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {
+		m_spriteNum -= 1;
 		HPCalc();
 	}
 	ScalingSelectCase();

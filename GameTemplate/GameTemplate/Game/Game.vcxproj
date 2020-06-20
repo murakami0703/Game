@@ -110,6 +110,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Gimmick.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="Gimmick.h" />

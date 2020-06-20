@@ -258,7 +258,7 @@ void Slaim::Update()
 		Attack();			//UŒ‚
 		break;
 	case Slaim::eState_Vertigo:
-		Vertigo();
+		Vertigo();			//‚ß‚Ü‚¢
 		break;
 	case Slaim::eState_Return:
 		Return();			//œpœjˆÊ’u‚É–ß‚é

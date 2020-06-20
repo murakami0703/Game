@@ -280,6 +280,7 @@
     <ClCompile Include="TreasureBox.cpp">
       <Filter>gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -466,6 +467,7 @@
     <ClInclude Include="TreasureBox.h">
       <Filter>gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="GameOver.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -620,10 +622,18 @@
     <ImageContentTask Include="Assets\sprite\Hp.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Hp_Half.png" />
-    <ImageContentTask Include="Assets\modelData\AO.png" />
-    <ImageContentTask Include="Assets\modelData\MatallicSmoothness.png" />
-    <ImageContentTask Include="Assets\modelData\Normal.png" />
+    <ImageContentTask Include="Assets\modelData\AO.png">
+      <Filter>Assets\modelData</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\Normal.png">
+      <Filter>Assets\modelData</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\modelData\MatallicSmoothness.png">
+      <Filter>Assets\modelData</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Hp_Half.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

@@ -14,9 +14,9 @@ bool EffectPlay::Start()
 {
 	effect = g_goMgr->NewGameObject<Effect>();
 	effect->Play(animation.c_str());	//Ä¶
-	effect->SetScale(scale);
-	effect->SetPosition(position);
-
+	effect->SetScale(m_scale);
+	effect->SetPosition(m_position);
+	effect->SetRotation(m_rotation);
 	return true;
 }
 

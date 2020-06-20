@@ -34,7 +34,8 @@ private:
 		Player_Idle,
 		Player_Walk,
 		Player_Attack,
-		Player_Dead
+		Player_Dead,
+		Player_Damage
 	};
 
 	enum PAnimation {
@@ -51,6 +52,8 @@ private:
 	void Move();						//移動。
 	void Attack();
 	void Dead();
+
+	void Damage();				//ダメージ受けました。
 
 private:
 	SkinModelRender* m_skinModelRender = nullptr;				//スキンモデルレンダー。
@@ -79,6 +82,9 @@ private:
 	//サウンド関係
 	CSoundSource m_se;						//se。
 
+	//HP
+	float m_nowHP = 0;
+	int m_damageTimer = 0;
 	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
 	ID3D11ShaderResourceView* g_specularMapSRV = nullptr;
 	ID3D11ShaderResourceView* g_ambientMapSRV = nullptr;

@@ -77,10 +77,43 @@ public:
 		return m_speedUp;
 	}
 
-	void GameData::ItemHpRecovery()
-	{
-		m_hpRecovery++;
+	void  GameData::HPRecoveryCalc(int x) {
+		m_hpRecovery += x;
+		if (m_hpRecovery < 0) {
+			m_hpRecovery = 0;
+		}
+		if (MAXItem < m_hpRecovery) {
+			m_hpRecovery = MAXItem;
+		}
 	}
+	void  GameData::BumCalc(int x) {
+		m_bum += x;
+		if (m_bum < 0) {
+			m_bum = 0;
+		}
+		if (MAXItem < m_bum) {
+			m_bum = MAXItem;
+		}
+	}
+	void  GameData::AttackUpCalc(int x) {
+		m_attackUp += x;
+		if (m_attackUp < 0) {
+			m_attackUp = 0;
+		}
+		if (MAXItem < m_attackUp) {
+			m_attackUp = MAXItem;
+		}
+	}
+	void  GameData::SpeedUpCalc(int x) {
+		m_speedUp += x;
+		if (m_speedUp < 0) {
+			m_speedUp = 0;
+		}
+		if (MAXItem < m_speedUp) {
+			m_speedUp = MAXItem;
+		}
+	}
+
 
 	//////////////°///////////////////
 	void  GameData::AnimaCalc(int x) {
@@ -143,5 +176,8 @@ private:
 	int m_bum = 0;			//”š’e
 	int m_attackUp = 0;		//UŒ‚—ÍUP
 	int m_speedUp = 0;		//ˆÚ“®‘¬“xUP
+
+	const int MAXItem = 99;	//Å‘åŠŽƒAƒCƒeƒ€”
+
 };
 

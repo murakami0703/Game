@@ -8,6 +8,8 @@ public:
 	enum EffectName {
 		Null,
 		test, //アイテム入手時のエフェクト
+		Bat_Attack, //アイテム入手時のエフェクト
+		Bat_memai, //アイテム入手時のエフェクト
 	};
 
 	EffectManager();
@@ -28,9 +30,11 @@ public:
 private:
 
 	//エフェクトファイル名
-	wchar_t DetaBase[17][30]{
+	wchar_t DetaBase[17][40]{
 		{ L"" },//Nullなので何もない
 		{ L"Assets/effect/test.efk" },
+		{ L"Assets/effect/bat_attackEfk.efk" },
+		{ L"Assets/effect/bat_vertigo.efk" }
 	};
 
 	CVector3 m_scale = CVector3::One();

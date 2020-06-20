@@ -46,6 +46,8 @@ Title::Title()
 		m_loadFont->SetPosition(m_loadFontPos);
 
 	}
+	m_titleBgm.Init(L"tAssets/sound/stage1_BGM.wav");
+	m_titleBgm.Play(true);
 }
 
 

@@ -31,7 +31,6 @@ bool Ghost::Start()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 
-	m_characon.Init(50.0f, 100.0f, m_position);	//キャラコンの初期化。
 	m_enemyModelRender->SetShadowMap(true);		//シャドウマップに描画。
 
 	return true;
@@ -109,11 +108,10 @@ void Ghost::Loitering()
 	else {
 		m_timer++;
 	}
-	moveVec = walkmove * randomSpeed;
+	m_position += walkmove * randomSpeed;
 
 	Horizon();	//視野角判定
 
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(1);
 
 }
@@ -125,7 +123,7 @@ void Ghost::Follow()
 	if (m_toBPVec.Length() > 50.0f) {
 		m_toBPVec.y = 0.0f;
 		m_toBPVec.Normalize();
-		moveVec = m_toBPVec * 250.0f;
+		m_position += m_toBPVec * 5.0f;
 
 	}
 	/*else if (m_toBPVec.Length() < 10.0f) {
@@ -156,7 +154,6 @@ void Ghost::Follow()
 		m_battlePoint = nullptr;
 		m_state = eState_Loitering;
 	}
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(1);
 
 }
@@ -169,13 +166,13 @@ void Ghost::Premove()
 
 	timer1++;
 	if (timer1 <= 10) {
-		moveVec = diff * 5.0f;
-		moveVec.y -= 5.0f;
+		m_position += diff * 5.0f;
+		m_position.y -= 5.0f;
 
 	}
 	else if (timer1 >= 10 && timer1 <= 50) {
-		moveVec += diff * 5.0f;
-		moveVec.y += 15.0f;
+		m_position += diff * 5.0f;
+		m_position.y += 15.0f;
 	}
 	else if (timer1 >= 50 && timer1 <= 60) {
 		timer1 = 0;
@@ -202,7 +199,6 @@ void Ghost::Premove()
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 
 	m_enemyModelRender->PlayAnimation(2,0.5f);
 }
@@ -213,19 +209,18 @@ void Ghost::Attack()
 	//急降下します
 
 
-	if (baund==true && m_characon.IsOnGround() == false) {
-		moveVec = dff * 2000.0f;
-		moveVec.y -= 5.0f;
+	if (baund==true ) {
+		m_position += dff * 20.0f;
+		m_position.y -= 5.0f;
 	}
 	else {
 		baund = false;
 		m_timer++;
 		if (baund == false && m_position.y <= 440.0f) {
-			moveVec = dff * 200.0f;
-			moveVec.y += 200.0f;
+			m_position += dff * 10.0f;
+			m_position.y += 200.0f;
 		}
 		else if (m_timer <= 100.0f) {
-			moveVec = {0.0f,0.0f,0.0f};
 		}
 		else {
 			m_timer = 0;
@@ -240,7 +235,6 @@ void Ghost::Attack()
 		//HP減らす
 		GameData::GetInstance()->HPCalc(-0.5f);
 	}*/
-	m_position = m_characon.Execute(m_caraTime, moveVec);
 	m_enemyModelRender->PlayAnimation(0);
 
 }

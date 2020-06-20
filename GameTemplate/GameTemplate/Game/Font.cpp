@@ -6,7 +6,7 @@ Font::Font()
 {
 	m_spriteBatch = g_graphicsEngine->GetSpriteBatch();
 	m_spriteFont = g_graphicsEngine->GetSpriteFont();
-	auto& ge = GraphicsEngine();
+
 	m_scaleMat.MakeScaling(
 		{
 			FRAME_BUFFER_W / static_cast<float>(FRAME_BUFFER_W),

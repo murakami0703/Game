@@ -1,5 +1,4 @@
 #pragma once
-#include "character/CharacterController.h"
 
 class Bat : public IGameObject
 {
@@ -72,7 +71,6 @@ private:
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
 
 	EState m_state = eState_Loitering;					//状態。
-	CharacterController m_characon;		//キャラコン
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 	
 	//移動関連

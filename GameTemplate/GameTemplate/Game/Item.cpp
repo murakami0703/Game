@@ -54,42 +54,74 @@ bool Item::Start()
 	return true;
 }
 
-void Item::ItemGet()
-{
-	//アイテム取得
-	//fontアイテム加算
-}
 void Item::ItemUse(eItemState& m_State)
 {		
+	GameData* m_gamedate = GameData::GetInstance();
 	//アイテム使用
 	switch (m_State) {
-	case Item::Item_HpRecovery:
-	{
-		break;
-	}
-	case Item::Item_Bum:
-	{
-		break;
-	}
-	case Item::Item_AttackUp:
-	{
-		break;
-	}
-	case Item::Item_SpeedUp:
-	{
-		break;
-	}
+		case Item::Item_HpRecovery:
+		{
+			m_gamedate->HPRecoveryCalc(-1);
+			//使用後のアイテム数表示
+			wchar_t text[256];
+			swprintf(text, L"%d", m_gamedate->GetItemHpRecovery());
+			m_itemCountFont->SetText(text);
+
+			m_state = Item_Now;
+			break;
+		}
+		case Item::Item_Bum:
+		{
+			m_gamedate->BumCalc(-1);
+			//使用後のアイテム数表示
+			wchar_t text[256];
+			swprintf(text, L"%d", m_gamedate->GetItemBum());
+			m_itemCountFont->SetText(text);
+
+			m_state = Item_Now;
+			break;
+		}
+		case Item::Item_AttackUp:
+		{
+			m_gamedate->AttackUpCalc(-1);
+			//使用後のアイテム数表示
+			wchar_t text[256];
+			swprintf(text, L"%d", m_gamedate->GetItemAttackUp());
+			m_itemCountFont->SetText(text);
+
+			m_state = Item_Now;
+			break;
+		}
+		case Item::Item_SpeedUp:
+		{
+			m_gamedate->SpeedUpCalc(-1);
+			//使用後のアイテム数表示
+			wchar_t text[256];
+			swprintf(text, L"%d", m_gamedate->GetItemSpeedUp());
+			m_itemCountFont->SetText(text);
+
+			m_state = Item_Now;
+			break;
+		}
 	}
 
 }
 void Item::ItemMoveSet(eItemState& m_State)
 {
+	GameData* m_gamedate = GameData::GetInstance();
+
 	//アイテムspriteの移動拡大設定。
 	if (m_State == Item_HpRecovery) {
 		m_spriteRender[0]->SetPosScale(m_item1Pos, m_item1Scale);
 		m_spriteRender[1]->SetPosScale(m_item2Pos, m_item2Scale);
 		m_spriteRender[2]->SetPosScale(m_item3Pos, m_item3Scale);
 		m_spriteRender[3]->SetPosScale(m_item4Pos, m_item4Scale);
+
+		//回復薬のアイテム数
+		wchar_t text[256];
+		swprintf(text, L"%d", m_gamedate->GetItemHpRecovery());
+		m_itemCountFont->SetText(text);
+
 		m_itemMoveEndFlag = true;
 
 	}
@@ -99,6 +131,12 @@ void Item::ItemMoveSet(eItemState& m_State)
 		m_spriteRender[1]->SetPosScale(m_item1Pos, m_item1Scale);
 		m_spriteRender[2]->SetPosScale(m_item2Pos, m_item2Scale);
 		m_spriteRender[3]->SetPosScale(m_item3Pos, m_item3Scale);
+
+		//爆弾のアイテム数
+		wchar_t text[256];
+		swprintf(text, L"%d", m_gamedate->GetItemBum());
+		m_itemCountFont->SetText(text);
+
 		m_itemMoveEndFlag = true;
 
 	}
@@ -108,6 +146,12 @@ void Item::ItemMoveSet(eItemState& m_State)
 		m_spriteRender[1]->SetPosScale(m_item4Pos, m_item4Scale);
 		m_spriteRender[2]->SetPosScale(m_item1Pos, m_item1Scale);
 		m_spriteRender[3]->SetPosScale(m_item2Pos, m_item2Scale);
+
+		//攻撃力UPのアイテム数
+		wchar_t text[256];
+		swprintf(text, L"%d", m_gamedate->GetItemAttackUp());
+		m_itemCountFont->SetText(text);
+
 		m_itemMoveEndFlag = true;
 
 	}
@@ -117,6 +161,12 @@ void Item::ItemMoveSet(eItemState& m_State)
 		m_spriteRender[1]->SetPosScale(m_item3Pos, m_item3Scale);
 		m_spriteRender[2]->SetPosScale(m_item4Pos, m_item4Scale);
 		m_spriteRender[3]->SetPosScale(m_item1Pos, m_item1Scale);
+
+		//移動速度UPのアイテム数
+		wchar_t text[256];
+		swprintf(text, L"%d", m_gamedate->GetItemSpeedUp());
+		m_itemCountFont->SetText(text);
+
 		m_itemMoveEndFlag = true;
 	}
 }
@@ -228,9 +278,6 @@ void Item::Update()
 {
 	switch (m_state)
 	{
-	case Item::Item_Get:
-		ItemGet();
-		break;
 	case Item::Item_Use:
 		ItemUse(m_itemState);
 		break;
