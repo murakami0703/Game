@@ -122,15 +122,9 @@ void Player::Attack()
 	if (Atcount == 1 && attackflag == false) {
 		//攻撃1回目
 		m_skinModelRender->PlayAnimation(2);
-		effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 10.0f,10.0f,10.0f });
+		//effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 10.0f,10.0f,10.0f });
 		//m_se.Play(false);
 		attackflag = true;
-		if (m_skinModelRender->IsPlayingAnimation() == false) {
-			//再生終了したら待機に戻る
-			Atcount = 0;
-			attackflag = false;
-			m_state = Player_Idle;
-		}
 	}
 	/*if (Atcount >= 2) {
 		//攻撃2回目
@@ -144,6 +138,13 @@ void Player::Attack()
 		}
 
 	}*/
+	if (m_skinModelRender->IsPlayingAnimation() == false && attackflag == true) {
+		//再生終了したら待機に戻る
+		Atcount = 0;
+		attackflag = false;
+		m_state = Player_Idle;
+	}
+
 }
 void Player::Dead()
 {

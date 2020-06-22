@@ -68,7 +68,7 @@ private:
 	AnimationClip m_animClips[AnimationClip_Num];	//アニメーションクリップ
 
 	//移動関連
-	float m_movespeed = 1000.0f;			//移動速度
+	float m_movespeed = 800.0f;			//移動速度
 	const float m_rotationLR = 80.0f;		//左右の回転角度
 	const float m_rotationD = 110.0f;		//下の回転角度
 	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間

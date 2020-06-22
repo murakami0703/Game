@@ -50,7 +50,7 @@ void Bat::Follow()
 	if (m_toEPVec.Length() > m_toPlyaerLength) {
 		m_toEPVec.y = 0.0f;
 		m_toEPVec.Normalize();
-		moveVec += m_toEPVec * 1.0f;
+		m_position += m_toEPVec * 1.0f;
 	}
 	//近づいたので予備動作状態に遷移します。
 	else if (m_toEPVec.Length() <= m_toPlyaerLength)
@@ -90,8 +90,8 @@ void Bat::Premove()
 void Bat::Attack()
 {
 	EffectManager* effect = EffectManager::GetInstance();
-	effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
-
+	effect->EffectPlayer(EffectManager::Bat_Attack, { m_position.x ,m_position.y+50.0f ,m_position.z }, { 10.0f,10.0f,10.0f },m_rotation);
+	
 	//攻撃。
 	m_enemyModelRender->PlayAnimation(2);	//攻撃アニメの再生。
 	//エフェクト再生（攻撃）

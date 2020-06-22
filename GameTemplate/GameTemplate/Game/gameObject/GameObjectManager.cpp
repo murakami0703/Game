@@ -5,7 +5,6 @@
 //GameObjectManagerクラスのインスタンス。
 GameObjectManager* g_goMgr = nullptr;
 
-//カメラを初期化。
 void GameObjectManager::Init()
 {
 	//メインレンダリングターゲットの作成。
@@ -41,7 +40,6 @@ void GameObjectManager::Init()
 	//デプスステンシルステートを作成。
 	d3ddevice->CreateDepthStencilState(&desc, &depthStencilState);
 }
-
 void GameObjectManager::Update()
 {
 	//登録されているゲームオブジェクトの更新関数を呼ぶ。

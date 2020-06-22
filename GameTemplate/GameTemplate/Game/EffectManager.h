@@ -18,7 +18,7 @@ public:
 	//引数1→再生するエフェクト（種類はヘッダーに）
 	//引数2→position
 	//引数3→scale
-	void EffectPlayer(EffectName EF, CVector3 position, CVector3 scale);
+	void EffectPlayer(EffectName EF, CVector3 position, CVector3 scale, CQuaternion m_rotation);
 
 	//インスタンスの取得
 	static EffectManager* EffectManager::GetInstance() {
@@ -39,6 +39,7 @@ private:
 
 	CVector3 m_scale = CVector3::One();
 	CVector3 m_position = CVector3::Zero();
+	CQuaternion m_rotation = CQuaternion().Identity();	//!<回転。
 
 	EffectName m_stete = Null;		 //エフェクト状態
 	wchar_t EF_Name[30] = { L"" };	//エフェクト名保管用

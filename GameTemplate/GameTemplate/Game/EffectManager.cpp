@@ -25,7 +25,7 @@ EffectManager::~EffectManager()
 bool EffectManager::Start() { return true; }
 
 //エフェクト再生くん
-void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scale) {
+void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scale,CQuaternion m_rotation) {
 	//作成
 	EffectPlay* m_player = g_goMgr->NewGameObject<EffectPlay>();
 	//名前を引っ張ってくる
@@ -37,6 +37,7 @@ void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scal
 	m_player->SetAnimation(EF_Name);
 	m_player->SetPosition(position);
 	m_player->SetScale(scale);
-	
+	m_player->SetRotation(m_rotation);
+
 }
 void EffectManager::Update(){}

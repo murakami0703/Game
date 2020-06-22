@@ -85,9 +85,8 @@ private:
 	CVector3 m_position = CVector3().Zero();			//座標。
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
-	EState m_state = eState_Idle;					//状態。
+	EState m_state = eState_Loitering;					//状態。
 
-	CharacterController m_characon;		//キャラコン
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 
 	//共用
@@ -128,7 +127,7 @@ private:
 	int count = 0;							//移動用カウント
 	int wrandom = 0;						//移動の方向乱数
 	const int randomCount = 120;			//ランダムで移動方向切り替えタイマー
-	const float randomSpeed = 120.0f;			//移動速度
+	const float randomSpeed = 2.0f;			//移動速度
 
 	CVector3 moveVec = CVector3().Zero();			//座標。
 	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間

@@ -166,13 +166,13 @@ void Ghost::Premove()
 
 	timer1++;
 	if (timer1 <= 10) {
-		m_position += diff * 5.0f;
-		m_position.y -= 5.0f;
+		m_position += diff * 1.0f;
+		m_position.y -= 3.0f;
 
 	}
 	else if (timer1 >= 10 && timer1 <= 50) {
-		m_position += diff * 5.0f;
-		m_position.y += 15.0f;
+		m_position += diff * 4.0f;
+		m_position.y += 8.0f;
 	}
 	else if (timer1 >= 50 && timer1 <= 60) {
 		timer1 = 0;
@@ -209,18 +209,19 @@ void Ghost::Attack()
 	//急降下します
 
 
-	if (baund==true ) {
-		m_position += dff * 20.0f;
-		m_position.y -= 5.0f;
+	if (baund==true && m_position.y >= 410.0f) {
+		m_position += dff * 60.0f;
+		m_position.y -= 3.0f;
 	}
 	else {
 		baund = false;
 		m_timer++;
 		if (baund == false && m_position.y <= 440.0f) {
-			m_position += dff * 10.0f;
-			m_position.y += 200.0f;
+			m_position += dff * 1.0f;
+			m_position.y += 3.0f;
 		}
 		else if (m_timer <= 100.0f) {
+			m_position = m_position;
 		}
 		else {
 			m_timer = 0;
@@ -243,8 +244,8 @@ void Ghost::Dead()
 {
 	m_enemyModelRender->PlayAnimation(3);
 	EffectManager* effect = EffectManager::GetInstance();
-	effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
-
+	//effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
+	m_scale -= {0.05f, 0.05f, 0.05f};
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
 		//エネミーの数減らします
