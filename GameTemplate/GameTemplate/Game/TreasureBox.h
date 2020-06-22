@@ -64,7 +64,7 @@ private:
 
 	//開封関連
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレーヤーと箱のベクトル。
-	const float m_openYVec = 30.0f;						//開封用距離。
+	const float m_openYVec = 200.0f;						//開封用距離。
 	const int m_randNum[4] = { 0,1,2,3 };				//開封用距離。
 	int m_rand = 0;										//ランダム数の格納。
 

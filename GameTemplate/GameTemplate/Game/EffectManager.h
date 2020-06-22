@@ -7,7 +7,7 @@ public:
 	//エフェクト名前
 	enum EffectName {
 		Null,
-		test, //アイテム入手時のエフェクト
+		open, //アイテム入手時のエフェクト
 		Bat_Attack, //アイテム入手時のエフェクト
 		Bat_memai, //アイテム入手時のエフェクト
 	};
@@ -19,6 +19,7 @@ public:
 	//引数2→position
 	//引数3→scale
 	void EffectPlayer(EffectName EF, CVector3 position, CVector3 scale, CQuaternion m_rotation);
+	void EffectPlayer(EffectName EF, CVector3 position, CVector3 scale);
 
 	//インスタンスの取得
 	static EffectManager* EffectManager::GetInstance() {
@@ -32,7 +33,7 @@ private:
 	//エフェクトファイル名
 	wchar_t DetaBase[17][40]{
 		{ L"" },//Nullなので何もない
-		{ L"Assets/effect/test.efk" },
+		{ L"Assets/effect/open_Box.efk" },
 		{ L"Assets/effect/bat_attackEfk.efk" },
 		{ L"Assets/effect/bat_vertigo.efk" }
 	};

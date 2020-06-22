@@ -22,7 +22,11 @@ Game::~Game()
 
 bool Game::Start()
 {
-	
+	//ƒ‹[ƒvSE
+	/*m_bgm.Init(L"Assets/sound/bgm.wav");
+	m_bgm.Play(true);
+	*/
+
 	g_goMgr->NewGameObject<EffectManager>();
 
 	g_goMgr->NewGameObject<Player>();

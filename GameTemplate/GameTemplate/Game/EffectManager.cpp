@@ -40,4 +40,20 @@ void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scal
 	m_player->SetRotation(m_rotation);
 
 }
+
+void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scale) {
+	//ì¬
+	EffectPlay* m_player = g_goMgr->NewGameObject<EffectPlay>();
+	//–¼‘O‚ðˆø‚Á’£‚Á‚Ä‚­‚é
+	int len = (int)wcslen(DetaBase[EF]);
+	for (int x = 0; x < len + 1; x++) {
+		EF_Name[x] = DetaBase[EF][x];
+	}
+	//Ý’è
+	m_player->SetAnimation(EF_Name);
+	m_player->SetPosition(position);
+	m_player->SetScale(scale);
+
+}
+
 void EffectManager::Update(){}
