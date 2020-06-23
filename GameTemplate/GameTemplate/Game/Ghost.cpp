@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "SiegePoint.h"
 #include "EffectManager.h"
+#include "Anima.h"
 
 
 
@@ -242,12 +243,14 @@ void Ghost::Attack()
 
 void Ghost::Dead()
 {
-	m_enemyModelRender->PlayAnimation(3);
 	EffectManager* effect = EffectManager::GetInstance();
-	//effect->EffectPlayer(EffectManager::test, m_position, { 10.0f,10.0f,10.0f });
+	m_enemyModelRender->PlayAnimation(3);
 	m_scale -= {0.05f, 0.05f, 0.05f};
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
+		//エフェクト再生とSoul出現
+		//effect->EffectPlayer(EffectManager::Item_Get, m_position, { 10.0f,10.0f,10.0f });
+		g_goMgr->NewGameObject<Anima>();
 		//エネミーの数減らします
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();

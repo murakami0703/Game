@@ -10,6 +10,7 @@ public:
 		open, //アイテム入手時のエフェクト
 		Bat_Attack, //アイテム入手時のエフェクト
 		Bat_memai, //アイテム入手時のエフェクト
+		Item_Get, //アイテム入手時のエフェクト
 	};
 
 	EffectManager();
@@ -35,7 +36,8 @@ private:
 		{ L"" },//Nullなので何もない
 		{ L"Assets/effect/open_Box.efk" },
 		{ L"Assets/effect/bat_attackEfk.efk" },
-		{ L"Assets/effect/bat_vertigo.efk" }
+		{ L"Assets/effect/bat_vertigo.efk" },
+		{ L"Assets/effect/item_Appear.efk" }
 	};
 
 	CVector3 m_scale = CVector3::One();

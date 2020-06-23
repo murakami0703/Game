@@ -125,6 +125,7 @@ void Player::Attack()
 		//effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 10.0f,10.0f,10.0f });
 		//m_se.Play(false);
 		attackflag = true;
+		Atcount = 0;
 	}
 	/*if (Atcount >= 2) {
 		//UŒ‚2‰ñ–Ú
@@ -140,7 +141,6 @@ void Player::Attack()
 	}*/
 	if (m_skinModelRender->IsPlayingAnimation() == false && attackflag == true) {
 		//Ä¶I—¹‚µ‚½‚ç‘Ò‹@‚É–ß‚é
-		Atcount = 0;
 		attackflag = false;
 		m_state = Player_Idle;
 	}

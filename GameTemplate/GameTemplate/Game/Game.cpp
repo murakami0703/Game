@@ -9,6 +9,7 @@
 #include "EffectManager.h"
 
 #include "SiegePoint.h"
+#include "GameOver.h"
 
 
 Game::Game()
@@ -53,6 +54,7 @@ void Game::Update() {
 	}
 	//プレイヤーのHPがなくなったのでGAMEOVERです。
 	if (m_gamedate->GetHitPoint() <= 0.0f) {
+		g_goMgr->NewGameObject<GameOver>();
 
 	}
 }

@@ -100,7 +100,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Anima.cpp" />
-    <ClCompile Include="AnimaManeger.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectEngine.cpp" />
@@ -171,7 +170,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anima.h" />
-    <ClInclude Include="AnimaManeger.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectEngine.h" />

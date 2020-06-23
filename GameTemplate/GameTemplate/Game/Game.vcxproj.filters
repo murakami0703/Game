@@ -31,9 +31,6 @@
     <Filter Include="system">
       <UniqueIdentifier>{48b58c60-bbe2-40d8-9d2f-e81d065b6820}</UniqueIdentifier>
     </Filter>
-    <Filter Include="light">
-      <UniqueIdentifier>{847f080b-cec1-4fc2-8e5f-83a8e4f3fe8a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="sprite">
       <UniqueIdentifier>{2f287d16-81b2-4dc9-84b1-dd1bb418866f}</UniqueIdentifier>
     </Filter>
@@ -231,9 +228,6 @@
     <ClCompile Include="GameUI.cpp">
       <Filter>ui</Filter>
     </ClCompile>
-    <ClCompile Include="AnimaManeger.cpp">
-      <Filter>manager</Filter>
-    </ClCompile>
     <ClCompile Include="Anima.cpp">
       <Filter>anima</Filter>
     </ClCompile>
@@ -416,9 +410,6 @@
     </ClInclude>
     <ClInclude Include="GameUI.h">
       <Filter>ui</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimaManeger.h">
-      <Filter>manager</Filter>
     </ClInclude>
     <ClInclude Include="Anima.h">
       <Filter>anima</Filter>

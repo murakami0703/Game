@@ -2,7 +2,6 @@
 #include "Slaim.h"
 #include "GameData.h"
 #include "Anima.h"
-#include "AnimaManeger.h"
 #include "Player.h"
 #include "SiegePoint.h"
 
