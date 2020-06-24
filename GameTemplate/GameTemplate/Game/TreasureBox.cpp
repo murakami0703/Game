@@ -29,10 +29,8 @@ bool TreasureBox::Start() {
 
 void TreasureBox::Open()
 {
-	EffectManager* effect = EffectManager::GetInstance();
 	//開封アニメ再生
 	m_BoxModelRender->PlayAnimation(1);
-	effect->EffectPlayer(EffectManager::open, m_position, { 1.0f,1.0f,1.0f });
 
 	if (m_BoxModelRender->IsPlayingAnimation() == false) {
 		//アニメ再生終了したので、取得するアイテムを決める
@@ -83,6 +81,8 @@ void TreasureBox::Update()
 		//攻撃中に宝箱に近づくと開くよ！！！
 		if (m_toPlayerVec.Length() <= m_openYVec) {
 			if (player->GetAttackflag() == true) {
+				EffectManager* effect = EffectManager::GetInstance();
+				effect->EffectPlayer(EffectManager::open, m_position, { 1.0f,1.0f,1.0f });
 				m_state = eState_Open;
 			}
 		}

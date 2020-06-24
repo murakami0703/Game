@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "SiegePoint.h"
 #include "EffectManager.h"
+#include "GameData.h"
+#include "SoulManager.h"
 
 
 Bat::Bat()
@@ -55,6 +57,9 @@ void Bat::Follow()
 	//近づいたので予備動作状態に遷移します。
 	else if (m_toEPVec.Length() <= m_toPlyaerLength)
 	{
+		EneAttackflag = true;
+		EffectManager* effect = EffectManager::GetInstance();
+		effect->EffectPlayer(EffectManager::bat_pre, { m_position.x ,m_position.y + 80.0f ,m_position.z }, { 5.0f,5.0f,5.0f }, m_rotation);
 		m_state = eState_Premove;
 	}
 	//モデルの前方向。
@@ -90,27 +95,72 @@ void Bat::Premove()
 void Bat::Attack()
 {
 	EffectManager* effect = EffectManager::GetInstance();
-	effect->EffectPlayer(EffectManager::Bat_Attack, { m_position.x ,m_position.y+50.0f ,m_position.z }, { 10.0f,10.0f,10.0f },m_rotation);
-	
 	//攻撃。
 	m_enemyModelRender->PlayAnimation(2);	//攻撃アニメの再生。
 	//エフェクト再生（攻撃）
-
+	m_timer++;
 	//アニメが終わったので徘徊状態に遷移。
-	if (m_enemyModelRender->IsPlayingAnimation() != true)
+	if (m_timer <= 1)
 	{
-		m_state = eState_Loitering;
-
+		effect->EffectPlayer(EffectManager::Bat_Attack, { m_position.x ,m_position.y + 80.0f ,m_position.z }, { 10.0f,10.0f,10.0f }, m_rotation);
 	}
+	else if (EneAttackflag == true && m_timer <= 20)
+	{
+		CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
+		m_rotation.Multiply(enemyForward);
+
+		//エネミーからプレイヤーに伸びるベクトルを求める。
+		CVector3 toPlayerDir = m_toPlayerVec;
+
+		//正規化を行う前に、プレイヤーまでの距離を求めておく。
+		float toPlayerLen = toPlayerDir.Length();
+		//正規化
+		toPlayerDir.Normalize();
+
+		//enemyForwardとtoPlayerDirとの内積を計算する。
+		float d = enemyForward.Dot(toPlayerDir);
+
+		//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
+		float angle = acos(d);
+
+
+		//視野角判定
+		//fabsfは絶対値を求める関数！
+		//角度はマイナスが存在するから、絶対値にする。
+		if (EneAttackflag == true && fabsf(angle) < CMath::DegToRad(45.0f) && toPlayerLen < 200.0f){
+			//近距離で攻撃したら
+			//HP減らす
+			GameData::GetInstance()->HPCalc(-1.0f);
+			EneAttackflag = false;
+		}
+	}
+	else if (m_enemyModelRender->IsPlayingAnimation() != true && m_timer>=20)
+	{
+		m_timer = 0;
+		m_state = eState_Loitering;
+	}
+
 }
 void Bat::Dead()
 {
+	EffectManager* effect = EffectManager::GetInstance();
+	SoulManager* soul = SoulManager::GetInstance();
+
 	m_enemyModelRender->PlayAnimation(3);
 	if (m_enemyModelRender->IsPlayingAnimation() != true) {
 		//アニメーションの再生が終わったので消しま
+	//エフェクト再生とSoul出現
+		effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,420.0f,m_position.z }, { 20.0f,20.0f,20.0f });
+		effect->EffectPlayer(EffectManager::Item_Get, { m_position.x ,430.0f,m_position.z }, { 10.0f,10.0f,10.0f });
+		soul->SoulGenerated({ m_position.x ,430.0f,m_position.z });
+		//エネミーの数減らします
+		GameData* m_gamedate = GameData::GetInstance();
+		m_gamedate->EnemyReduce();
+
+		//アニメーションの再生が終わったので消しま
 		//消えなさい。
-		g_goMgr->DeleteGameObject(this);
 		g_goMgr->DeleteGameObject(m_enemyModelRender);
+		g_goMgr->DeleteGameObject(this);
 	}
 }
 

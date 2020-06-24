@@ -7,6 +7,7 @@
 #include "GameUI.h"
 #include "Result.h"
 #include "EffectManager.h"
+#include "SoulManager.h"
 
 #include "SiegePoint.h"
 #include "GameOver.h"
@@ -29,6 +30,7 @@ bool Game::Start()
 	*/
 
 	g_goMgr->NewGameObject<EffectManager>();
+	g_goMgr->NewGameObject<SoulManager>();
 
 	g_goMgr->NewGameObject<Player>();
 	g_goMgr->NewGameObject<GameCamera>();

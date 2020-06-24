@@ -22,6 +22,8 @@ public:
 	}
 private:
 	void HPCalc();
+	void SoulCalc();
+
 private:
 
 	static GameUI* m_instance;
@@ -29,8 +31,9 @@ private:
 	void ScalingSelectCase();					//‘I‘ğ˜g‚ÌŠg‘åk¬
 	std::vector<SpriteRender*> m_spriteRender;	//ƒXƒvƒ‰ƒCƒg‚Ì“®“I”z—ñ
 	SpriteRender* r;
-	FontRender* m_font;
-	
+	FontRender* m_soulFont;
+	wchar_t soulText[256];
+
 	//ƒAƒCƒeƒ€ŠÖ˜A
 	CVector3 m_itemC1Pos = { 460.0f,-240.0f,0.0f };		//˜g1‚ÌÀ•W
 	CVector3 m_itemC2Pos = { 560.0f,-120.0f,0.0f };		//˜g2‚ÌÀ•W
@@ -61,5 +64,12 @@ private:
 	float m_setHP = 0.0f;		//Å‰‚ÌHP—Ê
 	float m_nowHp = 0.0f;			//Œ»İ‚ÌHP‚ğŠi”[
 	int m_spriteNum = 7;			//ƒQ[ƒ€ŠJn‚Ìsprite‚Ì”‚ğŠi”[B
+
+	//°Šl“¾”
+	CVector3 m_soulPos = { -575.0f,200.0f,0.0f };		//°Šl“¾”‚ÌÀ•W
+	CVector3 m_soulFramePos = { -500.0f,200.0f,0.0f };		//°Šl“¾”˜g‚ÌÀ•W
+	CVector3 m_soulScale = { 0.35f,0.35f,0.35f };		//°Šl“¾”Šg‘å—¦
+	int m_soulNowNum = 0;			//Œ»İ‚ÌHP‚ğŠi”[
+	int m_soulSpNum = 0;			//Œ»İ‚ÌHP‚ğŠi”[
 };
 

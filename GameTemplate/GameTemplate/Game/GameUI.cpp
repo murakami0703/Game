@@ -93,7 +93,7 @@ bool GameUI::Start()
 				m_spriteRender.push_back(r);
 			}
 			else {
-				//番→HP1
+				//8番→HP1
 				r = g_goMgr->NewGameObject<SpriteRender>();
 				r->Init(L"Assets/sprite/Hp.dds", 350.0f, 350.0f);
 				r->SetPosition(m_hpPos);
@@ -104,6 +104,30 @@ bool GameUI::Start()
 	}
 	m_spriteNum += m_setHP+1;
 
+	//?番→魂獲得数
+	r = g_goMgr->NewGameObject<SpriteRender>();
+	r->Init(L"Assets/sprite/Ui_SouiFrame.dds", 800.0f, 300.0f);
+	r->SetPosition(m_soulFramePos);
+	r->SetScale(m_soulScale);
+	r->SetAlpha(0.8f);
+	m_spriteRender.push_back(r);
+
+	r = g_goMgr->NewGameObject<SpriteRender>();
+	r->Init(L"Assets/sprite/Ui_Soui.dds", 400.0f, 300.0f);
+	r->SetPosition(m_soulPos);
+	r->SetScale(m_soulScale);
+	m_spriteRender.push_back(r);
+
+	//魂カウントフォントの設定。
+	GameData* m_gamedate = GameData::GetInstance();
+	m_soulFont = g_goMgr->NewGameObject<FontRender>();
+	m_soulNowNum = m_gamedate->GetAnima();
+	swprintf(soulText, L"%02d", m_soulNowNum);
+	m_soulFont->SetText(soulText);
+	m_soulFont->SetScale(2.0f);
+	m_soulFont->SetPosition({ -490.0f,230.0f });
+
+	m_soulSpNum += 1;
 	//アイテム
 	g_goMgr->NewGameObject<Item>();
 
@@ -135,12 +159,17 @@ void GameUI::HPCalc()
 
 
 
-
 void GameUI::Update()
 {
 	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {
 		m_spriteNum -= 1;
 		HPCalc();
 	}
+	if (GameData::GetInstance()->GetAnima() > m_soulNowNum) {
+		swprintf(soulText, L"%02d", GameData::GetInstance()->GetAnima());
+		m_soulFont->SetText(soulText);
+		m_soulNowNum++;
+	}
+
 	ScalingSelectCase();
 }

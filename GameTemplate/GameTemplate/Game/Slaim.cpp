@@ -4,6 +4,8 @@
 #include "Anima.h"
 #include "Player.h"
 #include "SiegePoint.h"
+#include "EffectManager.h"
+#include "SoulManager.h"
 
 
 Slaim::Slaim()
@@ -38,7 +40,7 @@ bool Slaim::Start()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 
-	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
+	m_characon.Init(60.0f, 30.0f, m_position);//キャラコン
 	m_enemyModelRender->SetShadowMap(true);
 
 	return true;
@@ -185,6 +187,9 @@ void Slaim::Attack()
 		m_enemyModelRender->PlayAnimation(4,0.5f);
 		timer1++;
 		if (timer1 >= 20) {
+			EffectManager* effect = EffectManager::GetInstance();
+			effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 5.0f,5.0f,5.0f });
+			timer1 = 0;
 			m_state = eState_Vertigo;
 		}
 		else if (timer1>=5) {
@@ -200,7 +205,7 @@ void Slaim::Vertigo()
 {
 	m_enemyModelRender->PlayAnimation(5,0.5f);
 	timer2++;
-	if (timer2 >= 60) {
+	if (timer2 >= 40) {
 		m_timer = 0;
 		timer2 = 0;
 		m_state = eState_Loitering;
@@ -211,15 +216,23 @@ void Slaim::Return()
 {}
 void Slaim::Dead()
 {
+	EffectManager* effect = EffectManager::GetInstance();
+	SoulManager* soul = SoulManager::GetInstance();
+
 	//m_enemyModelRender->PlayAnimation(2);
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
+		//エフェクト再生とSoul出現
+		effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,420.0f,m_position.z }, { 20.0f,20.0f,20.0f });
+		effect->EffectPlayer(EffectManager::Item_Get, { m_position.x ,430.0f,m_position.z }, { 10.0f,10.0f,10.0f });
+		soul->SoulGenerated({ m_position.x ,430.0f,m_position.z });
+
 		//エネミーの数減らします
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();
 		//消えなさい。
-		g_goMgr->DeleteGameObject(this);
 		g_goMgr->DeleteGameObject(m_enemyModelRender);
+		g_goMgr->DeleteGameObject(this);
 	}
 }
 
@@ -231,7 +244,7 @@ void Slaim::Update()
 
 	//攻撃が当たったので死ぬ。
 	if (Player::GetInstance()->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 200.0f) {
+		if (m_toPlayerVec.Length() < 100.0f) {
 			m_state = eState_Dead;
 		}
 	}

@@ -4,7 +4,8 @@
 #include "Player.h"
 #include "SiegePoint.h"
 #include "EffectManager.h"
-#include "Anima.h"
+#include "SoulManager.h"
+
 
 
 
@@ -146,6 +147,7 @@ void Ghost::Follow()
 	if (m_battlePoint != nullptr) {
 		if (m_toPlayerVec.Length() <= 200.0f) {
 			EneAttackflag = true;
+			m_timer = 0;
 			m_state = eState_Premove;
 		}
 	}
@@ -208,6 +210,7 @@ void Ghost::Attack()
 	//攻撃するよ！！！
 
 	//急降下します
+	EffectManager* effect = EffectManager::GetInstance();
 
 
 	if (baund==true && m_position.y >= 410.0f) {
@@ -217,11 +220,22 @@ void Ghost::Attack()
 	else {
 		baund = false;
 		m_timer++;
-		if (baund == false && m_position.y <= 440.0f) {
+		if (m_timer<=1){
+			effect->EffectPlayer(EffectManager::bund, { m_position.x ,350.0f,m_position.z }, { 30.0f,30.0f,30.0f });
+
+		}
+		else if (baund == false && m_position.y <= 410.0f) {
 			m_position += dff * 1.0f;
 			m_position.y += 3.0f;
+			if (EneAttackflag == true && (Player::GetInstance()->GetPosition() - m_position).Length() < 40.0f) {
+				//近距離で攻撃したら
+				//HP減らす
+				GameData::GetInstance()->HPCalc(-1.0f);
+				EneAttackflag = false;
+			}
+
 		}
-		else if (m_timer <= 100.0f) {
+		else if (m_timer <= 80.0f) {
 			m_position = m_position;
 		}
 		else {
@@ -232,11 +246,6 @@ void Ghost::Attack()
 			m_state = eState_Loitering;
 		}
 	}
-	/*if ((Player::GetInstance()->GetPosition() - m_position).Length() < 10.f) {
-		//近距離で攻撃したら
-		//HP減らす
-		GameData::GetInstance()->HPCalc(-0.5f);
-	}*/
 	m_enemyModelRender->PlayAnimation(0);
 
 }
@@ -244,19 +253,21 @@ void Ghost::Attack()
 void Ghost::Dead()
 {
 	EffectManager* effect = EffectManager::GetInstance();
+	SoulManager* soul = SoulManager::GetInstance();
 	m_enemyModelRender->PlayAnimation(3);
 	m_scale -= {0.05f, 0.05f, 0.05f};
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
 		//エフェクト再生とSoul出現
-		//effect->EffectPlayer(EffectManager::Item_Get, m_position, { 10.0f,10.0f,10.0f });
-		g_goMgr->NewGameObject<Anima>();
+		effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,420.0f,m_position.z }, { 20.0f,20.0f,20.0f });
+		effect->EffectPlayer(EffectManager::Item_Get, { m_position.x ,430.0f,m_position.z }, { 10.0f,10.0f,10.0f });
+		soul->SoulGenerated({ m_position.x ,430.0f,m_position.z });
 		//エネミーの数減らします
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();
 		//消えなさい。
-		g_goMgr->DeleteGameObject(this);
 		g_goMgr->DeleteGameObject(m_enemyModelRender);
+		g_goMgr->DeleteGameObject(this);
 	}
 
 }
@@ -268,7 +279,7 @@ void Ghost::Update()
 	m_toPlayerVec = m_playerPos - m_position;
 	//攻撃が当たったので死ぬ。
 	if (Player::GetInstance()->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 200.0f) {
+		if (m_toPlayerVec.Length() < 100.0f) {
 			m_state = eState_Dead;
 		}
 	}

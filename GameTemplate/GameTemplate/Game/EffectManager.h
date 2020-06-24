@@ -11,6 +11,9 @@ public:
 		Bat_Attack, //アイテム入手時のエフェクト
 		Bat_memai, //アイテム入手時のエフェクト
 		Item_Get, //アイテム入手時のエフェクト
+		bat_pre, //アイテム入手時のエフェクト
+		Enemy_Dead, //アイテム入手時のエフェクト
+		bund
 	};
 
 	EffectManager();
@@ -37,7 +40,10 @@ private:
 		{ L"Assets/effect/open_Box.efk" },
 		{ L"Assets/effect/bat_attackEfk.efk" },
 		{ L"Assets/effect/bat_vertigo.efk" },
-		{ L"Assets/effect/item_Appear.efk" }
+		{ L"Assets/effect/item_Appear.efk" },
+		{ L"Assets/effect/bat_premove.efk" },
+		{ L"Assets/effect/enemy_dead.efk" },
+		{ L"Assets/effect/baund.efk" }
 	};
 
 	CVector3 m_scale = CVector3::One();

@@ -275,6 +275,9 @@
       <Filter>gimmick</Filter>
     </ClCompile>
     <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="SoulManager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -459,6 +462,9 @@
       <Filter>gimmick</Filter>
     </ClInclude>
     <ClInclude Include="GameOver.h" />
+    <ClInclude Include="SoulManager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -625,8 +631,16 @@
     <ImageContentTask Include="Assets\sprite\Hp_Half.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Ui_Soui.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\Ui_SouiFrame.png">
+      <Filter>Assets\sprite</Filter>
+    </Image>
   </ItemGroup>
 </Project>

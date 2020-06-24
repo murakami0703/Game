@@ -124,7 +124,6 @@ public:
 		if (MAXAnima < Anima) {
 			Anima = MAXAnima;
 		}
-		Anima;
 	}
 
 	void  GameData::SetResultFlag(bool flag)
@@ -136,8 +135,7 @@ public:
 	{
 		return resultflag;
 	}
-	//‘Ì—ÍŽæ“¾
-	float GameData::GetAnima() {
+	int GameData::GetAnima() {
 		return Anima;
 	}
 
@@ -165,7 +163,7 @@ private:
 	int EnemyCount = 0;	//“G‚Ì”
 
 	//‚½‚Ü‚µ‚¢
-	int Anima = 50;	//ŽG‹›‚©‚ç–á‚¦‚é°
+	int Anima = 0;	//ŽG‹›‚©‚ç–á‚¦‚é°
 	const int MAXAnima = 999;	//Å‘åAnima
 	int BigAnima = 0;	//ƒ{ƒX‚©‚ç–á‚¦‚é°
 

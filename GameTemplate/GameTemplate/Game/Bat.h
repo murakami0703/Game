@@ -83,5 +83,6 @@ private:
 	CVector3 moveVec = CVector3().Zero();			//座標。
 	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間
 
+	int m_timer = 0;
 };
 
