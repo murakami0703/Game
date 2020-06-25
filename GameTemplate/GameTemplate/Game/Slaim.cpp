@@ -31,7 +31,7 @@ bool Slaim::Start()
 	m_animClips[eAnimation_Vertigo].Load(L"Assets/animData/slaim/slaim_vertigo.tka");
 	m_animClips[eAnimation_Vertigo].SetLoopFlag(true);
 
-	//m_animClips[eAnimation_Death].Load(L"Assets/animData/slaim/slaim_dead.tka");
+	m_animClips[eAnimation_Death].Load(L"Assets/animData/slaim/slaim_dead.tka");
 
 	//cmoファイルの読み込み。
 	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
@@ -219,7 +219,7 @@ void Slaim::Dead()
 	EffectManager* effect = EffectManager::GetInstance();
 	SoulManager* soul = SoulManager::GetInstance();
 
-	//m_enemyModelRender->PlayAnimation(2);
+	m_enemyModelRender->PlayAnimation(2);
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
 		//エフェクト再生とSoul出現
@@ -231,6 +231,7 @@ void Slaim::Dead()
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();
 		//消えなさい。
+		m_characon.RemoveRigidBoby();
 		g_goMgr->DeleteGameObject(m_enemyModelRender);
 		g_goMgr->DeleteGameObject(this);
 	}

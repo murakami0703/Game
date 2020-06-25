@@ -173,7 +173,7 @@ void Bat::Update()
 
 	//UŒ‚‚ª“–‚½‚Á‚½‚Ì‚ÅŽ€‚ÊB
 	if (Player::GetInstance()->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 200.0f) {
+		if (m_toPlayerVec.Length() < 120.0f) {
 			m_state = eState_Dead;
 		}
 	}

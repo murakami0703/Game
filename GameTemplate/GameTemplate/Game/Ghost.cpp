@@ -227,7 +227,7 @@ void Ghost::Attack()
 		else if (baund == false && m_position.y <= 410.0f) {
 			m_position += dff * 1.0f;
 			m_position.y += 3.0f;
-			if (EneAttackflag == true && (Player::GetInstance()->GetPosition() - m_position).Length() < 40.0f) {
+			if (EneAttackflag == true && (Player::GetInstance()->GetPosition() - m_position).Length() < 80.0f) {
 				//近距離で攻撃したら
 				//HP減らす
 				GameData::GetInstance()->HPCalc(-1.0f);
@@ -235,7 +235,7 @@ void Ghost::Attack()
 			}
 
 		}
-		else if (m_timer <= 80.0f) {
+		else if (m_timer <= 60.0f) {
 			m_position = m_position;
 		}
 		else {
@@ -260,7 +260,7 @@ void Ghost::Dead()
 		//アニメーションの再生が終わったので消しま
 		//エフェクト再生とSoul出現
 		effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,420.0f,m_position.z }, { 20.0f,20.0f,20.0f });
-		effect->EffectPlayer(EffectManager::Item_Get, { m_position.x ,430.0f,m_position.z }, { 10.0f,10.0f,10.0f });
+		effect->EffectPlayer(EffectManager::Item_Get, { m_position.x ,430.0f,m_position.z }, { 12.0f,12.0f,12.0f });
 		soul->SoulGenerated({ m_position.x ,430.0f,m_position.z });
 		//エネミーの数減らします
 		GameData* m_gamedate = GameData::GetInstance();
@@ -279,7 +279,7 @@ void Ghost::Update()
 	m_toPlayerVec = m_playerPos - m_position;
 	//攻撃が当たったので死ぬ。
 	if (Player::GetInstance()->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 100.0f) {
+		if (m_toPlayerVec.Length() < 150.0f) {
 			m_state = eState_Dead;
 		}
 	}

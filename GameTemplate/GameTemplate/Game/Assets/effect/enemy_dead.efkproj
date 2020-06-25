@@ -172,7 +172,7 @@
                           </Fixed>
                         </ScalingValues>
                         <RendererCommonValues>
-                          <ColorTexture>../../../../../../effect/tktk01/tktk01/Texture/Particle02.png</ColorTexture>
+                          <ColorTexture>Texture/Particle02.png</ColorTexture>
                           <AlphaBlend>2</AlphaBlend>
                         </RendererCommonValues>
                         <DrawingValues>
@@ -337,7 +337,7 @@
                       </SingleEasing>
                     </ScalingValues>
                     <RendererCommonValues>
-                      <ColorTexture>../../../../../../effect/tktk01/tktk01/Texture/Particle02.png</ColorTexture>
+                      <ColorTexture>Texture/Particle02.png</ColorTexture>
                       <AlphaBlend>2</AlphaBlend>
                     </RendererCommonValues>
                     <DrawingValues>
@@ -501,7 +501,7 @@
                       </SingleEasing>
                     </ScalingValues>
                     <RendererCommonValues>
-                      <ColorTexture>../../../../../../effect/tktk01/tktk01/Texture/Particle02.png</ColorTexture>
+                      <ColorTexture>Texture/Particle02.png</ColorTexture>
                       <AlphaBlend>2</AlphaBlend>
                     </RendererCommonValues>
                     <DrawingValues>
@@ -618,7 +618,7 @@
                       </SingleEasing>
                     </ScalingValues>
                     <RendererCommonValues>
-                      <ColorTexture>../../../../../../effect/tktk01/tktk01/Texture/Particle02.png</ColorTexture>
+                      <ColorTexture>Texture/Particle02.png</ColorTexture>
                       <AlphaBlend>2</AlphaBlend>
                     </RendererCommonValues>
                     <DrawingValues>

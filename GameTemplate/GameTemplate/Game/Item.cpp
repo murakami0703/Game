@@ -64,7 +64,7 @@ void Item::ItemUse(eItemState& m_State)
 			m_gamedate->HPRecoveryCalc(-1);
 			//使用後のアイテム数表示
 			wchar_t text[256];
-			swprintf(text, L"%d", m_gamedate->GetItemHpRecovery());
+			swprintf(text, L"%02d", m_gamedate->GetItemHpRecovery());
 			m_itemCountFont->SetText(text);
 
 			m_state = Item_Now;
@@ -75,7 +75,7 @@ void Item::ItemUse(eItemState& m_State)
 			m_gamedate->BumCalc(-1);
 			//使用後のアイテム数表示
 			wchar_t text[256];
-			swprintf(text, L"%d", m_gamedate->GetItemBum());
+			swprintf(text, L"%02d", m_gamedate->GetItemBum());
 			m_itemCountFont->SetText(text);
 
 			m_state = Item_Now;
@@ -86,7 +86,7 @@ void Item::ItemUse(eItemState& m_State)
 			m_gamedate->AttackUpCalc(-1);
 			//使用後のアイテム数表示
 			wchar_t text[256];
-			swprintf(text, L"%d", m_gamedate->GetItemAttackUp());
+			swprintf(text, L"%02d", m_gamedate->GetItemAttackUp());
 			m_itemCountFont->SetText(text);
 
 			m_state = Item_Now;
@@ -97,7 +97,7 @@ void Item::ItemUse(eItemState& m_State)
 			m_gamedate->SpeedUpCalc(-1);
 			//使用後のアイテム数表示
 			wchar_t text[256];
-			swprintf(text, L"%d", m_gamedate->GetItemSpeedUp());
+			swprintf(text, L"%02d", m_gamedate->GetItemSpeedUp());
 			m_itemCountFont->SetText(text);
 
 			m_state = Item_Now;
@@ -119,7 +119,7 @@ void Item::ItemMoveSet(eItemState& m_State)
 
 		//回復薬のアイテム数
 		wchar_t text[256];
-		swprintf(text, L"%d", m_gamedate->GetItemHpRecovery());
+		swprintf(text, L"%02d", m_gamedate->GetItemHpRecovery());
 		m_itemCountFont->SetText(text);
 
 		m_itemMoveEndFlag = true;
@@ -134,7 +134,7 @@ void Item::ItemMoveSet(eItemState& m_State)
 
 		//爆弾のアイテム数
 		wchar_t text[256];
-		swprintf(text, L"%d", m_gamedate->GetItemBum());
+		swprintf(text, L"%02d", m_gamedate->GetItemBum());
 		m_itemCountFont->SetText(text);
 
 		m_itemMoveEndFlag = true;
@@ -149,7 +149,7 @@ void Item::ItemMoveSet(eItemState& m_State)
 
 		//攻撃力UPのアイテム数
 		wchar_t text[256];
-		swprintf(text, L"%d", m_gamedate->GetItemAttackUp());
+		swprintf(text, L"%02d", m_gamedate->GetItemAttackUp());
 		m_itemCountFont->SetText(text);
 
 		m_itemMoveEndFlag = true;
@@ -164,7 +164,7 @@ void Item::ItemMoveSet(eItemState& m_State)
 
 		//移動速度UPのアイテム数
 		wchar_t text[256];
-		swprintf(text, L"%d", m_gamedate->GetItemSpeedUp());
+		swprintf(text, L"%02d", m_gamedate->GetItemSpeedUp());
 		m_itemCountFont->SetText(text);
 
 		m_itemMoveEndFlag = true;

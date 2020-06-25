@@ -21,10 +21,8 @@ bool Anima::Start()
 	//cmoファイルの読み込み。
 	m_animaModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_animaModelRender->Init(L"Assets/modelData/Anima.cmo", m_animClips, eAnimation_Num);
-	m_scale = m_soulScale;
-
 	m_animaModelRender->SetPosition(m_position);
-	m_animaModelRender->SetScale(m_scale);
+	m_animaModelRender->SetScale(m_soulScale);
 
 	m_animaModelRender->PlayAnimation(0);
 	m_animaModelRender->SetShadowMap(true);
@@ -33,18 +31,26 @@ bool Anima::Start()
 }
 
 void Anima::Appear()
-{	//出現中。
-	m_timer++;
-	Player* player = Player::GetInstance();
-	if ((player->GetPosition() - m_position).Length() < 50.0f) {
-		//取得
-		m_state = Anima_Get;
+{	
+	//地面から離れていたら下降させる。
+	if (m_position.y <= m_GroundYPos) {
+		//出現中。
+		m_timer++;
+		Player* player = Player::GetInstance();
+		if ((player->GetPosition() - m_position).Length() < m_toPlayerPos) {
+			//取得
+			m_state = Anima_Get;
 
+		}
+		else if (m_timer > m_destroyTimer) {
+			//消滅。
+			m_state = Anima_Destroy;
+		}
 	}
-	else if (m_timer > m_destroyTimer) {
-		//消滅。
-		m_state = Anima_Destroy;
+	else {
+		m_position.y -= m_moveSpeed;
 	}
+
 }
 
 void Anima::Get()
@@ -76,8 +82,7 @@ void Anima::Update()
 
 	//ワールド行列の更新。
 	m_animaModelRender->SetPosition(m_position);
-	m_animaModelRender->SetRotation(m_rotation);
-	m_animaModelRender->SetScale(m_scale);
+	m_animaModelRender->SetScale(m_soulScale);
 
 }
 

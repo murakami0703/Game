@@ -156,13 +156,13 @@ void Player::Damage()
 	GameData* gamedata = GameData::GetInstance();
 	//ダメージ受けました。
 	//赤くしますよお
-	m_skinModelRender->SetLightColor({ 0.7f,0.0f,0.0f,1.0f });
+	m_skinModelRender->SetLightColor({ 0.8f,0.0f,0.0f,1.0f });
 	m_damageTimer++;
 	//ちょっと時間経過したら元に戻す。
 	if (m_damageTimer>=10) {
+		m_damageTimer = 0;
 		m_skinModelRender->SetLightColor({ 0.7f,0.7f,0.7f,1.0f });
 		m_nowHP = gamedata->GetHitPoint();
-		m_state = Player_Idle;
 	}
 
 }
@@ -174,11 +174,11 @@ void Player::Update()
 		Atcount = 1;
 		m_state = Player_Attack;
 	}
-	/*//ダメージ受けましたわよ
-	if (gamedata->GetHitPoint() <= m_nowHP) {
-		m_state = Player_Damage;
+	//ダメージ受けましたわよ
+	if (gamedata->GetHitPoint() < m_nowHP) {
+		Damage();		//ダメージ受けましたぁ
 	}
-	*/
+	
 	switch (m_state)
 	{
 	case Player::Player_Idle:

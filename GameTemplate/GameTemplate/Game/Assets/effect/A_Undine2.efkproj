@@ -8,6 +8,7 @@
           <MaxGeneration>
             <Value>10</Value>
           </MaxGeneration>
+          <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
             <Center>20</Center>
             <Max>25</Max>
@@ -51,8 +52,9 @@
           <Easing>
             <Start>
               <X>
-                <Max>1.2</Max>
-                <Min>0.8</Min>
+                <Center>2</Center>
+                <Max>2.2</Max>
+                <Min>1.8</Min>
               </X>
               <Y>
                 <Max>1.2</Max>
@@ -65,8 +67,9 @@
             </Start>
             <End>
               <X>
-                <Max>1.2</Max>
-                <Min>0.8</Min>
+                <Center>2</Center>
+                <Max>2.2</Max>
+                <Min>1.8</Min>
               </X>
               <Y>
                 <Max>1.2</Max>
@@ -146,7 +149,7 @@
             <Outer_Fixed>
               <Location>
                 <X>1.5</X>
-                <Y>1</Y>
+                <Y>0.5</Y>
               </Location>
             </Outer_Fixed>
             <Inner_Fixed>
@@ -190,6 +193,7 @@
       </Node>
       <Node>
         <CommonValues>
+          <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
             <Center>25</Center>
             <Max>25</Max>
@@ -286,6 +290,7 @@
       </Node>
       <Node>
         <CommonValues>
+          <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
             <Center>10</Center>
             <Max>10</Max>
@@ -362,11 +367,13 @@
             <Wave>Salamander3.efkproj</Wave>
           </Sound>
         </SoundValues>
+        <IsRendered>False</IsRendered>
         <Name>ShockWave4</Name>
         <Children />
       </Node>
       <Node>
         <CommonValues>
+          <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
             <Center>10</Center>
             <Max>10</Max>
@@ -456,6 +463,7 @@
           <MaxGeneration>
             <Value>10</Value>
           </MaxGeneration>
+          <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
             <Center>20</Center>
             <Max>25</Max>
@@ -637,6 +645,7 @@
       </Node>
       <Node>
         <CommonValues>
+          <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
             <Center>25</Center>
             <Max>25</Max>
@@ -700,6 +709,7 @@
           <MaxGeneration>
             <Value>20</Value>
           </MaxGeneration>
+          <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
             <Center>35</Center>
             <Max>35</Max>
@@ -761,11 +771,13 @@
             <Wave>Undine1.efkproj</Wave>
           </Sound>
         </SoundValues>
+        <IsRendered>False</IsRendered>
         <Name>Node</Name>
         <Children>
           <Node>
             <CommonValues>
               <RotationEffectType>1</RotationEffectType>
+              <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
               <Life>
                 <Center>20</Center>
                 <Max>20</Max>
@@ -814,6 +826,7 @@
               <Node>
                 <CommonValues>
                   <RotationEffectType>1</RotationEffectType>
+                  <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
                   <Life>
                     <Center>15</Center>
                     <Max>15</Max>
@@ -892,6 +905,7 @@
                     <Wave>Undine1.efkproj</Wave>
                   </Sound>
                 </SoundValues>
+                <IsRendered>False</IsRendered>
                 <Name>Node</Name>
                 <Children />
               </Node>

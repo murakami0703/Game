@@ -82,7 +82,7 @@ void TreasureBox::Update()
 		if (m_toPlayerVec.Length() <= m_openYVec) {
 			if (player->GetAttackflag() == true) {
 				EffectManager* effect = EffectManager::GetInstance();
-				effect->EffectPlayer(EffectManager::open, m_position, { 1.0f,1.0f,1.0f });
+				effect->EffectPlayer(EffectManager::open, m_position, { 2.0f,2.0f,2.0f });
 				m_state = eState_Open;
 			}
 		}

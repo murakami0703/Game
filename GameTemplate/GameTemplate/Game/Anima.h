@@ -36,19 +36,18 @@ private:
 	void Get();			//取得したよ！！
 	void Destroy();		//時間経過のため消滅。
 
-	SkinModelRender* m_animaModelRender;		//スキンモデル
-	CVector3 m_position = CVector3().Zero();			//座標
-	CQuaternion m_rotation = CQuaternion().Identity();	//回転
-	CVector3 m_scale = CVector3().One();			//拡大率
+	SkinModelRender* m_animaModelRender;				//スキンモデル。
+	CVector3 m_position = CVector3().Zero();			//座標。
+	const CVector3 m_soulScale = { 5.0f,5.0f,5.0f };	//魂の拡大率。
 
-	EState m_state = Anima_Appear;//状態
+	EState m_state = Anima_Appear;//状態。
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 
-
-	const CVector3 m_soulScale = { 3.0f,3.0f,3.0f };			//魂の大きさ
 	int m_timer = 0;		//タイマー
-	const float m_destroyTimer = 600.0f;	//消滅するまでの時間
-
+	const float m_destroyTimer = 600.0f;	//消滅するまでの時間。
+	const float m_GroundYPos = 430.0f;		//地面の座標。
+	const float m_toPlayerPos = 50.0f;		//地面の座標。
+	const float m_moveSpeed = 5.0f;			//下降速度。
 
 
 };
