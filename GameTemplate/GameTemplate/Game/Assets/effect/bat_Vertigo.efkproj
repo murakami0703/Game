@@ -7,9 +7,9 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>120</Center>
-            <Max>120</Max>
-            <Min>120</Min>
+            <Center>60</Center>
+            <Max>60</Max>
+            <Min>60</Min>
           </Life>
         </CommonValues>
         <LocationValues>
@@ -72,9 +72,9 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>59</Center>
-            <Max>59</Max>
-            <Min>59</Min>
+            <Center>29</Center>
+            <Max>29</Max>
+            <Min>29</Min>
           </Life>
           <GenerationTimeOffset>
             <DrawnAs>0</DrawnAs>
@@ -170,9 +170,9 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.25</X>
-              <Y>0.25</Y>
-              <Z>0.25</Z>
+              <X>0.5</X>
+              <Y>0.5</Y>
+              <Z>0.5</Z>
             </Scale>
           </Fixed>
         </ScalingValues>
@@ -211,9 +211,9 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>59</Center>
-            <Max>59</Max>
-            <Min>59</Min>
+            <Center>29</Center>
+            <Max>29</Max>
+            <Min>29</Min>
           </Life>
           <GenerationTimeOffset>
             <DrawnAs>0</DrawnAs>
@@ -314,9 +314,9 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.25</X>
-              <Y>0.25</Y>
-              <Z>0.25</Z>
+              <X>0.5</X>
+              <Y>0.5</Y>
+              <Z>0.5</Z>
             </Scale>
           </Fixed>
         </ScalingValues>
@@ -355,19 +355,19 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>110</Center>
-            <Max>110</Max>
-            <Min>110</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </Life>
           <GenerationTime>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTime>
           <GenerationTimeOffset>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTimeOffset>
         </CommonValues>
         <LocationValues>
@@ -484,9 +484,9 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.25</X>
-              <Y>0.25</Y>
-              <Z>0.25</Z>
+              <X>0.5</X>
+              <Y>0.5</Y>
+              <Z>0.5</Z>
             </Scale>
           </Fixed>
         </ScalingValues>
@@ -525,19 +525,19 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>110</Center>
-            <Max>110</Max>
-            <Min>110</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </Life>
           <GenerationTime>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTime>
           <GenerationTimeOffset>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTimeOffset>
         </CommonValues>
         <LocationValues>
@@ -654,8 +654,8 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.25</X>
-              <Y>0.25</Y>
+              <X>0.5</X>
+              <Y>0.5</Y>
               <Z>0.25</Z>
             </Scale>
           </Fixed>
@@ -695,9 +695,9 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>59</Center>
-            <Max>59</Max>
-            <Min>59</Min>
+            <Center>29</Center>
+            <Max>29</Max>
+            <Min>29</Min>
           </Life>
           <GenerationTimeOffset>
             <DrawnAs>0</DrawnAs>
@@ -798,9 +798,9 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.15</X>
-              <Y>0.15</Y>
-              <Z>0.15</Z>
+              <X>0.3</X>
+              <Y>0.3</Y>
+              <Z>0.3</Z>
             </Scale>
           </Fixed>
         </ScalingValues>
@@ -839,19 +839,19 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>110</Center>
-            <Max>110</Max>
-            <Min>110</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </Life>
           <GenerationTime>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTime>
           <GenerationTimeOffset>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTimeOffset>
         </CommonValues>
         <LocationValues>
@@ -968,9 +968,9 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.15</X>
-              <Y>0.15</Y>
-              <Z>0.15</Z>
+              <X>0.3</X>
+              <Y>0.3</Y>
+              <Z>0.3</Z>
             </Scale>
           </Fixed>
         </ScalingValues>
@@ -1009,9 +1009,9 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>59</Center>
-            <Max>59</Max>
-            <Min>59</Min>
+            <Center>29</Center>
+            <Max>29</Max>
+            <Min>29</Min>
           </Life>
           <GenerationTimeOffset>
             <DrawnAs>0</DrawnAs>
@@ -1112,9 +1112,9 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.15</X>
-              <Y>0.15</Y>
-              <Z>0.15</Z>
+              <X>0.3</X>
+              <Y>0.3</Y>
+              <Z>0.3</Z>
             </Scale>
           </Fixed>
         </ScalingValues>
@@ -1153,19 +1153,19 @@
         <CommonValues>
           <RemoveWhenParentIsRemoved>True</RemoveWhenParentIsRemoved>
           <Life>
-            <Center>110</Center>
-            <Max>110</Max>
-            <Min>110</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </Life>
           <GenerationTime>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTime>
           <GenerationTimeOffset>
-            <Center>60</Center>
-            <Max>60</Max>
-            <Min>60</Min>
+            <Center>30</Center>
+            <Max>30</Max>
+            <Min>30</Min>
           </GenerationTimeOffset>
         </CommonValues>
         <LocationValues>
@@ -1282,9 +1282,9 @@
         <ScalingValues>
           <Fixed>
             <Scale>
-              <X>0.15</X>
-              <Y>0.15</Y>
-              <Z>0.15</Z>
+              <X>0.3</X>
+              <Y>0.3</Y>
+              <Z>0.3</Z>
             </Scale>
           </Fixed>
         </ScalingValues>
@@ -1324,6 +1324,6 @@
   <ToolVersion>1.32</ToolVersion>
   <Version>3</Version>
   <StartFrame>0</StartFrame>
-  <EndFrame>120</EndFrame>
+  <EndFrame>60</EndFrame>
   <IsLoop>True</IsLoop>
 </EffekseerProject>

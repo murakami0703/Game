@@ -58,8 +58,11 @@ private:
 		eAnimation_Premove2,
 		eAnimation_Attack,
 		eAnimation_Vertigo,
-		eAnimation_Death,
 		eAnimation_Num
+	};
+	enum EAnimationClip2 {
+		eAnimation2_Death,
+		eAnimation2_Num
 	};
 
 private:
@@ -77,6 +80,7 @@ private:
 private:
 
 	SkinModelRender* m_enemyModelRender;				//エネミースキンモデルレンダー。
+	SkinModelRender* m_enemyDeadModelRender;				//エネミースキンモデルレンダー。
 	CVector3 m_position = CVector3().Zero();			//座標。
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
@@ -84,7 +88,7 @@ private:
 
 	CharacterController m_characon;		//キャラコン
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
-
+	AnimationClip  m_animClips2[eAnimation2_Num];
 private:
 
 	//共用
@@ -110,6 +114,7 @@ private:
 	const float m_followSpeed = 250.0f;		//徘徊速度。
 	const float m_loiteringLength = 500.0f;	//徘徊に戻る距離。
 
+	bool m_modelflag = false;				//方向転換。
 
 
 
