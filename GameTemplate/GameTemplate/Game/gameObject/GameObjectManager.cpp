@@ -147,6 +147,7 @@ void GameObjectManager::ForwordRender()
 	for (auto go : m_goList) {
 		go->Render();
 	}
+	g_graphicsEngine->GetEffectEngine().EffektRender();
 }
 /// <summary>
 /// ポストレンダリング。
@@ -167,7 +168,7 @@ void GameObjectManager::Post2DRender()
 	for (auto go : m_goList) {
 		go->PostRender();
 	}
-	g_graphicsEngine->GetEffectEngine().EffektRender();
+	
 
 
 	//レンダリングターゲットとデプスステンシルの参照カウンタを下す。

@@ -7,6 +7,7 @@ public:
 	bool Start();
 	void Update();
 private:
+	SkinModelRender* m_bossModelRender = nullptr;
 
 };
 

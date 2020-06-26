@@ -45,13 +45,6 @@
                 <Min>0.1</Min>
               </GenerationTime>
             </CommonValues>
-            <LocationValues>
-              <Fixed>
-                <Location>
-                  <Y>-1</Y>
-                </Location>
-              </Fixed>
-            </LocationValues>
             <ScalingValues>
               <SingleEasing>
                 <End>

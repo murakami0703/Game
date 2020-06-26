@@ -12,6 +12,7 @@ Golem::~Golem()
 }
 bool Golem::Start()
 {
+
 	return true;
 }
 

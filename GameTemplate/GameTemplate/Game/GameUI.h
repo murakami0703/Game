@@ -22,8 +22,6 @@ public:
 	}
 private:
 	void HPCalc();
-	void SoulCalc();
-
 private:
 
 	static GameUI* m_instance;

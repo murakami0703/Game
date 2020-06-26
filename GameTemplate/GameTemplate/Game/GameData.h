@@ -135,6 +135,16 @@ public:
 	{
 		return resultflag;
 	}
+	void  GameData::SetGameOverFlag(bool flag)
+	{
+		resultflag = flag;
+	}
+
+	bool  GameData::GameOverFlag()
+	{
+		return resultflag;
+	}
+
 	int GameData::GetAnima() {
 		return Anima;
 	}
@@ -167,7 +177,8 @@ private:
 	const int MAXAnima = 999;	//最大Anima
 	int BigAnima = 0;	//ボスから貰える魂
 
-	bool resultflag = true;
+	bool resultflag = false;		//リザルトです。
+	bool gameOverflag = false;	//true ゲームオーバです。
 
 	//アイテム
 	int m_hpRecovery = 0;	//回復薬

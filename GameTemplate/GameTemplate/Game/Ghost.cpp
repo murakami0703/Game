@@ -221,7 +221,7 @@ void Ghost::Attack()
 		baund = false;
 		m_timer++;
 		if (m_timer<=1){
-			effect->EffectPlayer(EffectManager::bund, { m_position.x ,350.0f,m_position.z }, { 30.0f,30.0f,30.0f });
+			effect->EffectPlayer(EffectManager::bund, { m_position.x ,430.0f,m_position.z }, { 30.0f,30.0f,30.0f });
 
 		}
 		else if (baund == false && m_position.y <= 410.0f) {
