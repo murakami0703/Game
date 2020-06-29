@@ -56,10 +56,10 @@ void Game::Update() {
 		m_gamedate->SetResultFlag(true);
 	}
 	//プレイヤーのHPがなくなったのでGAMEOVERです。
-	/*if (m_gamedate->GetHitPoint() <= 0.0f && m_gamedate->GameOverFlag() == false) {
+	if (m_gamedate->GetHitPoint() <= 0.0f && m_gamedate->GameOverFlag() == false) {
 		g_goMgr->NewGameObject<GameOver>();
 		m_gamedate->SetGameOverFlag(true);
 
-	}*/
+	}
 }
 

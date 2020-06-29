@@ -2,12 +2,11 @@
 #include "Ghost.h"
 #include "GameData.h"
 #include "Player.h"
+
 #include "SiegePoint.h"
+
 #include "EffectManager.h"
 #include "SoulManager.h"
-
-
-
 
 Ghost::Ghost()
 {
@@ -41,7 +40,7 @@ bool Ghost::Start()
 void Ghost::Horizon()
 {
 	//エネミーの前方方向を求める。
-	//前方方向は{0, 0, 1}のベクトルをm_rotationで回して求めてみる。
+	//前方方向は{0, 0, 1}のベクトルをm_rotationで回して求める。
 	CVector3 enemyForward = { 0.0f, 0.0f, -1.0f };
 	m_rotation.Multiply(enemyForward);
 
@@ -61,15 +60,13 @@ void Ghost::Horizon()
 
 
 	//視野角判定
-	//fabsfは絶対値を求める関数！
-	//角度はマイナスが存在するから、絶対値にする。
+	//角度は絶対値にする。
 	if (fabsf(angle) < CMath::DegToRad(horiAngle) && toPlayerLen < horilong)
 	{
 		//近い！！！！！
 		m_battlePoint = SiegePoint::GetInstance()->TryGetBattlePoint(m_position);
 		//空いてるバトルポイントに向かっていくぅ
 		if (m_battlePoint != nullptr) {
-			flag = true;
 			m_state = eState_Follow;
 		}
 
@@ -99,10 +96,9 @@ void Ghost::Loitering()
 		//ランダムで方向を決定して動きます
 		m_randRot = rand() % 360;
 		m_rotation.SetRotation(CVector3::AxisY(), (float)m_randRot);
-		walkmove = { 0.0f, 0.0f,-1.0f };
-		m_rotation.Multiply(walkmove);
+		m_frontmove = { 0.0f, 0.0f,-1.0f };
+		m_rotation.Multiply(m_frontmove);
 		m_timer = 1;
-		flag = false;
 	}
 	else if (m_timer > m_randTimer) {
 		m_timer = 0;
@@ -110,19 +106,18 @@ void Ghost::Loitering()
 	else {
 		m_timer++;
 	}
-	m_position += walkmove * randomSpeed;
+	m_position += m_frontmove * m_loiteringSpeed;
 
 	Horizon();	//視野角判定
 
 	m_enemyModelRender->PlayAnimation(1);
 
 }
-
 void Ghost::Follow()
 {
 	//追尾ちゅ
 	CVector3 m_toBPVec = m_battlePoint->position - m_position;
-	if (m_toBPVec.Length() > 50.0f) {
+	if (m_toBPVec.Length() > m_followLength) {
 		m_toBPVec.y = 0.0f;
 		m_toBPVec.Normalize();
 		m_position += m_toBPVec * 5.0f;
@@ -255,13 +250,14 @@ void Ghost::Dead()
 	EffectManager* effect = EffectManager::GetInstance();
 	SoulManager* soul = SoulManager::GetInstance();
 	m_enemyModelRender->PlayAnimation(3);
-	m_scale -= {0.05f, 0.05f, 0.05f};
+	m_scale -= m_smallValue;
+
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
 		//エフェクト再生とSoul出現
-		effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,420.0f,m_position.z }, { 20.0f,20.0f,20.0f });
+		effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,m_effectEneDeadYPos ,m_position.z }, m_effectEneDeadSca);
 		effect->EffectPlayer(EffectManager::Item_Get, { m_position.x ,430.0f,m_position.z }, { 12.0f,12.0f,12.0f });
-		soul->SoulGenerated({ m_position.x ,430.0f,m_position.z });
+		soul->SoulGenerated({ m_position.x ,m_soulSetYPos ,m_position.z });
 		//エネミーの数減らします
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();
@@ -279,7 +275,7 @@ void Ghost::Update()
 	m_toPlayerVec = m_playerPos - m_position;
 	//攻撃が当たったので死ぬ。
 	if (Player::GetInstance()->GetAttackflag() == true) {
-		if (m_toPlayerVec.Length() < 150.0f) {
+		if (m_toPlayerVec.Length() < m_deadLength) {
 			m_state = eState_Dead;
 		}
 	}

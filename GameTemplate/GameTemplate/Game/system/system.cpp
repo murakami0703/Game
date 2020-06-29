@@ -93,7 +93,10 @@ void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, in
 	g_goMgr = new GameObjectManager();
 	g_goMgr->Init();
 
-	
+	////諸々の初期化。
+	//g_engine = new Engine();
+	//g_engine->Init();
+
 	//ゲームパッドの初期化。
 	//最大４つのコントローラーを接続できるようにしましょう。
 	g_pad[0].Init(0);

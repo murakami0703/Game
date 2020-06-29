@@ -57,6 +57,7 @@
 
 
 #include "gameObject/GameObjectManager.h"
+#include "Engine.h"
 
 //‚±‚±‚©‚ç‰º‚ÉrenderƒNƒ‰ƒX‚©‚­
 #include "graphics/SkinModelRender.h"

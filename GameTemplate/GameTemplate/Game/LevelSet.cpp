@@ -7,7 +7,8 @@
 #include "Bat.h"
 #include "Slaim.h"
 
-
+//ƒ{ƒX
+#include "Golem.h"
 #include "TreasureBox.h"
 
 #include "GameData.h"
@@ -73,6 +74,17 @@ void LevelSet::LevelSetting()
 
 			return true;
 		}
+		if (objData.EqualObjectName(L"Golem_Boss")) {
+			Golem* m_golem = g_goMgr->NewGameObject<Golem>();
+			m_golem->SetPosition(objData.position);
+			m_golem->SetRotation(objData.rotation);
+			m_golem->SetScale(objData.scale);
+
+			m_enemyCount++;
+
+			return true;
+		}
+
 		if (objData.EqualObjectName(L"Treasure_Box")) {
 		TreasureBox* m_treasurebox = g_goMgr->NewGameObject<TreasureBox>();
 		m_treasurebox->SetPosition(objData.position);

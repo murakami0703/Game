@@ -279,6 +279,7 @@
       <Filter>manager</Filter>
     </ClCompile>
     <ClCompile Include="StageSelect.cpp" />
+    <ClCompile Include="Engine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -467,6 +468,7 @@
       <Filter>manager</Filter>
     </ClInclude>
     <ClInclude Include="StageSelect.h" />
+    <ClInclude Include="Engine.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -639,13 +641,9 @@
     <ImageContentTask Include="Assets\sprite\Ui_SouiFrame.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gameover.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\gameover.png">
-      <Filter>Assets\sprite</Filter>
-    </Image>
   </ItemGroup>
 </Project>

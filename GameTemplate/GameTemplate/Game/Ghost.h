@@ -8,7 +8,6 @@ public:
 	Ghost();
 	~Ghost();
 	bool Start();
-
 	void Update();
 
 	/// <summary>
@@ -88,6 +87,8 @@ private:
 	EState m_state = eState_Loitering;					//状態。
 
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
+	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 
 	//共用
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
@@ -107,36 +108,25 @@ private:
 	//徘徊関連
 	const int m_randTimer = 120;			//方向転換する時間。
 	int m_randRot = 0;						//方向の乱数格納。
-	const float m_loiteringSpeed = 120.0f;	//徘徊速度。
+	CVector3 m_frontmove = CVector3().Zero();			//方向転換時の前ベクトル格納
+	const float m_loiteringSpeed = 2.0f;	//徘徊速度。
 
 	//追尾関連
+	//const float m_followLength = 100.0f;	//追尾する距離
+	//死亡関連
+	const float m_deadLength = 150.0f;						//死亡判定の距離
+	const CVector3 m_smallValue = { 0.05f, 0.05f, 0.05f };	//死亡時1フレーム毎に縮小させる値
+	//Soul関連
+	const float m_soulSetYPos = 430.0f;			//魂生成時のY座標の位置
+	//エフェクト関連
+	const float m_effectEneDeadYPos = 420.0f;						//死亡時再生されるエフェクトのY座標の位置
+	const CVector3 m_effectEneDeadSca = { 20.0f, 20.0f, 20.0f };	//死亡時再生されるエフェクトの拡大率。
 
-	//移動関連
-	int m_moveCount = 0;						//巡回用カウント
-	float m_moveSpeed = 0.6f;					//エネミの移動速度。
-	const float m_follSpeed = 3.0f;				//追尾中の移動速度。
-	const float m_tuisekiLength = 300.0f;		//追尾する距離。
-	const float m_ReturnLength = 1000.0f;		//徘徊位置に戻る距離。
+	int timer1 = 0;
+	CVector3 dff = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+	bool baund = true;					//攻撃中ですか？
 
-	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
-	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 	//攻撃判定
 	bool EneAttackflag = false;					//攻撃中ですか？
-
-	CVector3 walkmove = CVector3().Zero();		// 座標。
-	int count = 0;							//移動用カウント
-	int wrandom = 0;						//移動の方向乱数
-	const int randomCount = 120;			//ランダムで移動方向切り替えタイマー
-	const float randomSpeed = 2.0f;			//移動速度
-
-	CVector3 moveVec = CVector3().Zero();			//座標。
-	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間
-	bool flag = true;
-	float timer = 0;
-	float timer1 = 0;	
-	bool baund = true;
-
-	CVector3 dff = CVector3().Zero();
-
 };
 

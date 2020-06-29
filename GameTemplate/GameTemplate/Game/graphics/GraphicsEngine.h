@@ -120,7 +120,7 @@ private:
 	ID3D11Texture2D*		m_depthStencil = NULL;		//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;	//デプスステンシルビュー。
 	EffectEngine			m_effectEngine;				//!<エフェクトエンジン。
-	CSoundEngine			m_soundEngine;				//サウンドエンジン。
+	CSoundEngine			m_soundEngine;
 
 	std::unique_ptr<DirectX::SpriteBatch>	m_spriteBatch;				//!<スプライトバッチ。
 	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;				//!<スプライトフォント。

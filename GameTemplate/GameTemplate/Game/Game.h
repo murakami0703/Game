@@ -8,7 +8,7 @@ public:
 	bool Start();
 	void Update();
 private:
-	CSoundSource m_bgm;						//BGMÅB
+	CSoundSource m_bgm;						//GameíÜÇÃBGMÅB
 
 };
 

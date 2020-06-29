@@ -155,6 +155,7 @@ void GameUI::HPCalc()
 	//HP”¼•ª•\Ž¦
 	m_spriteRender[m_spriteNum]->SetAlpha(0.0f);
 	m_setHP -= 1.0f;
+
 }
 
 

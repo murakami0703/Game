@@ -87,6 +87,9 @@ public:
 	{
 		m_viewAngle = angle;
 	}
+
+	void CalcScreenPositionFromWorldPosition2(CVector3& screenPos, const CVector3& worldPos) const;
+
 private:
 	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。
 	CMatrix m_projMatrix = CMatrix::Identity();		//プロジェクション行列。
@@ -96,6 +99,9 @@ private:
 	float m_viewAngle = CMath::DegToRad(60.0f);		//画角。
 	float m_far = 10000.0f;							//遠い平面までの距離。
 	float m_near = 1.0f;							//近平面までの距離。
+
+	CMatrix		m_viewProjectionMatrix;				//ビュープロジェクション行列。
+
 };
 
 extern Camera g_camera3D;		//!<3Dカメラ。

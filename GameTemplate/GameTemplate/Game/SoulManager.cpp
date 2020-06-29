@@ -28,6 +28,7 @@ void SoulManager::Update() {}
 
 void SoulManager::SoulGenerated(CVector3 position)
 {
+	//Soul¶¬
 	Anima* m_anima = g_goMgr->NewGameObject<Anima>();
 	m_anima->SetPosition(position);
 }

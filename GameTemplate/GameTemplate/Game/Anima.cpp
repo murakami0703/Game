@@ -27,6 +27,7 @@ bool Anima::Start()
 	m_animaModelRender->PlayAnimation(0);
 	m_animaModelRender->SetShadowMap(true);
 
+
 	return  true;
 }
 
