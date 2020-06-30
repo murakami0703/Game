@@ -88,11 +88,12 @@ public:
 		m_viewAngle = angle;
 	}
 
-	void CalcScreenPositionFromWorldPosition2(CVector3& screenPos, const CVector3& worldPos) const;
+	void CalcScreenPositionFromWorldPosition2(CVector3& screenPos, const CVector3& worldPos);
 
 private:
 	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。
 	CMatrix m_projMatrix = CMatrix::Identity();		//プロジェクション行列。
+	CMatrix	m_viewProjectionMatrix = CMatrix::Identity();				//ビュープロジェクション行列。
 	CVector3 m_target = CVector3::Zero();			//注視点。
 	CVector3 m_position = CVector3::Zero();			//視点。
 	CVector3 m_up = CVector3::Up();					//上方向。
@@ -100,7 +101,6 @@ private:
 	float m_far = 10000.0f;							//遠い平面までの距離。
 	float m_near = 1.0f;							//近平面までの距離。
 
-	CMatrix		m_viewProjectionMatrix;				//ビュープロジェクション行列。
 
 };
 

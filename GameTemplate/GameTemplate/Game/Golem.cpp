@@ -35,6 +35,20 @@ bool Golem::Start()
 
 	m_skinModelRender->SetShadowMap(true);
 
+	//HPバー
+	{
+		m_hpbarSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_hpbarSprite->Init(L"Assets/sprite/Boss_Hpframe.dds", 150.0f, 50.0f);
+		m_hpbarSprite->SetAlpha(0.0f);
+		m_spriteRender.push_back(m_hpbarSprite);
+		//1番→ItemCase2
+		m_hpbarSprite = g_goMgr->NewGameObject<SpriteRender>();
+		m_hpbarSprite->Init(L"Assets/sprite/Boss_Hp.dds", 150.0f, 50.0f);
+		m_hpbarSprite->SetAlpha(0.0f);		
+		m_hpbarSprite->SetPivot(LifePivot);
+		m_spriteRender.push_back(m_hpbarSprite);
+
+	}
 	return true;
 }
 
@@ -47,6 +61,7 @@ void Golem::Idle()
 		m_timer = 0;
 		m_state = eState_Follow;
 	}
+	m_damegeFlag = false;
 	m_skinModelRender->PlayAnimation(0);
 	
 }
@@ -115,32 +130,33 @@ void Golem::Back()
 	if (m_skinModelRender->IsPlayingAnimation() == false)
 	{
 		//休憩する。
+		m_timer = 0;
 		m_state = eState_Idle;
 	}
 }
 void Golem::MoveHPGage() {
 	//寿命ゲージを動かす
 	//寿命を計算
+	HP -= SUB_HP;
 	m_lifeY = (float)HP / (float)MAX_HP;
 	//???
-	//LifeScale = { m_lifeY,1.0f,1.0f };
-	//m_skin2->SetScale(LifeScale);
+	LifeScale = { m_lifeY,1.0f,1.0f };
+	m_spriteRender[1]->SetScale(LifeScale);
+	count++;
 	m_moveGageEndflag = true;
 }
 
 void Golem::Damage()
 {
 	//ダメージ受。
-	HP -= SUB_HP;
-	MoveHPGage();
-	if (HP < 0) {
-		HP = 0;
+	if (m_moveGageEndflag == false) {
+		MoveHPGage();
+		if (HP < 0) {
+			HP = 0;
+		}
 	}
-	if (HP <= 0) {
-		m_state = eState_Dead;//死にます。
-	}
-	//HPバー動かし終わったよお
-	if (m_moveGageEndflag == true) {
+	else{
+		m_moveGageEndflag = false;
 		m_state = eState_Follow;//追従します。
 	}
 
@@ -160,6 +176,8 @@ void Golem::Dead()
 		//エネミーの数減らします
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();
+		m_gamedate->SetResultFlag(true);
+
 		//消えなさい。
 		g_goMgr->DeleteGameObject(m_skinModelRender);
 		g_goMgr->DeleteGameObject(this);
@@ -169,48 +187,58 @@ void Golem::Dead()
 
 void Golem::HPBarSaid()
 {
-	//HPバーの表示処理。
-	CVector3 cameraPos = g_camera3D.GetPosition();
-	CVector3 Pos = cameraPos - m_position;
-	float len = Pos.Length();
-	if (len < 300.0f) {
-		m_spriteRender[0]->SetAlpha(0.0f);
-		m_spriteRender[1]->SetAlpha(1.0f);
-		CVector3 screenPos;
-		CVector3 atamaNoPos = m_position;
-		atamaNoPos.y += 40.0f;
-		g_camera3D.CalcScreenPositionFromWorldPosition2(screenPos, atamaNoPos);
+	m_spriteRender[0]->SetAlpha(1.0f);
+	m_spriteRender[1]->SetAlpha(1.0f);
+	atamaNoPos = m_position;
+	atamaNoPos.y += 300.0f;
+	g_camera3D.CalcScreenPositionFromWorldPosition2(screenPos, atamaNoPos);
 
-		if (screenPos.z > 0.0f) {
-			screenPos.z = 0.0f;
-			m_spriteRender[0]->SetPosition(screenPos);
-			CVector3 hoge = screenPos;
-			hoge.x += -50.0f;
-			hoge.y += -10.0f;
-			hoge.z += 0.0f;
-			m_spriteRender[1]->SetPosition(hoge);
-			m_spriteRender[2]->SetPosition(screenPos);
+	if (screenPos.z > 0.0f) {
+		screenPos.z = 0.0f;
+		m_spriteRender[0]->SetPosition(screenPos);
+		hoge = screenPos;
+		if (count == 0) {
+			hoge.x -= 150.0f;
 
 		}
-	}
-	else {
-		m_spriteRender[0]->SetAlpha(0.0f);
-		m_spriteRender[1]->SetAlpha(0.0f);
-		m_spriteRender[2]->SetAlpha(0.0f);
-	}
+		else if (count == 1) {
+			hoge.x -= 125.0f;
 
+		}
+		else if (count == 2) {
+			hoge.x -= 98.0f;
+
+		}
+
+		m_spriteRender[1]->SetPosition(hoge);
+	}
 }
 void Golem::Update()
 {
 	//プレイヤーとの距離。
 	m_playerPos = Player::GetInstance()->GetPosition();
 	m_toPlayerVec = m_playerPos - m_position;
-
 	//攻撃が当たった。
 	if (Player::GetInstance()->GetAttackflag() == true) {
-		if (m_state== eState_Attack && m_toPlayerVec.Length() < m_damageLength) {
+		if (m_damegeFlag == false && m_state != eState_Attack && m_toPlayerVec.Length() < m_damageLength) {
+			m_damegeFlag = true;
 			m_state = eState_Damage;
 		}
+	}
+	//HPバーの表示処理。
+	cameraPos = g_camera3D.GetPosition();
+	Pos = cameraPos - m_position;
+	float len = Pos.Length();
+	if (len < 1000.0f) {
+		HPBarSaid();
+	}
+	else {
+		m_spriteRender[0]->SetAlpha(0.0f);
+		m_spriteRender[1]->SetAlpha(0.0f);
+	}
+
+	if (HP <= 0) {
+		m_state = eState_Dead;//死にます。
 	}
 
 	switch (m_state)

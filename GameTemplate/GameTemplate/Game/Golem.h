@@ -97,5 +97,15 @@ private:
 	const int MAX_HP = 120;		//最大HP
 	float m_lifeY = 0.0f;
 	bool m_moveGageEndflag = false;	//ゲージの移動終わりましたか？
+
+	CVector3 screenPos = CVector3().Zero();
+	CVector3 hoge = CVector3().Zero();
+	CVector3 cameraPos = CVector3().Zero();
+	CVector3 Pos = CVector3().Zero();
+	CVector3 atamaNoPos = CVector3().Zero();
+	CVector3 LifeScale = CVector3().Zero();
+	const CVector2 LifePivot = { 1.0f,0.5f };//HPの基本
+	bool m_damegeFlag = false;
+	int count = 0;
 };
 

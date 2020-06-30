@@ -120,6 +120,16 @@ public:
 		m_position = position;
 		m_scale = scl;
 	}
+
+	/// <summary>
+	/// ピボットを設定。
+	/// </summary>
+	/// <param name="pivot">基点。</param>
+	void SetPivot(const CVector2& pivot)
+	{
+		m_pivot = pivot;
+	}
+
 private:
 	Sprite	m_sprite;				//スプライト。
 	CVector3 m_position = CVector3().Zero();			//座標

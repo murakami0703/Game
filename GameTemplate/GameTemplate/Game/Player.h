@@ -88,5 +88,7 @@ private:
 	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
 	ID3D11ShaderResourceView* g_specularMapSRV = nullptr;
 	ID3D11ShaderResourceView* g_ambientMapSRV = nullptr;
+
+	int timer = 0;
 };
 
