@@ -13,7 +13,6 @@ GameUI::GameUI()
 
 GameUI::~GameUI()
 {
-
 }
 bool GameUI::Start()
 {
@@ -158,10 +157,19 @@ void GameUI::HPCalc()
 
 }
 
-
+void GameUI::OnlyDelete()
+{
+	//sprite全部消す。
+	for (int i = 0; i < m_spriteRender.size(); i++) {
+		g_goMgr->DeleteGameObject(m_spriteRender[i]);
+	}
+	g_goMgr->DeleteGameObject(this);
+}
 
 void GameUI::Update()
 {
+	GameData* m_gamedate = GameData::GetInstance();
+
 	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {
 		m_spriteNum -= 1;
 		HPCalc();
@@ -173,4 +181,9 @@ void GameUI::Update()
 	}
 
 	ScalingSelectCase();
+
+	//ボスが倒されたのでUI消す。
+	if (m_gamedate->ResultFlag() == true) {
+		OnlyDelete();
+	}
 }

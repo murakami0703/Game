@@ -22,6 +22,8 @@ public:
 	}
 private:
 	void HPCalc();
+
+	void OnlyDelete();
 private:
 
 	static GameUI* m_instance;
