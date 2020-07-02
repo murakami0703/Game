@@ -13,31 +13,40 @@ Player::Player()
 }
 Player::~Player()
 {
+	if (g_specularMapSRV) {
+		g_specularMapSRV->Release();
+	}
+	if (g_normalMapSRV) {
+		g_normalMapSRV->Release();
+	}
+	if (g_ambientMapSRV) {
+		g_ambientMapSRV->Release();
+	}
 }
 
 bool Player::Start()
 {
 
 	//アニメーションクリップのロードとループフラグの設定。
-	m_animClips[Animation_Idel].Load(L"Assets/animData/test.tka");
+	m_animClips[Animation_Idel].Load(L"Assets/animData/eneIdle.tka");
 	m_animClips[Animation_Idel].SetLoopFlag(true);
-	/*m_animClips[Animation_Walk].Load(L"Assets/animData/eneWalk.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/eneWalk.tka");
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 	m_animClips[Animation_Attack1].Load(L"Assets/animData/eneAT1.tka");
 	m_animClips[Animation_Dead].Load(L"Assets/animData/eneDeath.tka");
-	*/
+	
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
-	m_skinModelRender->Init(L"Assets/modelData/tesplay.cmo", m_animClips, AnimationClip_Num);
+	m_skinModelRender->Init(L"Assets/modelData/Footman_Default.cmo", m_animClips, AnimationClip_Num);
 	m_position = { -4300.0f, 400.0f, -3000.0f };
 	m_skinModelRender->SetPosition(m_position);
 
-	m_scale = { 3.0f, 3.0f, 3.0f };
+	m_scale = { 50.0f, 50.0f, 50.0f };
 	m_skinModelRender->SetScale(m_scale);
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 
-	/*//法線マップつけます
+	//法線マップつけます
 	DirectX::CreateDDSTextureFromFileEx(
 		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/Normal.dds", 0,
 		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
@@ -59,7 +68,7 @@ bool Player::Start()
 	m_skinModelRender->SetNormalMap(g_normalMapSRV);
 	m_skinModelRender->SetSpecularMap(g_specularMapSRV);
 	m_skinModelRender->SetSpecularMap(g_ambientMapSRV);
-	*/
+	
 	m_nowHP = GameData::GetInstance()->GetHitPoint();
 	m_skinModelRender->SetShadowMap(true);
 	return true;
@@ -113,7 +122,7 @@ void Player::Move()
 		m_move.y = 0.0f;
 	}
 	m_position = m_characon.Execute(m_caraTime, m_move);
-	m_skinModelRender->PlayAnimation(0);
+	m_skinModelRender->PlayAnimation(1);
 
 }
 void Player::Attack()
@@ -121,7 +130,7 @@ void Player::Attack()
 	EffectManager* effect = EffectManager::GetInstance();
 	if (Atcount == 1 && attackflag == false) {
 		//攻撃1回目
-		m_skinModelRender->PlayAnimation(0);
+		m_skinModelRender->PlayAnimation(2);
 		//effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 10.0f,10.0f,10.0f });
 		//m_se.Play(false);
 		attackflag = true;

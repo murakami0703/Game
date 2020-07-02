@@ -11,7 +11,10 @@ Level::~Level()
 {
 }
 
-void Level::Init(const wchar_t* levelDataFilePath, Level::HookWhenBuildObjectFunc hookFunc)
+void Level::Init(
+	const wchar_t* levelDataFilePath, Level::HookWhenBuildObjectFunc hookFunc,
+	std::function<void(LevelObjectData& objData, MapChip& mapchip)> onBuildMapchip
+)
 {
 	//スケルトンをロードする。
 	Skeleton skeleton;
@@ -43,7 +46,7 @@ void Level::Init(const wchar_t* levelDataFilePath, Level::HookWhenBuildObjectFun
 			}
 			if (isHook == false) {
 				//フックされなかったので、マップチップを作成する。
-				auto mapChip = std::make_unique<MapChip>(objData);
+				auto mapChip = std::make_unique<MapChip>(objData, onBuildMapchip);
 				m_mapChipArray.push_back(std::move(mapChip));
 			}
 		}

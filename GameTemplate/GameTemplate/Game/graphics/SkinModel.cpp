@@ -13,10 +13,7 @@ SkinModel::~SkinModel()
 		//サンプラステートを解放。
 		m_samplerState->Release();
 	}
-	//アルベドテクスチャを解放。
-	if (m_albedoTextureSRV != nullptr) {
-		m_albedoTextureSRV->Release();
-	}
+	
 	//ライト用の定数バッファの解放。
 	if (m_lightCb != nullptr) {
 		m_lightCb->Release();
@@ -93,10 +90,7 @@ void SkinModel::InitAlbedoTexture()
 {
 	//アルベドテクスチャを初期化。
 	//ファイル名を使って、テクスチャをロードして、ShaderResrouceViewを作成する。
-	HRESULT hr = DirectX::CreateDDSTextureFromFileEx(
-		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/utc_all2.dds", 0,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		false, nullptr, &m_albedoTextureSRV);
+	
 }
 void SkinModel::InitDirectionLight() {
 	//ディレクションライトの初期化。
@@ -232,7 +226,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 		m_skeleton.SendBoneMatrixArrayToGPU();
 		//アルベドテクスチャを設定する。
 		ID3D11ShaderResourceView* m_shadowMapSRV = g_goMgr->GetShadowMap()->GetShadowMapSRV();
-		d3dDeviceContext->PSSetShaderResources(0, 1, &m_albedoTextureSRV);
+		
 		d3dDeviceContext->PSSetShaderResources(2, 1, &m_shadowMapSRV);
 
 		//エフェクトにクエリを行う。

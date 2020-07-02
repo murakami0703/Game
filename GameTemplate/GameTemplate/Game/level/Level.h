@@ -71,7 +71,11 @@ public :
 	*									フックしないならnullptrを指定すればよい、
 	*									詳細はHookWhenBuildObjectFuncのコメントを参照。
 	*/
-	void Init(const wchar_t* levelDataFilePath, HookWhenBuildObjectFunc hookFunc);
+	void Init(
+		const wchar_t* levelDataFilePath, 
+		HookWhenBuildObjectFunc hookFunc,
+		std::function<void(LevelObjectData& objData, MapChip& mapchip)> onBuildMapchip
+	);
 	/*!
 	* @brief	レベルを描画。
 	*/

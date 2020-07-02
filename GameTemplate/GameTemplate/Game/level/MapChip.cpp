@@ -2,13 +2,18 @@
 #include "MapChip.h"
 #include "Level.h"
 
-MapChip::MapChip(const LevelObjectData& objData)
+MapChip::MapChip(LevelObjectData& objData,
+	std::function<void(LevelObjectData& objData, MapChip& mapchip)> onBuildMapchip)
 {
 	wchar_t filePath[256];
 	swprintf_s(filePath, L"Assets/modelData/%s.cmo", objData.name);
 	m_model.Init(filePath);
 	m_model.UpdateWorldMatrix(objData.position, objData.rotation, objData.scale);
 	m_model.SetShadowReciever(true);
+
+	if (onBuildMapchip) {
+		onBuildMapchip(objData, *this);
+	}
 	//静的物理オブジェクトをメッシュコライダーから作成する。
 	m_physicsStaticObject.CreateMeshObject(m_model, objData.position, objData.rotation, objData.scale);
 }

@@ -30,62 +30,60 @@ LevelSet::~LevelSet()
 	m_instance = nullptr;
 }
 
-void LevelSet::LevelSetting()
+bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 {
-	//levelで置きますわよ。
-	m_level.Init(L"Assets/level/stage_02.tkl", [&](LevelObjectData& objData) {
-		//ステージ
-		if (objData.EqualObjectName(L"Floor")) {
-			Map* m_map = g_goMgr->NewGameObject<Map>();
-			m_map->SetPosition(objData.position);
-			m_map->SetRotation(objData.rotation);
-			m_map->SetScale(objData.scale);
-			return true;
-		}
-		//ゴースト
-		if (objData.EqualObjectName(L"ghosts")) {
-			Ghost* m_ghost = g_goMgr->NewGameObject<Ghost>();
-			m_ghost->SetPosition(objData.position);
-			m_ghost->SetRotation(objData.rotation);
-			m_ghost->SetScale(objData.scale);
-			
-			m_enemyCount++;
+	//ステージ
+	if (objData.EqualObjectName(L"Floor")) {
+		Map* m_map = g_goMgr->NewGameObject<Map>();
+		m_map->SetPosition(objData.position);
+		m_map->SetRotation(objData.rotation);
+		m_map->SetScale(objData.scale);
+		return true;
+	}
+	//ゴースト
+	if (objData.EqualObjectName(L"ghosts")) {
+		Ghost* m_ghost = g_goMgr->NewGameObject<Ghost>();
+		m_ghost->SetPosition(objData.position);
+		m_ghost->SetRotation(objData.rotation);
+		m_ghost->SetScale(objData.scale);
 
-			return true;
-		}
-		//バット
-		if (objData.EqualObjectName(L"bat")) {
-			Bat* m_bat = g_goMgr->NewGameObject<Bat>();
-			m_bat->SetPosition(objData.position);
-			m_bat->SetRotation(objData.rotation);
-			m_bat->SetScale(objData.scale);
+		m_enemyCount++;
 
-			m_enemyCount++;
+		return true;
+	}
+	//バット
+	if (objData.EqualObjectName(L"bat")) {
+		Bat* m_bat = g_goMgr->NewGameObject<Bat>();
+		m_bat->SetPosition(objData.position);
+		m_bat->SetRotation(objData.rotation);
+		m_bat->SetScale(objData.scale);
 
-			return true;
-		}
-		if (objData.EqualObjectName(L"slaim")) {
-			Slaim* m_slaim = g_goMgr->NewGameObject<Slaim>();
-			m_slaim->SetPosition(objData.position);
-			m_slaim->SetRotation(objData.rotation);
-			m_slaim->SetScale(objData.scale);
+		m_enemyCount++;
 
-			m_enemyCount++;
+		return true;
+	}
+	if (objData.EqualObjectName(L"slaim")) {
+		Slaim* m_slaim = g_goMgr->NewGameObject<Slaim>();
+		m_slaim->SetPosition(objData.position);
+		m_slaim->SetRotation(objData.rotation);
+		m_slaim->SetScale(objData.scale);
 
-			return true;
-		}
-		if (objData.EqualObjectName(L"Golem_Boss")) {
-			Golem* m_golem = g_goMgr->NewGameObject<Golem>();
-			m_golem->SetPosition(objData.position);
-			m_golem->SetRotation(objData.rotation);
-			m_golem->SetScale(objData.scale);
+		m_enemyCount++;
 
-			m_enemyCount++;
+		return true;
+	}
+	if (objData.EqualObjectName(L"Golem_Boss")) {
+		Golem* m_golem = g_goMgr->NewGameObject<Golem>();
+		m_golem->SetPosition(objData.position);
+		m_golem->SetRotation(objData.rotation);
+		m_golem->SetScale(objData.scale);
 
-			return true;
-		}
+		m_enemyCount++;
 
-		if (objData.EqualObjectName(L"Treasure_Box")) {
+		return true;
+	}
+
+	if (objData.EqualObjectName(L"Treasure_Box")) {
 		TreasureBox* m_treasurebox = g_goMgr->NewGameObject<TreasureBox>();
 		m_treasurebox->SetPosition(objData.position);
 		m_treasurebox->SetRotation(objData.rotation);
@@ -93,8 +91,23 @@ void LevelSet::LevelSetting()
 		return true;
 	}
 
-		return false;
-	});
+	return false;
+}
+void LevelSet::OnPostBuildMapChip(LevelObjectData& objData, MapChip& mapchip)
+{
+
+}
+void LevelSet::LevelSetting()
+{
+	//levelで置きますわよ。
+	m_level.Init(L"Assets/level/stage_02.tkl", 
+		[&](LevelObjectData& objData) {
+			return OnPreBuildMapchip(objData);
+		}, 
+		[&](LevelObjectData& objData, MapChip& mapchip) {
+			OnPostBuildMapChip(objData, mapchip);
+		}
+	);
 	//敵の数をGameDataに教える
 	GameData* m_gamedate = GameData::GetInstance();
 	m_gamedate->SetEnemyCount(m_enemyCount);

@@ -185,7 +185,6 @@ private:
 	SLight				m_light;						//!<ライトの構造体。
 	ID3D11Buffer*		m_shadowMapcb = nullptr;					//!<シャドウマップ用の定数バッファ。
 
-	ID3D11ShaderResourceView* m_albedoTextureSRV = nullptr;	//!<アルベドテクスチャのSRV
 	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップのSRV
 	ID3D11ShaderResourceView* m_specularSRV = nullptr;		//スぺキュラマップのSRV
 	ID3D11ShaderResourceView* m_ambientSRV = nullptr;		//アンビエントマップのSRV

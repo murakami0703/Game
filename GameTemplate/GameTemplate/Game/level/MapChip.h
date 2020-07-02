@@ -14,13 +14,24 @@ public:
 	* @brief	コンストラクタ。
 	*@param[in] objData			オブジェクト情報。
 	*/
-	MapChip(const LevelObjectData& objData);
+	MapChip(LevelObjectData& objData,
+		std::function<void(LevelObjectData& objData, MapChip& mapchip)> onBuildMapchip
+	);
 	/*!
 	* @brief	描画。
 	*/
 	void Draw();
+	/// <summary>
+	/// スキンモデルを取得
+	/// </summary>
+	/// <returns></returns>
+	SkinModel& GetSkinModel()
+	{
+		return m_model;
+	}
 private:
 	SkinModel m_model;		//!<モデル。
 	PhysicsStaticObject m_physicsStaticObject;	//!<静的物理オブジェクト。
+
 	
 };
