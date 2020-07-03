@@ -103,6 +103,9 @@
     <Filter Include="Assets\sprite\hp">
       <UniqueIdentifier>{607d15d7-c910-4dbd-bc6a-be4c9b3422c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="light">
+      <UniqueIdentifier>{dcbb6f05-7173-45ae-851a-40b18c4de04c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="PointLight.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -472,6 +478,9 @@
     </ClInclude>
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="PointLight.h">
+      <Filter>light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">

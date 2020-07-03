@@ -95,7 +95,9 @@ bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 }
 void LevelSet::OnPostBuildMapChip(LevelObjectData& objData, MapChip& mapchip)
 {
-
+	if (objData.EqualObjectName(L"stage1_1")) {
+		
+	}
 }
 void LevelSet::LevelSetting()
 {

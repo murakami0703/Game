@@ -49,11 +49,26 @@ struct SDirectionLight {
 	float4 dligColor[Dcolor];
 
 };
+
+/// <summary>
+/// ポイントライトの定数バッファ
+/// </summary>
+
+static const int NUM_POINT_LIGHT = 4;
+
+struct SPointLight {
+	float3 position[NUM_POINT_LIGHT];
+	float4 color[NUM_POINT_LIGHT];
+	float4 range[NUM_POINT_LIGHT];
+
+};
+
 /// <summary>
 /// ライト用の定数バッファ
 /// </summary>
 cbuffer SLight : register(b1) {
 	SDirectionLight		directionLight;		//ディレクションライト
+	SPointLight		pointLight;		//ポイントライト
 	float3			eyePos;				//視点の座標。
 	float			specPow;			//鏡面反射の絞り。
 	float3			EnvironmentLight;				//環境光。
@@ -241,6 +256,28 @@ float3 DirectionCalc(float3 normal)
 	return lig;
 }
 /// <summary>
+/// ポイントライトの計算。
+/// </summary>
+float3 PointCalc(float3 normal, float3 worldPos)
+{
+	float3 lig = 0.0f;
+	//ポイントライトから光によるランバート拡散反射を計算。
+	for (int i = 0; i < NUM_POINT_LIGHT; i++) {
+		//１．光源からサーファイスに入射するベクトルを計算。
+		float3 ligDir = normalize(worldPos - pointLight.position[i]);
+		//２．光源からサーフェイスまでの距離を計算。
+		float distance = length(worldPos - pointLight.position[i]);
+		//３．光の入射ベクトルとサーフェイスの法線で内積を取って反射の強さを計算する。
+		float t = max(0.0f, dot(-ligDir, normal));
+		//４．影響率を計算する。影響率は0.0～1.0の範囲で、
+		//    指定した距離(pointLight[i].range)を超えたら、影響率は0.0になる。
+		float affect = 1.0f - min(1.0f, distance / pointLight.range[i]);
+		lig += pointLight.color[i] * t * affect;
+	}
+	return lig;
+}
+
+/// <summary>
 /// スぺキュラライトの計算。
 /// </summary>
 float3 SpecularCalc(float3 normal, float3 worldPos, float2 uv)
@@ -325,6 +362,9 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 	//ディフューズライトを加算。
 	lig += DirectionCalc(normal);
+
+	//ポイントライトを加算。
+	//lig +=PointCalc(normal, In.worldPos);
 
 	//スペキュラライトを加算。
 	lig += SpecularCalc(normal, In.worldPos, In.TexCoord);

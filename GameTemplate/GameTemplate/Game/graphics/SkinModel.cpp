@@ -31,11 +31,10 @@ void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
 	//サンプラステートの初期化。
 	InitSamplerState();
 
-	//アルベドテクスチャを初期化。
-	InitAlbedoTexture();
-
 	//ディレクションライトの初期化。
 	InitDirectionLight();
+	//ポイントライトの初期化。
+	m_light.pointLight.InitPointLight();
 
 	//SkinModelDataManagerを使用してCMOファイルのロード。
 	m_modelDx = g_skinModelDataManager.Load(filePath, m_skeleton);
@@ -85,12 +84,6 @@ void SkinModel::InitConstantBuffer()
 	bufferDesc.ByteWidth = (((sizeof(SLight) - 1) / 16) + 1) * 16;				//SDirectionLightは16byteの倍数になっているので、切り上げはやらない。
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_lightCb);
 
-}
-void SkinModel::InitAlbedoTexture()
-{
-	//アルベドテクスチャを初期化。
-	//ファイル名を使って、テクスチャをロードして、ShaderResrouceViewを作成する。
-	
 }
 void SkinModel::InitDirectionLight() {
 	//ディレクションライトの初期化。

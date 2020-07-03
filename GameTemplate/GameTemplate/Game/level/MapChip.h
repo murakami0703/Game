@@ -29,9 +29,11 @@ public:
 	{
 		return m_model;
 	}
+
 private:
 	SkinModel m_model;		//!<モデル。
 	PhysicsStaticObject m_physicsStaticObject;	//!<静的物理オブジェクト。
+	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
 
 	
 };

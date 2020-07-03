@@ -28,6 +28,6 @@ private:
 	void OnPostBuildMapChip(LevelObjectData& objData, MapChip& mapchip);
 private:
 	Level m_level;	//レベルデータ。
-
+	SkinModel m_model;
 	int m_enemyCount = 0;	//エネミーの数
 };

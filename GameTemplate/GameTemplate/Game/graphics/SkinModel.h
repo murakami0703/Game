@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Skeleton.h"
+#include "PointLight.h"
 #include "SkinModelEffect.h"
 
 /*!
@@ -136,15 +137,12 @@ private:
 	*/
 	void InitSkeleton(const wchar_t* filePath);
 	/// <summary>
-	/// アルベドテクスチャを初期化。
-	/// </summary>
-	void InitAlbedoTexture();
-	/// <summary>
 	/// ディレクションライトの初期化。
 	/// </summary>
 	void InitDirectionLight();
 
 	static const int Dcolor = 4;
+
 private:
 	//定数バッファ。
 	struct SVSConstantBuffer {
@@ -170,6 +168,7 @@ private:
 	//ライト構造体
 	struct SLight {
 		SDirectionLight		directionLight;		//ディレクションライト
+		PointLight			pointLight;			//ポイントライト
 		CVector3			eyePos;				//視点の座標。
 		float				specPow;			//鏡面反射の絞り。
 		CVector3			EnvironmentLight = {1.0f,1.0f,1.0f};				//環境光。
@@ -181,9 +180,9 @@ private:
 	CMatrix				m_worldMatrix;					//!<ワールド行列。
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
 	ID3D11SamplerState* m_samplerState = nullptr;		//!<サンプラステート。
-	ID3D11Buffer*		m_lightCb = nullptr;				//!<ライト用の定数バッファ。
+	ID3D11Buffer*		m_lightCb = nullptr;			//!<ライト用の定数バッファ。
 	SLight				m_light;						//!<ライトの構造体。
-	ID3D11Buffer*		m_shadowMapcb = nullptr;					//!<シャドウマップ用の定数バッファ。
+	ID3D11Buffer*		m_shadowMapcb = nullptr;		//!<シャドウマップ用の定数バッファ。
 
 	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップのSRV
 	ID3D11ShaderResourceView* m_specularSRV = nullptr;		//スぺキュラマップのSRV
