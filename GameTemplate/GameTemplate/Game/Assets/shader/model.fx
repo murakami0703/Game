@@ -367,7 +367,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//lig +=PointCalc(normal, In.worldPos);
 
 	//スペキュラライトを加算。
-	lig += SpecularCalc(normal, In.worldPos, In.TexCoord);
+	//lig += SpecularCalc(normal, In.worldPos, In.TexCoord);
 
 	//アンビエントライトを加算。
 	lig += AmbientCalc(albedoColor, In.TexCoord);

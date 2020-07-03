@@ -17,7 +17,7 @@ bool GameOver::Start()
 
 	//0”Ô¨GameOver
 	m_gameOverSprite = g_goMgr->NewGameObject<SpriteRender>();
-	m_gameOverSprite->Init(L"Assets/sprite/spe.dds", 700.0f, 150.0f);
+	m_gameOverSprite->Init(L"Assets/sprite/gameover.dds", 700.0f, 150.0f);
 	m_gameOverSprite->SetPosition({ 0.0f,m_startYPos ,0.0f });
 	m_gameOverSprite->SetAlpha(0.0f);
 	m_spriteRender.push_back(m_gameOverSprite);
