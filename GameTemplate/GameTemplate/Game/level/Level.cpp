@@ -32,7 +32,7 @@ void Level::Init(
 			auto t = objData.position.y;
 			objData.position.y = objData.position.z;
 			objData.position.z = -t;
-
+			
 			t = objData.rotation.y;
 			objData.rotation.y = objData.rotation.z;
 			objData.rotation.z = -t;

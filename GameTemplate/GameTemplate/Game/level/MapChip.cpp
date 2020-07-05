@@ -17,7 +17,12 @@ MapChip::MapChip(LevelObjectData& objData,
 	//静的物理オブジェクトをメッシュコライダーから作成する。
 	m_physicsStaticObject.CreateMeshObject(m_model, objData.position, objData.rotation, objData.scale);
 }
-
+MapChip::~MapChip()
+{
+	if (g_normalMapSRV) {
+		g_normalMapSRV->Release();
+	}
+}
 void MapChip::Draw()
 {
 	m_model.Draw(

@@ -17,6 +17,8 @@ public:
 	MapChip(LevelObjectData& objData,
 		std::function<void(LevelObjectData& objData, MapChip& mapchip)> onBuildMapchip
 	);
+	~MapChip();
+
 	/*!
 	* @brief	描画。
 	*/
@@ -28,6 +30,13 @@ public:
 	SkinModel& GetSkinModel()
 	{
 		return m_model;
+	}
+	/// <summary>
+	/// 法線マップの設定。
+	/// </summary>
+	ID3D11ShaderResourceView* GetNormalMap()
+	{
+		return g_normalMapSRV;
 	}
 
 private:

@@ -96,7 +96,13 @@ bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 void LevelSet::OnPostBuildMapChip(LevelObjectData& objData, MapChip& mapchip)
 {
 	if (objData.EqualObjectName(L"stage1_1")) {
-		
+		//アンビエントマップつけます
+		DirectX::CreateDDSTextureFromFileEx(
+			g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/AO.dds", 0,
+			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+			false, nullptr, &mapchip
+		);
+
 	}
 }
 void LevelSet::LevelSetting()
