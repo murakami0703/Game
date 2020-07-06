@@ -13,7 +13,8 @@ public:
 		Item_Get, //アイテム入手時のエフェクト
 		bat_pre, //アイテム入手時のエフェクト
 		Enemy_Dead, //アイテム入手時のエフェクト
-		bund
+		bund,
+		Golem_Attack			//ゴーレム攻撃時のエフェクト
 	};
 
 	EffectManager();
@@ -43,7 +44,8 @@ private:
 		{ L"Assets/effect/item_Appear.efk" },
 		{ L"Assets/effect/bat_premove.efk" },
 		{ L"Assets/effect/enemy_dead.efk" },
-		{ L"Assets/effect/baund.efk" }
+		{ L"Assets/effect/baund.efk" },
+		{ L"Assets/effect/Golem_Attack.efk" }
 	};
 
 	CVector3 m_scale = CVector3::One();

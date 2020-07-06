@@ -68,7 +68,7 @@ struct SPointLight {
 /// </summary>
 cbuffer SLight : register(b1) {
 	SDirectionLight		directionLight;		//ディレクションライト
-	SPointLight		pointLight;		//ポイントライト
+//	SPointLight		pointLight;		//ポイントライト
 	float3			eyePos;				//視点の座標。
 	float			specPow;			//鏡面反射の絞り。
 	float3			EnvironmentLight;				//環境光。
@@ -262,7 +262,7 @@ float3 PointCalc(float3 normal, float3 worldPos)
 {
 	float3 lig = 0.0f;
 	//ポイントライトから光によるランバート拡散反射を計算。
-	for (int i = 0; i < NUM_POINT_LIGHT; i++) {
+/*	for (int i = 0; i < NUM_POINT_LIGHT; i++) {
 		//１．光源からサーファイスに入射するベクトルを計算。
 		float3 ligDir = normalize(worldPos - pointLight.position[i]);
 		//２．光源からサーフェイスまでの距離を計算。
@@ -273,7 +273,7 @@ float3 PointCalc(float3 normal, float3 worldPos)
 		//    指定した距離(pointLight[i].range)を超えたら、影響率は0.0になる。
 		float affect = 1.0f - min(1.0f, distance / pointLight.range[i]);
 		lig += pointLight.color[i] * t * affect;
-	}
+	}*/
 	return lig;
 }
 
@@ -298,7 +298,7 @@ float3 SpecularCalc(float3 normal, float3 worldPos, float2 uv)
 		if (isHasSpecularMap) {
 			specPower = g_specularMap.Sample(Sampler, uv).r;
 		}
-		float3 specLig = pow(t, specPow) * directionLight.dligColor[i] * specPower * 7.0f;
+		float3 specLig = pow(t, specPow) * directionLight.dligColor[i] * specPower * 0.0f;
 		//鏡面反射を反射光に加算する。
 		lig += specLig;
 	}
@@ -367,7 +367,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//lig +=PointCalc(normal, In.worldPos);
 
 	//スペキュラライトを加算。
-	//lig += SpecularCalc(normal, In.worldPos, In.TexCoord);
+	lig += SpecularCalc(normal, In.worldPos, In.TexCoord);
 
 	//アンビエントライトを加算。
 	lig += AmbientCalc(albedoColor, In.TexCoord);

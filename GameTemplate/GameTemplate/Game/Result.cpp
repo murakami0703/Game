@@ -449,11 +449,34 @@ void Result::Next()
 }
 void Result::Removal()
 {
-	//一旦全部排除。
+	//一旦リザルトと点線以外排除。
+	//透明度減少させてゆくぅ
+	SpriteIndicate(m_spriteRender[10]);
+	SpriteIndicate(m_spriteRender[11]);
+	SpriteIndicate(m_spriteRender[12]);
+	SpriteIndicate(m_spriteRender[13]);
+	SpriteIndicate(m_spriteRender[14]);
+	SpriteIndicate(m_spriteRender[15]);
+	SpriteIndicate(m_spriteRender[16]);
+	SpriteIndicate(m_spriteRender[17]);
+	SpriteIndicate(m_spriteRender[18]);
+	SpriteIndicate(m_spriteRender[19]);
+	SpriteIndicate(m_spriteRender[20]);
+
+	//排除完了、次の処理へ...。
+	if (m_spriteRender[20]->GetAlpha() >= 1.0f) {
+		m_state = Result_GetJewelry;
+	}
+
+
 }
 void Result::GetJewelry()
 {
 	//宝石表示。
+	//リザルト台座の真ん中で表示
+	//SpriteIndicate(m_spriteRender[10]);
+	//エフェクト再生してちょっと豪華にしま。
+
 }
 void Result::SelectNext()
 {

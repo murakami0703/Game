@@ -1,5 +1,6 @@
 #pragma once
 #include "level/Level.h"
+
 class LevelSet : public IGameObject
 {
 	static LevelSet* m_instance;

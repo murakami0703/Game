@@ -83,7 +83,7 @@ private:
 	//追従関係
 	CVector3 m_move = CVector3().Zero();		//移動
 	//攻撃関係
-	const float m_damageLen = 200.0f;	//ダメージ判定の距離
+	const float m_damageLen = 300.0f;	//ダメージ判定の距離
 	bool m_isDamageFlag = false;		//攻撃中にプレイヤーにダメージ与えましたか？
 	int m_attacktimer = 0;				//攻撃時用タイマー
 	const int m_attackEndTime = 60;	//攻撃状態終了タイム

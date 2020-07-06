@@ -13,15 +13,6 @@ Player::Player()
 }
 Player::~Player()
 {
-	if (g_specularMapSRV) {
-		g_specularMapSRV->Release();
-	}
-	if (g_normalMapSRV) {
-		g_normalMapSRV->Release();
-	}
-	if (g_ambientMapSRV) {
-		g_ambientMapSRV->Release();
-	}
 }
 
 bool Player::Start()
@@ -46,28 +37,10 @@ bool Player::Start()
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 
-	//法線マップつけます
-	DirectX::CreateDDSTextureFromFileEx(
-		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/Normal.dds", 0,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		false, nullptr, &g_normalMapSRV
-	);
-	//スぺキュラマップつけます
-	DirectX::CreateDDSTextureFromFileEx(
-		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/MatallicSmoothness.dds", 0,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		false, nullptr, &g_specularMapSRV
-	);
-
-	//アンビエントマップつけます
-	DirectX::CreateDDSTextureFromFileEx(
-		g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/AO.dds", 0,
-		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		false, nullptr, &g_ambientMapSRV
-	);
-	m_skinModelRender->SetNormalMap(g_normalMapSRV);
-	m_skinModelRender->SetSpecularMap(g_specularMapSRV);
-	m_skinModelRender->SetSpecularMap(g_ambientMapSRV);
+	//各マップの設定。
+	m_skinModelRender->SetNormalMap(L"Assets/modelData/Normal.dds");
+	m_skinModelRender->SetSpecularMap(L"Assets/modelData/MatallicSmoothness.dds");
+	m_skinModelRender->SetSpecularMap(L"Assets/modelData/Normal.dds");
 	
 	m_nowHP = GameData::GetInstance()->GetHitPoint();
 	m_skinModelRender->SetShadowMap(true);
@@ -111,11 +84,6 @@ void Player::Move()
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationD);
 
 	}
-	else if (g_pad[0].IsTrigger(enButtonA) && m_characon.IsOnGround() == false) {
-		//ジャンプ
-		//m_move.y = m_jumpPos;
-	}
-
 	m_move.y -= 1.0f;
 	if (m_characon.IsOnGround()) {
 		//重力ストップ

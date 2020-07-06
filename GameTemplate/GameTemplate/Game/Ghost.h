@@ -111,8 +111,6 @@ private:
 	CVector3 m_frontmove = CVector3().Zero();			//方向転換時の前ベクトル格納
 	const float m_loiteringSpeed = 2.0f;	//徘徊速度。
 
-	//追尾関連
-	//const float m_followLength = 100.0f;	//追尾する距離
 	//死亡関連
 	const float m_deadLength = 150.0f;						//死亡判定の距離
 	const CVector3 m_smallValue = { 0.05f, 0.05f, 0.05f };	//死亡時1フレーム毎に縮小させる値

@@ -9,6 +9,15 @@ SkinModelRender::SkinModelRender()
 
 SkinModelRender::~SkinModelRender()
 {
+	if (g_specularMapSRV) {
+		g_specularMapSRV->Release();
+	}
+	if (g_normalMapSRV) {
+		g_normalMapSRV->Release();
+	}
+	if (g_ambientMapSRV) {
+		g_ambientMapSRV->Release();
+	}
 }
 bool SkinModelRender::Start() {
 	return true;

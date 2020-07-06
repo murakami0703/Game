@@ -54,6 +54,11 @@ public:
 			EnemyCount--;
 	}
 
+	bool GameData::GetBossMoveFlag()
+	{
+		return m_bossMoveFlag;
+	}
+
 	//引数をエネミーカウントに代入
 	void GameData::SetEnemyCount(int x)
 	{
@@ -170,8 +175,8 @@ private:
 	float ATK = 30.0f;	//基礎攻撃力
 
 	//敵
-	int EnemyCount = 0;	//敵の数
-
+	int EnemyCount = 0;				//敵の数
+	bool m_bossMoveFlag = false;	//true ボスが動く。
 	//たましい
 	int Anima = 0;	//雑魚から貰える魂
 	const int MAXAnima = 999;	//最大Anima

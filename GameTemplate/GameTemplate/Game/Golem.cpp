@@ -105,7 +105,7 @@ void Golem::Attack()
 		m_attacktimer++;
 		//波紋エフェクト流す。
 		if (m_attacktimer <= 1) {
-			effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,430.0f ,m_position.z }, { 50.0f,50.0f,50.0f });
+			effect->EffectPlayer(EffectManager::Golem_Attack, { m_position.x ,430.0f ,m_position.z }, { 50.0f,50.0f,50.0f });
 		}
 		//エフェクト範囲内の時プレーヤーにダメージ
 		if (m_isDamageFlag==false && m_position.x < m_damageLen&& m_position.x > -m_damageLen
@@ -215,57 +215,60 @@ void Golem::HPBarSaid()
 }
 void Golem::Update()
 {
-	//プレイヤーとの距離。
-	m_playerPos = Player::GetInstance()->GetPosition();
-	m_toPlayerVec = m_playerPos - m_position;
-	//攻撃が当たった。
-	if (Player::GetInstance()->GetAttackflag() == true) {
-		if (m_damegeFlag == false && m_state != eState_Attack && m_toPlayerVec.Length() < m_damageLength) {
-			m_damegeFlag = true;
-			m_state = eState_Damage;
+	GameData* m_gamedate = GameData::GetInstance();
+	if (m_gamedate->GetBossMoveFlag() == true) {
+
+		//プレイヤーとの距離。
+		m_playerPos = Player::GetInstance()->GetPosition();
+		m_toPlayerVec = m_playerPos - m_position;
+		//攻撃が当たった。
+		if (Player::GetInstance()->GetAttackflag() == true) {
+			if (m_damegeFlag == false && m_state != eState_Attack && m_toPlayerVec.Length() < m_damageLength) {
+				m_damegeFlag = true;
+				m_state = eState_Damage;
+			}
 		}
-	}
-	//HPバーの表示処理。
-	cameraPos = g_camera3D.GetPosition();
-	Pos = cameraPos - m_position;
-	float len = Pos.Length();
-	if (len < 1000.0f) {
-		HPBarSaid();
-	}
-	else {
-		m_spriteRender[0]->SetAlpha(0.0f);
-		m_spriteRender[1]->SetAlpha(0.0f);
-	}
+		//HPバーの表示処理。
+		cameraPos = g_camera3D.GetPosition();
+		Pos = cameraPos - m_position;
+		float len = Pos.Length();
+		if (len < 1000.0f) {
+			HPBarSaid();
+		}
+		else {
+			m_spriteRender[0]->SetAlpha(0.0f);
+			m_spriteRender[1]->SetAlpha(0.0f);
+		}
 
-	if (HP <= 0) {
-		m_state = eState_Dead;//死にます。
+		if (HP <= 0) {
+			m_state = eState_Dead;//死にます。
+		}
+
+		switch (m_state)
+		{
+		case Golem::eState_Idle:
+			Idle();			//待機。
+			break;
+		case Golem::eState_Follow:
+			Follow();		//プレイヤーを追跡。
+			break;
+		case Golem::eState_Attack:
+			Attack();		//攻撃。
+			break;
+		case Golem::eState_Back:
+			Back();			//拳を戻す。
+			break;
+		case Golem::eState_Damage:
+			Damage();		//ダメージ受。
+			break;
+		case Golem::eState_Dead:
+			Dead();			//死。
+			break;
+
+		}
+		//ワールド行列の更新。
+		m_skinModelRender->SetPosition(m_position);
+		m_skinModelRender->SetRotation(m_rotation);
+		m_skinModelRender->SetScale(m_scale);
 	}
-
-	switch (m_state)
-	{
-	case Golem::eState_Idle:
-		Idle();			//待機。
-		break;
-	case Golem::eState_Follow:
-		Follow();		//プレイヤーを追跡。
-		break;
-	case Golem::eState_Attack:
-		Attack();		//攻撃。
-		break;
-	case Golem::eState_Back:
-		Back();			//拳を戻す。
-		break;
-	case Golem::eState_Damage:
-		Damage();		//ダメージ受。
-		break;
-	case Golem::eState_Dead:
-		Dead();			//死。
-		break;
-
-	}
-	//ワールド行列の更新。
-	m_skinModelRender->SetPosition(m_position);
-	m_skinModelRender->SetRotation(m_rotation);
-	m_skinModelRender->SetScale(m_scale);
-
 }

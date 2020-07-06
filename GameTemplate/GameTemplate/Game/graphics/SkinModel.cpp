@@ -34,7 +34,7 @@ void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
 	//ディレクションライトの初期化。
 	InitDirectionLight();
 	//ポイントライトの初期化。
-	m_light.pointLight.InitPointLight();
+	//m_light.pointLight.InitPointLight();
 
 	//SkinModelDataManagerを使用してCMOファイルのロード。
 	m_modelDx = g_skinModelDataManager.Load(filePath, m_skeleton);

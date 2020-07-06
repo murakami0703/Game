@@ -168,7 +168,7 @@ private:
 	//ライト構造体
 	struct SLight {
 		SDirectionLight		directionLight;		//ディレクションライト
-		PointLight			pointLight;			//ポイントライト
+	//	PointLight			pointLight;			//ポイントライト
 		CVector3			eyePos;				//視点の座標。
 		float				specPow;			//鏡面反射の絞り。
 		CVector3			EnvironmentLight = {1.0f,1.0f,1.0f};				//環境光。

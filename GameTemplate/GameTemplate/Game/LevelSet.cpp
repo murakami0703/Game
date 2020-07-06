@@ -12,6 +12,8 @@
 #include "TreasureBox.h"
 
 #include "GameData.h"
+#include "level/MapChip.h"
+
 LevelSet* LevelSet::m_instance = nullptr;
 LevelSet::LevelSet()
 {
@@ -62,6 +64,7 @@ bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 
 		return true;
 	}
+	//スライム
 	if (objData.EqualObjectName(L"slaim")) {
 		Slaim* m_slaim = g_goMgr->NewGameObject<Slaim>();
 		m_slaim->SetPosition(objData.position);
@@ -72,6 +75,7 @@ bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 
 		return true;
 	}
+	//ボス
 	if (objData.EqualObjectName(L"Golem_Boss")) {
 		Golem* m_golem = g_goMgr->NewGameObject<Golem>();
 		m_golem->SetPosition(objData.position);
@@ -82,7 +86,7 @@ bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 
 		return true;
 	}
-
+	//宝箱
 	if (objData.EqualObjectName(L"Treasure_Box")) {
 		TreasureBox* m_treasurebox = g_goMgr->NewGameObject<TreasureBox>();
 		m_treasurebox->SetPosition(objData.position);
@@ -95,15 +99,53 @@ bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 }
 void LevelSet::OnPostBuildMapChip(LevelObjectData& objData, MapChip& mapchip)
 {
-	if (objData.EqualObjectName(L"stage1_1")) {
-		//アンビエントマップつけます
-		DirectX::CreateDDSTextureFromFileEx(
-			g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/AO.dds", 0,
-			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-			false, nullptr, &mapchip
-		);
+	if (objData.EqualObjectName(L"stage1_start")
+		|| objData.EqualObjectName(L"stage1_1")
+		|| objData.EqualObjectName(L"stage1_1_2")
+		|| objData.EqualObjectName(L"stage1_1_3")
+		|| objData.EqualObjectName(L"stage1_boss")) {
+		//法線マップつけます
+		ID3D11ShaderResourceView* normal;
 
+		DirectX::CreateDDSTextureFromFileEx(
+			g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/stage1_texture/Gravel_normal.dds", 0,
+			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+			false, nullptr, &normal
+		);
+		mapchip.SetNormalMap(normal);
 	}
+	if (objData.EqualObjectName(L"stage1_start")
+		|| objData.EqualObjectName(L"stage1_1")
+		|| objData.EqualObjectName(L"stage1_1_2")
+		|| objData.EqualObjectName(L"stage1_1_3")
+		|| objData.EqualObjectName(L"stage1_boss")) {
+		//スぺキュラマップつけます
+		ID3D11ShaderResourceView* specular;
+
+		//DirectX::CreateDDSTextureFromFileEx(
+		//	g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/stage1_texture/Gravel_SPE.dds", 0,
+		//	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		//	false, nullptr, &specular
+		//);
+		//mapchip.SetSpecularMap(specular);
+	}
+	if (objData.EqualObjectName(L"stage1_start")
+		|| objData.EqualObjectName(L"stage1_1")
+		|| objData.EqualObjectName(L"stage1_1_2")
+		|| objData.EqualObjectName(L"stage1_1_3")
+		|| objData.EqualObjectName(L"stage1_boss")) {
+		//ＡＯマップつけます
+		ID3D11ShaderResourceView* AO;
+
+		DirectX::CreateDDSTextureFromFileEx(
+			g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/stage1_texture/Gravel_AO.dds", 0,
+			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+			false, nullptr, &AO
+		);
+		mapchip.SetAoMap(AO);
+	}
+
+
 }
 void LevelSet::LevelSetting()
 {
@@ -119,7 +161,6 @@ void LevelSet::LevelSetting()
 	//敵の数をGameDataに教える
 	GameData* m_gamedate = GameData::GetInstance();
 	m_gamedate->SetEnemyCount(m_enemyCount);
-
 }
 void LevelSet::Update()
 {

@@ -107,23 +107,41 @@ public:
 	/// <summary>
 	/// 法線マップの設定。
 	/// </summary>
-	void SetNormalMap(ID3D11ShaderResourceView* srv)
+	void SetNormalMap(const wchar_t* filePath)
 	{
-		m_skinModel.SetNormalMap(srv);
+		//法線マップつけます
+		DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), filePath, 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_normalMapSRV
+		);
+		m_skinModel.SetNormalMap(g_normalMapSRV);
 	}
 	/// <summary>
 	/// スぺキュラマップの設定。
 	/// </summary>
-	void SetSpecularMap(ID3D11ShaderResourceView* srv)
+	void SetSpecularMap(const wchar_t* filePath)
 	{
-		m_skinModel.SetSpecularMap(srv);
+		//法線マップつけます
+		DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), filePath, 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_specularMapSRV
+		);
+		m_skinModel.SetSpecularMap(g_specularMapSRV);
 	}
 	/// <summary>
 	/// アンビエントマップの設定。
 	/// </summary>
-	void SetAmbientMap(ID3D11ShaderResourceView* srv)
+	void SetAmbientMap(const wchar_t* filePath)
 	{
-		m_skinModel.SetAmbientMap(srv);
+		//法線マップつけます
+		DirectX::CreateDDSTextureFromFileEx(
+		g_graphicsEngine->GetD3DDevice(), filePath, 0,
+		D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+		false, nullptr, &g_ambientMapSRV
+		);
+		m_skinModel.SetAmbientMap(g_ambientMapSRV);
 	}
 
 	bool Start();
@@ -146,5 +164,11 @@ public:
 	Animation					m_animation;						//アニメーション。
 	bool m_shadowMapFlag = false;		//シャドウマップ描画フラグ
 	bool m_silhouetteflag = false;		//シルエット描画フラグ
+
+	//各種マップの設定。
+	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;				//法線マップ。
+	ID3D11ShaderResourceView* g_specularMapSRV = nullptr;			//スぺキュラマップ。
+	ID3D11ShaderResourceView* g_ambientMapSRV = nullptr;			//アンビエントマップ
+
 };
 

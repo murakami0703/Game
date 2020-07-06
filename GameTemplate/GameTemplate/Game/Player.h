@@ -31,11 +31,13 @@ public:
 private:
 
 	enum EState {
-		Player_Idle,
-		Player_Walk,
-		Player_Attack,
-		Player_Dead,
-		Player_Damage
+		Player_Idle,		//待機
+		Player_Walk,		//歩き
+		Player_Run,			//走り
+		Player_Attack,		//攻撃
+		Player_ItemUse,		//アイテム使用
+		Player_Damage,		//ダメージ
+		Player_Dead			//死
 	};
 
 	enum PAnimation {
@@ -85,9 +87,6 @@ private:
 	//HP
 	float m_nowHP = 0;
 	int m_damageTimer = 0;
-	ID3D11ShaderResourceView* g_normalMapSRV = nullptr;
-	ID3D11ShaderResourceView* g_specularMapSRV = nullptr;
-	ID3D11ShaderResourceView* g_ambientMapSRV = nullptr;
 
 	int timer = 0;
 };

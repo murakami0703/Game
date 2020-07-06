@@ -16,4 +16,10 @@ GameData::~GameData()
 bool GameData::Start() {
 	return true;
 }
-void GameData::Update(){}
+void GameData::Update(){
+	//敵が全部倒されたのでボスを動かします。
+	if (EnemyCount <= 0)
+	{
+		m_bossMoveFlag = true;
+	}
+}
