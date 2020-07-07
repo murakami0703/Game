@@ -82,7 +82,7 @@ private:
 	//攻撃関連
 	bool attackflag = false;	//攻撃判定用。
 	//サウンド関係
-	CSoundSource m_se;						//se。
+	//CSoundSource m_se;						//se。
 
 	//HP
 	float m_nowHP = 0;

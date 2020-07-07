@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "system/system.h"
+#include "Engine.h"
 //#include "Title.h"
 #include "Game.h"
 
@@ -10,7 +10,7 @@
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
 	//ゲームの初期化。
-	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
+	Engine().InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
 	//カメラを初期化。
 	g_camera3D.SetPosition({ 0.0f, 100.0f, 300.0f });
@@ -26,7 +26,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_goMgr->NewGameObject<Game>();
 
 	//ゲームループ。
-	while (DispatchWindowMessage() == true)
+	while (Engine().DispatchWindowMessage() == true)
 	{
 		g_goMgr->Update();
 	}
