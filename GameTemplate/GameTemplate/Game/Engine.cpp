@@ -25,7 +25,7 @@ void Engine::Init()
 	g_goMgr->Init();
 
 	//サウンドエンジンの初期化。
-	//m_soundEngine.Init();
+	m_soundEngine.Init();
 }
 
 ///////////////////////////////////////////////////////////////////
