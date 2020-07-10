@@ -2,6 +2,7 @@
 #include "TreasureBox.h"
 #include "Player.h"
 #include "EffectManager.h"
+#include "ItemManager.h"
 
 
 TreasureBox::TreasureBox()
@@ -29,6 +30,7 @@ bool TreasureBox::Start() {
 
 void TreasureBox::Open()
 {
+	ItemManager* item = ItemManager::GetInstance();
 	//開封アニメ再生
 	m_BoxModelRender->PlayAnimation(1);
 
@@ -37,38 +39,20 @@ void TreasureBox::Open()
 		m_rand = rand() % 4;
 		//1 回復薬
 		if (m_rand == m_randNum[0]) {
-			m_state = eState_HpRecovery;
+			//item->ItemGenerated();
 		}
 		//2 爆弾
 		else if (m_rand == m_randNum[1]) {
-			m_state = eState_Bum;
 		}
 		//3 攻撃力UP
 		else if (m_rand == m_randNum[2]) {
-			m_state = eState_AttackUp;
 		}
 		//4 移動速度UP
 		else if (m_rand == m_randNum[3]) {
-			m_state = eState_SpeedUp;
 		}
 	}
 }
 
-void TreasureBox::HpRecovery()
-{
-}
-void TreasureBox::Bum()
-{
-
-}
-void TreasureBox::AttackUp()
-{
-
-}
-void TreasureBox::SpeedUp() 
-{
-
-}
 
 void TreasureBox::Update()
 {
@@ -89,18 +73,6 @@ void TreasureBox::Update()
 		break;
 	case TreasureBox::eState_Open:
 		Open();
-		break;
-	case TreasureBox::eState_HpRecovery:
-		HpRecovery();
-		break;
-	case TreasureBox::eState_Bum:
-		Bum();
-		break;
-	case TreasureBox::eState_AttackUp:
-		AttackUp();
-		break;
-	case TreasureBox::eState_SpeedUp:
-		SpeedUp();
 		break;
 	}
 }

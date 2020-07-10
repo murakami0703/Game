@@ -87,7 +87,7 @@ public:
 	/// シャドウマップ描画フラグ
 	/// </summary>
 	/// <param name="flag">trueなら描画</param>
-	void SetShadowMap(bool flag)
+	void SetShadowCaster(bool flag)
 	{
 		m_shadowMapFlag = flag;
 	}

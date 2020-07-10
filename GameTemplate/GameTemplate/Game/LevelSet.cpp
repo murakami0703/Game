@@ -122,12 +122,12 @@ void LevelSet::OnPostBuildMapChip(LevelObjectData& objData, MapChip& mapchip)
 		//スぺキュラマップつけます
 		ID3D11ShaderResourceView* specular;
 
-		//DirectX::CreateDDSTextureFromFileEx(
-		//	g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/stage1_texture/Gravel_SPE.dds", 0,
-		//	D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
-		//	false, nullptr, &specular
-		//);
-		//mapchip.SetSpecularMap(specular);
+		DirectX::CreateDDSTextureFromFileEx(
+			g_graphicsEngine->GetD3DDevice(), L"Assets/modelData/stage1_texture/Gravel_SPE.dds", 0,
+			D3D11_USAGE_DEFAULT, D3D11_BIND_SHADER_RESOURCE, 0, 0,
+			false, nullptr, &specular
+		);
+		mapchip.SetSpecularMap(specular);
 	}
 	if (objData.EqualObjectName(L"stage1_start")
 		|| objData.EqualObjectName(L"stage1_1")

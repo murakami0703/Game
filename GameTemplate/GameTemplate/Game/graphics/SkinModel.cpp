@@ -153,7 +153,6 @@ void SkinModel::Update()
 	for (int i = 0; i < Dcolor; i++) {
 		qRot.Multiply(m_light.directionLight.direction[i]);
 	}*/
-	m_light.EnvironmentLight = { 0.1f,0.1f,0.1f };
 
 }
 void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_renderMode)

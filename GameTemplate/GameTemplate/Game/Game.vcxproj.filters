@@ -259,9 +259,6 @@
       <Filter>enemy</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="Item.cpp">
-      <Filter>ui</Filter>
-    </ClCompile>
     <ClCompile Include="Golem.cpp">
       <Filter>boss</Filter>
     </ClCompile>
@@ -287,6 +284,15 @@
     </ClCompile>
     <ClCompile Include="Engine.cpp">
       <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemUI.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +455,6 @@
       <Filter>enemy</Filter>
     </ClInclude>
     <ClInclude Include="Title.h" />
-    <ClInclude Include="Item.h">
-      <Filter>ui</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Golem.h">
       <Filter>boss</Filter>
@@ -478,6 +481,15 @@
     </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemUI.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -528,6 +540,9 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\tesplay.fbx">
       <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\fence.fbx">
+      <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>

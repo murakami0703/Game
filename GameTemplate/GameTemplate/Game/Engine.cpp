@@ -110,7 +110,7 @@ void Engine::InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	//ウィンドウを初期化。
 	InitWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow, appName);
 
-	//初期化
+	//諸々初期化
 	Init();
 
 	//ゲームパッドの初期化。

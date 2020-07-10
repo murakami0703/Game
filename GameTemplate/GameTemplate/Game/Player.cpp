@@ -40,7 +40,7 @@ bool Player::Start()
 	//各マップの設定。
 	m_skinModelRender->SetNormalMap(L"Assets/modelData/Normal.dds");
 	m_skinModelRender->SetSpecularMap(L"Assets/modelData/MatallicSmoothness.dds");
-	m_skinModelRender->SetSpecularMap(L"Assets/modelData/Normal.dds");
+	m_skinModelRender->SetAmbientMap(L"Assets/modelData/AO.dds");
 	
 	m_nowHP = GameData::GetInstance()->GetHitPoint();
 	m_skinModelRender->SetShadowMap(true);

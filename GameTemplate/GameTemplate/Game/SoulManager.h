@@ -17,8 +17,5 @@ public:
 		return m_instance;
 	}
 
-private:
-	CVector3 m_position = CVector3::Zero();	//ç¿ïW
-
 };
 

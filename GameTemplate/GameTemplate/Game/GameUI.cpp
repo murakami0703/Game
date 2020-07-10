@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameUI.h"
 #include "GameData.h"
-#include "Item.h"
+#include "ItemUI.h"
 
 GameUI* GameUI::m_instance = nullptr;
 
@@ -128,7 +128,7 @@ bool GameUI::Start()
 
 	m_soulSpNum += 1;
 	//ƒAƒCƒeƒ€
-	g_goMgr->NewGameObject<Item>();
+	g_goMgr->NewGameObject<ItemUI>();
 
 	return true;
 }

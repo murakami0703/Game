@@ -95,6 +95,14 @@ public:
 		m_isShadowReciever = flag;
 	}
 	/// <summary>
+	/// シャドウキャスターのフラグを設定。
+	/// </summary>
+	/// <param name="flag"></param>
+	void SetShadowCaster(bool flag)
+	{
+	}
+
+	/// <summary>
 	/// ライトの設定。
 	/// </summary>
 	void SetLightColor(CVector4 color) {
@@ -171,7 +179,7 @@ private:
 	//	PointLight			pointLight;			//ポイントライト
 		CVector3			eyePos;				//視点の座標。
 		float				specPow;			//鏡面反射の絞り。
-		CVector3			EnvironmentLight = {1.0f,1.0f,1.0f};				//環境光。
+		CVector3			EnvironmentLight = {0.2f,0.2f,0.2f};				//環境光。
 	};
 
 	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;	//!<FBXの上方向。
@@ -189,6 +197,7 @@ private:
 	ID3D11ShaderResourceView* m_ambientSRV = nullptr;		//アンビエントマップのSRV
 
 	bool m_isShadowReciever = false;						//シャドウレシーバーのフラグ。
+	bool m_isShadowCaster = false;						//シャドウレシーバーのフラグ。
 
 };
 

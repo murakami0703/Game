@@ -9,6 +9,12 @@ Map::Map()
 	m_mapModel->SetPosition(m_position);
 	m_mapModel->SetRotation(m_rotation);
 	m_mapModel->SetScale(m_scale);
+
+	//各マップの設定。
+	m_mapModel->SetNormalMap(L"Assets/modelData/stage1_texture/ClumpMud_Normal.dds");
+	m_mapModel->SetSpecularMap(L"Assets/modelData/stage1_texture/ClumpMud_smoothness.dds");
+	m_mapModel->SetSpecularMap(L"Assets/modelData/stage1_texture/ClumpMud_Grass_Ao.dds");
+
 	m_phyStaticObject.CreateMeshObject(m_mapModel->GetSkinModel(), m_position, m_rotation, m_scale);
 	m_mapModel->SetShadowReciever(true);
 	m_mapModel->SetShadowMap(true);

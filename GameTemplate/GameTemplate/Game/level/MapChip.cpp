@@ -9,7 +9,7 @@ MapChip::MapChip(LevelObjectData& objData,
 	swprintf_s(filePath, L"Assets/modelData/%s.cmo", objData.name);
 	m_model.Init(filePath);
 	m_model.UpdateWorldMatrix(objData.position, objData.rotation, objData.scale);
-	m_model.SetShadowReciever(true);
+	//m_model.SetShadowMap(true);
 
 	if (onBuildMapchip) {
 		onBuildMapchip(objData, *this);

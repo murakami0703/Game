@@ -298,7 +298,7 @@ float3 SpecularCalc(float3 normal, float3 worldPos, float2 uv)
 		if (isHasSpecularMap) {
 			specPower = g_specularMap.Sample(Sampler, uv).r;
 		}
-		float3 specLig = pow(t, specPow) * directionLight.dligColor[i] * specPower * 0.0f;
+		float3 specLig = pow(t, specPow) * directionLight.dligColor[i] * specPower * directionLight.dligColor[i].w;
 		//ãæñ îΩéÀÇîΩéÀåıÇ…â¡éZÇ∑ÇÈÅB
 		lig += specLig;
 	}
@@ -340,7 +340,7 @@ float3 AmbientCalc(float4 albedoColor, float2 uv)
 	if (isHasAmbientMap == 1) {
 		//AOÇ†ÇÈyo
 		float3 Ambient = g_aoMap.Sample(Sampler, uv);
-		Calc = albedoColor.xyz * EnvironmentLight * Ambient;
+		Calc = albedoColor.xyz * EnvironmentLight*Ambient;
 	}
 	else {
 		Calc = albedoColor.xyz * EnvironmentLight;

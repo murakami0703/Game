@@ -31,20 +31,12 @@ public:
 	}
 private:
 	void Open();
-	void HpRecovery();
-	void Bum();
-	void AttackUp();
-	void SpeedUp();
 
 	void OnlyDelete();
 
 	enum eState {
 		eState_Idle,
 		eState_Open,
-		eState_HpRecovery,
-		eState_Bum,
-		eState_AttackUp,
-		eState_SpeedUp
 	};
 	enum EAnimationClip {
 		eAnimation_Close,
