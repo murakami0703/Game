@@ -84,7 +84,7 @@ public:
 		m_silhouetteflag = flag;
 	}
 	/// <summary>
-	/// シャドウマップ描画フラグ
+	/// シャドウキャスター描画フラグ
 	/// </summary>
 	/// <param name="flag">trueなら描画</param>
 	void SetShadowCaster(bool flag)

@@ -32,7 +32,7 @@ bool Ghost::Start()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 
-	m_enemyModelRender->SetShadowMap(true);		//シャドウマップに描画。
+	m_enemyModelRender->SetShadowCaster(true);		//シャドウマップに描画。
 
 	return true;
 }

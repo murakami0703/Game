@@ -113,6 +113,7 @@ void LevelSet::OnPostBuildMapChip(LevelObjectData& objData, MapChip& mapchip)
 			false, nullptr, &normal
 		);
 		mapchip.SetNormalMap(normal);
+
 	}
 	if (objData.EqualObjectName(L"stage1_start")
 		|| objData.EqualObjectName(L"stage1_1")
@@ -164,7 +165,7 @@ void LevelSet::LevelSetting()
 }
 void LevelSet::Update()
 {
-
+	m_level.Update();
 }
 void LevelSet::Render()
 {

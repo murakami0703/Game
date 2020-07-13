@@ -7,6 +7,7 @@ class Map : public IGameObject
 public:
 	Map();
 	~Map();
+	bool Start();
 	void Update();
 	/// <summary>
 	/// À•W‚ğİ’èB

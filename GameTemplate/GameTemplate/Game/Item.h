@@ -8,19 +8,11 @@ public:
 	bool Start();
 	void Update();
 
-	//アイテムの種類
-	enum ItemState {
-		Item_HpRecovery,
-		Item_Bum,
-		Item_AttackUp,
-		Item_SpeedUp,
-		Item_Num
-	};
-
 	//出現アイテムの指定
-	void Item::SetState(ItemState& m_State)
+	void Item::SetItemNum(int Num)
 	{
-		m_itemState = m_State;
+		//0 回復薬、1 爆弾、2 攻撃力Up、3 移動速度Up
+		m_itemNum = Num;
 	}
 	/// <summary>
 	/// 座標を設定。
@@ -49,7 +41,6 @@ private:
 	const CVector3 m_Scale = { 5.0f,5.0f,5.0f };	//拡大率。
 
 	EState m_state = Item_Appear;				//状態。
-	ItemState m_itemState = Item_Num;			//アイテム選択。
-
+	int m_itemNum = 0;		//アイテム指定用の値
 };
 

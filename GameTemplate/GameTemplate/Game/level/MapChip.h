@@ -19,6 +19,7 @@ public:
 	);
 	~MapChip();
 
+	void Update();
 	/*!
 	* @brief	•`‰æB
 	*/

@@ -33,7 +33,7 @@ bool Bat::Start()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 
-	m_enemyModelRender->SetShadowMap(true);
+	m_enemyModelRender->SetShadowCaster(true);
 
 	return true;
 }

@@ -8,6 +8,12 @@
 #include "SoulManager.h"
 
 
+/////////////////////////////////////////////////////////
+/// 定数
+/////////////////////////////////////////////////////////
+const float SLAIM_COLLISION_RADIUS = 60.0f;	//スライムのカプセルコリジョンの半径。
+const float SLAIM_COLLISION_HEIGHT = 30.0f;	//スライムのカプセルコリジョンの高さ。
+
 Slaim::Slaim()
 {
 }
@@ -40,8 +46,14 @@ bool Slaim::Start()
 	m_enemyModelRender->SetRotation(m_rotation);
 	m_enemyModelRender->SetScale(m_scale);
 
-	m_characon.Init(60.0f, 30.0f, m_position);//キャラコン
-	m_enemyModelRender->SetShadowMap(true);
+	//キャラコン
+	m_characon.Init(
+		SLAIM_COLLISION_RADIUS, 
+		SLAIM_COLLISION_HEIGHT, 
+		m_position
+	);
+
+	m_enemyModelRender->SetShadowCaster(true);
 
 	return true;
 }

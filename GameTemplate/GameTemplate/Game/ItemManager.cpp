@@ -26,7 +26,8 @@ void ItemManager::ItemGenerated(ItemState item, CVector3 position)
 {
 	//アイテムの生成
 	Item* m_item = g_goMgr->NewGameObject<Item>();
-	//m_item->SetState(item);
+	//名前を引っ張ってくる
+	m_item->SetItemNum(int(item));
 	m_item->SetPosition(position);
 
 }

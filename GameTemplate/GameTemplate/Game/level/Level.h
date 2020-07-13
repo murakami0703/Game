@@ -76,6 +76,7 @@ public :
 		HookWhenBuildObjectFunc hookFunc,
 		std::function<void(LevelObjectData& objData, MapChip& mapchip)> onBuildMapchip
 	);
+	void Update();
 	/*!
 	* @brief	ƒŒƒxƒ‹‚ğ•`‰æB
 	*/

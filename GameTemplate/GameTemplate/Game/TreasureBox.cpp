@@ -39,16 +39,19 @@ void TreasureBox::Open()
 		m_rand = rand() % 4;
 		//1 ‰ñ•œ–ò
 		if (m_rand == m_randNum[0]) {
-			//item->ItemGenerated();
+			item->ItemGenerated(ItemManager::Item_HpRecovery, m_position);
 		}
 		//2 ”š’e
 		else if (m_rand == m_randNum[1]) {
+			item->ItemGenerated(ItemManager::Item_Bum, m_position);
 		}
 		//3 UŒ‚—ÍUP
 		else if (m_rand == m_randNum[2]) {
+			item->ItemGenerated(ItemManager::Item_AttackUp, m_position);
 		}
 		//4 ˆÚ“®‘¬“xUP
 		else if (m_rand == m_randNum[3]) {
+			item->ItemGenerated(ItemManager::Item_SpeedUp, m_position);
 		}
 	}
 }

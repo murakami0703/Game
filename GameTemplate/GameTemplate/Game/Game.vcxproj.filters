@@ -294,6 +294,9 @@
     <ClCompile Include="ItemManager.cpp">
       <Filter>manager</Filter>
     </ClCompile>
+    <ClCompile Include="MapChipRender.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -490,6 +493,9 @@
     </ClInclude>
     <ClInclude Include="ItemManager.h">
       <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MapChipRender.h">
+      <Filter>level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

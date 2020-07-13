@@ -13,7 +13,6 @@ public:
 	static LevelSet* LevelSet::GetInstance() {
 		return m_instance;
 	}
-
 	void Update();
 	void Render();
 private:

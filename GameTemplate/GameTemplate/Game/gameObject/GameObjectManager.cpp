@@ -75,7 +75,7 @@ void GameObjectManager::Update()
 		//シャドウマップを更新。
 		CVector3 m_playerPos = Player::GetInstance()->GetPosition();
 		m_shadowMap.Update(
-			{ m_playerPos.x + 400.0f,  (m_playerPos.y + 500.0f),  m_playerPos.z + 200.0f},
+			{ m_playerPos.x + 1800.0f,  (m_playerPos.y + 2000.0f),  m_playerPos.z + 1000.0f},
 			{ m_playerPos.x,  m_playerPos.y ,  m_playerPos.z }
 		);
 

@@ -29,7 +29,7 @@ bool Player::Start()
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_skinModelRender->Init(L"Assets/modelData/Footman_Default.cmo", m_animClips, AnimationClip_Num);
-	m_position = { -4300.0f, 400.0f, -3000.0f };
+	m_position = { -4300.0f, 460.0f, -3000.0f };
 	m_skinModelRender->SetPosition(m_position);
 
 	m_scale = { 50.0f, 50.0f, 50.0f };
@@ -43,7 +43,7 @@ bool Player::Start()
 	m_skinModelRender->SetAmbientMap(L"Assets/modelData/AO.dds");
 	
 	m_nowHP = GameData::GetInstance()->GetHitPoint();
-	m_skinModelRender->SetShadowMap(true);
+	m_skinModelRender->SetShadowCaster(true);
 	return true;
 }
 

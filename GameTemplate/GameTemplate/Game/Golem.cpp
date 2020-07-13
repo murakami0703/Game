@@ -33,7 +33,7 @@ bool Golem::Start()
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->SetScale(m_scale);
 
-	m_skinModelRender->SetShadowMap(true);
+	m_skinModelRender->SetShadowCaster(true);
 
 	//HPƒo[
 	{

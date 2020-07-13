@@ -25,7 +25,7 @@ bool Anima::Start()
 	m_animaModelRender->SetScale(m_soulScale);
 
 	m_animaModelRender->PlayAnimation(0);
-	m_animaModelRender->SetShadowMap(true);
+	m_animaModelRender->SetShadowCaster(true);
 
 
 	return  true;

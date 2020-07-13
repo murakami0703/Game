@@ -1,7 +1,16 @@
 #include "stdafx.h"
 #include "Map.h"
 
+
 Map::Map()
+{
+}
+
+
+Map::~Map()
+{
+}
+bool Map::Start()
 {
 	//cmoファイルの読み込み。
 	m_mapModel = g_goMgr->NewGameObject<SkinModelRender>();
@@ -17,12 +26,9 @@ Map::Map()
 
 	m_phyStaticObject.CreateMeshObject(m_mapModel->GetSkinModel(), m_position, m_rotation, m_scale);
 	m_mapModel->SetShadowReciever(true);
-	m_mapModel->SetShadowMap(true);
-}
+	m_mapModel->SetShadowCaster(true);
 
-
-Map::~Map()
-{
+	return true;
 }
 
 void Map::Update()
