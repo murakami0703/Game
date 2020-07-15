@@ -98,7 +98,6 @@ private:
 	CVector3 m_enemyForward = { 0.0f, 0.0f, 1.0f };			//スライムの前ベクトル。
 
 	float m_timer = 0;
-
 	//待機関連
 	float m_idleTime = 30.0f;				//待機時間。
 

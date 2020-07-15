@@ -13,7 +13,10 @@
 /////////////////////////////////////////////////////////
 const float SLAIM_COLLISION_RADIUS = 60.0f;	//スライムのカプセルコリジョンの半径。
 const float SLAIM_COLLISION_HEIGHT = 30.0f;	//スライムのカプセルコリジョンの高さ。
-
+const int SLAIM_MOVEROTATION_RANGE = 360;	//スライムの移動方向の角度の範囲。
+const int TIMER_INITIAL_VALUE_ZERO = 0;		//タイマーの初期化用の値
+const int TIMER_SET_ZERO = 0;		//タイマーの初期化用の値
+const CVector3 ENEMY_FRONT_VECTOR = { 0.0f, 0.0f, 1.0f };	//エネミーの前ベクトル。
 Slaim::Slaim()
 {
 }
@@ -64,10 +67,10 @@ void Slaim::Idle()
 	timer++;
 	//一定時間経つと徘徊します。
 	if (timer >= m_idleTime) {
-		m_timer = 0;
+		m_timer = TIMER_INITIAL_VALUE_ZERO;
 		m_state = eState_Loitering;
 	}
-	m_enemyModelRender->PlayAnimation(0);
+	m_enemyModelRender->PlayAnimation(eAnimation_Idle);
 }
 void Slaim::Loitering()
 {
@@ -75,17 +78,18 @@ void Slaim::Loitering()
 	CVector3 diff = m_toPlayerVec;
 
 	//一定時間ごとに方向転換する。
-	if (m_timer == 0) {
-		//ランダムで方向を決定して動きます
-		m_randRot = rand() % 360;
+	if (m_timer == TIMER_INITIAL_VALUE_ZERO) {
+		//タイマーが0の時ランダムで方向を決定して回転させる
+		m_randRot = rand() % SLAIM_MOVEROTATION_RANGE;
 		m_rotation.SetRotation(CVector3::AxisY(), (float)m_randRot);
-		m_enemyForward = { 0.0f, 0.0f, 1.0f };
+		m_enemyForward = ENEMY_FRONT_VECTOR;
 		m_rotation.Multiply(m_enemyForward);
 		m_timer = 1;
 		flag = false;
 	}
 	else if (m_timer > m_randTimer) {
-		m_timer = 0;
+		//タイマーを0に戻す。
+		m_timer = TIMER_INITIAL_VALUE_ZERO;
 	}
 	else {
 		m_timer++;
@@ -96,7 +100,7 @@ void Slaim::Loitering()
 		m_battlePoint = SiegePoint::GetInstance()->TryGetBattlePoint(m_position);
 		//空いてるバトルポイントに向かっていくぅ
 		if (m_battlePoint != nullptr) {
-			m_timer = 0;
+			m_timer = TIMER_INITIAL_VALUE_ZERO;
 			m_state = eState_Follow;
 		}
 	}
@@ -218,7 +222,7 @@ void Slaim::Vertigo()
 	m_enemyModelRender->PlayAnimation(5,0.5f);
 	timer2++;
 	if (timer2 >= 60) {
-		m_timer = 0;
+		m_timer = TIMER_INITIAL_VALUE_ZERO;
 		timer2 = 0;
 		m_state = eState_Loitering;
 	}
