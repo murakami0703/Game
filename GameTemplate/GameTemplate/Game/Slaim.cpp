@@ -13,7 +13,7 @@
 /////////////////////////////////////////////////////////
 const float SLAIM_COLLISION_RADIUS = 60.0f;	//スライムのカプセルコリジョンの半径。
 const float SLAIM_COLLISION_HEIGHT = 30.0f;	//スライムのカプセルコリジョンの高さ。
-const float CHARACON_TIME = (1.0f / 60.0f);		//キャラコンの経過時間。
+const float CHARACON_TIME = (1.0f / 60.0f);	//キャラコンの経過時間。
 const int SLAIM_MOVEROTATION_RANGE = 360;	//スライムの移動方向の角度の範囲。
 const int TIMER_INITIAL_VALUE_ZERO = 0;		//タイマーの初期化用の値
 const int CHANG_DIRECTION_TIME = 120;		//方向転換する時間。
@@ -28,9 +28,9 @@ const float FOLLOW_Y_REMOVAL = 0.0f;					//Y成分の除去。
 const CVector3 SRAIM_STOP_MOVE = { 0.0f, 0.0f, 0.0f };	//移動停止させる。
 const float SRAIM_FOLLOW_MOVESPEED = 250.0f;			//徘徊の時の速度。
 
-const float SRAIM_LOITERING_LENGTH = 500.0f;			//徘徊に戻る距離。
-const float SRAIM_LOITERING_LENGTH = 500.0f;			//徘徊に戻る距離。
-const float SRAIM_LOITERING_LENGTH = 500.0f;			//徘徊に戻る距離。
+const float SRAIM_FALLPOINT_SPEED = 4000.0f;			//落下地点への移動速度。
+const float FALLPOINT_POSY_ADDVALUE = 500.0f;			//落下地点のY座標に足す値。
+const float SLAIM_ATTACK_LENGTH = 1000.0f;				//攻撃を始める距離。
 
 
 const float SRAIM_DEAD_LENGTH = 100.0f;					//死亡判定の距離
@@ -189,41 +189,36 @@ void Slaim::Premove2()
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
 		//プレイヤーの上に離れまーーーーース
 		m_setMoveVec.Normalize();
-		m_moveVec = m_setMoveVec * 4000.0f ;
+		m_moveVec = m_setMoveVec * SRAIM_FALLPOINT_SPEED;
 
 		//だいぶ上に行ったので攻撃しますぅ。
-		if (m_position.y >= 1000.0f) {
-			Player* player = Player::GetInstance();
-			CVector3 P_Position = player->GetPosition();
-			m_setMoveVec = P_Position - m_position;
+		if (m_position.y >= SLAIM_ATTACK_LENGTH) {
+			m_setMoveVec = m_toPlayerVec;
 			//攻撃状態に遷移。
 			m_state = eState_Attack;
 		}
 	}
 	else {
-		//プレイヤーとの距離を調べ上昇地点を決めるます。
-		Player* player = Player::GetInstance();
-		CVector3 P_Position = player->GetPosition();
-		P_Position.y += 500.0f;
-		m_setMoveVec = P_Position - m_position;
+		//プレイヤーとの距離を調べ向かわせる方向のベクトルを求めるます。
+		m_playerPos.y += FALLPOINT_POSY_ADDVALUE;
+		m_setMoveVec = m_toPlayerVec - m_position;
 
 	}
 	m_position = m_characon.Execute(CHARACON_TIME, m_moveVec);
 }
-
 void Slaim::Attack()
 {
-
+	//攻撃
+	//落下します。
 	if (m_position.y >= 450.0f) {
 		m_setMoveVec.y -= 400.0f;
 		m_enemyModelRender->PlayAnimation(0);
 	}
 	else {
+		//バウンドするよ！
 		m_enemyModelRender->PlayAnimation(4,0.5f);
 		timer1++;
 		if (timer1 >= 20) {
-			EffectManager* effect = EffectManager::GetInstance();
-			effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 5.0f,5.0f,5.0f });
 			timer1 = 0;
 			m_state = eState_Vertigo;
 		}
@@ -239,6 +234,9 @@ void Slaim::Attack()
 void Slaim::Vertigo()
 {
 	//めまい
+	EffectManager* effect = EffectManager::GetInstance();
+	effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 5.0f,5.0f,5.0f });
+
 	m_enemyModelRender->PlayAnimation(eAnimation_Vertigo, INTERPOLATE_TIME);
 	m_vertigoTimer++;
 	//一定時間が経ったら追尾状態に遷移。

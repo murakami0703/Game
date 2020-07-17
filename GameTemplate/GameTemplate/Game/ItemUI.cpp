@@ -31,14 +31,14 @@ bool ItemUI::Start()
 
 		//2”Ô¨UŒ‚—ÍUP
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/1.dds", 250.0f, 250.0f);
+		m_itemSprite->Init(L"Assets/sprite/attackUp.dds", 250.0f, 250.0f);
 		m_itemSprite->SetPosition(m_item3Pos);
 		m_itemSprite->SetScale({ 0.25f,0.25f ,0.25f });
 		m_spriteRender.push_back(m_itemSprite);
 
 		//3”Ô¨ˆÚ“®‘¬“xUP
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/2.dds", 250.0f, 250.0f);
+		m_itemSprite->Init(L"Assets/sprite/speedUp.dds", 250.0f, 250.0f);
 		m_itemSprite->SetPosition(m_item4Pos);
 		m_itemSprite->SetScale({ 0.15f,0.15f ,0.15f });
 		m_spriteRender.push_back(m_itemSprite);

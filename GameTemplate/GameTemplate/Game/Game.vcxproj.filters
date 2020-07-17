@@ -688,4 +688,12 @@
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\Item\speedUp.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </Image>
+    <Image Include="Assets\sprite\Item\attackUp.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
