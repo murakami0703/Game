@@ -30,6 +30,7 @@ public:
 		return *instance;
 	}
 
+	void GameUpdate();	//ゲームの更新
 	/// <summary>
 	/// Engineのインスタンスを取得
 	/// </summary>

@@ -28,6 +28,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームループ。
 	while (Engine().DispatchWindowMessage() == true)
 	{
-		g_goMgr->Update();
+		Engine().GameUpdate();
 	}
 };

@@ -44,17 +44,6 @@ void GameObjectManager::Update()
 {
 	//登録されているゲームオブジェクトの更新関数を呼ぶ。
 	{
-		for (auto& pad : g_pad) {
-			pad.Update();
-		}
-
-		//サウンドエンジンを更新。
-		g_graphicsEngine->GetSoundEngine().Update();
-
-		//物理エンジンの更新。
-		g_physics.Update();
-
-
 		//一回だけ呼ばれる処理
 		for (auto go : m_goList) {
 			if (!go->IsStart()) {

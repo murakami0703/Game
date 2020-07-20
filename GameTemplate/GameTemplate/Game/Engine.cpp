@@ -122,6 +122,25 @@ void Engine::InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 
 	g_physics.Init();
 }
+
+void Engine::GameUpdate()
+{
+	//ゲームの更新
+
+	for (auto& pad : g_pad) {
+		pad.Update();
+	}
+
+	//サウンドエンジンを更新。
+	m_soundEngine.Update();
+
+	//物理エンジンの更新。
+	g_physics.Update();
+
+	//GameObjectManagerの更新
+	g_goMgr->Update();
+}
+
 //ウィンドウメッセージをディスパッチ。falseが返ってきたら、ゲーム終了。
 bool Engine::DispatchWindowMessage()
 {
