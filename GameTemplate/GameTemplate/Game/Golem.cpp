@@ -216,7 +216,7 @@ void Golem::HPBarSaid()
 void Golem::Update()
 {
 	GameData* m_gamedate = GameData::GetInstance();
-	//if (m_gamedate->GetBossMoveFlag() == true) {
+	if (m_gamedate->GetEnemyCount() < 6) {
 
 		//プレイヤーとの距離。
 		m_playerPos = Player::GetInstance()->GetPosition();
@@ -270,5 +270,5 @@ void Golem::Update()
 		m_skinModelRender->SetPosition(m_position);
 		m_skinModelRender->SetRotation(m_rotation);
 		m_skinModelRender->SetScale(m_scale);
-//	}
+	}
 }

@@ -20,6 +20,7 @@ CSoundSource::~CSoundSource()
 void CSoundSource::InitCommon()
 {
 }
+bool CSoundSource::Start() { return true; }
 void CSoundSource::Init(wchar_t* filePath)
 {
 	m_isAvailable = false;

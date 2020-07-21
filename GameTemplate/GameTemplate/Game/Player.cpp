@@ -6,6 +6,10 @@
 
 
 Player* Player::m_instance = nullptr;
+const CVector4 PLAYER_LIGHTCOLOR_RED = { 0.8f,0.0f,0.0f,1.0f };	//ダメージ時にプレイヤーに当たっているカメラを赤くする
+const CVector4 PLAYER_LIGHTCOLOR_DEFAULT = { 0.7f, 0.7f, 0.7f, 1.0f };//通常カメラの色
+const int LIGHT_CHANGEDEFAULT_TIME = 10;//ライトのカラーをデフォルトに戻すまでの時間
+const int TIMER_INITIAL_VALUE_ZERO = 0;		//タイマーの初期化用の値
 
 Player::Player()
 {
@@ -133,12 +137,12 @@ void Player::Damage()
 	GameData* gamedata = GameData::GetInstance();
 	//ダメージ受けました。
 	//赤くしますよお
-	m_skinModelRender->SetLightColor({ 0.8f,0.0f,0.0f,1.0f });
+	m_skinModelRender->SetLightColor(PLAYER_LIGHTCOLOR_RED);
 	m_damageTimer++;
 	//ちょっと時間経過したら元に戻す。
-	if (m_damageTimer>=10) {
-		m_damageTimer = 0;
-		m_skinModelRender->SetLightColor({ 0.7f,0.7f,0.7f,1.0f });
+	if (m_damageTimer>= LIGHT_CHANGEDEFAULT_TIME) {
+		m_damageTimer = TIMER_INITIAL_VALUE_ZERO;
+		m_skinModelRender->SetLightColor(PLAYER_LIGHTCOLOR_DEFAULT);
 		m_nowHP = gamedata->GetHitPoint();
 	}
 

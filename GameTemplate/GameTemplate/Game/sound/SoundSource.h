@@ -23,7 +23,7 @@
 /// 
 /// このクラスのインスタンス化を行うと、そのインスタンスはサウンドエンジンクラスに登録されます。
 /// </remarks>
-class CSoundSource {
+class CSoundSource : public IGameObject {
 public:
 	/// <summary>
 	/// コンストラクタ。
@@ -157,7 +157,7 @@ public:
 	{
 		return m_matrixCoefficients;
 	}
-
+	bool Start();
 	/// <summary>
 	/// 更新
 	/// </summary>

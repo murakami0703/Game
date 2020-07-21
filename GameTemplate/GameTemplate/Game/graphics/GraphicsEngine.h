@@ -1,8 +1,6 @@
 #pragma once
 
 #include "EffectEngine.h"
-#include "sound/SoundEngine.h"
-#include "sound/SoundSource.h"
 
 /// <summary>
 /// レンダリングモード。
