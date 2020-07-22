@@ -39,6 +39,12 @@ void Item::ItemAppear()
 {
 	//アイテム出現
 	//斜め前に出しますよお
+
+	if (m_timer > ITEM_APPEAR_TIME) {
+		//消滅。
+		m_state = Item_Destroy;
+	}
+
 }
 void Item::ItemGet()
 {

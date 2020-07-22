@@ -30,9 +30,8 @@ public:
 		m_scale = sca;
 	}
 
-
 private:
-
+	//状態。
 	enum EState {
 		eState_Idle,		//待機。
 		eState_Follow,		//プレイヤーを追跡。
@@ -41,7 +40,7 @@ private:
 		eState_Damage,		//ダメージ受。
 		eState_Dead			//死。
 	};
-
+	//アニメーション。
 	enum EAnimationClip {
 		eAnimation_Idle,
 		eAnimation_Walk,
@@ -67,12 +66,11 @@ private:
 	CVector3 m_position = CVector3().Zero();			//座標。
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
-
-	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* m_hpbarSprite;
-
-	EState m_state = eState_Idle;	//状態
+	EState m_state = eState_Idle;						//状態。
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+
+	std::vector<SpriteRender*> m_spriteRender;			//スプライトの動的配列。
+	SpriteRender* m_hpbarSprite;						////スプライトレンダー。
 
 	//共通使用
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。

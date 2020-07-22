@@ -175,6 +175,13 @@ Result::Result()
 		m_spriteRender.push_back(m_itemSprite);
 	}
 
+	//21番→プレイヤーイラスト
+	m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
+	m_itemSprite->Init(L"Assets/sprite/Player_Illustration.dds", 1690.0f, 3142.0f);
+	m_itemSprite->SetPosition(m_nextFontPos);
+	m_itemSprite->SetAlpha(m_startAlpha);
+	m_spriteRender.push_back(m_itemSprite);
+
 	//フォント
 	{
 		//ステージ名

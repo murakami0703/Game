@@ -9,16 +9,6 @@ class Anima : public IGameObject
 public:
 	Anima();
 	~Anima();
-	enum AniAnimation {
-		eAnimation_Move,
-		eAnimation_Num
-	};
-
-	enum EState {
-		Anima_Appear,
-		Anima_Get,
-		Anima_Destroy
-	};
 
 	bool Start();
 	void Update();
@@ -30,25 +20,32 @@ public:
 	{
 		m_position = pos;
 	}
+private:
+	//状態。
+	enum EState {
+		Anima_Appear,	//出現中。
+		Anima_Get,		//獲得。
+		Anima_Destroy	//消滅。
+	};
+	//アニメーション。
+	enum EAnimationClip {
+		eAnimation_Move,
+		eAnimation_Num
+	};
 
 private:
 	void Appear();		//出現中。
-	void Get();			//取得したよ！！
-	void Destroy();		//時間経過のため消滅。
+	void Get();			//獲得したよ！！
+	void Destroy();		//消滅。
 
-	SkinModelRender* m_animaModelRender;				//スキンモデル。
-	CVector3 m_position = CVector3().Zero();			//座標。
-	const CVector3 m_soulScale = { 5.0f,5.0f,5.0f };	//魂の拡大率。
 
-	EState m_state = Anima_Appear;//状態。
-	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+	SkinModelRender* m_animaModelRender;			//スキンモデル。
+	CVector3 m_position = CVector3().Zero();		//座標。
+
+	EState m_state = Anima_Appear;					//状態。
+	AnimationClip  m_animClips[eAnimation_Num];		//アニメーションクリップ。
 
 	int m_timer = 0;		//タイマー
-	const float m_destroyTimer = 600.0f;	//消滅するまでの時間。
-	const float m_GroundYPos = 430.0f;		//地面の座標。
-	const float m_toPlayerPos = 50.0f;		//地面の座標。
-	const float m_moveSpeed = 5.0f;			//下降速度。
-
 
 };
 

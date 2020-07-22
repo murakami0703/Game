@@ -705,4 +705,9 @@
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\result\Player_Illustration.png">
+      <Filter>Assets\sprite\result</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

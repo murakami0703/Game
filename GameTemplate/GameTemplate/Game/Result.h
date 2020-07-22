@@ -110,6 +110,8 @@ private:
 	const float m_triangleXPos = 610.0f;							//三角のX座標の折り返し地点。
 	const float m_triangleSpeed = 0.5f;								//三角の移動速度。
 
+	//プレイヤーイラスト関連
+
 	//全体使用
 	const float m_startAlpha = 0.0f;				//大体の初期透明度。
 	const float m_fallMoveSpeed = -15.0f;			//下降速度。

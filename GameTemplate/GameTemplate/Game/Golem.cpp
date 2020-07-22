@@ -6,14 +6,17 @@
 #include "EffectManager.h"
 #include "SoulManager.h"
 
-Golem::Golem()
-{
-}
+/////////////////////////////////////////////////////////
+/// 定数
+/////////////////////////////////////////////////////////
+const int TIMER_INITIAL_VALUE_ZERO = 0;		//タイマーの初期化用の値
+const float GOLEM_IDLE_TIME = 120.0f;		//休憩時間。
+const float GOLEM_ATTACK_LENGTH = 300.0f;	//攻撃。
 
 
-Golem::~Golem()
-{
-}
+Golem::Golem(){}
+Golem::~Golem(){}
+
 bool Golem::Start()
 {
 	//アニメーションクリップのロードとループフラグの設定。
@@ -35,20 +38,21 @@ bool Golem::Start()
 
 	m_skinModelRender->SetShadowCaster(true);
 
-	//HPバー
+	//HP
 	{
+		//0番→Hpフレーム
 		m_hpbarSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_hpbarSprite->Init(L"Assets/sprite/Boss_Hpframe.dds", 150.0f, 50.0f);
 		m_hpbarSprite->SetAlpha(0.0f);
 		m_spriteRender.push_back(m_hpbarSprite);
-		//1番→ItemCase2
+		//1番→Hpバー
 		m_hpbarSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_hpbarSprite->Init(L"Assets/sprite/Boss_Hp.dds", 150.0f, 50.0f);
 		m_hpbarSprite->SetAlpha(0.0f);		
 		m_hpbarSprite->SetPivot(LifePivot);
 		m_spriteRender.push_back(m_hpbarSprite);
-
 	}
+
 	return true;
 }
 
@@ -57,15 +61,14 @@ void Golem::Idle()
 	//休憩。
 	m_timer++;
 	//追跡再開。
-	if (m_timer >= m_idleTime) {
-		m_timer = 0;
+	if (m_timer >= GOLEM_IDLE_TIME) {
+		m_timer = TIMER_INITIAL_VALUE_ZERO;
+		m_damegeFlag = false;
 		m_state = eState_Follow;
 	}
-	m_damegeFlag = false;
-	m_skinModelRender->PlayAnimation(0);
+	m_skinModelRender->PlayAnimation(eAnimation_Idle);
 	
 }
-
 void Golem::Follow()
 {
 	//プレイヤーを追跡。

@@ -42,5 +42,8 @@ private:
 
 	EState m_state = Item_Appear;				//状態。
 	int m_itemNum = 0;		//アイテム指定用の値
+
+	int m_timer = 0;	//タイマー
+	const int ITEM_APPEAR_TIME = 300;	//タイマー
 };
 

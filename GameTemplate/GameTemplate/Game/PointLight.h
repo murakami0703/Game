@@ -14,7 +14,7 @@ public:
 
 	//ポイントライトの定数バッファ
 	struct SPointLight {
-		CVector3 position[NUM_POINT_LIGHT];		//ライトの位置。
+		CVector4 position[NUM_POINT_LIGHT];		//ライトの位置。
 		CVector4 color[NUM_POINT_LIGHT];			//ライトのカラー。
 		CVector4 attn[NUM_POINT_LIGHT];			//ライトの減衰用パラメーター。
 	};

@@ -159,10 +159,14 @@ void GameUI::HPCalc()
 
 void GameUI::OnlyDelete()
 {
-	//sprite全部消す。
+	//全部消す。
+	//sprite。
 	for (int i = 0; i < m_spriteRender.size(); i++) {
 		g_goMgr->DeleteGameObject(m_spriteRender[i]);
 	}
+	//フォント
+	g_goMgr->DeleteGameObject(m_soulFont);
+
 	g_goMgr->DeleteGameObject(this);
 }
 

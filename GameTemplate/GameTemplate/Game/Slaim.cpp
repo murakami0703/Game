@@ -33,7 +33,7 @@ const float FALLPOINT_POSY_ADDVALUE = 500.0f;			//落下地点のY座標に足す値。
 const float SLAIM_ATTACK_LENGTH = 1000.0f;				//攻撃を始める距離。
 
 
-const float SRAIM_DEAD_LENGTH = 100.0f;					//死亡判定の距離
+const float SRAIM_DEAD_LENGTH = 200.0f;					//死亡判定の距離
 const CVector3 SPLITSRAIM_SCALE = { 1.5f,1.5f,1.5f };	//分割モデルの拡大率。
 const float EF_SOUL_SET_POSY = 430.0f;						//エフェクト、魂出現時のY軸の高さ。
 const CVector3 SMOKE_SCALE = { 20.0f,20.0f,20.0f };			//煙エフェクトの拡大率。
