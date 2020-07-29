@@ -58,6 +58,12 @@ public:
 	void SetMainSpriteMulColor(CVector4 mul) {
 		m_copyMainRtToFrameBufferSprite.SetMulColor(mul);
 	}
+	/// <summary>
+	/// ゲームが開始されましたか？
+	/// </summary>
+	void SetGameFlag(bool flag) {
+		m_gameStartFlag = flag;
+	}
 private:
 	/// <summary>
 	/// プリレンダリング。
@@ -77,7 +83,7 @@ private:
 	RenderTarget m_mainRenderTarget;		//メインレンダリングターゲット。
 	ShadowMap m_shadowMap;					//シャドウマップ。
 	Sprite m_copyMainRtToFrameBufferSprite;			//メインレンダリングターゲットに描かれた絵をフレームバッファにコピーするためのスプライト。
-
+	bool m_gameStartFlag = false;		//ゲーム開始フラグ。
 private:
 	//フレームバッファのレンダリングターゲット。
 	ID3D11RenderTargetView* oldRenderTargetView;	//フレームバッファのレンダリングターゲットビュー。

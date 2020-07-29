@@ -40,7 +40,7 @@ bool Game::Start()
 
 
 	g_goMgr->NewGameObject<SiegePoint>();
-
+	g_goMgr->SetGameFlag(true);
 	return true;
 }
 

@@ -20,12 +20,13 @@ void Engine::Init()
 	g_graphicsEngine = new GraphicsEngine();
 	g_graphicsEngine->Init(g_hWnd);
 
+	//サウンドエンジンの初期化。
+	m_soundEngine.Init();
+
 	//GemeObjectManagerの初期化。
 	g_goMgr = new GameObjectManager();
 	g_goMgr->Init();
 
-	//サウンドエンジンの初期化。
-	m_soundEngine.Init();
 }
 
 ///////////////////////////////////////////////////////////////////

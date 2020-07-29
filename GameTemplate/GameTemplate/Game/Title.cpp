@@ -23,7 +23,7 @@ Title::Title()
 		//2番→Game_title
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/game_title.dds", 400.0f, 80.0f);
-		m_titleSprite->SetPosition({ 0.0f,280.0f,0.0f });
+		m_titleSprite->SetPosition({ 0.0f,260.0f,0.0f });
 		m_spriteRender.push_back(m_titleSprite);
 
 		//3番→light
@@ -36,24 +36,22 @@ Title::Title()
 	//フォント
 	{
 		m_startFont = g_goMgr->NewGameObject<FontRender>();
-		const wchar_t* start = L"はじめる";
+		const wchar_t* start = L"Start";
 		m_startFont->SetText(start);
-		m_startFont->SetPosition(m_startFontPos);
-
+		m_startFont->SetPosition(m_startFontPos);		
+		m_startFont->SetScale(m_startFontScale);
+		/*
 		m_loadFont = g_goMgr->NewGameObject<FontRender>();
 		const wchar_t* load = L"つづける";
 		m_loadFont->SetText(load);
 		m_loadFont->SetPosition(m_loadFontPos);
-
+		*/
 	}
-	m_titleBgm.Init(L"tAssets/sound/stage1_BGM.wav");
-	m_titleBgm.Play(true);
 }
 
 
 Title::~Title()
 {
-
 }
 void Title::SelectButtun(FontRender* m_font)
 {
@@ -80,6 +78,12 @@ void Title::Update()
 
 	LightFlashing();
 	if (g_pad[0].IsTrigger(enButtonStart)) {
+		for (int i = 0; i < m_spriteRender.size(); i++) {
+			g_goMgr->DeleteGameObject(m_spriteRender[i]);
+		}
+		//フォント
+		g_goMgr->DeleteGameObject(m_startFont);
+		g_goMgr->DeleteGameObject(this);
 		g_goMgr->NewGameObject<Game>();
 
 	}

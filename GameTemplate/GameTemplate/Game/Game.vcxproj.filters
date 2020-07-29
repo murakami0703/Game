@@ -701,13 +701,12 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Item\speedUp.png" />
     <ImageContentTask Include="Assets\sprite\Item\attackUp.png" />
+    <ImageContentTask Include="Assets\sprite\result\Player_Illustration.png" />
+    <ImageContentTask Include="Assets\sprite\title\game_title.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\result\Player_Illustration.png">
-      <Filter>Assets\sprite\result</Filter>
-    </Image>
   </ItemGroup>
 </Project>

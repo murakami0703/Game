@@ -219,7 +219,7 @@ void Golem::HPBarSaid()
 void Golem::Update()
 {
 	GameData* m_gamedate = GameData::GetInstance();
-	if (m_gamedate->GetEnemyCount() < 6) {
+	if (m_gamedate->GetEnemyCount() < 10) {
 
 		//プレイヤーとの距離。
 		m_playerPos = Player::GetInstance()->GetPosition();

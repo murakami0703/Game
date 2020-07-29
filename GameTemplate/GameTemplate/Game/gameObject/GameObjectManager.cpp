@@ -62,12 +62,13 @@ void GameObjectManager::Update()
 		g_camera2D.Update();
 
 		//シャドウマップを更新。
-		CVector3 m_playerPos = Player::GetInstance()->GetPosition();
-		m_shadowMap.Update(
-			{ m_playerPos.x + 1800.0f,  (m_playerPos.y + 2000.0f),  m_playerPos.z + 1000.0f},
-			{ m_playerPos.x,  m_playerPos.y ,  m_playerPos.z }
-		);
-
+		if (m_gameStartFlag == true) {
+			CVector3 m_playerPos = Player::GetInstance()->GetPosition();
+			m_shadowMap.Update(
+				{ m_playerPos.x + 1800.0f,  (m_playerPos.y + 2000.0f),  m_playerPos.z + 1000.0f },
+				{ m_playerPos.x,  m_playerPos.y ,  m_playerPos.z }
+			);
+		}
 		g_graphicsEngine->GetEffectEngine().Update();
 	}
 	//登録されているゲームオブジェクトの描画関数を呼ぶ。
@@ -117,7 +118,9 @@ void GameObjectManager::Update()
 void GameObjectManager::PreRender()
 {
 	//シャドウマップにレンダリング
-	m_shadowMap.RenderToShadowMap();
+	if (m_gameStartFlag == true) {
+		m_shadowMap.RenderToShadowMap();
+	}
 }
 /// <summary>
 /// フォワードレンダリング。
