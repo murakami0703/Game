@@ -4,55 +4,78 @@ class Title : public IGameObject
 public:
 	Title();
 	~Title();
-	void Update();
+
+	bool Start();		
+	void Update();	
 
 	static Title* GetInstance()
 	{
 		return m_instance;
 	}
 private:
-	void SelectButtun(FontRender* m_font);	//選択中のボタン
+	//状態
+	enum EState {
+		Title_FadeIn,		//フェードイン。
+		Title_GameTitle,	//文字の表示。
+		Title_Select,		//ボタン選択。
+		Title_FadeOut,		//フェードアウト。
+	};
+
+	//小人の移動
+	enum EVillainMove {
+		Villain_SideWays1,	//横移動1。
+		Villain_Forward,	//左上移動。
+		Villain_Stay,		//留まる。
+		Villain_Back,		//右下移動。
+		Villain_SideWays2,	//横移動2。
+		Villain_Stop,		//停止。
+		Villain_SideWays3	//横移動3。
+	};
+
+	//選択ボタン
+	enum EButton {
+		Button_Start,
+		Button_Load
+	};
+private:
+	void TitleFadeIn();			//フェードイン。
+	void TitleGameTitle();		//文字の表示。
+	void TitleSelect();			//ボタン選択。
+	void TitleFadeOut();		//フェードアウト。
+
+	//小人
+	void VillainSideWays1();	//横移動1。
+	void VillainForward();		//左上移動。
+	void VillainStay();			//留まる。
+	void VillainBack();			//右下移動。
+	void VillainSideWays2();	//横移動2。
+	void VillainStop();			//停止。
+	void VillainSideWays3();	//横移動3。
+
 	void LightFlashing();		//ライトの点滅
 
-	enum ETitleMove {
-		Title_Fadein,
-		Title_Gametitle,
-		Title_Backgraund,
-	};
-
-	enum ESelectButtun {
-		Title_Set,
-		Game_Start,
-		Game_Load
-	};
+	void SelectButtun(FontRender* m_font);	//選択中のボタン
 
 private:
+
 	static Title* m_instance;
 
-	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* m_titleSprite;
+	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列。
+	SpriteRender* m_titleSprite;				//スプライトレンダー。
 
-	FontRender* m_startFont;
-	FontRender* m_loadFont;
+	FontRender* m_startFont;					//Startフォント。
+	FontRender* m_loadFont;						//Loadフォント。
 
-	ESelectButtun m_select = Game_Start;	//選択状態
+	EState m_state = Title_FadeIn;						//状態。
+	EVillainMove m_villainState = Villain_SideWays1;	//小人の移動状態。
+	EButton m_buttonState = Button_Start;				//選択中のボタン状態。
+
+	//音関係
+	CSoundSource* m_titleBgm;						//タイトルBGM。
 
 	//ライトの点滅
 	float m_flashingTimer = 0;		//ライト用タイマー。
-	const float m_lightsUpTime = 45.0f;
-	const float m_lightsOffTime = 90.0f;
-	const float m_lightAlpha = 0.7f / 45.0f;
 
-	//星屑の動き
-
-
-	//フォント位置
-	const CVector2 m_startFontPos = { 400.0f,-270.0f };	//「はじめる」の座標
-	const CVector2 m_loadFontPos = { 400.0f,-270.0f };		//「つづける」の座標
-
-	const float m_startFontScale = 1.5f;	//「はじめる」の座標
-
-	CSoundSource* m_titleBgm;						//タイトルBGM。
 
 };
 

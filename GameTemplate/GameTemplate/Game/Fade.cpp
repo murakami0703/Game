@@ -27,6 +27,7 @@ void Fade::Update()
 		if (mulColorin.w > 1.0f) {
 			mulColorin.w = 1.0f;
 			m_sptiteRender->SetMulColor(mulColorin);
+			g_goMgr->DeleteGameObject(this);
 			return;
 		}
 		else {
@@ -41,6 +42,7 @@ void Fade::Update()
 		if (mulColorout.w < 0.0f) {
 			mulColorout.w = 0.0f;
 			m_sptiteRender->SetMulColor(mulColorout);
+			g_goMgr->DeleteGameObject(this);
 			return;
 		}
 		else {

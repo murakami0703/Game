@@ -109,6 +109,9 @@
     <Filter Include="Assets\modelData\item">
       <UniqueIdentifier>{f7ebcde0-563f-4d3d-8920-4988377e8360}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\title\villain">
+      <UniqueIdentifier>{be0f4edb-4312-4833-9139-f168d8b469de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -299,6 +302,12 @@
     </ClCompile>
     <ClCompile Include="MapChipRender.cpp">
       <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeIn.cpp">
+      <Filter>sprite\fade</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeOut.cpp">
+      <Filter>sprite\fade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +508,12 @@
     </ClInclude>
     <ClInclude Include="MapChipRender.h">
       <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeIn.h">
+      <Filter>sprite\fade</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeOut.h">
+      <Filter>sprite\fade</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -705,8 +720,40 @@
     <ImageContentTask Include="Assets\sprite\title\game_title.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Fade.png">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\title\Villain\Villain1.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain2.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain3.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain4.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain5.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain6.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain7.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain8.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
+    <Image Include="Assets\sprite\title\Villain\Villain9.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </Image>
   </ItemGroup>
 </Project>
