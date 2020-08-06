@@ -71,7 +71,7 @@ private:
 	EButton m_buttonState = Button_Start;				//選択中のボタン状態。
 
 	//音関係
-	CSoundSource* m_titleBgm;						//タイトルBGM。
+	CSoundSource* m_titleBgm;					//タイトルBGM。
 
 	//ライトの点滅
 	float m_flashingTimer = 0;		//ライト用タイマー。

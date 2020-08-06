@@ -9,20 +9,22 @@ FadeOut::FadeOut()
 
 FadeOut::~FadeOut()
 {
+	g_goMgr->DeleteGameObject(m_sptiteRender);
 }
-bool FadeOut::Start() 
-{
-	return true; 
-}
+bool FadeOut::Start() {	return true; }
 
 void FadeOut::Update()
 {
 		//フェードアウト
 	m_mulColor = m_sptiteRender->GetMulColor();
 
-	m_mulColor.w -= 0.05f;
-	if (m_mulColor.w < 0.0f) {
-		m_mulColor.w = 0.0f;
+	m_mulColor.x -= 0.01f;
+	m_mulColor.y -= 0.01f;
+	m_mulColor.z -= 0.01f;
+	if (m_mulColor.x  < 0.0f && m_mulColor.y  < 0.0f && m_mulColor.z < 0.0f) {
+		m_mulColor.x = 0.0f;
+		m_mulColor.y = 0.0f;
+		m_mulColor.z = 0.0f;
 		m_sptiteRender->SetMulColor(m_mulColor);
 		g_goMgr->DeleteGameObject(this);
 		return;

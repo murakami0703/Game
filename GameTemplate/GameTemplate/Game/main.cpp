@@ -10,7 +10,7 @@
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
 	//ゲームの初期化。
-	Engine().InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
+	Engine::EngineInstance().InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
 	//カメラを初期化。
 	g_camera3D.SetPosition({ 0.0f, 100.0f, 300.0f });
@@ -26,8 +26,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_goMgr->NewGameObject<Title>();
 
 	//ゲームループ。
-	while (Engine().DispatchWindowMessage() == true)
+	while (Engine::EngineInstance().DispatchWindowMessage() == true)
 	{
-		Engine().GameUpdate();
+		Engine::EngineInstance().GameUpdate();
 	}
 };

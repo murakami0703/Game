@@ -16,6 +16,7 @@ const float m_lightsUpTime = 45.0f;
 const float m_lightsOffTime = 90.0f;
 const float m_lightAlpha = 0.7f / 45.0f;
 
+const CVector4 a = { 1.0f,1.0f ,1.0f ,1.0f };		//「つづける」の座標
 
 
 
@@ -44,6 +45,7 @@ bool Title::Start()
 		//2番→Game_title
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/game_title.dds", 650.0f, 150.0f);
+		m_titleSprite->SetAlpha(0.0f);
 		m_titleSprite->SetPosition({ 0.0f,280.0f,0.0f });
 		m_titleSprite->SetScale({ 0.65f,0.65f,0.65f });
 		m_spriteRender.push_back(m_titleSprite);
@@ -138,9 +140,9 @@ bool Title::Start()
 		m_loadFont->SetPosition(m_loadFontPos);
 	}
 	
-	FadeIn* fadein = g_goMgr->NewGameObject<FadeIn>();
-	fadein->SetSprite(m_spriteRender[0]);
-
+	m_titleBgm = g_goMgr->NewGameObject<CSoundSource>();
+	m_titleBgm->Init(L"Assets/sound/stage1BGM.wav");
+	m_titleBgm->Play(false);
 	return true;
 }
 
@@ -164,8 +166,52 @@ void Title::LightFlashing()
 	}
 
 }
+
+void Title::TitleFadeIn() 
+{
+	//フェードイン。
+	FadeIn* fadein = g_goMgr->NewGameObject<FadeIn>();
+	fadein->SetSprite(m_spriteRender[0]);
+	fadein = g_goMgr->NewGameObject<FadeIn>();
+	fadein->SetSprite(m_spriteRender[1]);
+	fadein = g_goMgr->NewGameObject<FadeIn>();
+	fadein->SetSprite(m_spriteRender[3]);
+
+	if (m_spriteRender[3]->GetMulColor().x >= 1.0f &&
+		m_spriteRender[3]->GetMulColor().y >= 1.0f &&
+		m_spriteRender[3]->GetMulColor().z >= 1.0f ) 
+	{
+		m_state = Title_GameTitle;
+	}
+}
+void Title::TitleGameTitle()
+{
+	//文字の表示。
+}
+void Title::TitleSelect()
+{
+	//ボタン選択。
+}
+void Title::TitleFadeOut()
+{
+	//フェードアウト。
+}
+
 void Title::Update()
 {
-
-
+	switch (m_state)
+	{
+	case Title::Title_FadeIn:
+		TitleFadeIn();			//フェードイン。
+		break;
+	case Title::Title_GameTitle:
+		TitleGameTitle();		//文字の表示。
+		break;
+	case Title::Title_Select:
+		TitleSelect();			//ボタン選択。
+		break;
+	case Title::Title_FadeOut:
+		TitleFadeOut();		//フェードアウト。
+		break;
+	}
 }

@@ -21,7 +21,7 @@ public:
 	/// <summary>
 	/// インスタンスを取得。
 	/// </summary>
-	static Engine& GetInstance()
+	static Engine GetInstance()
 	{
 		static Engine* instance = nullptr;
 		if (instance == nullptr) {

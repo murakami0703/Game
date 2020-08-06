@@ -60,11 +60,11 @@
 #include "Engine.h"
 
 //‚±‚±‚©‚ç‰º‚ÉrenderƒNƒ‰ƒX‚©‚­
+#include "sound/SoundSource.h"
 #include "graphics/SkinModelRender.h"
 #include "sprite/SpriteRender.h"
 #include "FontRender.h"
 
-#include "Fade.h"
 
 
 
