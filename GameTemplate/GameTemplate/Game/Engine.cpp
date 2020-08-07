@@ -3,14 +3,21 @@
 
 HWND			g_hWnd = NULL;				//ウィンドウハンドル。
 GraphicsEngine* g_graphicsEngine = NULL;	//グラフィックスエンジン。
+Engine* Engine::m_instance = nullptr;
 
 Engine::Engine()
 {
+	if (m_instance != nullptr) {
+		std::abort();//すでに出ているためクラッシュ
+	}
+	m_instance = this;
+
 }
 
 
 Engine::~Engine()
 {
+	m_instance = nullptr;
 }
 
 void Engine::Init()

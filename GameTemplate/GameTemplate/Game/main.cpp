@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Engine.h"
 #include "Title.h"
 #include "Game.h"
 
@@ -9,8 +8,9 @@
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
+	Engine* m_engine = new Engine();
 	//ゲームの初期化。
-	Engine::EngineInstance().InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
+	m_engine->InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
 	//カメラを初期化。
 	g_camera3D.SetPosition({ 0.0f, 100.0f, 300.0f });
@@ -26,8 +26,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_goMgr->NewGameObject<Title>();
 
 	//ゲームループ。
-	while (Engine::EngineInstance().DispatchWindowMessage() == true)
+	while (m_engine->GetInstance()->DispatchWindowMessage() == true)
 	{
-		Engine::EngineInstance().GameUpdate();
+		m_engine->GetInstance()->GameUpdate();
 	}
 };

@@ -129,6 +129,7 @@ bool Title::Start()
 		m_startFont = g_goMgr->NewGameObject<FontRender>();
 		const wchar_t* start = L"Start";
 		m_startFont->SetText(start);
+		m_startFont->SetAlpha(0.0);
 		m_startFont->SetPosition(m_startFontPos);
 		m_startFont->SetScale(m_startFontScale);
 		//続きから
@@ -136,19 +137,21 @@ bool Title::Start()
 		const wchar_t* load = L"Load";
 		m_loadFont->SetText(load);
 		m_loadFont->SetScale(m_startFontScale);
-		m_loadFont->SetAlpha(0.3);
+		m_loadFont->SetAlpha(0.0);
 		m_loadFont->SetPosition(m_loadFontPos);
 	}
 	
-	m_titleBgm = g_goMgr->NewGameObject<CSoundSource>();
+	/*m_titleBgm = g_goMgr->NewGameObject<CSoundSource>();
 	m_titleBgm->Init(L"Assets/sound/stage1BGM.wav");
-	m_titleBgm->Play(false);
+	m_titleBgm->Play(false);*/
+
 	return true;
 }
 
 void Title::SelectButtun(FontRender* m_font)
 {
 	//選択中のボタン
+
 }
 void Title::LightFlashing()
 {
@@ -187,6 +190,22 @@ void Title::TitleFadeIn()
 void Title::TitleGameTitle()
 {
 	//文字の表示。
+	//タイトルの後に選択ボタンを表示させます。
+	m_fontTimer++;
+	if (m_fontTimer <= 30) {
+
+	}
+	else if (m_fontTimer >= 30) {
+
+	}
+	else {
+
+	}
+	m_spriteRender[3]->DeltaAlpha(-m_lightAlpha);
+
+	m_startFont->SetAlpha(0.0);
+	m_loadFont->SetAlpha(0.0);
+
 }
 void Title::TitleSelect()
 {

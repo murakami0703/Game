@@ -75,7 +75,7 @@ private:
 
 	//ライトの点滅
 	float m_flashingTimer = 0;		//ライト用タイマー。
-
+	int m_fontTimer = 0;			//文字用タイマー。
 
 };
 

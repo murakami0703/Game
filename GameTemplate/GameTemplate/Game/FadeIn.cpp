@@ -18,9 +18,9 @@ void FadeIn::Update()
 		//フェードイン
 	m_mulColor = m_sptiteRender->GetMulColor();
 
-	m_mulColor.x += 0.01f;
-	m_mulColor.y += 0.01f;
-	m_mulColor.z += 0.01f;
+	m_mulColor.x += 0.0005f;
+	m_mulColor.y += 0.0005f;
+	m_mulColor.z += 0.0005f;
 
 	if (m_mulColor.x > 1.0f && m_mulColor.y > 1.0f && m_mulColor.z > 1.0f) {
 		m_mulColor.x = 1.0f;
