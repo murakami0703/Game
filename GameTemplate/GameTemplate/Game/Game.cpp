@@ -25,6 +25,11 @@ Game::~Game()
 bool Game::Start()
 {
 
+	m_titleBgm = g_goMgr->NewGameObject<CSoundSource>();
+	m_titleBgm->Init(L"Assets/sound/stage1BGM.wav");
+	m_titleBgm->SetVolume(0.3f);
+	m_titleBgm->Play(true);
+
 	g_goMgr->NewGameObject<EffectManager>();
 	g_goMgr->NewGameObject<SoulManager>();
 

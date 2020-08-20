@@ -191,6 +191,9 @@ void CSoundSource::UpdateOnMemory()
 			//ƒ‹[ƒvB
 			Play(m_isLoop);
 		}
+		else {
+			g_goMgr->DeleteGameObject(this);
+		}
 	}
 }
 void CSoundSource::Update()

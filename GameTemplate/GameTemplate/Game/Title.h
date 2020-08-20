@@ -44,6 +44,8 @@ private:
 	void TitleFadeOut();		//フェードアウト。
 
 	//小人
+	void ChangeSprite(SpriteRender* m_sprite1, SpriteRender* m_sprite2, float moveX = 0.0f, float moveY = 0.0f);		//スプライトの切り替え。
+
 	void VillainSideWays1();	//横移動1。
 	void VillainForward();		//左上移動。
 	void VillainStay();			//留まる。
@@ -54,7 +56,6 @@ private:
 
 	void LightFlashing();		//ライトの点滅
 
-	void SelectButtun(FontRender* m_font);	//選択中のボタン
 
 private:
 
@@ -72,10 +73,12 @@ private:
 
 	//音関係
 	CSoundSource* m_titleBgm;					//タイトルBGM。
+	CSoundSource* m_se;					//タイトルBGM。
 
 	//ライトの点滅
 	float m_flashingTimer = 0;		//ライト用タイマー。
 	int m_fontTimer = 0;			//文字用タイマー。
-
+	int count = 0;
+	bool movestart = false;
 };
 

@@ -8,6 +8,8 @@ public:
 	bool Start();
 	void Update();
 private:
+	//音関係
+	CSoundSource* m_titleBgm;					//タイトルBGM。
 
 };
 

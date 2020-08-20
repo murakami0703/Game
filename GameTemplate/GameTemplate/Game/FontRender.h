@@ -64,9 +64,29 @@ public:
 	{
 		m_color = color;
 	}
+	/// <summary>
+	/// α値の設定
+	/// </summary>
+	/// <param name="alpha"></param>
 	void SetAlpha(float alpha) {
 		m_color.w = alpha;
 	}
+	/// <summary>
+	/// α値を変位させる
+	/// </summary>
+	/// <param name="delta">乗算αを変位させる量</param>
+	void DeltaAlpha(float delta)
+	{
+		m_color.w += delta;
+		//数値の境界チェック。
+		if (m_color.w > 1.0f) {
+			m_color.w = 1.0f;
+		}
+		else if (m_color.w < 0.0f) {
+			m_color.w = 0.0f;
+		}
+	}
+
 	/// <summary>
 	/// 回転を設定。
 	/// </summary>
