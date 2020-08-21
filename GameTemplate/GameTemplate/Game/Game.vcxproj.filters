@@ -669,9 +669,6 @@
     <ImageContentTask Include="Assets\sprite\Item\spe.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\light.png">
-      <Filter>Assets\sprite\title</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\star_chips.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
@@ -749,6 +746,9 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\Villain\Villain9.png">
       <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\light.png">
+      <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

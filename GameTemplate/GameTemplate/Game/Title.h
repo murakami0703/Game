@@ -45,6 +45,7 @@ private:
 
 	//小人
 	void ChangeSprite(SpriteRender* m_sprite1, SpriteRender* m_sprite2, float moveX = 0.0f, float moveY = 0.0f);		//スプライトの切り替え。
+	void SpriteSetAlpha(SpriteRender* m_nextSprite, SpriteRender* m_invisible1, SpriteRender* m_invisible2);
 
 	void VillainSideWays1();	//横移動1。
 	void VillainForward();		//左上移動。
@@ -79,6 +80,7 @@ private:
 	float m_flashingTimer = 0;		//ライト用タイマー。
 	int m_fontTimer = 0;			//文字用タイマー。
 	int count = 0;
+	int m_stopTimer = 0;			//停止時間用タイマー。
 	bool movestart = false;
 };
 
