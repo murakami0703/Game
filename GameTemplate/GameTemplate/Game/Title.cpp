@@ -9,31 +9,34 @@ Title* Title::m_instance = nullptr;
 /////////////////////////////////////////////////////////
 /// 定数
 /////////////////////////////////////////////////////////
+
 const CVector4 TITLE_SET_MULCOLOR = { 0.0f,0.0f ,0.0f ,1.0f };	//初期乗算カラーの設定。
 const float LIGHT_SET_ALPHA = 0.3f;								//ライトの初期透明度。
 const float TITLENAME_SET_ALPHA = 0.0f;							//ゲーム名の初期透明度。
 const CVector3 TITLENAME_SET_POSITION = { 0.0f,280.0f,0.0f };	//ゲーム名の座標。
 const CVector3 TITLENAME_SET_SCALE = { 0.65f,0.65f,0.65f };		//ゲーム名の拡大率。
 
-const float VILLAUN_SET_ALPHA_ONE = 1.0f;						//小人に設定する透明度(表示)。
-const float VILLAUN_SET_ALPHA_ZERO = 0.0f;						//小人に設定する透明度(非表示)。
+const float VILLAUN_SET_ACTIVE_TRUE = 1.0f;						//小人に設定する透明度(表示)。
+const float VILLAUN_SET_ACTIVE_FALSE = 0.0f;					//小人に設定する透明度(非表示)。
 
-const CVector2 m_startFontPos = { 250.0f,-250.0f };	//「はじめる」の座標
-const CVector2 m_loadFontPos = { 460.0f,-250.0f };		//「つづける」の座標
-const float m_startFontScale = 1.50f;	//「はじめる」の座標
+const float FONT_SET_ALPHA = 0.0f;								//フォントの初期透明度。
+const CVector2 FONT_START_SET_POSITION = { 250.0f,-250.0f };	//「はじめる」の座標。
+const CVector2 FONT_LOAD_SET_POSITION = { 460.0f,-250.0f };		//「つづける」の座標。
+const float FONT_SET_SCALE = 1.5f;								//フォントの拡大率。
 
-const float m_lightsUpTime = 120.0f;
-const float m_lightsOffTime = 240.0f;
-const float m_lightAlpha = 0.7f / 120.0f;
+const float LIGHT_INCREASE_TIME = 120.0f;					//ライトの明るさを増加させる時間。
+const float LIGHT_DECREASE_TIME = 240.0f;					//ライトの明るさを減少させる時間。
+const float LIGHT_DELTA_ALPHA = 0.7f/ 120.0f;				//変位させる透明度の値。
+const float LIGHT_TIMER_RESET = 0.0f;						//ライトのタイマーを初期状態にする。
+
+const float LIGHT_TIMER_RESET = 0.0f;						//ライトのタイマーを初期状態にする。
+
 const float TITLENAME_FADEE_IN = 1.0f / 30.0f;
 const float STARTFONT_FADEE_IN = 1.0f / 20.0f;
 const float LOADFONT_FADEE_IN = 0.3f / 20.0f;
 
 const CVector4 a = { 1.0f,1.0f ,1.0f ,1.0f };		//「つづける」の座標
 const CVector3 VILLAIN_SCALE = { 0.6f,0.6f,0.6f };		//「つづける」の座標
-
-
-
 
 Title::Title(){}
 
@@ -53,7 +56,7 @@ bool Title::Start()
 {
 	m_instance = this;
 
-	//諸々
+	//諸々。
 	{
 		//0番→Title(背景)
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
@@ -83,13 +86,13 @@ bool Title::Start()
 		m_spriteRender.push_back(m_titleSprite);
 
 	}
-	//小人
+	//小人。
 	{
 		//4番→Villain1
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain1.dds", 100.0f, 200.0f);
 		m_titleSprite->SetPosition({ 700.0f,-225.0f,0.0f });
-		m_titleSprite->SetAlpha(VILLAUN_SET_ALPHA_ONE);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
@@ -97,82 +100,82 @@ bool Title::Start()
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain2.dds", 100.0f, 200.0f);
 		m_titleSprite->SetPosition({ 450.0f,-225.0f,0.0f });
-		m_titleSprite->SetAlpha(VILLAUN_SET_ALPHA_ZERO);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
 		//6番→Villain3
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain3.dds", 100.0f, 200.0f);
-		m_titleSprite->SetAlpha(VILLAUN_SET_ALPHA_ZERO);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
 		//7番→Villain4
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain4.dds", 100.0f, 200.0f);
-		m_titleSprite->SetAlpha(0.0f);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
 		//8番→Villain5
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain5.dds", 100.0f, 200.0f);
-		m_titleSprite->SetAlpha(0.0f);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
 		//9番→Villain6
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain6.dds", 120.0f, 200.0f);
-		m_titleSprite->SetAlpha(0.0f);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
 		//10番→Villain7
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain7.dds", 100.0f, 200.0f);
-		m_titleSprite->SetAlpha(0.0f);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
 		//11番→Villain8
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain8.dds", 100.0f, 200.0f);
-		m_titleSprite->SetAlpha(0.0f);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 
 		//12番→Villain9
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain9.dds", 100.0f, 200.0f);
-		m_titleSprite->SetAlpha(0.0f);
+		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 	}
-	//フォント
+	//フォント。
 	{
 		//はじめる
 		m_startFont = g_goMgr->NewGameObject<FontRender>();
-		const wchar_t* start = L"Start";
-		m_startFont->SetText(start);
-		m_startFont->SetAlpha(0.0);
-		m_startFont->SetPosition(m_startFontPos);
-		m_startFont->SetScale(m_startFontScale);
+		const wchar_t* m_start = L"Start";
+		m_startFont->SetText(m_start);
+		m_startFont->SetAlpha(FONT_SET_ALPHA);
+		m_startFont->SetPosition(FONT_START_SET_POSITION);
+		m_startFont->SetScale(FONT_SET_SCALE);
 		//続きから
 		m_loadFont = g_goMgr->NewGameObject<FontRender>();
-		const wchar_t* load = L"Load";
-		m_loadFont->SetText(load);
-		m_loadFont->SetScale(m_startFontScale);
-		m_loadFont->SetAlpha(0.0);
-		m_loadFont->SetPosition(m_loadFontPos);
+		const wchar_t* m_load = L"Load";
+		m_loadFont->SetText(m_load);
+		m_loadFont->SetAlpha(FONT_SET_ALPHA);
+		m_loadFont->SetPosition(FONT_LOAD_SET_POSITION);
+		m_loadFont->SetScale(FONT_SET_SCALE);
+
 	}
 	
-
+	//音。
 	m_titleBgm = g_goMgr->NewGameObject<CSoundSource>();
 	m_titleBgm->Init(L"Assets/sound/TitleBGM.wav");
 
-	
 	return true;
 }
 
@@ -180,15 +183,15 @@ void Title::LightFlashing()
 {
 	//ライトの点滅
 	m_flashingTimer++;
-	if (m_flashingTimer <= m_lightsUpTime) {
-		m_spriteRender[2]->DeltaAlpha(m_lightAlpha);
+	if (m_flashingTimer <= LIGHT_INCREASE_TIME) {
+		m_spriteRender[2]->DeltaAlpha(LIGHT_DELTA_ALPHA);
 	}
-	else if (m_flashingTimer <= m_lightsOffTime)
+	else if (m_flashingTimer <= LIGHT_DECREASE_TIME)
 	{
-		m_spriteRender[2]->DeltaAlpha(-m_lightAlpha);
+		m_spriteRender[2]->DeltaAlpha(-LIGHT_DELTA_ALPHA);
 	}
 	else {
-		m_flashingTimer = 0.0f;
+		m_flashingTimer = LIGHT_TIMER_RESET;
 	}
 
 }
