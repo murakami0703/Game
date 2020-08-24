@@ -81,6 +81,8 @@ private:
 	int m_fontTimer = 0;			//文字用タイマー。
 	int count = 0;
 	int m_stopTimer = 0;			//停止時間用タイマー。
-	bool movestart = false;
+
+	CVector4 m_spriteMul = CVector4().White();
+		bool movestart = false;
 };
 

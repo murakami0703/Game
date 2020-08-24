@@ -16,6 +16,7 @@ const float TITLENAME_SET_ALPHA = 0.0f;							//ゲーム名の初期透明度。
 const CVector3 TITLENAME_SET_POSITION = { 0.0f,280.0f,0.0f };	//ゲーム名の座標。
 const CVector3 TITLENAME_SET_SCALE = { 0.65f,0.65f,0.65f };		//ゲーム名の拡大率。
 
+const CVector3 VILLAIN_SCALE = { 0.6f,0.6f,0.6f };				//小人の拡大率。
 const float VILLAUN_SET_ACTIVE_TRUE = 1.0f;						//小人に設定する透明度(表示)。
 const float VILLAUN_SET_ACTIVE_FALSE = 0.0f;					//小人に設定する透明度(非表示)。
 
@@ -29,14 +30,23 @@ const float LIGHT_DECREASE_TIME = 240.0f;					//ライトの明るさを減少させる時間。
 const float LIGHT_DELTA_ALPHA = 0.7f/ 120.0f;				//変位させる透明度の値。
 const float LIGHT_TIMER_RESET = 0.0f;						//ライトのタイマーを初期状態にする。
 
-const float LIGHT_TIMER_RESET = 0.0f;						//ライトのタイマーを初期状態にする。
+const CVector4 FADEIN_FINISHED = { 1.0f,1.0f,1.0f,1.0f };	//フェードインが終わる値。
+const CVector4 FADEOUTO_FINISHED = { 0.0f,0.0f,0.0f,1.0f };	//フェードアウトが終わる値。
 
-const float TITLENAME_FADEE_IN = 1.0f / 30.0f;
-const float STARTFONT_FADEE_IN = 1.0f / 20.0f;
-const float LOADFONT_FADEE_IN = 0.3f / 20.0f;
+const float TITLENAME_FADE_TIME = 30.0f;					//タイトル名をフェードさせる時間。
+const float TITLENAME_FADE_FONT_TIME = 50.0f;				//フォントをフェードさせる時間。
+const float TITLENAME_FADE_DELTA_ALPHA = 1.0f / 30.0f;		//タイトル名の透明度を変位させる値。
+const float STARTFONT_FADE_DELTA_ALPHA = 1.0f / 20.0f;		//「はじめる」の透明度を変位させる値。
+const float LOADFONT_FADE_DELTA_ALPHA = 0.3f / 20.0f;		//「つづける」の透明度を変位させる値。
 
-const CVector4 a = { 1.0f,1.0f ,1.0f ,1.0f };		//「つづける」の座標
-const CVector3 VILLAIN_SCALE = { 0.6f,0.6f,0.6f };		//「つづける」の座標
+const float FONT_SELECT = 1.0f;								//選択中のフォント。
+const float FONT_NOT_SELECT = 0.3f;							//選択外のフォント。
+const float DECIDED_SE_VOLUME = 0.5f;						//決定したとき流れるSEのボリューム。
+const float SELECT_SE_VOLUME = 0.1f;						//選択変更したとき流れるSEのボリューム。
+
+
+const int VILLAUN_MOVE_SPRITE1_TIME = 15;					//1枚目のSpriteを移動&切り替える時間。
+const int VILLAUN_MOVE_SPRITE2_TIME = 30;					//2枚目のSpriteを移動&切り替える時間。
 
 Title::Title(){}
 
@@ -178,7 +188,6 @@ bool Title::Start()
 
 	return true;
 }
-
 void Title::LightFlashing()
 {
 	//ライトの点滅
@@ -195,7 +204,6 @@ void Title::LightFlashing()
 	}
 
 }
-
 void Title::TitleFadeIn() 
 {
 	//フェードイン。
@@ -206,13 +214,14 @@ void Title::TitleFadeIn()
 	fadein = g_goMgr->NewGameObject<FadeIn>();
 	fadein->SetSprite(m_spriteRender[2]);
 
-	if (m_spriteRender[2]->GetMulColor().x >= 1.0f &&
-		m_spriteRender[2]->GetMulColor().y >= 1.0f &&
-		m_spriteRender[2]->GetMulColor().z >= 1.0f ) 
-	{
-		m_state = Title_GameTitle;
-		m_titleBgm->Play(true);
+	m_spriteMul = m_spriteRender[2]->GetMulColor();	
 
+	//フェードインが完了したので次へ。
+	if (m_spriteMul.x >= FADEIN_FINISHED.x && m_spriteMul.y >= FADEIN_FINISHED.y && m_spriteMul.z >= FADEIN_FINISHED.z)
+	{
+		//BGMの再生
+		m_titleBgm->Play(true);
+		m_state = Title_GameTitle;
 	}
 }
 void Title::TitleGameTitle()
@@ -220,57 +229,56 @@ void Title::TitleGameTitle()
 	//文字の表示。
 	//タイトルの後に選択ボタンを表示させます。
 	m_fontTimer++;
-	if (m_fontTimer <= 30) {
-		m_spriteRender[3]->DeltaAlpha(TITLENAME_FADEE_IN);
+	if (m_fontTimer <= TITLENAME_FADE_TIME) {
+		m_spriteRender[3]->DeltaAlpha(TITLENAME_FADE_DELTA_ALPHA);
 	}
-	else if (m_fontTimer > 30 && m_fontTimer <= 50) {
-		m_startFont->DeltaAlpha(STARTFONT_FADEE_IN);
-		m_loadFont->DeltaAlpha(LOADFONT_FADEE_IN);
+	else if (m_fontTimer > TITLENAME_FADE_TIME && m_fontTimer <= TITLENAME_FADE_FONT_TIME) {
+		m_startFont->DeltaAlpha(STARTFONT_FADE_DELTA_ALPHA);
+		m_loadFont->DeltaAlpha(LOADFONT_FADE_DELTA_ALPHA);
 	}
-	else if (m_fontTimer > 50) {
+	else if (m_fontTimer > TITLENAME_FADE_FONT_TIME) {
 		m_state = Title_Select;
 	}
-
 }
 void Title::TitleSelect()
 {
+	//ライトの点滅。
 	LightFlashing();
 
 	//ボタン選択。
 	if (g_pad[0].IsTrigger(enButtonStart)) {
-		m_startFont->SetAlpha(0.0f);
-		m_loadFont->SetAlpha(0.0f);
+		m_startFont->SetAlpha(FONT_SET_ALPHA);
+		m_loadFont->SetAlpha(FONT_SET_ALPHA);
 		m_se = g_goMgr->NewGameObject<CSoundSource>();
 		m_se->Init(L"Assets/sound/Decision.wav");
-		m_se->SetVolume(0.5f);
+		m_se->SetVolume(DECIDED_SE_VOLUME);
 		m_se->Play(false);
 		m_state = Title_FadeOut;
 	}
 	else if (m_buttonState == Button_Load && g_pad[0].IsTrigger(enButtonLeft)) {
+		//「はじめる」を選択する。
 		m_buttonState = Button_Start;
-		m_startFont->SetAlpha(1.0f);
-		m_loadFont->SetAlpha(0.3f);
+		m_startFont->SetAlpha(FONT_SELECT);
+		m_loadFont->SetAlpha(FONT_NOT_SELECT);
 		m_se = g_goMgr->NewGameObject<CSoundSource>();
 		m_se->Init(L"Assets/sound/SelectButton.wav");
-		m_se->SetVolume(0.1f);
+		m_se->SetVolume(SELECT_SE_VOLUME);
 		m_se->Play(false);
 	}
 	else if (m_buttonState == Button_Start && g_pad[0].IsTrigger(enButtonRight)) {
+		//「つづける」を選択する。
 		m_buttonState = Button_Load;
-		m_startFont->SetAlpha(0.3f);
-		m_loadFont->SetAlpha(1.0f);
+		m_startFont->SetAlpha(FONT_NOT_SELECT);
+		m_loadFont->SetAlpha(FONT_SELECT);
 		m_se = g_goMgr->NewGameObject<CSoundSource>();
 		m_se->Init(L"Assets/sound/SelectButton.wav");
-		m_se->SetVolume(0.1f);
+		m_se->SetVolume(SELECT_SE_VOLUME);
 		m_se->Play(false);
 	}
-
-
 }
 void Title::TitleFadeOut()
 {
 	//フェードアウト。
-		//フェードイン。
 	FadeOut* fadeout = g_goMgr->NewGameObject<FadeOut>();
 	fadeout->SetSprite(m_spriteRender[0]);
 	fadeout = g_goMgr->NewGameObject<FadeOut>();
@@ -280,9 +288,10 @@ void Title::TitleFadeOut()
 	fadeout = g_goMgr->NewGameObject<FadeOut>();
 	fadeout->SetSprite(m_spriteRender[3]);
 
-	if (m_spriteRender[3]->GetMulColor().x <= 0.0f &&
-		m_spriteRender[3]->GetMulColor().y <= 0.0f &&
-		m_spriteRender[3]->GetMulColor().z <= 0.0f)
+	m_spriteMul = m_spriteRender[3]->GetMulColor();
+
+	//フェードインが完了したのでゲーム開始。
+	if (m_spriteMul.x <= FADEOUTO_FINISHED.x && m_spriteMul.y <= FADEOUTO_FINISHED.y && m_spriteMul.z <= FADEOUTO_FINISHED.z)
 	{
 		g_goMgr->NewGameObject<Game>();
 		g_goMgr->DeleteGameObject(this);
@@ -291,21 +300,22 @@ void Title::TitleFadeOut()
 
 }
 
+////////////////////////////////小人の移動処理////////////////////////////////
+
 void Title::ChangeSprite(SpriteRender* m_sprite1, SpriteRender* m_sprite2, float moveX, float moveY)
 {
 	CVector3 pos1 = m_sprite1->GetPosition();
-	CVector3 pos2 = m_sprite2->GetPosition();
 
 	count++;
 	//スプライトの切り替え。
 	//歩いているように見せます。
-	if (count == 15) {
+	if (count == VILLAUN_MOVE_SPRITE1_TIME) {
 		pos1.x -= moveX;
 		pos1.y += moveY;
 		m_sprite1->SetAlpha(0.0f);
 		m_sprite2->SetAlpha(1.0f);
 	}
-	else if (count == 30) {
+	else if (count == VILLAUN_MOVE_SPRITE2_TIME) {
 		pos1.x -= moveX*2;
 		pos1.y += moveY;
 		m_sprite1->SetAlpha(1.0f);
@@ -426,6 +436,9 @@ void Title::VillainSideWays3()
 	}
 
 }
+
+//////////////////////////////////////////////////////////////////////////////
+
 void Title::Update()
 {
 	switch (m_state)
