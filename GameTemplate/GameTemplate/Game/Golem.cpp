@@ -9,9 +9,19 @@
 /////////////////////////////////////////////////////////
 /// 定数
 /////////////////////////////////////////////////////////
+const float HP_SETACTIVE_TRUE = 1.0f;		//HP表示中。
+const float HP_SETACTIVE_FALSE = 0.0f;		//HP非表示。
+const CVector2 HP_PIVOT = { 1.0f,0.5f };	//HPバーの基点。
+
 const int TIMER_INITIAL_VALUE_ZERO = 0;		//タイマーの初期化用の値
 const float GOLEM_IDLE_TIME = 120.0f;		//休憩時間。
-const float GOLEM_ATTACK_LENGTH = 300.0f;	//攻撃。
+const float GOLEM_ATTACK_LENGTH = 300.0f;	//攻撃する距離。
+const float GOLEM_VECTOR_Y_ZERO = 0.0f;		//移動ベクトルのY軸の値。
+const float GOLEM_FOLLOW_SPEED = 5.0f;		//追跡中の移動速度。
+
+const CVector3 GOLEM_FORWARD_VECTOR = { 0.0f, 0.0f, 1.0f };			//ゴーレムの前ベクトル。
+const float GOLEM_ATTACK_EFFECT_POS_Y = 430.0f;						//攻撃エフェクトのY座標。
+const CVector3 GOLEM_ATTACK_EFFECT_SCALE = { 50.0f,50.0f,50.0f };	//攻撃エフェクトの拡大率。
 
 
 Golem::Golem(){}
@@ -36,20 +46,20 @@ bool Golem::Start()
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->SetScale(m_scale);
 
-	m_skinModelRender->SetShadowCaster(true);
+	m_skinModelRender->SetShadowCaster(true);	//シャドウキャスターに登録。
 
 	//HP
 	{
 		//0番→Hpフレーム
 		m_hpbarSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_hpbarSprite->Init(L"Assets/sprite/Boss_Hpframe.dds", 150.0f, 50.0f);
-		m_hpbarSprite->SetAlpha(0.0f);
+		m_hpbarSprite->SetAlpha(HP_SETACTIVE_FALSE);
 		m_spriteRender.push_back(m_hpbarSprite);
 		//1番→Hpバー
 		m_hpbarSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_hpbarSprite->Init(L"Assets/sprite/Boss_Hp.dds", 150.0f, 50.0f);
-		m_hpbarSprite->SetAlpha(0.0f);		
-		m_hpbarSprite->SetPivot(LifePivot);
+		m_hpbarSprite->SetAlpha(HP_SETACTIVE_FALSE);
+		m_hpbarSprite->SetPivot(HP_PIVOT);
 		m_spriteRender.push_back(m_hpbarSprite);
 	}
 
@@ -73,45 +83,52 @@ void Golem::Follow()
 {
 	//プレイヤーを追跡。
 	m_move = m_toPlayerVec;
-	if (m_toPlayerVec.Length() <= 300.0f) {
+
+	if (m_toPlayerVec.Length() <= GOLEM_ATTACK_LENGTH) {
+		//攻撃状態に遷移。
 		m_state = eState_Attack;
 	}
 	else {
-		m_move.y = 0.0f;
+		//移動。
+		m_move.y = GOLEM_VECTOR_Y_ZERO;
 		m_move.Normalize();
-		m_position += m_move * 5.0f;
+		m_position += m_move * GOLEM_FOLLOW_SPEED;
 
 	}
 
-	CVector3 enemyForward = { 0.0f, 0.0f, 1.0f };
+	CVector3 enemyForward = GOLEM_FORWARD_VECTOR;
 
 	//　向かせたい方向のベクトルを計算する。
 	CVector3 targetVector = Player::GetInstance()->GetPosition() - m_position;
 	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
-	targetVector.y = 0.0f;
+	targetVector.y = GOLEM_VECTOR_Y_ZERO;
 	targetVector.Normalize();
 	CQuaternion qRot;
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
 
-
-	m_skinModelRender->PlayAnimation(1);
+	m_skinModelRender->PlayAnimation(eAnimation_Walk);
 }
 void Golem::Attack()
 {
 	//攻撃。
 	EffectManager* effect = EffectManager::GetInstance();
-	m_skinModelRender->PlayAnimation(2);
+	m_skinModelRender->PlayAnimation(eAnimation_Attack);
 
 	if (m_skinModelRender->IsPlayingAnimation() == false)
 	{
+		//攻撃
 		m_attacktimer++;
 		//波紋エフェクト流す。
 		if (m_attacktimer <= 1) {
-			effect->EffectPlayer(EffectManager::Golem_Attack, { m_position.x ,430.0f ,m_position.z }, { 50.0f,50.0f,50.0f });
+			effect->EffectPlayer(
+				EffectManager::Golem_Attack,
+				{ m_position.x ,GOLEM_ATTACK_EFFECT_POS_Y ,m_position.z },
+				GOLEM_ATTACK_EFFECT_SCALE
+			);
 		}
 		//エフェクト範囲内の時プレーヤーにダメージ
-		if (m_isDamageFlag==false && m_position.x < m_damageLen&& m_position.x > -m_damageLen
+		if (m_isDamageFlag == false && m_position.x < m_damageLen&& m_position.x > -m_damageLen
 			&& m_position.z < m_damageLen&& m_position.z > -m_damageLen)
 		{
 			GameData::GetInstance()->HPCalc(-1.0f);

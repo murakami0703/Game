@@ -45,7 +45,7 @@ private:
 
 	//小人
 	void ChangeSprite(SpriteRender* m_sprite1, SpriteRender* m_sprite2, float moveX = 0.0f, float moveY = 0.0f);		//スプライトの切り替え。
-	void SpriteSetAlpha(SpriteRender* m_nextSprite, SpriteRender* m_invisible1, SpriteRender* m_invisible2);
+	void SpriteSetAlpha(SpriteRender* m_nextSprite1, SpriteRender* m_nextSprite2, SpriteRender* m_invisible1, SpriteRender* m_invisible2);			//次のスプライトに入れ替え。
 
 	void VillainSideWays1();	//横移動1。
 	void VillainForward();		//左上移動。
@@ -79,7 +79,7 @@ private:
 	//ライトの点滅
 	float m_flashingTimer = 0;		//ライト用タイマー。
 	int m_fontTimer = 0;			//文字用タイマー。
-	int count = 0;
+	int m_changeTimer = 0;
 	int m_stopTimer = 0;			//停止時間用タイマー。
 
 	CVector4 m_spriteMul = CVector4().White();

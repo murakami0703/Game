@@ -16,6 +16,7 @@ const float TITLENAME_SET_ALPHA = 0.0f;							//ゲーム名の初期透明度。
 const CVector3 TITLENAME_SET_POSITION = { 0.0f,280.0f,0.0f };	//ゲーム名の座標。
 const CVector3 TITLENAME_SET_SCALE = { 0.65f,0.65f,0.65f };		//ゲーム名の拡大率。
 
+const CVector3 VILLAIN1_POSITION = { 700.0f,-225.0f,0.0f };		//小人1の座標。
 const CVector3 VILLAIN_SCALE = { 0.6f,0.6f,0.6f };				//小人の拡大率。
 const float VILLAUN_SET_ACTIVE_TRUE = 1.0f;						//小人に設定する透明度(表示)。
 const float VILLAUN_SET_ACTIVE_FALSE = 0.0f;					//小人に設定する透明度(非表示)。
@@ -45,8 +46,23 @@ const float DECIDED_SE_VOLUME = 0.5f;						//決定したとき流れるSEのボリューム。
 const float SELECT_SE_VOLUME = 0.1f;						//選択変更したとき流れるSEのボリューム。
 
 
-const int VILLAUN_MOVE_SPRITE1_TIME = 15;					//1枚目のSpriteを移動&切り替える時間。
-const int VILLAUN_MOVE_SPRITE2_TIME = 30;					//2枚目のSpriteを移動&切り替える時間。
+const int VILLAUN_MOVE_SPRITE1_TIME = 10;					//1枚目のSpriteを移動&切り替える時間。
+const int VILLAUN_MOVE_SPRITE2_TIME = 20;					//2枚目のSpriteを移動&切り替える時間。
+const int VILLAUN_MUL_VALUE = 2;							//2枚目のSpriteの移動量に乗算する値。
+const float VILLAUN_TIMER_RESET = 0.0f;						//小人のタイマーを初期状態にする。
+
+const float VILLAUN_MOVE_X = 5.0f;							//小人のX軸の移動量。
+const float VILLAUN_FORWARD_LENGTH = 200.0f;				//左上(前方)移動する距離。
+const float VILLAUN_FORWARD_MOVE_Y = 2.0f;					//小人の左上(前方)移動時のY軸の移動量。
+const float VILLAUN_STAY_LENGTH = 150.0f;					//留まる距離。
+const int VILLAUN_CHANGE_TIME = 20;							//小人を切り替える時間。
+const int VILLAUN_BACK_TIME = 480;							//右下(後方)移動する時間。
+const float VILLAUN_BACK_MOVE_X = 3.0f;						//小人の右下(後方)移動時のX軸の移動量。
+const float VILLAUN_BACK_MOVE_Y = -2.0f;					//小人の右下(後方)移動時のY軸の移動量。
+const float VILLAUN_SIDEWAYS2_LENGTH = 50.0f;				//横移動する距離。
+const float VILLAUN_STOP_LENGTH = -450.0f;					//停止する距離。
+const int VILLAUN_SIDEWAYS3_TIME = 60;						//横移動する時間。
+const float VILLAUN_RESET_LENGTH = -750.0f;						//初期状態に戻す距離。
 
 Title::Title(){}
 
@@ -101,7 +117,7 @@ bool Title::Start()
 		//4番→Villain1
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain1.dds", 100.0f, 200.0f);
-		m_titleSprite->SetPosition({ 700.0f,-225.0f,0.0f });
+		m_titleSprite->SetPosition(VILLAIN1_POSITION);
 		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
@@ -109,7 +125,6 @@ bool Title::Start()
 		//5番→Villain2
 		m_titleSprite = g_goMgr->NewGameObject<SpriteRender>();
 		m_titleSprite->Init(L"Assets/sprite/Villain2.dds", 100.0f, 200.0f);
-		m_titleSprite->SetPosition({ 450.0f,-225.0f,0.0f });
 		m_titleSprite->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
@@ -288,6 +303,14 @@ void Title::TitleFadeOut()
 	fadeout = g_goMgr->NewGameObject<FadeOut>();
 	fadeout->SetSprite(m_spriteRender[3]);
 
+	//出現中の小人もフェードアウトさせるぅ。
+	for (int villain = 4; villain <= 12; villain++) {
+		if (m_spriteRender[villain]->GetAlpha() >= VILLAUN_SET_ACTIVE_TRUE) {
+			fadeout = g_goMgr->NewGameObject<FadeOut>();
+			fadeout->SetSprite(m_spriteRender[villain]);
+		}
+	}
+
 	m_spriteMul = m_spriteRender[3]->GetMulColor();
 
 	//フェードインが完了したのでゲーム開始。
@@ -306,61 +329,68 @@ void Title::ChangeSprite(SpriteRender* m_sprite1, SpriteRender* m_sprite2, float
 {
 	CVector3 pos1 = m_sprite1->GetPosition();
 
-	count++;
-	//スプライトの切り替え。
-	//歩いているように見せます。
-	if (count == VILLAUN_MOVE_SPRITE1_TIME) {
+	m_changeTimer++;
+
+	//Spriteの切り替え。
+	//2枚のSpriteを使って歩いているように見せます。
+	if (m_changeTimer == VILLAUN_MOVE_SPRITE1_TIME) {
 		pos1.x -= moveX;
 		pos1.y += moveY;
-		m_sprite1->SetAlpha(0.0f);
-		m_sprite2->SetAlpha(1.0f);
+		m_sprite1->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
+		m_sprite2->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
 	}
-	else if (count == VILLAUN_MOVE_SPRITE2_TIME) {
-		pos1.x -= moveX*2;
+	else if (m_changeTimer == VILLAUN_MOVE_SPRITE2_TIME) {
+		pos1.x -= moveX * VILLAUN_MUL_VALUE;
 		pos1.y += moveY;
-		m_sprite1->SetAlpha(1.0f);
-		m_sprite2->SetAlpha(0.0f);
-		count = 0;
+		m_sprite1->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
+		m_sprite2->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
+		m_changeTimer = VILLAUN_TIMER_RESET;
 	}
+	//座標の設定。
 	m_sprite1->SetPosition(pos1);
 	m_sprite2->SetPosition(pos1);
 }
-void Title::SpriteSetAlpha(SpriteRender* m_nextSprite, SpriteRender* m_invisible1, SpriteRender* m_invisible2)
+void Title::SpriteSetAlpha(SpriteRender* m_nextSprite1, SpriteRender* m_nextSprite2, SpriteRender* m_invisible1, SpriteRender* m_invisible2)
 {
+	//小人のSptiteを入れ替え。
+	//最前列の小人の位置を次のSpriteに設定。
 	if (m_invisible1->GetPosition().x <= m_invisible2->GetPosition().x)
 	{
-		m_nextSprite->SetPosition(m_invisible1->GetPosition());
+		m_nextSprite1->SetPosition(m_invisible1->GetPosition());
+		m_nextSprite2->SetPosition(m_invisible1->GetPosition());
 	}
 	else {
-		m_nextSprite->SetPosition(m_invisible2->GetPosition());
-
+		m_nextSprite1->SetPosition(m_invisible2->GetPosition());
+		m_nextSprite2->SetPosition(m_invisible2->GetPosition());
 	}
-	m_nextSprite->SetAlpha(1.0f);
-	m_invisible1->SetAlpha(0.0f);
-	m_invisible2->SetAlpha(0.0f);
+	m_nextSprite1->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
+	m_nextSprite2->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
+	m_invisible1->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
+	m_invisible2->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
 }
 
 void Title::VillainSideWays1()
 {
 	//横移動1。
-	ChangeSprite(m_spriteRender[4], m_spriteRender[5],5.0f);
+	ChangeSprite(m_spriteRender[4], m_spriteRender[5], VILLAUN_MOVE_X);
 
 	//次。
-	if (m_spriteRender[4]->GetPosition().x <= 300.0f||
-		m_spriteRender[5]->GetPosition().x <= 300.0f) {
-		SpriteSetAlpha(m_spriteRender[6],m_spriteRender[4], m_spriteRender[5]);
+	if (m_spriteRender[4]->GetPosition().x <= VILLAUN_FORWARD_LENGTH || m_spriteRender[5]->GetPosition().x <= VILLAUN_FORWARD_LENGTH) {
+		SpriteSetAlpha(m_spriteRender[6], m_spriteRender[7], m_spriteRender[4], m_spriteRender[5]);
 		m_villainState = Villain_Forward;
 	}
 }
 void Title::VillainForward()
 {
 	//左上移動。
-	ChangeSprite(m_spriteRender[6], m_spriteRender[7], 5.0f, 1.0f);
+	ChangeSprite(m_spriteRender[6], m_spriteRender[7], VILLAUN_MOVE_X, VILLAUN_FORWARD_MOVE_Y);
 
-	if (m_spriteRender[6]->GetPosition().x <= 150.0f ||
-		m_spriteRender[7]->GetPosition().x <= 150.0f) {
-		SpriteSetAlpha(m_spriteRender[8], m_spriteRender[6], m_spriteRender[7]);
-		m_spriteRender[9]->SetPosition(m_spriteRender[8]->GetPosition());
+	//次。
+
+	if (m_spriteRender[6]->GetPosition().x <= VILLAUN_STAY_LENGTH ||
+		m_spriteRender[7]->GetPosition().x <= VILLAUN_STAY_LENGTH)
+	{
+		SpriteSetAlpha(m_spriteRender[8], m_spriteRender[9], m_spriteRender[6], m_spriteRender[7]);
 		m_villainState = Villain_Stay;
 	}
 
@@ -369,39 +399,40 @@ void Title::VillainStay()
 {
 	//留まる。
 	m_stopTimer++;
-	if (m_stopTimer == 10) {
-		m_spriteRender[8]->SetAlpha(0.0f);
-		m_spriteRender[9]->SetAlpha(1.0f);
-	}
-	else if (m_stopTimer > 480) {
-		m_stopTimer = 0;
-		SpriteSetAlpha(m_spriteRender[10], m_spriteRender[8], m_spriteRender[9]);
-		m_villainState = Villain_Back;
 
+	if (m_stopTimer == VILLAUN_CHANGE_TIME) {
+		//スプライトの切り替え。
+		m_spriteRender[8]->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
+		m_spriteRender[9]->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
+	}
+	else if (m_stopTimer > VILLAUN_BACK_TIME) {
+		//次。
+		m_stopTimer = VILLAUN_TIMER_RESET;
+		SpriteSetAlpha(m_spriteRender[10], m_spriteRender[11], m_spriteRender[8], m_spriteRender[9]);
+		m_villainState = Villain_Back;
 	}
 }
 void Title::VillainBack()
 {
 	//右下移動。
-	ChangeSprite(m_spriteRender[10], m_spriteRender[11], 2.5f, -1.0f);
+	ChangeSprite(m_spriteRender[10], m_spriteRender[11], VILLAUN_BACK_MOVE_X, VILLAUN_BACK_MOVE_Y);
 
-	if (m_spriteRender[10]->GetPosition().x <= 50.0f ||
-		m_spriteRender[11]->GetPosition().x <= 50.0f) {
-		SpriteSetAlpha(m_spriteRender[4], m_spriteRender[10], m_spriteRender[11]);
+	//次。
+	if (m_spriteRender[10]->GetPosition().x <= VILLAUN_SIDEWAYS2_LENGTH ||
+		m_spriteRender[11]->GetPosition().x <= VILLAUN_SIDEWAYS2_LENGTH) {
+		SpriteSetAlpha(m_spriteRender[4], m_spriteRender[5], m_spriteRender[10], m_spriteRender[11]);
 		m_villainState = Villain_SideWays2;
 	}
-
 }
 void Title::VillainSideWays2()
 {
 	//横移動2。
-	ChangeSprite(m_spriteRender[4], m_spriteRender[5], 5.0f);
+	ChangeSprite(m_spriteRender[4], m_spriteRender[5], VILLAUN_MOVE_X);
 
-	if (m_spriteRender[4]->GetPosition().x <= -450.0f ||
-		m_spriteRender[5]->GetPosition().x <= -450.0f) {
-		SpriteSetAlpha(m_spriteRender[8], m_spriteRender[4], m_spriteRender[5]);
-		m_spriteRender[12]->SetPosition(m_spriteRender[8]->GetPosition());
-
+	//次。
+	if (m_spriteRender[4]->GetPosition().x <= VILLAUN_STOP_LENGTH ||
+		m_spriteRender[5]->GetPosition().x <= VILLAUN_STOP_LENGTH) {
+		SpriteSetAlpha(m_spriteRender[8], m_spriteRender[12], m_spriteRender[4], m_spriteRender[5]);
 		m_villainState = Villain_Stop;
 	}
 }
@@ -409,13 +440,14 @@ void Title::VillainStop()
 {
 	//停止。
 	m_stopTimer++;
-	if (m_stopTimer == 10) {
-		m_spriteRender[8]->SetAlpha(0.0f);
-		m_spriteRender[12]->SetAlpha(1.0f);
+	if (m_stopTimer == VILLAUN_CHANGE_TIME) {
+		m_spriteRender[8]->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
+		m_spriteRender[12]->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
 	}
-	else if (m_stopTimer > 60) {
-		m_stopTimer = 0;
-		SpriteSetAlpha(m_spriteRender[4], m_spriteRender[8], m_spriteRender[12]);
+	else if (m_stopTimer > VILLAUN_SIDEWAYS3_TIME) {
+		//次。
+		m_stopTimer = VILLAUN_TIMER_RESET;
+		SpriteSetAlpha(m_spriteRender[4], m_spriteRender[5], m_spriteRender[8], m_spriteRender[12]);
 		m_villainState = Villain_SideWays3;
 
 	}
@@ -424,14 +456,15 @@ void Title::VillainStop()
 void Title::VillainSideWays3()
 {
 	//横移動3。
-	ChangeSprite(m_spriteRender[4], m_spriteRender[5], 5.0f);
+	ChangeSprite(m_spriteRender[4], m_spriteRender[5], VILLAUN_MOVE_X);
 
-	if (m_spriteRender[4]->GetPosition().x <= -750.0f ||
-		m_spriteRender[5]->GetPosition().x <= -750.0f) {
-		m_spriteRender[4]->SetAlpha(1.0f);
-		m_spriteRender[5]->SetAlpha(0.0f);
-		m_spriteRender[4]->SetPosition({ 700.0f,-225.0f,0.0f });
-
+	//横移動1へ。
+	if (m_spriteRender[4]->GetPosition().x <= VILLAUN_RESET_LENGTH ||
+		m_spriteRender[5]->GetPosition().x <= VILLAUN_RESET_LENGTH) {
+		//初期状態に戻す。
+		m_spriteRender[4]->SetAlpha(VILLAUN_SET_ACTIVE_TRUE);
+		m_spriteRender[5]->SetAlpha(VILLAUN_SET_ACTIVE_FALSE);
+		m_spriteRender[4]->SetPosition(VILLAIN1_POSITION);
 		m_villainState = Villain_SideWays1;
 	}
 
@@ -457,6 +490,8 @@ void Title::Update()
 		break;
 	}
 
+	//小人の移動処理
+	//ループします。
 	switch (m_villainState)
 	{
 	case Title::Villain_SideWays1:
