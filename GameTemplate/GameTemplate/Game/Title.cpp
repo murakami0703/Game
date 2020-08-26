@@ -62,7 +62,7 @@ const float VILLAUN_BACK_MOVE_Y = -2.0f;					//小人の右下(後方)移動時のY軸の移動
 const float VILLAUN_SIDEWAYS2_LENGTH = 50.0f;				//横移動する距離。
 const float VILLAUN_STOP_LENGTH = -450.0f;					//停止する距離。
 const int VILLAUN_SIDEWAYS3_TIME = 60;						//横移動する時間。
-const float VILLAUN_RESET_LENGTH = -750.0f;						//初期状態に戻す距離。
+const float VILLAUN_RESET_LENGTH = -750.0f;					//初期状態に戻す距離。
 
 Title::Title(){}
 

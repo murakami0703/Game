@@ -8,17 +8,29 @@
 #include "EffectManager.h"
 #include "SoulManager.h"
 
+/////////////////////////////////////////////////////////
+/// 定数
+/////////////////////////////////////////////////////////
+
+const CVector3 GHOST_FORWARD_VECTOR = { 0.0f, 0.0f, -1.0f };		//ゴーストの前ベクトル。
+const float GHOST_HORIANGLE = 90.0f;					//視野角判定の角度。
+const float GHOST_HORILONG = 500.0f;					//視野角判定の距離。
+
+const float GHOST_IDLE_TIME = 30.0f;					//待機時間。
+const float GHOST_TIMER_RESET = 0.0f;					//タイマーを初期状態に戻す。
+const int GHOST_RAND_TIMER = 120;						//方向転換する時間。
+const int GHOST_RAND_RANGE = 360;						//方向転換する範囲。
+const int GHOST_RAND_CALC_TIME = 0;						//方向転換の向きを計算する時間。
+
 Ghost::Ghost()
 {
 }
-
 Ghost::~Ghost()
 {
 }
 
 bool Ghost::Start()
 {
-
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[eAnimation_Idle].Load(L"Assets/animData/ghost/ghost_Idle.tka");
 	m_animClips[eAnimation_Walk].Load(L"Assets/animData/ghost/ghost_walk.tka");
@@ -41,7 +53,7 @@ void Ghost::Horizon()
 {
 	//エネミーの前方方向を求める。
 	//前方方向は{0, 0, 1}のベクトルをm_rotationで回して求める。
-	CVector3 enemyForward = { 0.0f, 0.0f, -1.0f };
+	CVector3 enemyForward = GHOST_FORWARD_VECTOR;
 	m_rotation.Multiply(enemyForward);
 
 	//エネミーからプレイヤーに伸びるベクトルを求める。
@@ -61,7 +73,7 @@ void Ghost::Horizon()
 
 	//視野角判定
 	//角度は絶対値にする。
-	if (fabsf(angle) < CMath::DegToRad(horiAngle) && toPlayerLen < horilong)
+	if (fabsf(angle) < CMath::DegToRad(GHOST_HORIANGLE) && toPlayerLen < GHOST_HORILONG)
 	{
 		//近い！！！！！
 		m_battlePoint = SiegePoint::GetInstance()->TryGetBattlePoint(m_position);
@@ -73,44 +85,44 @@ void Ghost::Horizon()
 	}
 
 }
-
 void Ghost::Idle()
 {
 	//待機。
 	m_timer++;
 	//一定時間経つと徘徊します。
-	if (m_timer >= m_idleTime) {
-		m_timer = 0;
+	if (m_timer >= GHOST_IDLE_TIME) {
+		m_timer = GHOST_TIMER_RESET;
 		m_state = eState_Loitering;
 	}
 
 	Horizon();	//視野角判定
 
-	m_enemyModelRender->PlayAnimation(1);
+	m_enemyModelRender->PlayAnimation(eAnimation_Idle);
 }
 void Ghost::Loitering()
 {
 	//徘徊。
 	//一定時間ごとに方向転換する。
-	if (m_timer == 0) {
+	if (m_timer <= GHOST_RAND_CALC_TIME) {
 		//ランダムで方向を決定して動きます
-		m_randRot = rand() % 360;
+		m_randRot = rand() % GHOST_RAND_RANGE;
 		m_rotation.SetRotation(CVector3::AxisY(), (float)m_randRot);
-		m_frontmove = { 0.0f, 0.0f,-1.0f };
+		m_frontmove = GHOST_FORWARD_VECTOR;
 		m_rotation.Multiply(m_frontmove);
-		m_timer = 1;
+		m_timer++;
 	}
-	else if (m_timer > m_randTimer) {
-		m_timer = 0;
+	else if (m_timer > GHOST_RAND_TIMER) {
+		//タイマーの初期化。
+		m_timer = GHOST_TIMER_RESET;
 	}
 	else {
 		m_timer++;
 	}
-	m_position += m_frontmove * m_loiteringSpeed;
 
+	m_position += m_frontmove * m_loiteringSpeed;
 	Horizon();	//視野角判定
 
-	m_enemyModelRender->PlayAnimation(1);
+	m_enemyModelRender->PlayAnimation(eAnimation_Walk);
 
 }
 void Ghost::Follow()
@@ -273,12 +285,14 @@ void Ghost::Update()
 	//プレイヤーとの距離を調べる。
 	m_playerPos = Player::GetInstance()->GetPosition();
 	m_toPlayerVec = m_playerPos - m_position;
+
 	//攻撃が当たったので死ぬ。
 	if (Player::GetInstance()->GetAttackflag() == true) {
 		if (m_toPlayerVec.Length() < m_deadLength) {
 			m_state = eState_Dead;
 		}
 	}
+
 	switch (m_state) {
 	case Ghost::eState_Idle:
 		Idle();

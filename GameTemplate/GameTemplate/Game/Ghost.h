@@ -98,9 +98,6 @@ private:
 	float m_timer = 0;
 	const float m_followLength = 500.0f;	//追跡を始める距離。
 
-	//視野角関連
-	const float horilong = 500.0f;	//視野角判定の距離
-	const float horiAngle = 90.0f;	//視野角判定の角度
 
 	//待機関連
 	float m_idleTime = 30.0f;		//待機時間。

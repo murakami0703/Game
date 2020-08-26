@@ -127,9 +127,16 @@ void Golem::Attack()
 				GOLEM_ATTACK_EFFECT_SCALE
 			);
 		}
+		float m_DamageX = m_position.x + m_damageLen;
+		float m_DamageZ = m_position.z + m_damageLen;
+
 		//エフェクト範囲内の時プレーヤーにダメージ
-		if (m_isDamageFlag == false && m_position.x < m_damageLen&& m_position.x > -m_damageLen
-			&& m_position.z < m_damageLen&& m_position.z > -m_damageLen)
+		if (m_isDamageFlag == false &&
+			m_position.x < m_DamageX &&
+			m_position.x > -m_DamageX &&
+			m_position.z < m_DamageZ &&
+			m_position.z > -m_DamageZ
+			)
 		{
 			GameData::GetInstance()->HPCalc(-1.0f);
 			m_isDamageFlag = true;
