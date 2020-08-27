@@ -306,6 +306,13 @@
     <ClCompile Include="FadeOut.cpp">
       <Filter>sprite\fade</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsGhostObject.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObjectBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -509,6 +516,13 @@
     <ClInclude Include="FadeOut.h">
       <Filter>sprite\fade</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsGhostObject.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObjectBase.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
