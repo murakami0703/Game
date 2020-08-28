@@ -18,7 +18,7 @@ PhysicsGhostObject::~PhysicsGhostObject()
 
 void PhysicsGhostObject::GhostObject(CVector3 pos, CQuaternion rot)
 {
-	m_ghostObject.setCollisionShape(m_collider->GetBody());
+	//m_ghostObject.setCollisionShape(m_collider->GetBody());
 	btTransform btTrans;
 	btTrans.setOrigin({ pos.x, pos.y, pos.z });
 	btTrans.setRotation({ rot.x, rot.y, rot.z, rot.w });

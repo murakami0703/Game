@@ -2,7 +2,7 @@
 #include "TreasureBox.h"
 #include "Player.h"
 #include "EffectManager.h"
-#include "ItemManager.h"
+#include "Item.h"
 
 
 TreasureBox::TreasureBox()
@@ -20,6 +20,7 @@ bool TreasureBox::Start() {
 	//cmoファイルの読み込み。
 	m_BoxModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_BoxModelRender->Init(L"Assets/modelData/Treasure_Box.cmo", m_animClips, eAnimation_Num);
+	m_fowardVector = { 1.0f,0.0f,0.0f };
 	m_BoxModelRender->SetPosition(m_position);
 	m_BoxModelRender->SetRotation(m_rotation);
 	m_BoxModelRender->SetScale(m_scale);
@@ -30,30 +31,19 @@ bool TreasureBox::Start() {
 
 void TreasureBox::Open()
 {
-	ItemManager* item = ItemManager::GetInstance();
 	//開封アニメ再生
 	m_BoxModelRender->PlayAnimation(1);
 
 	if (m_BoxModelRender->IsPlayingAnimation() == false) {
-		//アニメ再生終了したので、取得するアイテムを決める
-		m_rand = rand() % 4;
-		//1 回復薬
-		if (m_rand == m_randNum[0]) {
-			item->ItemGenerated(ItemManager::Item_HpRecovery, m_position);
-		}
-		//2 爆弾
-		else if (m_rand == m_randNum[1]) {
-			item->ItemGenerated(ItemManager::Item_Bum, m_position);
-		}
-		//3 攻撃力UP
-		else if (m_rand == m_randNum[2]) {
-			item->ItemGenerated(ItemManager::Item_AttackUp, m_position);
-		}
-		//4 移動速度UP
-		else if (m_rand == m_randNum[3]) {
-			item->ItemGenerated(ItemManager::Item_SpeedUp, m_position);
-		}
+		//アイテム生成。
+		Item* m_item = g_goMgr->NewGameObject<Item>();
+		m_item->SetPosition(m_position);
+		m_item->SetRotation(m_rotation);
+		m_state = eState_Opened;
 	}
+}
+void TreasureBox::Opened()
+{
 }
 
 
@@ -76,6 +66,10 @@ void TreasureBox::Update()
 		break;
 	case TreasureBox::eState_Open:
 		Open();
-		break;
+		break;	
+	case TreasureBox::eState_Opened:
+			Opened();
+			break;
+
 	}
 }

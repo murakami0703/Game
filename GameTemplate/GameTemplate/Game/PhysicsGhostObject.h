@@ -3,12 +3,13 @@
 /// </summary>
 #pragma once
 #include "physics/RigidBody.h"
+#include "PhysicsObjectBase.h"
 
 /// <summary>
 /// ゴーストオブジェクト
 /// </summary>
 
-class PhysicsGhostObject
+class PhysicsGhostObject : public PhysicsObjectBase
 {
 public:
 	/*!

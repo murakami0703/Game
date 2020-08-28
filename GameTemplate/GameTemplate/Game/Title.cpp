@@ -308,10 +308,13 @@ void Title::TitleFadeOut()
 		if (m_spriteRender[villain]->GetAlpha() >= VILLAUN_SET_ACTIVE_TRUE) {
 			fadeout = g_goMgr->NewGameObject<FadeOut>();
 			fadeout->SetSprite(m_spriteRender[villain]);
+			fadeout = g_goMgr->NewGameObject<FadeOut>();
+			fadeout->SetSprite(m_spriteRender[villain + 1]);
+			m_villainNum = villain;
 		}
 	}
 
-	m_spriteMul = m_spriteRender[3]->GetMulColor();
+	m_spriteMul = m_spriteRender[m_villainNum]->GetMulColor();
 
 	//フェードインが完了したのでゲーム開始。
 	if (m_spriteMul.x <= FADEOUTO_FINISHED.x && m_spriteMul.y <= FADEOUTO_FINISHED.y && m_spriteMul.z <= FADEOUTO_FINISHED.z)
