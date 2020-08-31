@@ -2,14 +2,13 @@
 /// ゴーストオブジェクト
 /// </summary>
 #pragma once
-#include "physics/RigidBody.h"
-#include "PhysicsObjectBase.h"
+#include "BoxCollider.h"
 
 /// <summary>
 /// ゴーストオブジェクト
 /// </summary>
 
-class PhysicsGhostObject : public PhysicsObjectBase
+class PhysicsGhostObject
 {
 public:
 	/*!
@@ -34,11 +33,12 @@ public:
 	/// </summary>
 	/// <param name="pos">座標</param>
 	/// <param name="rot">回転</param>
-	void GhostObject(CVector3 pos, CQuaternion rot);
+	void GhostBoxObject(CVector3 pos, CQuaternion rot, CVector3 size);
 
 private:
 	bool						m_isRegistPhysicsWorld = false;	//!<物理ワールドに登録しているかどうかのフラグ。
-	btGhostObject				m_ghostObject;	//!<ゴースト
+	BoxCollider					m_boxCollider;	//ボックスコライダー。
+	btGhostObject				m_ghostObject;	//!<ゴースト。
 
 };
 

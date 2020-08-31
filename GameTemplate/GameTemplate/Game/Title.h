@@ -57,6 +57,9 @@ private:
 
 	void LightFlashing();		//ライトの点滅
 
+	//ランダム星屑
+	void RandomChipsGenerated();	//ランダムに星屑を生成。
+	void RandomMoveChips();			//ランダムに星屑を動かす。
 
 private:
 
@@ -64,6 +67,7 @@ private:
 
 	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列。
 	SpriteRender* m_titleSprite;				//スプライトレンダー。
+	SpriteRender* m_chipsSprite;				//スプライトレンダー。(星屑)
 
 	FontRender* m_startFont;					//Startフォント。
 	FontRender* m_loadFont;						//Loadフォント。

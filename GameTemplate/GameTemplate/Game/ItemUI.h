@@ -12,7 +12,8 @@ private:
 	enum eSelectState {
 		Item_Use,
 		Item_Move,
-		Item_Now
+		Item_Now,
+		Item_InUse,
 	};
 	//アイテムの種類
 	enum eItemState {
@@ -28,6 +29,7 @@ private:
 	void ItemUse(eItemState& m_State);		//アイテム使用
 	void ItemMove(eItemState& m_State);	//アイテム移動
 	void ItemNow();		//現在選択されているアイテム
+	void ItemInUse();		//現在選択されているアイテム
 
 private:
 	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列

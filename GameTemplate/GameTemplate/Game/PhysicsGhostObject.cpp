@@ -16,9 +16,12 @@ PhysicsGhostObject::~PhysicsGhostObject()
 	}
 }
 
-void PhysicsGhostObject::GhostObject(CVector3 pos, CQuaternion rot)
+void PhysicsGhostObject::GhostBoxObject(CVector3 pos, CQuaternion rot, CVector3 size)
 {
-	//m_ghostObject.setCollisionShape(m_collider->GetBody());
+	//ボックスコライダー
+	m_boxCollider.Create(size);
+
+	m_ghostObject.setCollisionShape(m_boxCollider.GetBody());
 	btTransform btTrans;
 	btTrans.setOrigin({ pos.x, pos.y, pos.z });
 	btTrans.setRotation({ rot.x, rot.y, rot.z, rot.w });
