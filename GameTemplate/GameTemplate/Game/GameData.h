@@ -172,7 +172,11 @@ private:
 	float MP = 50.0f;	//ƒfƒtƒHƒ‹ƒgMP
 	const float MAXMP = 400.0f;	//Å‘åMP
 
-	float ATK = 30.0f;	//Šî‘bUŒ‚—Í
+	float ATK = 10.0f;	//Šî‘bUŒ‚—Í
+	float SPD = 0.5f;	//Šî‘bˆÚ“®‘¬“x
+
+	const float MAXATK = 50.0f;	//Å‘åUŒ‚—Í
+	const float MAXSPD = 2.0f;	//Å‘åˆÚ“®‘¬“x
 
 	//“G
 	int EnemyCount = 0;				//“G‚Ì”

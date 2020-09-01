@@ -18,10 +18,14 @@ public:
 	void Flashing();	//点滅。
 	void EndUse();		//点滅。
 
+	bool SpeedUp::GetItemUseFlag() {
+		return m_itemInUseFlag;
+	}
 private:
 
 	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
 	SpriteRender* m_Sprite;
 	eState m_state = In_Use;
+	bool m_itemInUseFlag = false;
 };
 

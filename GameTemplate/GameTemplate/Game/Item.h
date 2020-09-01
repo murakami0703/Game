@@ -30,6 +30,15 @@ public:
 		m_fowardVector = fowVec;
 	}
 
+	/// <summary>
+	/// アイテム使用中か？
+	/// </summary>
+	/// <param name="flag">false	未使用</param>
+	/// <param name="flag">true		使用中</param>
+	void Item::SetIsItemUse(bool flag) {
+		m_ItemUseFlag = flag;
+	}
+
 private:
 	//状態
 	enum EState {
@@ -57,5 +66,7 @@ private:
 
 	int m_timer = 0;	//タイマー
 	const int ITEM_APPEAR_TIME = 300;	//タイマー
+
+	bool m_ItemUseFlag = false;		//アイテム使用中フラグ
 };
 

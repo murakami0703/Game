@@ -1,5 +1,6 @@
 #pragma once
 #include "PhysicsGhostObject.h"
+
 class StageGate : public IGameObject
 {
 public:
