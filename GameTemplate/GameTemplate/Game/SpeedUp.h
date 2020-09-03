@@ -25,7 +25,9 @@ private:
 
 	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
 	SpriteRender* m_Sprite;
-	eState m_state = In_Use;
-	bool m_itemInUseFlag = false;
+	eState m_state = In_Use;		//状態
+	bool m_itemInUseFlag = false;	//アイテム使用中フラグ
+	int m_timer = 0;				//タイマー。
+	int m_changeCount = 0;			//点滅用のカウント。
 };
 

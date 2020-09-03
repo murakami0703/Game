@@ -589,6 +589,9 @@
     <ImageContentTask Include="Assets\sprite\title\chip2.png" />
     <ImageContentTask Include="Assets\sprite\title\chip3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Item\Itemframe.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

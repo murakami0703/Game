@@ -797,6 +797,9 @@
     <ImageContentTask Include="Assets\sprite\title\chip3.png">
       <Filter>Assets\sprite\title\chips</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\Itemframe.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
