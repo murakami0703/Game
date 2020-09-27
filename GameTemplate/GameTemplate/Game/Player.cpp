@@ -23,18 +23,18 @@ bool Player::Start()
 {
 
 	//アニメーションクリップのロードとループフラグの設定。
-	m_animClips[Animation_Idel].Load(L"Assets/animData/playIdel.tka");
-	m_animClips[Animation_Walk].Load(L"Assets/animData/playwalk.tka");
+	m_animClips[Animation_Idel].Load(L"Assets/animData/player/player_idle.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/player/player_walk.tka");
 	m_animClips[Animation_Walk].SetLoopFlag(true);
-	m_animClips[Animation_Attack].Load(L"Assets/animData/playAttack.tka");
+	m_animClips[Animation_Attack].Load(L"Assets/animData/player/player_idle.tka");
 
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
-	m_skinModelRender->Init(L"Assets/modelData/Footman_Default.cmo", m_animClips, AnimationClip_Num);
+	m_skinModelRender->Init(L"Assets/modelData/player.cmo", m_animClips, AnimationClip_Num);
 	m_position = { -4300.0f, 430.0f, -3000.0f };
 	m_skinModelRender->SetPosition(m_position);
 
-	m_scale = { 0.5f, 0.5f, 0.5f };
+	m_scale = { 3.0f, 3.0f, 3.0f };
 	m_skinModelRender->SetScale(m_scale);
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;

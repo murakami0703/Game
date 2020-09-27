@@ -258,10 +258,10 @@ void ItemUI::ItemMove(eItemState& m_State)
 void ItemUI::ItemNow()
 {
 	//現在選択されているアイテム
-	if (g_pad[0].IsTrigger(enButtonY)) {
+	/*if (g_pad[0].IsTrigger(enButtonY)) {
 		//Yボタンが押されたらアイテム使用状態に遷移
 		m_state = Item_Use;
-	}
+	}*/
 	//LB1またはLB2ボタンが押されたらアイテム移動状態に遷移
 	if (g_pad[0].IsTrigger(enButtonRB1)) {
 		m_upDounFlag = true;		//上
