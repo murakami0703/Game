@@ -23,6 +23,10 @@ public:
 	float GameData::GetATK() {
 		return ATK;
 	}
+	//ˆÚ“®—Íæ“¾
+	float GameData::GetSPD() {
+		return SPD;
+	}
 	//Å‘å‘Ì—Íæ“¾
 	float GameData::GetMAXHitPoint() {
 		return MAXHP;
@@ -40,6 +44,27 @@ public:
 		}
 		if (MAXHP < HP) {
 			HP = MAXHP;
+		}
+	}
+
+	//ˆø”‚Éİ’è‚µ‚½’l‚ğUŒ‚—Í‚É‰ÁZ‚·‚é@•‰‚Ì”‚ğİ’è‚µ‚½‚çŒ¸­‚·‚é
+	void  GameData::ATKCalc(float x) {
+		ATK += x;
+		if (ATK < 0) {
+			ATK = 0;
+		}
+		if (MAXATK < ATK) {
+			ATK = MAXATK;
+		}
+	}
+	//ˆø”‚Éİ’è‚µ‚½’l‚ğˆÚ“®—Í‚É‰ÁZ‚·‚é@•‰‚Ì”‚ğİ’è‚µ‚½‚çŒ¸­‚·‚é
+	void  GameData::SPDCalc(float x) {
+		SPD += x;
+		if (SPD < 0) {
+			SPD = 0;
+		}
+		if (MAXSPD < SPD) {
+			SPD = MAXSPD;
 		}
 	}
 
@@ -172,7 +197,11 @@ private:
 	float MP = 50.0f;	//ƒfƒtƒHƒ‹ƒgMP
 	const float MAXMP = 400.0f;	//Å‘åMP
 
-	float ATK = 30.0f;	//Šî‘bUŒ‚—Í
+	float ATK = 10.0f;	//Šî‘bUŒ‚—Í
+	float SPD = 0.5f;	//Šî‘bˆÚ“®‘¬“x
+
+	const float MAXATK = 50.0f;	//Å‘åUŒ‚—Í
+	const float MAXSPD = 2.0f;	//Å‘åˆÚ“®‘¬“x
 
 	//“G
 	int EnemyCount = 0;				//“G‚Ì”

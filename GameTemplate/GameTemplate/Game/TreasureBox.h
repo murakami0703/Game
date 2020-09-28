@@ -31,12 +31,12 @@ public:
 	}
 private:
 	void Open();
-
-	void OnlyDelete();
+	void Opened();
 
 	enum eState {
 		eState_Idle,
 		eState_Open,
+		eState_Opened,
 	};
 	enum EAnimationClip {
 		eAnimation_Close,
@@ -48,6 +48,7 @@ private:
 	SkinModelRender* m_ItemModelRender;				//アイテムスキンモデルレンダー。
 
 	CVector3 m_position = CVector3().Zero();			//座標。
+	CVector3 m_fowardVector = CVector3().Zero();		//宝箱の前ベクトル。
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
 	CVector3 m_scale = CVector3().One();				//拡大率。
 

@@ -68,7 +68,7 @@ void ItemUI::ItemUse(eItemState& m_State)
 		swprintf(text, L"%02d", m_gamedate->GetItemHpRecovery());
 		m_itemCountFont->SetText(text);
 
-		m_state = Item_Now;
+		m_state = Item_InUse;
 		break;
 	}
 	case ItemUI::Item_Bum:
@@ -79,7 +79,7 @@ void ItemUI::ItemUse(eItemState& m_State)
 		swprintf(text, L"%02d", m_gamedate->GetItemBum());
 		m_itemCountFont->SetText(text);
 
-		m_state = Item_Now;
+		m_state = Item_InUse;
 		break;
 	}
 	case ItemUI::Item_AttackUp:
@@ -90,7 +90,7 @@ void ItemUI::ItemUse(eItemState& m_State)
 		swprintf(text, L"%02d", m_gamedate->GetItemAttackUp());
 		m_itemCountFont->SetText(text);
 
-		m_state = Item_Now;
+		m_state = Item_InUse;
 		break;
 	}
 	case ItemUI::Item_SpeedUp:
@@ -101,7 +101,7 @@ void ItemUI::ItemUse(eItemState& m_State)
 		swprintf(text, L"%02d", m_gamedate->GetItemSpeedUp());
 		m_itemCountFont->SetText(text);
 
-		m_state = Item_Now;
+		m_state = Item_InUse;
 		break;
 	}
 	}
@@ -273,7 +273,10 @@ void ItemUI::ItemNow()
 		m_state = Item_Move;
 	}
 }
+void ItemUI::ItemInUse()
+{
 
+}
 
 void ItemUI::Update()
 {
@@ -288,6 +291,10 @@ void ItemUI::Update()
 	case ItemUI::Item_Now:
 		ItemNow();
 		break;
+	case ItemUI::Item_InUse:
+		ItemInUse();
+		break;
+
 	}
 }
 
