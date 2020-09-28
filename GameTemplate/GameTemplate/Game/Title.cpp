@@ -178,6 +178,7 @@ bool Title::Start()
 		m_titleSprite->SetScale(VILLAIN_SCALE);
 		m_spriteRender.push_back(m_titleSprite);
 	}
+
 	//フォント。
 	{
 		//はじめる
@@ -470,6 +471,20 @@ void Title::VillainSideWays3()
 		m_spriteRender[4]->SetPosition(VILLAIN1_POSITION);
 		m_villainState = Villain_SideWays1;
 	}
+
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////星屑関係の処理////////////////////////////////
+
+void Title::RandomChipsGenerated()
+{
+	//ランダムに星屑を生成。
+}
+void Title::RandomMoveChips()
+{
+	//ランダムに星屑を動かす。
 
 }
 

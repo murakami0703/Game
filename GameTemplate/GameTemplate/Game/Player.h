@@ -24,6 +24,10 @@ public:
 		return attackflag;
 	}
 
+	CharacterController Player::GetCharacon() {
+		return m_characon;
+	}
+
 	//インスタンスの取得
 	static Player* GetInstance() {
 		return m_instance;

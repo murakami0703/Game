@@ -112,6 +112,12 @@
     <Filter Include="Assets\sprite\title\villain">
       <UniqueIdentifier>{be0f4edb-4312-4833-9139-f168d8b469de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\title\chips">
+      <UniqueIdentifier>{af3cedb9-4b46-4916-8faa-f54d5d9bcabb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="item">
+      <UniqueIdentifier>{e937ded1-1eee-4999-93f0-dbd89a3f4231}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -291,9 +297,6 @@
     <ClCompile Include="ItemUI.cpp">
       <Filter>ui</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>gimmick</Filter>
-    </ClCompile>
     <ClCompile Include="MapChipRender.cpp">
       <Filter>level</Filter>
     </ClCompile>
@@ -309,8 +312,21 @@
     <ClCompile Include="BoxCollider.cpp">
       <Filter>physics</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsObjectBase.cpp">
-      <Filter>physics</Filter>
+    <ClCompile Include="StageGate.cpp" />
+    <ClCompile Include="Item.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedUp.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="HpRecovery.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="Bum.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackUp.cpp">
+      <Filter>item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -500,9 +516,6 @@
     <ClInclude Include="ItemUI.h">
       <Filter>ui</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>gimmick</Filter>
-    </ClInclude>
     <ClInclude Include="MapChipRender.h">
       <Filter>level</Filter>
     </ClInclude>
@@ -518,8 +531,21 @@
     <ClInclude Include="BoxCollider.h">
       <Filter>physics</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsObjectBase.h">
-      <Filter>physics</Filter>
+    <ClInclude Include="StageGate.h" />
+    <ClInclude Include="Item.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedUp.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="HpRecovery.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="Bum.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackUp.h">
+      <Filter>item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -732,35 +758,47 @@
     <ImageContentTask Include="Assets\sprite\Ui_SouiFrame.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain1.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain2.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain3.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain4.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain5.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain6.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain7.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain8.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain9.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\light.png">
       <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain1.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain8.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain9.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain2.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain3.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain4.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain5.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain6.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain7.png">
+      <Filter>Assets\sprite\title\villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\chip1.png">
+      <Filter>Assets\sprite\title\chips</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\chip2.png">
+      <Filter>Assets\sprite\title\chips</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\chip3.png">
+      <Filter>Assets\sprite\title\chips</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\Itemframe.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

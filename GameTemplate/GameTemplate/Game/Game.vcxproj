@@ -103,8 +103,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Anima.cpp" />
+    <ClCompile Include="AttackUp.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Bum.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectEngine.cpp" />
     <ClCompile Include="EffectManager.cpp" />
@@ -138,6 +140,7 @@
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
+    <ClCompile Include="HpRecovery.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemUI.cpp" />
     <ClCompile Include="LevelSet.cpp" />
@@ -150,7 +153,6 @@
     <ClCompile Include="math\Matrix.cpp" />
     <ClCompile Include="math\Vector.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
-    <ClCompile Include="PhysicsObjectBase.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\Physics.cpp" />
     <ClCompile Include="physics\RigidBody.cpp" />
@@ -169,9 +171,11 @@
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
+    <ClCompile Include="SpeedUp.cpp" />
     <ClCompile Include="sprite\Sprite.cpp" />
     <ClCompile Include="sprite\SpriteRender.cpp" />
     <ClCompile Include="sprite\SpriteStandby.cpp" />
+    <ClCompile Include="StageGate.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -182,8 +186,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anima.h" />
+    <ClInclude Include="AttackUp.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Bum.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectEngine.h" />
     <ClInclude Include="EffectManager.h" />
@@ -218,6 +224,7 @@
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
+    <ClInclude Include="HpRecovery.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemUI.h" />
     <ClInclude Include="LevelSet.h" />
@@ -229,7 +236,6 @@
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="PhysicsGhostObject.h" />
-    <ClInclude Include="PhysicsObjectBase.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\Physics.h" />
@@ -251,9 +257,11 @@
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
+    <ClInclude Include="SpeedUp.h" />
     <ClInclude Include="sprite\Sprite.h" />
     <ClInclude Include="sprite\SpriteRender.h" />
     <ClInclude Include="sprite\SpriteStandby.h" />
+    <ClInclude Include="StageGate.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Title.h" />
@@ -575,6 +583,14 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\title\light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\title\chip1.png" />
+    <ImageContentTask Include="Assets\sprite\title\chip2.png" />
+    <ImageContentTask Include="Assets\sprite\title\chip3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Item\Itemframe.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
