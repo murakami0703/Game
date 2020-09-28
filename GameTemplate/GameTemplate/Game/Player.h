@@ -42,16 +42,10 @@ private:
 
 	enum PAnimation {
 		Animation_Idel,
-		Animation_Start_Walking,
 		Animation_Walk,
-		Animation_Start_Dath,
-		Animation_Dath,
-		Animation_bom_throw,
-		Animation_bom_with,
-		Animation_bomwith_walk,
-		Animation_Drink,
 		Animation_Attack1,
-		Animation_Damage,
+		Animation_Attack2,
+		Animation_Dead,
 		AnimationClip_Num
 	};
 private:

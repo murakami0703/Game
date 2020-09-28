@@ -11,7 +11,7 @@ CSoundSource::CSoundSource()
 {
 	memset(m_emitterAzimuths, 0, sizeof(m_emitterAzimuths));
 	memset(m_matrixCoefficients, 0, sizeof(m_matrixCoefficients));
-	//g_soundEngine->AddSoundSource(this);
+	g_soundEngine->AddSoundSource(this);
 }
 CSoundSource::~CSoundSource()
 {
@@ -190,9 +190,6 @@ void CSoundSource::UpdateOnMemory()
 		if (m_isLoop) {
 			//ƒ‹[ƒvB
 			Play(m_isLoop);
-		}
-		else {
-			g_goMgr->DeleteGameObject(this);
 		}
 	}
 }

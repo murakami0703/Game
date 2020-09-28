@@ -109,9 +109,6 @@
     <Filter Include="Assets\modelData\item">
       <UniqueIdentifier>{f7ebcde0-563f-4d3d-8920-4988377e8360}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\sprite\title\villain">
-      <UniqueIdentifier>{be0f4edb-4312-4833-9139-f168d8b469de}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -231,6 +228,9 @@
     <ClCompile Include="Gimmick.cpp">
       <Filter>gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>sprite\fade</Filter>
+    </ClCompile>
     <ClCompile Include="GameUI.cpp">
       <Filter>ui</Filter>
     </ClCompile>
@@ -299,12 +299,6 @@
     </ClCompile>
     <ClCompile Include="MapChipRender.cpp">
       <Filter>level</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeIn.cpp">
-      <Filter>sprite\fade</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeOut.cpp">
-      <Filter>sprite\fade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +427,9 @@
     <ClInclude Include="Gimmick.h">
       <Filter>gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>sprite\fade</Filter>
+    </ClInclude>
     <ClInclude Include="GameUI.h">
       <Filter>ui</Filter>
     </ClInclude>
@@ -503,12 +500,6 @@
     <ClInclude Include="MapChipRender.h">
       <Filter>level</Filter>
     </ClInclude>
-    <ClInclude Include="FadeIn.h">
-      <Filter>sprite\fade</Filter>
-    </ClInclude>
-    <ClInclude Include="FadeOut.h">
-      <Filter>sprite\fade</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -556,6 +547,9 @@
     <MeshContentTask Include="Assets\modelData\Box.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\tesplay.fbx">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\fence.fbx">
       <Filter>Assets\modelData\stage1</Filter>
     </MeshContentTask>
@@ -570,9 +564,6 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\SpeedUp.fbx">
       <Filter>Assets\modelData\item</Filter>
-    </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Player.fbx">
-      <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
@@ -669,8 +660,17 @@
     <ImageContentTask Include="Assets\sprite\Item\spe.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\mikyan.jpg">
+      <Filter>Assets\sprite</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\title\light.png">
+      <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\star_chips.png">
       <Filter>Assets\sprite\title</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Hp.png">
+      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\modelData\AO.png">
       <Filter>Assets\modelData</Filter>
@@ -681,37 +681,7 @@
     <ImageContentTask Include="Assets\modelData\MatallicSmoothness.png">
       <Filter>Assets\modelData</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\hp\Boss_Hp.png">
-      <Filter>Assets\sprite\hp</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\hp\Boss_Hpframe.png">
-      <Filter>Assets\sprite\hp</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\game_title.png">
-      <Filter>Assets\sprite\title</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\result\Player_Illustration.png">
-      <Filter>Assets\sprite\result</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\attackUp.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\speedUp.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Fade.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\gameover.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Hp.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Hp_Half.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\mikyan.jpg">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\Ui_Soui.png">
@@ -720,34 +690,19 @@
     <ImageContentTask Include="Assets\sprite\Ui_SouiFrame.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain1.png">
+    <ImageContentTask Include="Assets\sprite\hp\Boss_Hp.png">
+      <Filter>Assets\sprite\hp</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\hp\Boss_Hpframe.png">
+      <Filter>Assets\sprite\hp</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gameover.png">
       <Filter>Assets\sprite</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain2.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain3.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain4.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain5.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain6.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain7.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain8.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\Villain\Villain9.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\title\light.png">
+    <ImageContentTask Include="Assets\sprite\Item\speedUp.png" />
+    <ImageContentTask Include="Assets\sprite\Item\attackUp.png" />
+    <ImageContentTask Include="Assets\sprite\result\Player_Illustration.png" />
+    <ImageContentTask Include="Assets\sprite\title\game_title.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
   </ItemGroup>

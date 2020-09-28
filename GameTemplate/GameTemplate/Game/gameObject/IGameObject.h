@@ -9,7 +9,6 @@ public:
 		m_priority(0)
 	{
 	}
-	virtual ~IGameObject() {}
 	/// <summary>
 	/// Update‚Ì’¼‘O‚ÅŒÄ‚Î‚ê‚éŠJnˆ—
 	/// </summary>

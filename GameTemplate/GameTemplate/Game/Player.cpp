@@ -23,38 +23,29 @@ bool Player::Start()
 {
 
 	//アニメーションクリップのロードとループフラグの設定。
-	m_animClips[Animation_Idel].Load(L"Assets/animData/player/player_idle.tka");
+	m_animClips[Animation_Idel].Load(L"Assets/animData/eneIdle.tka");
 	m_animClips[Animation_Idel].SetLoopFlag(true);
-	m_animClips[Animation_Start_Walking].Load(L"Assets/animData/player/player_start_walking.tka");
-	m_animClips[Animation_Walk].Load(L"Assets/animData/player/player_walk.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/eneWalk.tka");
 	m_animClips[Animation_Walk].SetLoopFlag(true);
-	m_animClips[Animation_Start_Dath].Load(L"Assets/animData/player/player_start_dash.tka");
-	m_animClips[Animation_Dath].Load(L"Assets/animData/player/player_dash.tka");
-	m_animClips[Animation_Dath].SetLoopFlag(true);
-	m_animClips[Animation_bom_throw].Load(L"Assets/animData/player/player_bom_throw.tka");
-	m_animClips[Animation_bom_with].Load(L"Assets/animData/player/player_bom_with.tka");
-	m_animClips[Animation_bomwith_walk].Load(L"Assets/animData/player/player_bomwith_walk.tka");
-	m_animClips[Animation_bomwith_walk].SetLoopFlag(true);
-	m_animClips[Animation_Drink].Load(L"Assets/animData/player/player_drink.tka");
-	m_animClips[Animation_Attack1].Load(L"Assets/animData/player/player_attack1.tka");
-	m_animClips[Animation_Damage].Load(L"Assets/animData/player/player_damage.tka");
-
+	m_animClips[Animation_Attack1].Load(L"Assets/animData/eneAT1.tka");
+	m_animClips[Animation_Dead].Load(L"Assets/animData/eneDeath.tka");
+	
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
-	m_skinModelRender->Init(L"Assets/modelData/Player.cmo", m_animClips, AnimationClip_Num);
-	m_position = { -4300.0f, 430.0f, -3000.0f };
+	m_skinModelRender->Init(L"Assets/modelData/Footman_Default.cmo", m_animClips, AnimationClip_Num);
+	m_position = { -4300.0f, 460.0f, -3000.0f };
 	m_skinModelRender->SetPosition(m_position);
 
-	m_scale = { 5.0f, 5.0f, 5.0f };
+	m_scale = { 50.0f, 50.0f, 50.0f };
 	m_skinModelRender->SetScale(m_scale);
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 
 	//各マップの設定。
-	/*m_skinModelRender->SetNormalMap(L"Assets/modelData/Normal.dds");
+	m_skinModelRender->SetNormalMap(L"Assets/modelData/Normal.dds");
 	m_skinModelRender->SetSpecularMap(L"Assets/modelData/MatallicSmoothness.dds");
 	m_skinModelRender->SetAmbientMap(L"Assets/modelData/AO.dds");
-	*/
+	
 	m_nowHP = GameData::GetInstance()->GetHitPoint();
 	m_skinModelRender->SetShadowCaster(true);
 	return true;
@@ -103,7 +94,7 @@ void Player::Move()
 		m_move.y = 0.0f;
 	}
 	m_position = m_characon.Execute(m_caraTime, m_move);
-	m_skinModelRender->PlayAnimation(9);
+	m_skinModelRender->PlayAnimation(1);
 
 }
 void Player::Attack()
