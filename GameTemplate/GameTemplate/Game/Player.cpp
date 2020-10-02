@@ -24,7 +24,7 @@ bool Player::Start()
 
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[Animation_Idel].Load(L"Assets/animData/player/player_idle.tka");
-	m_animClips[Animation_Walk].Load(L"Assets/animData/player/player_walk.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/player/player_dash.tka");
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 	m_animClips[Animation_Attack].Load(L"Assets/animData/player/player_idle.tka");
 

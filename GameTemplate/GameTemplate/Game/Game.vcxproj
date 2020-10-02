@@ -103,13 +103,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Anima.cpp" />
+    <ClCompile Include="AttackUp.cpp" />
     <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Bum.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectEngine.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EffectPlay.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="Fade.cpp" />
+    <ClCompile Include="FadeIn.cpp" />
+    <ClCompile Include="FadeOut.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FontRender.cpp" />
     <ClCompile Include="GameData.cpp" />
@@ -136,6 +140,8 @@
     <ClCompile Include="graphics\SkinModelEffect.cpp" />
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
+    <ClCompile Include="HpRecovery.cpp" />
+    <ClCompile Include="InUseItemUI.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemUI.cpp" />
     <ClCompile Include="LevelSet.cpp" />
@@ -147,6 +153,7 @@
     <ClCompile Include="math\kMath.cpp" />
     <ClCompile Include="math\Matrix.cpp" />
     <ClCompile Include="math\Vector.cpp" />
+    <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\Physics.cpp" />
     <ClCompile Include="physics\RigidBody.cpp" />
@@ -165,9 +172,11 @@
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
+    <ClCompile Include="SpeedUp.cpp" />
     <ClCompile Include="sprite\Sprite.cpp" />
     <ClCompile Include="sprite\SpriteRender.cpp" />
     <ClCompile Include="sprite\SpriteStandby.cpp" />
+    <ClCompile Include="StageGate.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -178,13 +187,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anima.h" />
+    <ClInclude Include="AttackUp.h" />
     <ClInclude Include="Bat.h" />
+    <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Bum.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectEngine.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="EffectPlay.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="Fade.h" />
+    <ClInclude Include="FadeIn.h" />
+    <ClInclude Include="FadeOut.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameData.h" />
@@ -212,6 +225,8 @@
     <ClInclude Include="graphics\SkinModelShaderConst.h" />
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
+    <ClInclude Include="HpRecovery.h" />
+    <ClInclude Include="InUseItemUI.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemUI.h" />
     <ClInclude Include="LevelSet.h" />
@@ -222,6 +237,7 @@
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
+    <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\Physics.h" />
@@ -243,9 +259,11 @@
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
+    <ClInclude Include="SpeedUp.h" />
     <ClInclude Include="sprite\Sprite.h" />
     <ClInclude Include="sprite\SpriteRender.h" />
     <ClInclude Include="sprite\SpriteStandby.h" />
+    <ClInclude Include="StageGate.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Title.h" />
@@ -293,6 +311,7 @@
     <MeshContentTask Include="Assets\modelData\HpRecovery.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\player.fbx" />
     <MeshContentTask Include="Assets\modelData\slaim.fbx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -332,12 +351,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </MeshContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\mikyan.jpg">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\Hp.png">
