@@ -24,10 +24,13 @@ bool Player::Start()
 
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[Animation_Idel].Load(L"Assets/animData/player/player_idle.tka");
-	m_animClips[Animation_Walk].Load(L"Assets/animData/player/player_dash.tka");
+	m_animClips[Animation_Walk].Load(L"Assets/animData/player/player_walk.tka");
 	m_animClips[Animation_Walk].SetLoopFlag(true);
-	m_animClips[Animation_Attack].Load(L"Assets/animData/player/player_idle.tka");
-
+	m_animClips[Animation_Run].Load(L"Assets/animData/player/player_dash.tka");
+	m_animClips[Animation_Run].SetLoopFlag(true);
+	m_animClips[Animation_Drink].Load(L"Assets/animData/player/player_drink.tka");
+	m_animClips[Animation_Attack].Load(L"Assets/animData/player/player_attacktes.tka");
+	m_animClips[Animation_Damage].Load(L"Assets/animData/player/player_damage.tka");
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_skinModelRender->Init(L"Assets/modelData/player.cmo", m_animClips, AnimationClip_Num);
@@ -85,6 +88,9 @@ void Player::Move()
 		m_move.z -= m_movespeed;
 		m_rotation.SetRotation(CVector3().AxisY(), m_rotationD);
 
+	}
+	else {
+		m_state = Player_Idle;
 	}
 	m_move.y -= 1.0f;
 	if (m_characon.IsOnGround()) {

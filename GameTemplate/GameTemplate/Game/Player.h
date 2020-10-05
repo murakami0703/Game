@@ -43,7 +43,10 @@ private:
 	enum PAnimation {
 		Animation_Idel,
 		Animation_Walk,
+		Animation_Run,
+		Animation_Drink,
 		Animation_Attack,
+		Animation_Damage,
 		AnimationClip_Num
 	};
 private:
