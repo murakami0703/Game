@@ -325,6 +325,9 @@
     <ClCompile Include="InUseItemUI.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsObjectBase.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -546,6 +549,9 @@
     </ClInclude>
     <ClInclude Include="InUseItemUI.h">
       <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObjectBase.h">
+      <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
