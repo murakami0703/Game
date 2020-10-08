@@ -3,6 +3,9 @@
 /// <summary>
 /// 物理オブジェクトのベースクラス。
 /// </summary>
+/// 
+ #include "Physics/ICollider.h"
+
 class PhysicsObjectBase
 {
 public:
