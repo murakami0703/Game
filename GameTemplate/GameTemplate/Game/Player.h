@@ -13,14 +13,14 @@ public:
 	/// プレイヤーのポジションを返す関数。
 	/// </summary>
 	/// <returns>座標</returns>
-	CVector3 Player::GetPosition() {
+	const CVector3 Player::GetPosition() {
 		return m_position;
 	}
 	/// <summary>
 	/// 攻撃判定
 	/// </summary>
 	/// <returns>true		攻撃中</returns>
-	bool Player::GetAttackflag() {
+	const bool Player::GetAttackflag() {
 		return attackflag;
 	}
 

@@ -68,10 +68,11 @@ Title::Title(){}
 
 Title::~Title()
 {
+	//Spriteの削除
 	for (int i = 0; i < m_spriteRender.size(); i++) {
 		g_goMgr->DeleteGameObject(m_spriteRender[i]);
 	}
-	//フォント
+	//フォントの削除。
 	g_goMgr->DeleteGameObject(m_startFont);
 	g_goMgr->DeleteGameObject(m_loadFont);
 	g_goMgr->DeleteGameObject(m_titleBgm);
@@ -317,7 +318,7 @@ void Title::TitleFadeOut()
 
 	m_spriteMul = m_spriteRender[m_villainNum]->GetMulColor();
 
-	//フェードインが完了したのでゲーム開始。
+	//フェードアウトが完了したのでゲーム開始。
 	if (m_spriteMul.x <= FADEOUTO_FINISHED.x && m_spriteMul.y <= FADEOUTO_FINISHED.y && m_spriteMul.z <= FADEOUTO_FINISHED.z)
 	{
 		g_goMgr->NewGameObject<Game>();
@@ -357,7 +358,7 @@ void Title::ChangeSprite(SpriteRender* m_sprite1, SpriteRender* m_sprite2, float
 void Title::SpriteSetAlpha(SpriteRender* m_nextSprite1, SpriteRender* m_nextSprite2, SpriteRender* m_invisible1, SpriteRender* m_invisible2)
 {
 	//小人のSptiteを入れ替え。
-	//最前列の小人の位置を次のSpriteに設定。
+	//最前列の小人の位置を次のSpriteたちに設定。
 	if (m_invisible1->GetPosition().x <= m_invisible2->GetPosition().x)
 	{
 		m_nextSprite1->SetPosition(m_invisible1->GetPosition());

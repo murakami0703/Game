@@ -8,11 +8,17 @@ public:
 	bool Start();		
 	void Update();	
 
+	/// <summary>
+	/// インスタンスの取得。
+	/// </summary>
+	/// <returns>インスタンス</returns>
 	static Title* GetInstance()
 	{
 		return m_instance;
 	}
+
 private:
+
 	//状態
 	enum EState {
 		Title_FadeIn,		//フェードイン。
@@ -87,6 +93,6 @@ private:
 	int m_stopTimer = 0;			//停止時間用タイマー。
 	int m_villainNum = 0;
 	CVector4 m_spriteMul = CVector4().White();
-		bool movestart = false;
+	bool movestart = false;
 };
 
