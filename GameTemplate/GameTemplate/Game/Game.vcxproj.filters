@@ -328,6 +328,9 @@
     <ClCompile Include="PhysicsObjectBase.cpp">
       <Filter>physics</Filter>
     </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -551,6 +554,9 @@
       <Filter>ui</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsObjectBase.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
       <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>

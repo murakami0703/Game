@@ -60,7 +60,6 @@ public:
 	*@param[in]	rot					回転。
 	*@param[in]	skinModelData		スキンモデルデータ。
 	*/
-	//void CreateMesh(CVector3 pos, CQuaternion rot, const SkinModelData& skinModelData);
 	void CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale, const SkinModel& skinModel);
 	void CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale, SkinModelRender* skinModelRender);
 protected:

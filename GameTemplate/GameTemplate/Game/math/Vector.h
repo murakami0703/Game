@@ -105,6 +105,14 @@ public:
 		dst.y = y;
 		dst.z = z;
 	}
+	template<>
+	void CopyTo(btVector3& dst) const
+	{
+		dst.setX(x);
+		dst.setY(y);
+		dst.setZ(z);
+	}
+
 	/*!
 	* @brief	ベクトルの各要素を設定。
 	*/
@@ -124,6 +132,13 @@ public:
 	{
 		Set(_v.x(), _v.y(), _v.z());
 	}
+	void Set(btVector3& _v)
+	{
+		this->x = _v.x();
+		this->y = _v.y();
+		this->z = _v.z();
+	}
+
 	
 	/*!
 	 * @brief	ベクトルを加算。
@@ -349,7 +364,25 @@ public:
 	{
 		return DirectX::XMLoadFloat4(&vec);
 	}
-	CVector4(){}
+	CVector4(){
+	}
+	template<class TVector4>
+	void CopyTo(TVector4& dst) const
+	{
+		dst.x = x;
+		dst.y = y;
+		dst.z = z;
+		dst.w = w;
+	}
+	template<>
+	void CopyTo(btQuaternion& dst) const
+	{
+		dst.setX(x);
+		dst.setY(y);
+		dst.setZ(z);
+		dst.setW(w);
+	}
+
 	/*!
 	*@brief	代入演算子。
 	*/
@@ -359,8 +392,8 @@ public:
 		return *this;
 	}
 	/*!
-	 *@brief	コンストラクタ
-	 */
+	*@brief	コンストラクタ
+	*/
 	CVector4(float x, float y, float z, float w)
 	{
 		Set(x, y, z, w);
@@ -519,6 +552,13 @@ public:
 		x = axis.x * s;
 		y = axis.y * s;
 		z = axis.z * s;
+	}
+	void Set(const btQuaternion& rot)
+	{
+		x = rot.x();
+		y = rot.y();
+		z = rot.z();
+		w = rot.w();
 	}
 	/*!
 	*@brief	行列からクォータニオンを作成。
