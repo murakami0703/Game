@@ -1,18 +1,15 @@
 #pragma once
 
-class GameCamera : public IGameObject
+class GameCamera final : public IGameObject
 {
 public:
 	GameCamera();
 	~GameCamera();
-	/// <summary>
-	/// 更新。
-	/// </summary>
-	/// <param name="player">プレイヤーの検索</param>
-	bool Start();
-	void Update();
+
+	bool Start() override;
+	void Update() override;
+private:
 	CVector3 cameraPos;			//視点。
 	CVector3 cameraTarget;		//注視点。
-
 };
 

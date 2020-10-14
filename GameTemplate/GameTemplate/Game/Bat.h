@@ -1,6 +1,6 @@
 #pragma once
 
-class Bat : public IGameObject
+class Bat : public IActor
 {
 public:
 	Bat();
@@ -8,30 +8,8 @@ public:
 	/// <summary>
 	/// 遠距離攻撃
 	/// </summary>
-	bool Start();
-	void Update();
-
-	/// <summary>
-	/// 座標を設定。
-	/// </summary>
-	void Bat::SetPosition(CVector3 pos)
-	{
-		m_position = pos;
-	}
-	/// <summary>
-	/// 回転を設定。
-	/// </summary>
-	void Bat::SetRotation(CQuaternion rot)
-	{
-		m_rotation = rot;
-	}
-	/// <summary>
-	/// 回転率を設定。
-	/// </summary>
-	void Bat::SetScale(CVector3 sca)
-	{
-		m_scale = sca;
-	}
+	bool Start() override;
+	void Update() override;
 
 private:
 	// 状態
@@ -61,11 +39,7 @@ private:
 
 private:
 
-	SkinModelRender* m_enemyModelRender;				//スキンモデルレンダー。
 	CVector3 m_position = CVector3().Zero();			//座標。
-	CVector3 m_oldPos = CVector3().Zero();				//初期座標。
-	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
-	CVector3 m_scale = CVector3().One();				//拡大率。
 
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。

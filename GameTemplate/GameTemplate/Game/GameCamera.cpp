@@ -2,20 +2,14 @@
 #include "GameCamera.h"
 #include "Player.h"
 
-GameCamera::GameCamera()
-{
-
-}
-
-
-GameCamera::~GameCamera()
-{
-}
+GameCamera::GameCamera(){}
+GameCamera::~GameCamera(){}
 
 bool GameCamera::Start()
 {
 	return true;
 }
+
 void GameCamera::Update()
 {
 	/// <summary>

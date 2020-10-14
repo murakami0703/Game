@@ -1,14 +1,14 @@
 #pragma once
 #include "IActor.h"
 
-class Golem : public IActor
+class Golem final : public IActor
 {
 public:
 	Golem();
 	~Golem();
 
-	bool Start();
-	void Update();
+	bool Start() override;
+	void Update() override;
 
 private:
 	//èÛë‘ÅB

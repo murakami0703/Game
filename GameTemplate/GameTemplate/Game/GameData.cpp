@@ -6,13 +6,9 @@ GameData* GameData::m_instance = nullptr;
 GameData::GameData()
 {
 	m_instance = this;
-
 }
+GameData::~GameData(){}
 
-
-GameData::~GameData()
-{
-}
 bool GameData::Start() {
 	return true;
 }

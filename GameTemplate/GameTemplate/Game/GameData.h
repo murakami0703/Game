@@ -8,32 +8,32 @@ public:
 	GameData();
 	~GameData();
 
-	bool Start();
-	void Update();
+	bool Start() override;
+	void Update() override;
 
 	//体力取得
-	float GameData::GetHitPoint() {
+	float GetHitPoint() {
 		return HP;
 	}
 	//魔力取得
-	float GameData::GetMagicPoint() {
+	float GetMagicPoint() {
 		return MP;
 	}
 	//攻撃力取得
-	float GameData::GetATK() {
+	float GetATK() {
 		return ATK;
 	}
 	//最大体力取得
-	float GameData::GetMAXHitPoint() {
+	float GetMAXHitPoint() {
 		return MAXHP;
 	}
 	//最大魔力取得
-	float GameData::GetMAXMagicPoint() {
+	float GetMAXMagicPoint() {
 		return MAXMP;
 	}
 
 	//引数に設定した値を体力に加算する　負の数を設定したら減少する
-	void  GameData::HPCalc(float x) {
+	void  HPCalc(float x) {
 		HP += x;
 		if (HP < 0) {
 			HP = 0;
@@ -45,44 +45,44 @@ public:
 
 	//////////////敵///////////////////
 	//敵の数を取得
-	int GameData::GetEnemyCount() {
+	int GetEnemyCount() {
 		return EnemyCount;
 	}
 	//敵の数を減少
-	void GameData::EnemyReduce() 
+	void EnemyReduce() 
 	{
 			EnemyCount--;
 	}
 
-	bool GameData::GetBossMoveFlag()
+	bool GetBossMoveFlag()
 	{
 		return m_bossMoveFlag;
 	}
 
 	//引数をエネミーカウントに代入
-	void GameData::SetEnemyCount(int x)
+	void SetEnemyCount(int x)
 	{
 		EnemyCount = x;
 	}
 	//////////////アイテム///////////////////
 	//回復薬
-	int GameData::GetItemHpRecovery() {
+	int GetItemHpRecovery() {
 		return m_hpRecovery;
 	}
 	//爆弾
-	int GameData::GetItemBum() {
+	int GetItemBum() {
 		return m_bum;
 	}
 	//攻撃力up
-	int GameData::GetItemAttackUp() {
+	int GetItemAttackUp() {
 		return m_attackUp;
 	}
 	//移動速度up
-	int GameData::GetItemSpeedUp() {
+	int GetItemSpeedUp() {
 		return m_speedUp;
 	}
 
-	void  GameData::HPRecoveryCalc(int x) {
+	void  HPRecoveryCalc(int x) {
 		m_hpRecovery += x;
 		if (m_hpRecovery < 0) {
 			m_hpRecovery = 0;
@@ -91,7 +91,7 @@ public:
 			m_hpRecovery = MAXItem;
 		}
 	}
-	void  GameData::BumCalc(int x) {
+	void  BumCalc(int x) {
 		m_bum += x;
 		if (m_bum < 0) {
 			m_bum = 0;
@@ -100,7 +100,7 @@ public:
 			m_bum = MAXItem;
 		}
 	}
-	void  GameData::AttackUpCalc(int x) {
+	void  AttackUpCalc(int x) {
 		m_attackUp += x;
 		if (m_attackUp < 0) {
 			m_attackUp = 0;
@@ -109,7 +109,7 @@ public:
 			m_attackUp = MAXItem;
 		}
 	}
-	void  GameData::SpeedUpCalc(int x) {
+	void  SpeedUpCalc(int x) {
 		m_speedUp += x;
 		if (m_speedUp < 0) {
 			m_speedUp = 0;
@@ -121,7 +121,7 @@ public:
 
 
 	//////////////魂///////////////////
-	void  GameData::AnimaCalc(int x) {
+	void  AnimaCalc(int x) {
 		Anima += x;
 		if (Anima < 0) {
 			Anima = 0;
@@ -131,26 +131,26 @@ public:
 		}
 	}
 
-	void  GameData::SetResultFlag(bool flag)
+	void  SetResultFlag(bool flag)
 	{
 		resultflag = flag;
 	}
 
-	bool  GameData::ResultFlag()
+	bool  ResultFlag()
 	{
 		return resultflag;
 	}
-	void  GameData::SetGameOverFlag(bool flag)
+	void  SetGameOverFlag(bool flag)
 	{
 		resultflag = flag;
 	}
 
-	bool  GameData::GameOverFlag()
+	bool  GameOverFlag()
 	{
 		return resultflag;
 	}
 
-	int GameData::GetAnima() {
+	int GetAnima() {
 		return Anima;
 	}
 

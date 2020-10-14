@@ -25,24 +25,26 @@ bool Bat::Start()
 	m_animClips[eAnimation_Premove].Load(L"Assets/animData/bat/bat_premove.tka");
 	m_animClips[eAnimation_Attack].Load(L"Assets/animData/bat/bat_attack.tka");
 	m_animClips[eAnimation_Death].Load(L"Assets/animData/bat/bat_dead.tka");
-	//cmoファイルの読み込み。
-	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
-	m_enemyModelRender->Init(L"Assets/modelData/bat.cmo", m_animClips, eAnimation_Num);
-	m_enemyModelRender->PlayAnimation(0);
-	m_enemyModelRender->SetPosition(m_position);
-	m_enemyModelRender->SetRotation(m_rotation);
-	m_enemyModelRender->SetScale(m_scale);
 
-	m_enemyModelRender->SetShadowCaster(true);
+	//cmoファイルの読み込み。
+	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
+	m_skinModelRender->Init(L"Assets/modelData/bat.cmo", m_animClips, eAnimation_Num);
+	m_skinModelRender->PlayAnimation(0);
+	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetScale(m_scale);
+
+	m_skinModelRender->SetShadowCaster(true);	//シャドウキャスターに描画。
 
 	return true;
 }
 
 void Bat::Loitering()
 {
-	m_enemyModelRender->PlayAnimation(0);
+	m_skinModelRender->PlayAnimation(eAnimation_Walk);
 	m_state = eState_Follow;
 }
+
 void Bat::Follow()
 {
 	//追尾中。
@@ -198,8 +200,8 @@ void Bat::Update()
 	}
 
 	//ワールド行列の更新。
-	m_enemyModelRender->SetPosition(m_position);
-	m_enemyModelRender->SetRotation(m_rotation);
-	m_enemyModelRender->SetScale(m_scale);
+	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetScale(m_scale);
 	
 }
