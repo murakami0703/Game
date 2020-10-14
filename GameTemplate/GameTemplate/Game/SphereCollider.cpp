@@ -19,4 +19,3 @@ void SphereCollider::Create(const float radius)
 {
 	shape = new btSphereShape(radius);
 }
-}

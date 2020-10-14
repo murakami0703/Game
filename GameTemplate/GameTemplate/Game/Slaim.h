@@ -40,14 +40,14 @@ private:
 
 	// 状態
 	enum EState {
-		eState_Idle,	//待機。
+		eState_Idle,		//待機。
 		eState_Loitering,	//徘徊。
 		eState_Follow,		//プレイヤーを追跡。
 		eState_Premove,		//予備動作。
-		eState_Premove2,		//予備動作。
+		eState_Premove2,	//予備動作。
 		eState_Attack,		//攻撃。
 		eState_Vertigo,		//眩暈。
-		eState_Dead	//死。
+		eState_Dead			//死。
 	};
 
 	enum EAnimationClip {
@@ -66,13 +66,13 @@ private:
 
 private:
 
-	void Idle();	//待機。
+	void Idle();		//待機。
 	void Loitering();	//徘徊。
 	void Follow();		//プレイヤーを追跡。
 	void Premove();		//予備動作。
-	void Premove2();		//予備動作。
+	void Premove2();	//予備動作。
 	void Attack();		//攻撃。
-	void Vertigo();	//眩暈。
+	void Vertigo();		//眩暈。
 	void Dead();		//死。
 
 private:

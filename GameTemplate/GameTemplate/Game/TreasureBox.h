@@ -11,14 +11,14 @@ public:
 	/// <summary>
 	/// À•W‚ğİ’èB
 	/// </summary>
-	void TreasureBox::SetPosition(CVector3 pos)
+	void SetPosition(CVector3 pos)
 	{
 		m_position = pos;
 	}
 	/// <summary>
 	/// ‰ñ“]‚ğİ’èB
 	/// </summary>
-	void TreasureBox::SetRotation(CQuaternion rot)
+	void SetRotation(const CQuaternion& rot)
 	{
 		m_rotation = rot;
 	}

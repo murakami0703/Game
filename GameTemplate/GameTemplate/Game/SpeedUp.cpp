@@ -44,15 +44,4 @@ void SpeedUp::EndUse()
 {
 	//èIÇÌÇËÅB
 }
-void SpeedUp::Update()
-{
-	switch (m_state)
-	{
-	case SpeedUp::In_Use:
-		break;
-	case SpeedUp::Flashing_Use:
-		break;
-	case SpeedUp::End_Use:
-		break;
-	}
-}
+

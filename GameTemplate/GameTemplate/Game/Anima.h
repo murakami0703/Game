@@ -16,7 +16,7 @@ public:
 	/// <summary>
 	/// À•W‚ğ‚ğİ’èB
 	/// </summary>
-	void Anima::SetPosition(CVector3 pos)
+	void SetPosition(CVector3 pos)
 	{
 		m_position = pos;
 	}

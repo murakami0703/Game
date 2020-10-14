@@ -45,7 +45,7 @@ void PhysicsObjectBase::CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale
 {
 	CreateMesh(pos, rot, scale, skinModelRender->GetSkinModel());
 }
-void PhysicsObjectBase::CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale, const SkinModel& skinModel)
+void PhysicsObjectBase::CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale, SkinModel& skinModel)
 {
 	Release();
 	CMatrix mScale;

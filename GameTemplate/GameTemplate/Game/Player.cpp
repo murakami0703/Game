@@ -6,10 +6,19 @@
 
 
 Player* Player::m_instance = nullptr;
-const CVector4 PLAYER_LIGHTCOLOR_RED = { 0.8f,0.0f,0.0f,1.0f };	//ダメージ時にプレイヤーに当たっているカメラを赤くする
-const CVector4 PLAYER_LIGHTCOLOR_DEFAULT = { 0.7f, 0.7f, 0.7f, 1.0f };//通常カメラの色
-const int LIGHT_CHANGEDEFAULT_TIME = 10;//ライトのカラーをデフォルトに戻すまでの時間
-const int TIMER_INITIAL_VALUE_ZERO = 0;		//タイマーの初期化用の値
+
+/////////////////////////////////////////////////////////
+/// 定数
+/////////////////////////////////////////////////////////
+const CVector4 PLAYER_LIGHTCOLOR_RED = { 0.8f,0.0f,0.0f,1.0f };			//ダメージ時にプレイヤーに当たっているカメラを赤くする
+const CVector4 PLAYER_LIGHTCOLOR_DEFAULT = { 0.7f, 0.7f, 0.7f, 1.0f };	//通常カメラの色
+const int LIGHT_CHANGEDEFAULT_TIME = 10;			//ライトのカラーをデフォルトに戻すまでの時間
+const int TIMER_INITIAL_VALUE_ZERO = 0;				//タイマーの初期化用の値
+const float CHARACON_TIME = (1.0f / 60.0f);			//キャラコンの経過時間。
+const float PLAYER_ROTATION_ANGLE_L = 80.0f;		//左の回転角度
+const float PLAYER_ROTATION_ANGLE_R = -80.0f;		//右の回転角度
+const float PLAYER_ROTATION_ANGLE_F = 0.0f;			//下の回転角度
+const float PLAYER_ROTATION_ANGLE_D = 110.0f;		//下の回転角度
 
 Player::Player()
 {
@@ -43,71 +52,85 @@ bool Player::Start()
 	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
 	m_move = m_position;
 
-	//各マップの設定。
-	/*m_skinModelRender->SetNormalMap(L"Assets/modelData/Normal.dds");
-	m_skinModelRender->SetSpecularMap(L"Assets/modelData/MatallicSmoothness.dds");
-	m_skinModelRender->SetAmbientMap(L"Assets/modelData/AO.dds");
-	*/
-	m_nowHP = GameData::GetInstance()->GetHitPoint();
+
+	m_nowHP = GameData::GetInstance()->GetHitPoint();	//playerHP
 	m_skinModelRender->SetShadowCaster(true);
 	return true;
 }
 
 void Player::Idel()
 {
-	m_skinModelRender->PlayAnimation(0);
-
-	//待機状態なにもしない
-	if (g_pad[0].IsPressAnyKey())
-	{
+	//待機状態
+	//なにもしない
+	m_skinModelRender->PlayAnimation(Animation_Idel);
+	if (g_pad[0].IsPressAnyKey()){
 		m_state = Player_Walk;
 	}
-
 }
 void Player::Move()
 {
+	//移動
+
 	m_move.x = 0.0f;
 	m_move.z = 0.0f;
-
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
+		//左
 		m_move.x -= m_movespeed;
-		m_rotation.SetRotation(CVector3().AxisY(), m_rotationLR);
+		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_L);
 
 	}
 	else if (g_pad[0].IsPress(enButtonRight)) {
+		//右
 		m_move.x += m_movespeed;
-		m_rotation.SetRotation(CVector3().AxisY(), -m_rotationLR);
+		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_R);
 
 	}
 	else if (g_pad[0].IsPress(enButtonUp)) {
+		//前
 		m_move.z += m_movespeed;
-		m_rotation.SetRotation(CVector3().AxisY(), 0.0f);
+		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_F);
 
 	}
 	else if (g_pad[0].IsPress(enButtonDown)) {
+		//後ろ
 		m_move.z -= m_movespeed;
-		m_rotation.SetRotation(CVector3().AxisY(), m_rotationD);
+		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_D);
 
 	}
 	else {
+		//移動してないので待機状態に遷移。
 		m_state = Player_Idle;
 	}
+	//走り
+	if (g_pad[0].IsPress(enButtonB)) {
+		m_move = m_move * 2.0f;
+	}
+	//重力
 	m_move.y -= 1.0f;
+
 	if (m_characon.IsOnGround()) {
-		//重力ストップ
+		//地面上なので重力ストップ
 		m_move.y = 0.0f;
 	}
-	m_position = m_characon.Execute(m_caraTime, m_move);
-	m_skinModelRender->PlayAnimation(1);
+
+	m_position = m_characon.Execute(CHARACON_TIME, m_move);
+	if (g_pad[0].IsPress(enButtonB)) {
+		m_skinModelRender->PlayAnimation(Animation_Run);
+	}
+	else {
+		m_skinModelRender->PlayAnimation(Animation_Walk);
+	}
 
 }
 void Player::Attack()
 {
+	//攻撃
+	//二段階攻撃もできます。
 	EffectManager* effect = EffectManager::GetInstance();
 	if (Atcount == 1 && attackflag == false) {
 		//攻撃1回目
-		m_skinModelRender->PlayAnimation(2);
+		m_skinModelRender->PlayAnimation(Animation_Attack);
 		//effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 10.0f,10.0f,10.0f });
 		//m_se.Play(false);
 		attackflag = true;
@@ -132,9 +155,9 @@ void Player::Attack()
 	}
 
 }
-void Player::Dead()
+void Player::ItemUse()
 {
-	//死亡
+	//アイテム使用。
 }
 
 void Player::Damage()
@@ -145,13 +168,19 @@ void Player::Damage()
 	m_skinModelRender->SetLightColor(PLAYER_LIGHTCOLOR_RED);
 	m_damageTimer++;
 	//ちょっと時間経過したら元に戻す。
-	if (m_damageTimer>= LIGHT_CHANGEDEFAULT_TIME) {
+	if (m_damageTimer >= LIGHT_CHANGEDEFAULT_TIME) {
 		m_damageTimer = TIMER_INITIAL_VALUE_ZERO;
 		m_skinModelRender->SetLightColor(PLAYER_LIGHTCOLOR_DEFAULT);
 		m_nowHP = gamedata->GetHitPoint();
 	}
 
 }
+
+void Player::Dead()
+{
+	//死亡
+}
+
 void Player::Update()
 {
 	GameData* gamedata = GameData::GetInstance();
@@ -160,11 +189,11 @@ void Player::Update()
 		Atcount = 1;
 		m_state = Player_Attack;
 	}
-	//ダメージ受けましたわよ
+	//ダメージ受けました
 	if (gamedata->GetHitPoint() < m_nowHP) {
-		Damage();		//ダメージ受けましたぁ
+		Damage();		//ダメージ受けました
 	}
-	
+	//状態。
 	switch (m_state)
 	{
 	case Player::Player_Idle:
@@ -176,11 +205,14 @@ void Player::Update()
 	case Player::Player_Attack:
 		Attack();		//攻撃
 		break;
-	case Player::Player_Dead:
-		Dead();			//死亡
+	case Player::Player_ItemUse:
+		ItemUse();		//アイテム使用。
 		break;
 	case Player::Player_Damage:
-		Damage();		//ダメージ受けましたぁ
+		Damage();		//ダメージ受けました
+		break;
+	case Player::Player_Dead:
+		Dead();			//死亡
 		break;
 	}
 

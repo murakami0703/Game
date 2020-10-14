@@ -68,8 +68,8 @@ void TreasureBox::Update()
 		Open();
 		break;	
 	case TreasureBox::eState_Opened:
-			Opened();
-			break;
+		Opened();
+		break;
 
 	}
 }

@@ -43,7 +43,7 @@ void Item::ItemAppear()
 {
 	Player* player = Player::GetInstance();
 	//アイテム出現
-	//斜め前に出しますよお
+	//斜め前に出します
 	m_position.x -= 1.0f;
 	if (m_timer > ITEM_APPEAR_TIME) {
 		//消滅。

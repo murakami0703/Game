@@ -1,5 +1,7 @@
 #pragma once
-class Golem : public IGameObject
+#include "IActor.h"
+
+class Golem : public IActor
 {
 public:
 	Golem();
@@ -7,28 +9,6 @@ public:
 
 	bool Start();
 	void Update();
-
-	/// <summary>
-	/// 座標を設定。
-	/// </summary>
-	void Golem::SetPosition(CVector3 pos)
-	{
-		m_position = pos;
-	}
-	/// <summary>
-	/// 回転を設定。
-	/// </summary>
-	void Golem::SetRotation(CQuaternion rot)
-	{
-		m_rotation = rot;
-	}
-	/// <summary>
-	/// 回転率を設定。
-	/// </summary>
-	void Golem::SetScale(CVector3 sca)
-	{
-		m_scale = sca;
-	}
 
 private:
 	//状態。
@@ -62,10 +42,7 @@ private:
 	void MoveHPGage();	//HPゲージの移動。
 	void HPBarSaid();	//HPバーの表示処理。
 private:
-	SkinModelRender* m_skinModelRender = nullptr;		//スキンモデルレンダー。
-	CVector3 m_position = CVector3().Zero();			//座標。
-	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
-	CVector3 m_scale = CVector3().One();				//拡大率。
+	
 	EState m_state = eState_Idle;						//状態。
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
 
@@ -76,34 +53,28 @@ private:
 	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
 	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
 	int m_timer = 0;	//タイマー
-	//待機関係
-	const float m_idleTime = 120.0f;	//休憩時間。
+
 	//追従関係
 	CVector3 m_move = CVector3().Zero();		//移動
+
 	//攻撃関係
-	const float m_damageLen = 300.0f;	//ダメージ判定の距離
 	bool m_isDamageFlag = false;		//攻撃中にプレイヤーにダメージ与えましたか？
 	int m_attacktimer = 0;				//攻撃時用タイマー
-	const int m_attackEndTime = 60;	//攻撃状態終了タイム
 
-	//ダメージ関係
-	const float m_damageLength = 250.0f;	//ダメージを受ける距離。
-	const int SUB_HP = 40;		//減少させるHPの値。
-
-	//HPPP
+	//HP処理関係
 	int HP = 120;				//現在HP
-	const int MAX_HP = 120;		//最大HP
 	float m_lifeY = 0.0f;
 	bool m_moveGageEndflag = false;	//ゲージの移動終わりましたか？
 
-	CVector3 screenPos = CVector3().Zero();
-	CVector3 hoge = CVector3().Zero();
-	CVector3 cameraPos = CVector3().Zero();
-	CVector3 Pos = CVector3().Zero();
-	CVector3 atamaNoPos = CVector3().Zero();
-	CVector3 LifeScale = CVector3().Zero();
+	//HPの表示関係
+	CVector3 m_screenPos = CVector3().Zero();
+	CVector3 m_hpBarSetPos = CVector3().Zero();
+	CVector3 m_cameraPos = CVector3().Zero();
+	CVector3 m_hpSpritePos = CVector3().Zero();
+	CVector3 m_headPos = CVector3().Zero();
+	CVector3 m_lifeScale = CVector3().Zero();
 	const CVector2 LifePivot = { 1.0f,0.5f };//HPの基本
 	bool m_damegeFlag = false;
-	int count = 0;
+	int m_damageCount = 0;
 };
 

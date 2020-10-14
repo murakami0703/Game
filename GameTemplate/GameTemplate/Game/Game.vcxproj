@@ -141,8 +141,10 @@
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="HpRecovery.cpp" />
+    <ClCompile Include="IActor.cpp" />
     <ClCompile Include="InUseItemUI.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemUI.cpp" />
     <ClCompile Include="LevelSet.cpp" />
     <ClCompile Include="level\Level.cpp" />
@@ -228,8 +230,10 @@
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
     <ClInclude Include="HpRecovery.h" />
+    <ClInclude Include="IActor.h" />
     <ClInclude Include="InUseItemUI.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemUI.h" />
     <ClInclude Include="LevelSet.h" />
     <ClInclude Include="level\Level.h" />

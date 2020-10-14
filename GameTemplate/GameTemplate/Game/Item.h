@@ -11,21 +11,21 @@ public:
 	/// <summary>
 	/// 座標を設定。
 	/// </summary>
-	void Item::SetPosition(CVector3 pos)
+	void SetPosition(CVector3 pos)
 	{
 		m_position = pos;
 	}
 	/// <summary>
 	/// 回転を設定。
 	/// </summary>
-	void Item::SetRotation(CQuaternion rot)
+	void SetRotation(CQuaternion rot)
 	{
 		m_rotation = rot;
 	}
 	/// <summary>
 	///前ベクトルを設定。
 	/// </summary>
-	void Item::SetFowardVector(CVector3 fowVec)
+	void SetFowardVector(CVector3 fowVec)
 	{
 		m_fowardVector = fowVec;
 	}
@@ -52,10 +52,10 @@ private:
 
 	const CVector3 m_Scale = { 5.0f,5.0f,5.0f };	//拡大率。
 
-	EState m_state = Item_Appear;				//状態。
-	int m_itemNum = 0;		//アイテム指定用の値
+	EState m_state = Item_Appear;					//状態。
+	int m_itemNum = 0;								//アイテム指定用の値
 
-	int m_timer = 0;	//タイマー
-	const int ITEM_APPEAR_TIME = 300;	//タイマー
+	int m_timer = 0;								//タイマー
+	const int ITEM_APPEAR_TIME = 300;				//出現する時間。単位frame。
 };
 

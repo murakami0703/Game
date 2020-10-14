@@ -24,7 +24,7 @@ EffectManager::~EffectManager()
 
 bool EffectManager::Start() { return true; }
 
-//エフェクト再生くん
+//エフェクト再生
 void EffectManager::EffectPlayer(EffectName EF, CVector3 position, CVector3 scale,CQuaternion m_rotation) {
 	//作成
 	EffectPlay* m_player = g_goMgr->NewGameObject<EffectPlay>();

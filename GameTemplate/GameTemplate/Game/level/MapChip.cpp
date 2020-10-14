@@ -14,7 +14,7 @@ MapChip::MapChip(LevelObjectData& objData,
 		onBuildMapchip(objData, *this);
 	}
 	//静的物理オブジェクトをメッシュコライダーから作成する。
-	m_physicsStaticObject.CreateMesh(objData.position, objData.rotation, objData.scale, m_model);
+	m_physicsStaticObject.CreateMeshObject(m_model, objData.position, objData.rotation, objData.scale);
 
 	m_model.SetShadowReciever(true);
 

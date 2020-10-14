@@ -62,9 +62,10 @@
 //‚±‚±‚©‚ç‰º‚ÉrenderƒNƒ‰ƒX‚©‚­
 #include "sound/SoundSource.h"
 #include "graphics/SkinModelRender.h"
-#include "sprite/SpriteRender.h"
+	#include "sprite/SpriteRender.h"
 #include "FontRender.h"
 
+#include "IActor.h"
 
 
 

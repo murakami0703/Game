@@ -17,7 +17,7 @@ public:
 	/// <summary>
 	/// デストラクタ。
 	/// </summary>
-	~PhysicsObjectBase();
+	virtual ~PhysicsObjectBase();
 
 	/// <summary>
 	/// ゴーストオブジェクトを解放。
@@ -60,7 +60,7 @@ public:
 	*@param[in]	rot					回転。
 	*@param[in]	skinModelData		スキンモデルデータ。
 	*/
-	void CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale, const SkinModel& skinModel);
+	void CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale, SkinModel& skinModel);
 	void CreateMesh(CVector3 pos, CQuaternion rot, CVector3 scale, SkinModelRender* skinModelRender);
 protected:
 	std::unique_ptr<ICollider> m_collider;	//!<コライダー。

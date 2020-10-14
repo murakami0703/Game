@@ -24,7 +24,7 @@ bool Map::Start()
 	m_mapModel->SetSpecularMap(L"Assets/modelData/stage1_texture/ClumpMud_smoothness.dds");
 	m_mapModel->SetSpecularMap(L"Assets/modelData/stage1_texture/ClumpMud_Grass_Ao.dds");
 
-	m_phyStaticObject.CreateMesh(m_position, m_rotation, m_scale, m_mapModel->GetSkinModel());
+	m_phyStaticObject.CreateMeshObject(m_mapModel->GetSkinModel(), m_position, m_rotation, m_scale);
 	m_mapModel->SetShadowReciever(true);
 	m_mapModel->SetShadowCaster(true);
 

@@ -331,6 +331,10 @@
     <ClCompile Include="SphereCollider.cpp">
       <Filter>physics</Filter>
     </ClCompile>
+    <ClCompile Include="IActor.cpp" />
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -558,6 +562,10 @@
     </ClInclude>
     <ClInclude Include="SphereCollider.h">
       <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="IActor.h" />
+    <ClInclude Include="ItemBase.h">
+      <Filter>item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

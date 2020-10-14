@@ -7,14 +7,15 @@ public:
 	//エフェクト名前
 	enum EffectName {
 		Null,
-		open, //アイテム入手時のエフェクト
-		Bat_Attack, //アイテム入手時のエフェクト
-		Bat_memai, //アイテム入手時のエフェクト
-		Item_Get, //アイテム入手時のエフェクト
-		bat_pre, //アイテム入手時のエフェクト
-		Enemy_Dead, //アイテム入手時のエフェクト
+		open,			//アイテム入手時のエフェクト
+		Bat_Attack,		//アイテム入手時のエフェクト
+		Bat_memai,		//アイテム入手時のエフェクト
+		Item_Get,		//アイテム入手時のエフェクト
+		bat_pre,		//アイテム入手時のエフェクト
+		Enemy_Dead,		//アイテム入手時のエフェクト
 		bund,
-		Golem_Attack			//ゴーレム攻撃時のエフェクト
+		Golem_Attack,	//ゴーレム攻撃時のエフェクト
+		NumEffect,		//エフェクトの数。
 	};
 
 	EffectManager();
@@ -36,7 +37,7 @@ public:
 private:
 
 	//エフェクトファイル名
-	wchar_t DetaBase[17][40]{
+	wchar_t DetaBase[NumEffect][MAX_PATH]{
 		{ L"" },//Nullなので何もない
 		{ L"Assets/effect/open_Box.efk" },
 		{ L"Assets/effect/bat_attackEfk.efk" },
