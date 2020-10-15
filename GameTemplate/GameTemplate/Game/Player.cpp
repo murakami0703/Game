@@ -10,15 +10,14 @@ Player* Player::m_instance = nullptr;
 /////////////////////////////////////////////////////////
 /// 定数
 /////////////////////////////////////////////////////////
-const float PLAYER_COLLISION_RADIUS = 20.0f;	//スライムのカプセルコリジョンの半径。
-const float PLAYER_COLLISION_HEIGHT = 30.0f;	//スライムのカプセルコリジョンの高さ。
-const float CHARACON_TIME = (1.0f / 60.0f);	//キャラコンの経過時間。
+const float PLAYER_COLLISION_RADIUS = 20.0f;	//プレイヤーのカプセルコリジョンの半径。
+const float PLAYER_COLLISION_HEIGHT = 30.0f;	//プレイヤーのカプセルコリジョンの高さ。
+const float CHARACON_TIME = (1.0f / 60.0f);		//キャラコンの経過時間。
 
 const CVector4 PLAYER_LIGHTCOLOR_RED = { 0.8f,0.0f,0.0f,1.0f };			//ダメージ時にプレイヤーに当たっているカメラを赤くする。
 const CVector4 PLAYER_LIGHTCOLOR_DEFAULT = { 0.7f, 0.7f, 0.7f, 1.0f };	//通常カメラの色。
 const int LIGHT_CHANGEDEFAULT_TIME = 10;			//ライトのカラーをデフォルトに戻すまでの時間。
 const int TIMER_INITIAL_VALUE_ZERO = 0;				//タイマーの初期化用の値。
-const float CHARACON_TIME = (1.0f / 60.0f);			//キャラコンの経過時間。
 const float PLAYER_ROTATION_ANGLE_L = 80.0f;		//左の回転角度。
 const float PLAYER_ROTATION_ANGLE_R = -80.0f;		//右の回転角度。
 const float PLAYER_ROTATION_ANGLE_F = 0.0f;			//下の回転角度。

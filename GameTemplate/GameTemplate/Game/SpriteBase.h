@@ -9,6 +9,6 @@ public:
 	SpriteBase();
 	~SpriteBase();
 
-	void Sprite
+	//void Sprite
 };
 
