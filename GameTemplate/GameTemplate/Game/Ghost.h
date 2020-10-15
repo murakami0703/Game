@@ -1,36 +1,14 @@
 #pragma once
-#include "character/CharacterController.h"
+#include "IActor.h"
 
 class BattlePoint;
-class Ghost : public IGameObject
+class Ghost final : public IActor
 {
 public:
 	Ghost();
 	~Ghost();
-	bool Start();
-	void Update();
-
-	/// <summary>
-	/// 座標を設定。
-	/// </summary>
-	void Ghost::SetPosition(CVector3 pos)
-	{
-		m_position = pos;
-	}
-	/// <summary>
-	/// 回転を設定。
-	/// </summary>
-	void Ghost::SetRotation(CQuaternion rot)
-	{
-		m_rotation = rot;
-	}
-	/// <summary>
-	/// 回転率を設定。
-	/// </summary>
-	void Ghost::SetScale(CVector3 sca)
-	{
-		m_scale = sca;
-	}
+	bool Start() override;
+	void Update() override;
 
 	/// <summary>
 	/// エネミのポジションを返す関数。
@@ -61,6 +39,7 @@ private:
 
 	};
 
+	//アニメション。
 	enum EAnimationClip {
 		eAnimation_Idle,
 		eAnimation_Walk,
@@ -72,7 +51,7 @@ private:
 private:
 	void Horizon();		//視野角判定
 
-	void Idle();	//待機。
+	void Idle();		//待機。
 	void Loitering();	//徘徊。
 	void Follow();		//プレイヤーを追跡。
 	void Premove();		//予備動作。
@@ -80,23 +59,18 @@ private:
 	void Dead();		//死。
 
 private:
-	SkinModelRender* m_enemyModelRender;				//スキンモデルレンダー。
-	CVector3 m_position = CVector3().Zero();			//座標。
-	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
-	CVector3 m_scale = CVector3().One();				//拡大率。
-	EState m_state = eState_Loitering;					//状態。
 
+	//共用
+	EState m_state = eState_Loitering;					//状態。
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
+	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
+	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+	int m_timer = 0;									//タイマー。
+
+	//バトルポイント関係。
 	bool m_battlePosflag = false;				//ちゃんとBPにいますか？
 	BattlePoint* m_battlePoint = nullptr;		//エネミのバトルポイント先
 
-	//共用
-	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
-	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
-	CVector3 m_enemyForward = { 0.0f, 0.0f, -1.0f };			//ゴーストの前ベクトル。
-
-	float m_timer = 0;
-	const float m_followLength = 500.0f;	//追跡を始める距離。
 
 
 	//待機関連

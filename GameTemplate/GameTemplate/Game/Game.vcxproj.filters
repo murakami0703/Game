@@ -335,6 +335,7 @@
     <ClCompile Include="ItemBase.cpp">
       <Filter>item</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -567,6 +568,7 @@
     <ClInclude Include="ItemBase.h">
       <Filter>item</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteBase.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">

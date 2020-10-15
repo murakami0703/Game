@@ -1,6 +1,10 @@
 #pragma once
 
-class Bat : public IActor
+/// <summary>
+/// エネミー　：　遠距離攻撃
+/// </summary>
+
+class Bat final : public IActor
 {
 public:
 	Bat();
@@ -12,15 +16,17 @@ public:
 	void Update() override;
 
 private:
-	// 状態
+
+	// 状態。
 	enum EState {
 		eState_Loitering,	//徘徊。
 		eState_Follow,		//プレイヤーを追跡。
 		eState_Premove,		//予備動作。
 		eState_Attack,		//攻撃。
-		eState_Dead	//死。
+		eState_Dead			//死。
 	};
 
+	//アニメーション。
 	enum EAnimationClip {
 		eAnimation_Walk,
 		eAnimation_Premove,
@@ -31,6 +37,8 @@ private:
 
 private:
 
+	void Horizon();		//視野角判定
+
 	void Loitering();	//徘徊。
 	void Follow();		//プレイヤーを追跡。
 	void Premove();		//予備動作。
@@ -39,24 +47,21 @@ private:
 
 private:
 
-	CVector3 m_position = CVector3().Zero();			//座標。
-
-	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
-	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
-
+	//共通使用。
 	EState m_state = eState_Loitering;					//状態。
 	AnimationClip  m_animClips[eAnimation_Num];			//アニメーションクリップ。
-	
-	//移動関連
-	const float m_toPlyaerLength = 250.0f;	//追従距離
-	const float m_returnLength = 800.0f;	//追従状態から徘徊状態に戻る距離
+	CVector3 m_playerPos = CVector3().Zero();			//プレイヤーの座標。
+	CVector3 m_toPlayerVec = CVector3().Zero();			//プレイヤーまで伸びているベクトル。
+	int m_timer = 0;									//タイマー。
 
-	//攻撃判定
-	bool EneAttackflag = false;					//攻撃中ですか？
+	//徘徊関係。
+	int m_randRot = 0;									//方向の乱数格納。
+	CVector3 m_frontmove = CVector3().Zero();			//方向転換時の前ベクトル格納
 
-	CVector3 moveVec = CVector3().Zero();			//座標。
-	float m_caraTime = (1.0f / 60.0f);		//キャラコンの経過時間
+	//追尾関係。
+	CVector3 m_toFollowEPVec = CVector3().Zero();		//追尾中のプレイヤーとの距離ベクトルの格納庫
 
-	int m_timer = 0;
+	//攻撃判定。
+	bool EneAttackflag = false;							//攻撃中ですか？
 };
 

@@ -4,6 +4,15 @@ class IActor : public IGameObject
 public:
 	IActor();
 	~IActor();
+
+	/// <summary>
+	/// 座標を取得。
+	/// </summary>
+	CVector3 GetPosition()
+	{
+		return m_position;
+	}
+
 	/// <summary>
 	/// 座標を設定。
 	/// </summary>

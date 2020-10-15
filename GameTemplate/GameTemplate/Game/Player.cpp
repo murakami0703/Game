@@ -10,15 +10,20 @@ Player* Player::m_instance = nullptr;
 /////////////////////////////////////////////////////////
 /// 定数
 /////////////////////////////////////////////////////////
-const CVector4 PLAYER_LIGHTCOLOR_RED = { 0.8f,0.0f,0.0f,1.0f };			//ダメージ時にプレイヤーに当たっているカメラを赤くする
-const CVector4 PLAYER_LIGHTCOLOR_DEFAULT = { 0.7f, 0.7f, 0.7f, 1.0f };	//通常カメラの色
-const int LIGHT_CHANGEDEFAULT_TIME = 10;			//ライトのカラーをデフォルトに戻すまでの時間
-const int TIMER_INITIAL_VALUE_ZERO = 0;				//タイマーの初期化用の値
+const float PLAYER_COLLISION_RADIUS = 20.0f;	//スライムのカプセルコリジョンの半径。
+const float PLAYER_COLLISION_HEIGHT = 30.0f;	//スライムのカプセルコリジョンの高さ。
+const float CHARACON_TIME = (1.0f / 60.0f);	//キャラコンの経過時間。
+
+const CVector4 PLAYER_LIGHTCOLOR_RED = { 0.8f,0.0f,0.0f,1.0f };			//ダメージ時にプレイヤーに当たっているカメラを赤くする。
+const CVector4 PLAYER_LIGHTCOLOR_DEFAULT = { 0.7f, 0.7f, 0.7f, 1.0f };	//通常カメラの色。
+const int LIGHT_CHANGEDEFAULT_TIME = 10;			//ライトのカラーをデフォルトに戻すまでの時間。
+const int TIMER_INITIAL_VALUE_ZERO = 0;				//タイマーの初期化用の値。
 const float CHARACON_TIME = (1.0f / 60.0f);			//キャラコンの経過時間。
-const float PLAYER_ROTATION_ANGLE_L = 80.0f;		//左の回転角度
-const float PLAYER_ROTATION_ANGLE_R = -80.0f;		//右の回転角度
-const float PLAYER_ROTATION_ANGLE_F = 0.0f;			//下の回転角度
-const float PLAYER_ROTATION_ANGLE_D = 110.0f;		//下の回転角度
+const float PLAYER_ROTATION_ANGLE_L = 80.0f;		//左の回転角度。
+const float PLAYER_ROTATION_ANGLE_R = -80.0f;		//右の回転角度。
+const float PLAYER_ROTATION_ANGLE_F = 0.0f;			//下の回転角度。
+const float PLAYER_ROTATION_ANGLE_D = 110.0f;		//下の回転角度。
+const float MOVE_SPEED = 900.0f;					//移動速度。
 
 Player::Player()
 {
@@ -41,6 +46,7 @@ bool Player::Start()
 	m_animClips[Animation_Drink].Load(L"Assets/animData/player/player_drink.tka");
 	m_animClips[Animation_Attack].Load(L"Assets/animData/player/player_attacktes.tka");
 	m_animClips[Animation_Damage].Load(L"Assets/animData/player/player_damage.tka");
+
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_skinModelRender->Init(L"Assets/modelData/player.cmo", m_animClips, AnimationClip_Num);
@@ -49,7 +55,13 @@ bool Player::Start()
 
 	m_scale = { 3.0f, 3.0f, 3.0f };
 	m_skinModelRender->SetScale(m_scale);
-	m_characon.Init(20.0f, 30.0f, m_position);//キャラコン
+
+	//キャラコン
+	m_characon.Init(
+		PLAYER_COLLISION_RADIUS, 
+		PLAYER_COLLISION_HEIGHT,
+		m_position
+	);
 	m_move = m_position;
 
 
@@ -76,25 +88,25 @@ void Player::Move()
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
 		//左
-		m_move.x -= m_movespeed;
+		m_move.x -= MOVE_SPEED;
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_L);
 
 	}
 	else if (g_pad[0].IsPress(enButtonRight)) {
 		//右
-		m_move.x += m_movespeed;
+		m_move.x += MOVE_SPEED;
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_R);
 
 	}
 	else if (g_pad[0].IsPress(enButtonUp)) {
 		//前
-		m_move.z += m_movespeed;
+		m_move.z += MOVE_SPEED;
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_F);
 
 	}
 	else if (g_pad[0].IsPress(enButtonDown)) {
 		//後ろ
-		m_move.z -= m_movespeed;
+		m_move.z -= MOVE_SPEED;
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_D);
 
 	}
@@ -128,21 +140,21 @@ void Player::Attack()
 	//攻撃
 	//二段階攻撃もできます。
 	EffectManager* effect = EffectManager::GetInstance();
-	if (Atcount == 1 && attackflag == false) {
+	if (m_Atcount == 1 && attackflag == false) {
 		//攻撃1回目
 		m_skinModelRender->PlayAnimation(Animation_Attack);
 		//effect->EffectPlayer(EffectManager::Bat_memai, m_position, { 10.0f,10.0f,10.0f });
 		//m_se.Play(false);
 		attackflag = true;
-		Atcount = 0;
+		m_Atcount = 0;
 	}
-	/*if (Atcount >= 2) {
+	/*if (m_Atcount >= 2) {
 		//攻撃2回目
 		m_animation.Play(Animation_Attack2, 0.5f);
 		attackflag = true;
 		if (m_animation.IsPlaying() == false) {
 			//再生終了したら待機に戻る
-			Atcount = 0;
+			m_Atcount = 0;
 			attackflag = false;
 			m_anime = Animation_Idel;
 		}
@@ -186,7 +198,7 @@ void Player::Update()
 	GameData* gamedata = GameData::GetInstance();
 	//攻撃します。
 	if (g_pad[0].IsTrigger(enButtonA) ) {
-		Atcount = 1;
+		m_Atcount = 1;
 		m_state = Player_Attack;
 	}
 	//ダメージ受けました

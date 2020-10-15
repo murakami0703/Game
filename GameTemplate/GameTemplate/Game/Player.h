@@ -1,21 +1,16 @@
 #pragma once
 #include "character/CharacterController.h"
+#include "IActor.h"
 
-class Player  : public IGameObject
+class Player  : public IActor
 {
 public:
 	Player();
 	~Player();
 
-	bool Start();
-	void Update();
-	/// <summary>
-	/// プレイヤーのポジションを返す関数。
-	/// </summary>
-	/// <returns>座標</returns>
-	const CVector3 Player::GetPosition() {
-		return m_position;
-	}
+	bool Start() override;
+	void Update() override;
+
 	/// <summary>
 	/// 攻撃判定
 	/// </summary>
@@ -30,6 +25,7 @@ public:
 	}
 private:
 
+	//状態。
 	enum EState {
 		Player_Idle,		//待機
 		Player_Walk,		//歩き
@@ -39,6 +35,7 @@ private:
 		Player_Dead			//死
 	};
 
+	//アニメーション。
 	enum PAnimation {
 		Animation_Idel,
 		Animation_Walk,
@@ -50,6 +47,7 @@ private:
 	};
 private:
 	static Player* m_instance;
+
 	void Idel();		//待機。
 	void Move();		//移動。
 	void Attack();		//攻撃。
@@ -58,34 +56,20 @@ private:
 	void Dead();		//死亡。
 
 private:
-	SkinModelRender* m_skinModelRender = nullptr;		//スキンモデルレンダー。
-	CVector3 m_position = CVector3().Zero();			//座標。
-	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
-	CVector3 m_scale = CVector3().One();				//拡大率。
-
 	CVector3 m_move = CVector3().Zero();				//移動量。
 	EState m_state = Player_Idle;						//状態。
-
 	CharacterController m_characon;					//キャラコン
 	AnimationClip m_animClips[AnimationClip_Num];	//アニメーションクリップ
 
-	//移動関連
-	float m_movespeed = 900.0f;			//移動速度
-	const float m_rotationLR = 80.0f;	//左右の回転角度
-	const float m_rotationD = 110.0f;	//下の回転角度
-
 	//Animation関連
-	int Atcount = 0;			//攻撃回数判定用。
+	int m_Atcount = 0;			//攻撃回数判定用。
 
 	//攻撃関連
 	bool attackflag = false;	//攻撃判定用。
-	//サウンド関係
-	//CSoundSource m_se;						//se。
 
 	//HP
-	float m_nowHP = 0;			
-	int m_damageTimer = 0;
+	float m_nowHP = 0;			//現在のHP格納庫。
+	int m_damageTimer = 0;		//ダメージ時に光らせるときに使うタイマー。
 
-	int timer = 0;
 };
 

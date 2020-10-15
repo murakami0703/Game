@@ -22,12 +22,12 @@ const int GHOST_RAND_TIMER = 120;						//方向転換する時間。
 const int GHOST_RAND_RANGE = 360;						//方向転換する範囲。
 const int GHOST_RAND_CALC_TIME = 0;						//方向転換の向きを計算する時間。
 
-Ghost::Ghost()
-{
-}
-Ghost::~Ghost()
-{
-}
+const float FOLLOW_LENGTH = 500.0f;						//追跡を始める距離。
+const float FOLLOW_Y_REMOVAL = 0.0f;					//Y成分の除去。
+const float FOLLOW_MOVE_SPEED = 5.0f;					//追尾中の移動速度。
+
+Ghost::Ghost(){}
+Ghost::~Ghost(){}
 
 bool Ghost::Start()
 {
@@ -38,13 +38,13 @@ bool Ghost::Start()
 	m_animClips[eAnimation_Premove].Load(L"Assets/animData/ghost/ghost_premove.tka");
 	m_animClips[eAnimation_Death].Load(L"Assets/animData/ghost/ghost_death.tka");
 	//cmoファイルの読み込み。
-	m_enemyModelRender = g_goMgr->NewGameObject<SkinModelRender>();
-	m_enemyModelRender->Init(L"Assets/modelData/ghosts.cmo", m_animClips, eAnimation_Num);
-	m_enemyModelRender->SetPosition(m_position);
-	m_enemyModelRender->SetRotation(m_rotation);
-	m_enemyModelRender->SetScale(m_scale);
+	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
+	m_skinModelRender->Init(L"Assets/modelData/ghosts.cmo", m_animClips, eAnimation_Num);
+	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetScale(m_scale);
 
-	m_enemyModelRender->SetShadowCaster(true);		//シャドウマップに描画。
+	m_skinModelRender->SetShadowCaster(true);		//シャドウマップに描画。
 
 	return true;
 }
@@ -97,7 +97,7 @@ void Ghost::Idle()
 
 	Horizon();	//視野角判定
 
-	m_enemyModelRender->PlayAnimation(eAnimation_Idle);
+	m_skinModelRender->PlayAnimation(eAnimation_Idle);
 }
 void Ghost::Loitering()
 {
@@ -122,24 +122,26 @@ void Ghost::Loitering()
 	m_position += m_frontmove * m_loiteringSpeed;
 	Horizon();	//視野角判定
 
-	m_enemyModelRender->PlayAnimation(eAnimation_Walk);
+	m_skinModelRender->PlayAnimation(eAnimation_Walk);
 
 }
+
 void Ghost::Follow()
 {
 	//追尾ちゅ
+	//バトルポイントとの距離を調べる。
 	CVector3 m_toBPVec = m_battlePoint->position - m_position;
-	if (m_toBPVec.Length() > m_followLength) {
-		m_toBPVec.y = 0.0f;
+
+	if (m_toBPVec.Length() > FOLLOW_LENGTH) {
+		m_toBPVec.y = FOLLOW_Y_REMOVAL;
 		m_toBPVec.Normalize();
-		m_position += m_toBPVec * 5.0f;
+		m_position += m_toBPVec * FOLLOW_MOVE_SPEED;
 
 	}
 	/*else if (m_toBPVec.Length() < 10.0f) {
 		//BPいますよ
 		m_battlePosflag = true;
 	}*/
-	CVector3 enemyForward = { 0.0f, 0.0f, -1.0f };
 
 	//　向かせたい方向のベクトルを計算する。
 	CVector3 targetVector = Player::GetInstance()->GetPosition() - m_position;
@@ -147,7 +149,7 @@ void Ghost::Follow()
 	targetVector.y = 0.0f;
 	targetVector.Normalize();
 	CQuaternion qRot;
-	qRot.SetRotation(enemyForward, targetVector);
+	qRot.SetRotation(GHOST_FORWARD_VECTOR, targetVector);
 	m_rotation = qRot;
 
 	//近いので攻撃
@@ -164,7 +166,7 @@ void Ghost::Follow()
 		m_battlePoint = nullptr;
 		m_state = eState_Loitering;
 	}
-	m_enemyModelRender->PlayAnimation(1);
+	m_skinModelRender->PlayAnimation(1);
 
 }
 
@@ -210,7 +212,7 @@ void Ghost::Premove()
 	qRot.SetRotation(enemyForward, targetVector);
 	m_rotation = qRot;
 
-	m_enemyModelRender->PlayAnimation(2,0.5f);
+	m_skinModelRender->PlayAnimation(2,0.5f);
 }
 void Ghost::Attack()
 {
@@ -253,7 +255,7 @@ void Ghost::Attack()
 			m_state = eState_Loitering;
 		}
 	}
-	m_enemyModelRender->PlayAnimation(0);
+	m_skinModelRender->PlayAnimation(0);
 
 }
 
@@ -261,10 +263,10 @@ void Ghost::Dead()
 {
 	EffectManager* effect = EffectManager::GetInstance();
 	SoulManager* soul = SoulManager::GetInstance();
-	m_enemyModelRender->PlayAnimation(3);
+	m_skinModelRender->PlayAnimation(3);
 	m_scale -= m_smallValue;
 
-	if (m_enemyModelRender->IsPlayingAnimation() == false) {
+	if (m_skinModelRender->IsPlayingAnimation() == false) {
 		//アニメーションの再生が終わったので消しま
 		//エフェクト再生とSoul出現
 		effect->EffectPlayer(EffectManager::Enemy_Dead, { m_position.x ,m_effectEneDeadYPos ,m_position.z }, m_effectEneDeadSca);
@@ -274,7 +276,7 @@ void Ghost::Dead()
 		GameData* m_gamedate = GameData::GetInstance();
 		m_gamedate->EnemyReduce();
 		//消えなさい。
-		g_goMgr->DeleteGameObject(m_enemyModelRender);
+		g_goMgr->DeleteGameObject(m_skinModelRender);
 		g_goMgr->DeleteGameObject(this);
 	}
 
@@ -315,7 +317,7 @@ void Ghost::Update()
 	}
 
 	//ワールド行列の更新。
-	m_enemyModelRender->SetPosition(m_position);
-	m_enemyModelRender->SetRotation(m_rotation);
-	m_enemyModelRender->SetScale(m_scale);
+	m_skinModelRender->SetPosition(m_position);
+	m_skinModelRender->SetRotation(m_rotation);
+	m_skinModelRender->SetScale(m_scale);
 }

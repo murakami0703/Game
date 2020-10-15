@@ -177,6 +177,7 @@
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="SpeedUp.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="SpriteBase.cpp" />
     <ClCompile Include="sprite\Sprite.cpp" />
     <ClCompile Include="sprite\SpriteRender.cpp" />
     <ClCompile Include="sprite\SpriteStandby.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="SpeedUp.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="SpriteBase.h" />
     <ClInclude Include="sprite\Sprite.h" />
     <ClInclude Include="sprite\SpriteRender.h" />
     <ClInclude Include="sprite\SpriteStandby.h" />

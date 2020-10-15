@@ -19,7 +19,7 @@ const int TIMER_INITIAL_VALUE_ZERO = 0;		//タイマーの初期化用の値
 const int CHANG_DIRECTION_TIME = 120;		//方向転換する時間。
 const int TIMER_SET_ONE = 1;				//方向転換完了時にタイマーに代入する値
 const float SLAIM_FOLLOW_LENGTH = 300.0f;	//追跡を始める距離。
-const CVector3 SRAIM_FRONT_VECTOR = { 0.0f, 0.0f, 1.0f };	//エネミーの前ベクトル。
+const CVector3 SRAIM_FORWARD_VECTOR = { 0.0f, 0.0f, 1.0f };	//エネミーの前ベクトル。
 const float SRAIM_LOITERING_MOVESPEED = 120.0f;				//徘徊の時の速度。
 
 const float SRAIM_LOITERING_LENGTH = 500.0f;			//徘徊に戻る距離。
@@ -104,7 +104,7 @@ void Slaim::Loitering()
 	if (m_timer == TIMER_INITIAL_VALUE_ZERO) {
 		m_randRot = rand() % SLAIM_MOVEROTATION_RANGE;
 		m_rotation.SetRotation(CVector3::AxisY(), (float)m_randRot);
-		m_enemyForward = SRAIM_FRONT_VECTOR;
+		m_enemyForward = SRAIM_FORWARD_VECTOR;
 		m_rotation.Multiply(m_enemyForward);
 		m_timer = TIMER_SET_ONE;
 	}
@@ -164,7 +164,7 @@ void Slaim::Follow()
 	//　Y成分は除去して正規化する。Y成分を入れると空を向いたりするよ。
 	targetVector.y = FOLLOW_Y_REMOVAL;
 	targetVector.Normalize();
-	m_enemyForward = SRAIM_FRONT_VECTOR;
+	m_enemyForward = SRAIM_FORWARD_VECTOR;
 	CQuaternion qRot;
 	qRot.SetRotation(m_enemyForward, targetVector);
 	m_rotation = qRot;
