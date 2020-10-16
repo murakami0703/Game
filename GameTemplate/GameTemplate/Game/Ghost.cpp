@@ -151,7 +151,6 @@ void Ghost::Follow()
 	CQuaternion qRot;
 	qRot.SetRotation(GHOST_FORWARD_VECTOR, targetVector);
 	m_rotation = qRot;
-
 	//ãﬂÇ¢ÇÃÇ≈çUåÇ
 	if (m_battlePoint != nullptr) {
 		if (m_toPlayerVec.Length() <= 200.0f) {
