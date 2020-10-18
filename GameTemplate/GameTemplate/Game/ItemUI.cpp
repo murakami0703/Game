@@ -2,56 +2,84 @@
 #include "ItemUI.h"
 #include "GameData.h"
 
+//アイテム
+#include "HpRecovery.h"
+#include "Bum.h"
+#include "AttackUp.h"
+#include "SpeedUp.h"
 
-ItemUI::ItemUI()
-{
-}
+/////////////////////////////////////////////////////////
+/// 定数
+/////////////////////////////////////////////////////////
+ 
+///////////////////////
+///sprite
+const int HPRECOVERY = 0;				//回復薬。
+const int BOMB = 1;						//爆弾。
+const int ATTACKUPRECOVERY = 2;			//攻撃力Up薬。
+const int SPEEDUPRECOVERY = 3;			//移動速度上昇薬。
+///////////////////////
 
+const CVector3 NOW_ITEM_SCALE = { 0.45f, 0.45f ,0.45f };			//選択中アイテムの拡大率
+const CVector3 NEXT1_ITEM_SCALE = { 0.35f,0.35f ,0.35f };			//次1アイテムの拡大率
+const CVector3 NEXT2_ITEM_SCALE = { 0.25f,0.25f ,0.25f };			//次2アイテムの拡大率
+const CVector3 NEXT3_ITEM_SCALE = { 0.15f,0.15f ,0.15f };			//次3アイテムの拡大率
 
-ItemUI::~ItemUI()
-{
-}
+const CVector3 NOW_ITEM_POSITION = { 460.0f,-240.0f,0.0f };			//選択中アイテムの座標
+const CVector3 NEXT1_ITEM_POSITION = { 560.0f,-120.0f,0.0f };		//次1アイテムの座標
+const CVector3 NEXT2_ITEM_POSITION = { 475.0f,-50.0f,0.0f };		//次2アイテムの座標
+const CVector3 NEXT3_ITEM_POSITION = { 545.0f,-3.0f,0.0f };			//次3アイテムの座標
+
+const CVector3 ITEMFONT_SET_COLOR = { 0.3,0.25f,0.2f };					//アイテムフォントの色。
+const CVector2 ITEMFONT_SET_POSITION = { 470.0f,-250.0f };				//アイテムフォントの座標。
+
+ItemUI::ItemUI(){}
+ItemUI::~ItemUI(){}
+
 bool ItemUI::Start()
 {
 	//アイテム
 	{
 		//0番→回復薬
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/spe.dds", 250.0f, 250.0f);
-		m_itemSprite->SetPosition(m_item1Pos);
-		m_itemSprite->SetScale({ 0.55f,0.55f ,0.55f });
+		m_itemSprite->Init(L"Assets/sprite/HpRecovery.dds", 250.0f, 250.0f);
+		m_itemSprite->SetPosition(NOW_ITEM_POSITION);
+		m_itemSprite->SetScale(NOW_ITEM_SCALE);
 		m_spriteRender.push_back(m_itemSprite);
 
 		//1番→爆弾
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/test.dds", 250.0f, 250.0f);
-		m_itemSprite->SetPosition(m_item2Pos);
-		m_itemSprite->SetScale({ 0.35f,0.35f ,0.35f });
+		m_itemSprite->Init(L"Assets/sprite/bomb.dds", 250.0f, 250.0f);
+		m_itemSprite->SetPosition(NEXT1_ITEM_POSITION);
+		m_itemSprite->SetScale(NEXT1_ITEM_SCALE);
 		m_spriteRender.push_back(m_itemSprite);
 
 		//2番→攻撃力UP
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/attackUp.dds", 250.0f, 250.0f);
-		m_itemSprite->SetPosition(m_item3Pos);
-		m_itemSprite->SetScale({ 0.25f,0.25f ,0.25f });
+		m_itemSprite->Init(L"Assets/sprite/attackUpRecovery.dds", 150.0f, 300.0f);
+		m_itemSprite->SetPosition(NEXT2_ITEM_POSITION);
+		m_itemSprite->SetScale(NEXT2_ITEM_SCALE);
 		m_spriteRender.push_back(m_itemSprite);
 
 		//3番→移動速度UP
 		m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-		m_itemSprite->Init(L"Assets/sprite/speedUp.dds", 250.0f, 250.0f);
-		m_itemSprite->SetPosition(m_item4Pos);
-		m_itemSprite->SetScale({ 0.15f,0.15f ,0.15f });
+		m_itemSprite->Init(L"Assets/sprite/speedUpRecovery.dds", 150.0f, 300.0f);
+		m_itemSprite->SetPosition(NEXT3_ITEM_POSITION);
+		m_itemSprite->SetScale(NEXT3_ITEM_SCALE);
 		m_spriteRender.push_back(m_itemSprite);
 
 	}
-	//アイテムカウントフォントの設定。
-	GameData* m_gamedate = GameData::GetInstance();
-	m_itemCountFont = g_goMgr->NewGameObject<FontRender>();
-	swprintf(ItemHpRecText, L"%02d", m_gamedate->GetItemHpRecovery());
-	m_itemCountFont->SetText(ItemHpRecText);
-	m_itemCountFont->SetColor({ 0.5f,0.4f,0.0f });
-	m_itemCountFont->SetPosition({ 480.0f,-240.0f });
 
+
+	//アイテムカウントフォントの設定。
+	{
+		GameData* m_gamedate = GameData::GetInstance();
+		m_itemCountFont = g_goMgr->NewGameObject<FontRender>();
+		swprintf(ItemHpRecText, L"%02d", m_gamedate->GetItemHpRecovery());
+		m_itemCountFont->SetText(ItemHpRecText);
+		m_itemCountFont->SetColor(ITEMFONT_SET_COLOR);
+		m_itemCountFont->SetPosition(ITEMFONT_SET_POSITION);
+	}
 	return true;
 }
 
@@ -68,6 +96,8 @@ void ItemUI::ItemUse(eItemState& m_State)
 		swprintf(text, L"%02d", m_gamedate->GetItemHpRecovery());
 		m_itemCountFont->SetText(text);
 
+		//アイテム使用(回復薬)
+		HpRecovery* m_hpRecovery = g_goMgr->NewGameObject<HpRecovery>();
 		m_state = Item_InUse;
 		break;
 	}
@@ -79,6 +109,8 @@ void ItemUI::ItemUse(eItemState& m_State)
 		swprintf(text, L"%02d", m_gamedate->GetItemBum());
 		m_itemCountFont->SetText(text);
 
+		//アイテム使用(爆弾)
+		g_goMgr->NewGameObject<Bum>();
 		m_state = Item_InUse;
 		break;
 	}
@@ -89,6 +121,8 @@ void ItemUI::ItemUse(eItemState& m_State)
 		wchar_t text[256];
 		swprintf(text, L"%02d", m_gamedate->GetItemAttackUp());
 		m_itemCountFont->SetText(text);
+		//アイテム使用(攻撃力Up)
+		g_goMgr->NewGameObject<AttackUp>();
 
 		m_state = Item_InUse;
 		break;
@@ -100,7 +134,9 @@ void ItemUI::ItemUse(eItemState& m_State)
 		wchar_t text[256];
 		swprintf(text, L"%02d", m_gamedate->GetItemSpeedUp());
 		m_itemCountFont->SetText(text);
-
+		//アイテム使用(移動速度Up)
+		SpeedUp* m_spedup = g_goMgr->NewGameObject<SpeedUp>();
+		m_spedup->SetState(SpeedUp::Flashing_Use);
 		m_state = Item_InUse;
 		break;
 	}
@@ -113,10 +149,10 @@ void ItemUI::ItemMoveSet(eItemState& m_State)
 
 	//アイテムspriteの移動拡大設定。
 	if (m_State == Item_HpRecovery) {
-		m_spriteRender[0]->SetPosScale(m_item1Pos, m_item1Scale);
-		m_spriteRender[1]->SetPosScale(m_item2Pos, m_item2Scale);
-		m_spriteRender[2]->SetPosScale(m_item3Pos, m_item3Scale);
-		m_spriteRender[3]->SetPosScale(m_item4Pos, m_item4Scale);
+		m_spriteRender[0]->SetPosScale(NOW_ITEM_POSITION, NOW_ITEM_SCALE);
+		m_spriteRender[1]->SetPosScale(NEXT1_ITEM_POSITION, NEXT1_ITEM_SCALE);
+		m_spriteRender[2]->SetPosScale(NEXT2_ITEM_POSITION, NEXT2_ITEM_SCALE);
+		m_spriteRender[3]->SetPosScale(NEXT3_ITEM_POSITION, NEXT3_ITEM_SCALE);
 
 		//回復薬のアイテム数
 		wchar_t text[256];
@@ -128,10 +164,10 @@ void ItemUI::ItemMoveSet(eItemState& m_State)
 	}
 	else if (m_State == Item_Bum)
 	{
-		m_spriteRender[0]->SetPosScale(m_item4Pos, m_item4Scale);
-		m_spriteRender[1]->SetPosScale(m_item1Pos, m_item1Scale);
-		m_spriteRender[2]->SetPosScale(m_item2Pos, m_item2Scale);
-		m_spriteRender[3]->SetPosScale(m_item3Pos, m_item3Scale);
+		m_spriteRender[0]->SetPosScale(NEXT3_ITEM_POSITION, NEXT3_ITEM_SCALE);
+		m_spriteRender[1]->SetPosScale(NOW_ITEM_POSITION, NOW_ITEM_SCALE);
+		m_spriteRender[2]->SetPosScale(NEXT1_ITEM_POSITION, NEXT1_ITEM_SCALE);
+		m_spriteRender[3]->SetPosScale(NEXT2_ITEM_POSITION, NEXT2_ITEM_SCALE);
 
 		//爆弾のアイテム数
 		wchar_t text[256];
@@ -143,10 +179,10 @@ void ItemUI::ItemMoveSet(eItemState& m_State)
 	}
 	else if (m_State == Item_AttackUp)
 	{
-		m_spriteRender[0]->SetPosScale(m_item3Pos, m_item3Scale);
-		m_spriteRender[1]->SetPosScale(m_item4Pos, m_item4Scale);
-		m_spriteRender[2]->SetPosScale(m_item1Pos, m_item1Scale);
-		m_spriteRender[3]->SetPosScale(m_item2Pos, m_item2Scale);
+		m_spriteRender[0]->SetPosScale(NEXT2_ITEM_POSITION, NEXT2_ITEM_SCALE);
+		m_spriteRender[1]->SetPosScale(NEXT3_ITEM_POSITION, NEXT3_ITEM_SCALE);
+		m_spriteRender[2]->SetPosScale(NOW_ITEM_POSITION, NOW_ITEM_SCALE);
+		m_spriteRender[3]->SetPosScale(NEXT1_ITEM_POSITION, NEXT1_ITEM_SCALE);
 
 		//攻撃力UPのアイテム数
 		wchar_t text[256];
@@ -158,10 +194,10 @@ void ItemUI::ItemMoveSet(eItemState& m_State)
 	}
 	else if (m_State == Item_SpeedUp)
 	{
-		m_spriteRender[0]->SetPosScale(m_item2Pos, m_item2Scale);
-		m_spriteRender[1]->SetPosScale(m_item3Pos, m_item3Scale);
-		m_spriteRender[2]->SetPosScale(m_item4Pos, m_item4Scale);
-		m_spriteRender[3]->SetPosScale(m_item1Pos, m_item1Scale);
+		m_spriteRender[0]->SetPosScale(NEXT1_ITEM_POSITION, NEXT1_ITEM_SCALE);
+		m_spriteRender[1]->SetPosScale(NEXT2_ITEM_POSITION, NEXT2_ITEM_SCALE);
+		m_spriteRender[2]->SetPosScale(NEXT3_ITEM_POSITION, NEXT3_ITEM_SCALE);
+		m_spriteRender[3]->SetPosScale(NOW_ITEM_POSITION, NOW_ITEM_SCALE);
 
 		//移動速度UPのアイテム数
 		wchar_t text[256];
@@ -258,10 +294,11 @@ void ItemUI::ItemMove(eItemState& m_State)
 void ItemUI::ItemNow()
 {
 	//現在選択されているアイテム
-	/*if (g_pad[0].IsTrigger(enButtonY)) {
+	if (g_pad[0].IsTrigger(enButtonY)) {
 		//Yボタンが押されたらアイテム使用状態に遷移
 		m_state = Item_Use;
-	}*/
+	}
+
 	//LB1またはLB2ボタンが押されたらアイテム移動状態に遷移
 	if (g_pad[0].IsTrigger(enButtonRB1)) {
 		m_upDounFlag = true;		//上
@@ -275,6 +312,19 @@ void ItemUI::ItemNow()
 }
 void ItemUI::ItemInUse()
 {
+	//アイテム使用中。
+	//各アイテムによってラグを設ける。
+
+	if (m_itemState == Item_HpRecovery) {
+	}
+	else if (m_itemState == Item_Bum){
+
+	}
+	else if (m_itemState == Item_AttackUp){
+	}
+	else if (m_itemState == Item_SpeedUp){
+
+	}
 
 }
 

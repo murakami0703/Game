@@ -142,7 +142,6 @@
     <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="HpRecovery.cpp" />
     <ClCompile Include="IActor.cpp" />
-    <ClCompile Include="InUseItemUI.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemUI.cpp" />
@@ -232,7 +231,6 @@
     <ClInclude Include="gameObject\IGameObject.h" />
     <ClInclude Include="HpRecovery.h" />
     <ClInclude Include="IActor.h" />
-    <ClInclude Include="InUseItemUI.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemUI.h" />
@@ -417,29 +415,7 @@
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Item\test.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Game.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Item\spe.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Item\1.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\2.png">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\result\Result_e.png">
@@ -578,16 +554,36 @@
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Item\speedUp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Item\attackUp.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ImageContentTask Include="Assets\sprite\result\Player_Illustration.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\title\game_title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\ItemIcon\AttackUp.png" />
+    <ImageContentTask Include="Assets\sprite\ItemIcon\Itemframe.png" />
+    <ImageContentTask Include="Assets\sprite\ItemIcon\SpeedUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Item\hpRecovery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Item\attackUpRecovery.png" />
+    <ImageContentTask Include="Assets\sprite\Item\speedUpRecovery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain1.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain2.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain3.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain4.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain5.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain6.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain7.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain8.png" />
+    <ImageContentTask Include="Assets\sprite\title\Villain\Villain9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\Item\bomb.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,9 +8,18 @@ public:
 		Flashing_Use,
 		End_Use
 	};
+
 	ItemBase();
 	~ItemBase();
 	void Update() override;
+
+	eState GetState() {
+		return m_state;
+	}
+
+	void SetState(const eState& state) {
+		m_state = state;
+	}
 
 	virtual void InUse() = 0;
 	virtual void Flashing() = 0;

@@ -18,7 +18,15 @@ bool AttackUp::Start()
 	return true;
 }
 
-void AttackUp::Update()
+void AttackUp::InUse()
 {
-
+	//使用中。
+}
+void AttackUp::Flashing()
+{
+	//点滅。
+}
+void AttackUp::EndUse()
+{
+	//終わり。
 }

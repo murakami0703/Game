@@ -190,10 +190,10 @@ private:
 	bool gameOverflag = false;	//true ゲームオーバです。
 
 	//アイテム
-	int m_hpRecovery = 0;	//回復薬
-	int m_bum = 0;			//爆弾
-	int m_attackUp = 0;		//攻撃力UP
-	int m_speedUp = 0;		//移動速度UP
+	int m_hpRecovery = 2;	//回復薬
+	int m_bum = 2;			//爆弾
+	int m_attackUp = 2;		//攻撃力UP
+	int m_speedUp = 2;		//移動速度UP
 
 	const int MAXItem = 99;	//最大所持アイテム数
 

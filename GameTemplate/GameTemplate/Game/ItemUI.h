@@ -40,16 +40,6 @@ private:
 	eItemState m_itemState = Item_HpRecovery;			//選択中のアイテム
 
 private:
-	//アイテム関連
-	CVector3 m_item1Pos = { 460.0f,-240.0f,0.0f };		//アイテム1の座標
-	CVector3 m_item2Pos = { 560.0f,-120.0f,0.0f };		//アイテム2の座標
-	CVector3 m_item3Pos = { 475.0f,-50.0f,0.0f };		//アイテム3の座標
-	CVector3 m_item4Pos = { 545.0f,-3.0f,0.0f };		//アイテム4の座標
-
-	CVector3 m_item1Scale = { 0.55f,0.55f ,0.55f };			//アイテム1の拡大率
-	CVector3 m_item2Scale = { 0.35f,0.35f ,0.35f };			//アイテム2の拡大率
-	CVector3 m_item3Scale = { 0.25f,0.25f ,0.25f };			//アイテム3の拡大率
-	CVector3 m_item4Scale = { 0.15f,0.15f ,0.15f };			//アイテム4の拡大率
 
 	bool m_itemMoveEndFlag = false;		//移動完了
 	/// <summary>

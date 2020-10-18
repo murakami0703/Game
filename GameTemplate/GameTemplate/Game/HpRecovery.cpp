@@ -18,7 +18,15 @@ bool HpRecovery::Start()
 	return true;
 }
 
-void HpRecovery::Update()
+void HpRecovery::InUse()
 {
-
+	//使用中。
+}
+void HpRecovery::Flashing()
+{
+	//点滅。
+}
+void HpRecovery::EndUse()
+{
+	//終わり。
 }
