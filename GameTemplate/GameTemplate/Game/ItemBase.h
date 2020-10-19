@@ -19,7 +19,7 @@ public:
 	~ItemBase();
 	void Update() override;
 
-	void SetItemMove(const eItemState& state);
+	//void SetItemMove(const eItemState& state);
 
 	eState GetState() {
 		return m_state;
@@ -31,6 +31,7 @@ public:
 
 	virtual void InUse() = 0;
 	virtual void EndUse() = 0;	
+	
 private:
 	eState m_state = In_Use;		//èÛë‘ÅB
 protected:

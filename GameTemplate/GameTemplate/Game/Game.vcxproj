@@ -104,7 +104,9 @@
   <ItemGroup>
     <ClCompile Include="Anima.cpp" />
     <ClCompile Include="AttackUp.cpp" />
+    <ClCompile Include="AttackUpUI.cpp" />
     <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="BombUI.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Bum.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -141,10 +143,12 @@
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="HpRecovery.cpp" />
+    <ClCompile Include="HpRecoveryUI.cpp" />
     <ClCompile Include="IActor.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemUI.cpp" />
+    <ClCompile Include="ItemUIBase.cpp" />
     <ClCompile Include="LevelSet.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
@@ -175,6 +179,7 @@
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="SpeedUp.cpp" />
+    <ClCompile Include="SpeedUpUI.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="SpriteBase.cpp" />
     <ClCompile Include="sprite\Sprite.cpp" />
@@ -192,7 +197,9 @@
   <ItemGroup>
     <ClInclude Include="Anima.h" />
     <ClInclude Include="AttackUp.h" />
+    <ClInclude Include="AttackUpUI.h" />
     <ClInclude Include="Bat.h" />
+    <ClInclude Include="BombUI.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Bum.h" />
     <ClInclude Include="Effect.h" />
@@ -230,10 +237,12 @@
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="gameObject\IGameObject.h" />
     <ClInclude Include="HpRecovery.h" />
+    <ClInclude Include="HpRecoveryUI.h" />
     <ClInclude Include="IActor.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemUI.h" />
+    <ClInclude Include="ItemUIBase.h" />
     <ClInclude Include="LevelSet.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
@@ -266,6 +275,7 @@
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="SpeedUp.h" />
+    <ClInclude Include="SpeedUpUI.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="SpriteBase.h" />
     <ClInclude Include="sprite\Sprite.h" />

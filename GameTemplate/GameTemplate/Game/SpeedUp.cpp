@@ -25,6 +25,10 @@ SpeedUp::~SpeedUp()
 {
 }
 
+void SpeedUp::SetItemMove(const ItemBase::eItemState& state)
+{
+
+}
 bool SpeedUp::Start()
 {
 
