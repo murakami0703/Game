@@ -158,6 +158,26 @@ public:
 		return Anima;
 	}
 
+	/// <summary>
+	/// アイテム使用中かどうか判定用のフラグ。
+	/// </summary>
+	/// <returns>ture		使用中。</returns>
+	/// <returns>false		未使用。</returns>
+	bool  GetItemInUseFlag() const
+	{
+		return m_itemInUsFlag;
+	}
+
+	/// <summary>
+	/// アイテム使用中かどうかのフラグを設定。
+	/// </summary>
+	/// <param name="flag"></param>
+	void  SetItemInUseFlag(bool flag)
+	{
+		m_itemInUsFlag = flag;
+	}
+
+
 	/////////////////////////////////// 
 	/// <summary>
 	/// インスタンスの取得。
@@ -176,7 +196,10 @@ private:
 	float MP = 50.0f;	//デフォルトMP
 	const float MAXMP = 400.0f;	//最大MP
 
+	//各数値。
 	float ATK = 30.0f;	//基礎攻撃力
+	float SPD = 300.0f;	//基礎移動速度
+
 
 	//敵
 	int EnemyCount = 0;				//敵の数
@@ -190,12 +213,13 @@ private:
 	bool gameOverflag = false;	//true ゲームオーバです。
 
 	//アイテム
-	int m_hpRecovery = 0;	//回復薬
-	int m_bum = 0;			//爆弾
-	int m_attackUp = 0;		//攻撃力UP
-	int m_speedUp = 0;		//移動速度UP
+	int m_hpRecovery = 2;	//回復薬
+	int m_bum = 2;			//爆弾
+	int m_attackUp = 2;		//攻撃力UP
+	int m_speedUp = 2;		//移動速度UP
 
 	const int MAXItem = 99;	//最大所持アイテム数
 
+	bool m_itemInUsFlag = false;		//アイテム使用中フラグ。
 };
 

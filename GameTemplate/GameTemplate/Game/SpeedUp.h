@@ -1,5 +1,8 @@
 #pragma once
 #include "ItemBase.h"
+/// <summary>
+/// 移動速度アップ。
+/// </summary>
 class SpeedUp : public ItemBase
 {
 public:
@@ -7,15 +10,15 @@ public:
 	~SpeedUp();
 
 	bool Start() override;
-	
+	void Update() override;
 
-
-	void InUse() override;		//点滅。
-	void Flashing() override;	//点滅。
-	void EndUse() override;		//点滅。
+	void InUse() override;		//使用中。
+	void EndUse() override;		//終わり。
 
 private:
-	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* m_Sprite;
+	SpriteRender* m_frameSprite;
+	SpriteRender* m_itemiconSprite;
+
+	float m_flashingTimer = 0;		//ライト用タイマー。
 };
 

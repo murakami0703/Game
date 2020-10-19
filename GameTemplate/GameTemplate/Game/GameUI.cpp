@@ -73,12 +73,12 @@ bool GameUI::Start()
 	}
 	//HP
 	{
-		/*//8番→HP半分
+		//8番→HP半分
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/Hp_Half.dds", 350.0f, 350.0f);
 		r->SetAlpha(0.0f);
 		m_spriteRender.push_back(r);
-		*/
+		
 		//HPを配置する。
 		m_setHP = GameData::GetInstance()->GetHitPoint();
 		for (int i = 0; i < m_setHP; i++) {
@@ -152,8 +152,16 @@ void GameUI::HPCalc()
 {
 	//今のHP量を取得。
 	//HP半分表示
-	m_spriteRender[m_spriteNum]->SetAlpha(0.0f);
-	m_setHP -= 1.0f;
+	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {
+		m_spriteRender[m_spriteNum]->SetAlpha(0.0f);
+		m_setHP -= 1.0f;
+
+	}
+	else if(GameData::GetInstance()->GetHitPoint() > m_setHP) {
+		m_spriteRender[m_spriteNum]->SetAlpha(1.0f);
+		m_setHP += 1.0f;
+
+	}
 
 }
 
@@ -176,6 +184,10 @@ void GameUI::Update()
 
 	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {
 		m_spriteNum -= 1;
+		HPCalc();
+	}
+	else if (GameData::GetInstance()->GetHitPoint() > m_setHP) {
+		m_spriteNum += 1;
 		HPCalc();
 	}
 	if (GameData::GetInstance()->GetAnima() > m_soulNowNum) {

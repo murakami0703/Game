@@ -1,24 +1,19 @@
 #pragma once
-class Bum : public IGameObject
+#include "ItemBase.h"
+/// <summary>
+/// 爆弾。
+/// </summary>
+class Bum : public ItemBase
 {
 public:
 	Bum();
 	~Bum();
 
-	bool Start();
-	void Update();
+	bool Start() override;
 
-	enum eState {
-		In_Use,
-		End_Use
-	};
-
+	void InUse() override;		//使用中。
+	void EndUse() override;		//終わり。
 private:
-	SkinModelRender* m_bumModelRender;				//スキンモデル。
-	CVector3 m_position = CVector3().Zero();		//座標。
-
-	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* m_Sprite;
 
 };
 

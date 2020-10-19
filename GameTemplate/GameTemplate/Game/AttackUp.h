@@ -1,21 +1,20 @@
 #pragma once
-class AttackUp : public IGameObject
+#include "ItemBase.h"
+/// <summary>
+/// 攻撃力アップ。
+/// </summary>
+class AttackUp : public ItemBase
 {
 public:
 	AttackUp();
 	~AttackUp();
 
-	bool Start();
-	void Update();
+	bool Start() override;
 
-	enum eState {
-		In_Use,
-		End_Use
-	};
-
+	void InUse() override;		//使用中。
+	void EndUse() override;		//終わり。
 private:
-	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* m_Sprite;
-
+	SpriteRender* m_frameSprite;
+	SpriteRender* m_itemSprite;
 };
 

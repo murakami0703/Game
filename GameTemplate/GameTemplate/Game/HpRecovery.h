@@ -1,22 +1,19 @@
 #pragma once
-class HpRecovery : public IGameObject
+#include "ItemBase.h"
+/// <summary>
+/// 回復薬。
+/// </summary>
+class HpRecovery : public ItemBase
 {
 public:
 	HpRecovery();
 	~HpRecovery();
 
-	bool Start();
-	void Update();
 
-	enum eState {
-		In_Use,
-		End_Use
-	};
+	bool Start() override;
 
+	void InUse() override;		//使用中。
+	void EndUse() override;		//終わり。
 private:
-
-	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* m_Sprite;
-
 };
 

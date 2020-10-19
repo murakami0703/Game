@@ -18,9 +18,6 @@ void ItemBase::Update()
 	case In_Use:
 		InUse();
 		break;
-	case Flashing_Use:
-		Flashing();
-		break;
 	case End_Use:
 		EndUse();
 		break;
