@@ -100,9 +100,6 @@
     <Filter Include="sound">
       <UniqueIdentifier>{e91662ef-364b-4c39-8f80-ac23b8a2dcb5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\sprite\hp">
-      <UniqueIdentifier>{607d15d7-c910-4dbd-bc6a-be4c9b3422c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="light">
       <UniqueIdentifier>{dcbb6f05-7173-45ae-851a-40b18c4de04c}</UniqueIdentifier>
     </Filter>
@@ -112,14 +109,17 @@
     <Filter Include="item">
       <UniqueIdentifier>{f5db5701-c2a9-4471-a3ee-4f8088466487}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\sprite\Item\itemframe">
-      <UniqueIdentifier>{21d48761-3f5b-4bb8-974a-452581a0cc2b}</UniqueIdentifier>
+    <Filter Include="Assets\sprite\itemicon">
+      <UniqueIdentifier>{f28c817d-efd2-4231-a281-8a280efcf1d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\sprite\title\villain">
-      <UniqueIdentifier>{7fdc90a1-fba5-4c91-9f47-a59cae660715}</UniqueIdentifier>
+    <Filter Include="Assets\sprite\bosshp">
+      <UniqueIdentifier>{607d15d7-c910-4dbd-bc6a-be4c9b3422c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Assets\sprite\iteicon">
-      <UniqueIdentifier>{7d6055f0-6323-4bde-b189-e2b004be5062}</UniqueIdentifier>
+    <Filter Include="Assets\sprite\playerhp">
+      <UniqueIdentifier>{4b83f364-95c6-4a50-b7d2-76be3438cbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\title\Villain">
+      <UniqueIdentifier>{6216bbe5-958d-4ef6-b748-0a0f35af4629}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -699,14 +699,35 @@
     <ImageContentTask Include="Assets\sprite\title\title.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case1.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case2.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case3.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case4.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\hasi.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\L.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\ZL.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\waku.png">
+      <Filter>Assets\sprite\Item</Filter>
+    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\light.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\star_chips.png">
       <Filter>Assets\sprite\title</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Hp.png">
-      <Filter>Assets\sprite</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\modelData\AO.png">
       <Filter>Assets\modelData</Filter>
@@ -717,14 +738,11 @@
     <ImageContentTask Include="Assets\modelData\MatallicSmoothness.png">
       <Filter>Assets\modelData</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Hp_Half.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\hp\Boss_Hp.png">
-      <Filter>Assets\sprite\hp</Filter>
+      <Filter>Assets\sprite\bosshp</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\hp\Boss_Hpframe.png">
-      <Filter>Assets\sprite\hp</Filter>
+      <Filter>Assets\sprite\bosshp</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\gameover.png">
       <Filter>Assets\sprite</Filter>
@@ -741,82 +759,64 @@
     <ImageContentTask Include="Assets\sprite\result\Player_Illustration.png">
       <Filter>Assets\sprite\result</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case1.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\Hp.png">
+      <Filter>Assets\sprite\playerhp</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case2.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\Hp_Half.png">
+      <Filter>Assets\sprite\playerhp</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case3.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\ItemIcon\AttackUp.png">
+      <Filter>Assets\sprite\itemicon</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case4.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\ItemIcon\Itemframe.png">
+      <Filter>Assets\sprite\itemicon</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\hasi.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\ItemIcon\SpeedUp.png">
+      <Filter>Assets\sprite\itemicon</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\L.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\Item\hpRecovery.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\waku.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\Item\attackUpRecovery.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\ZL.png">
-      <Filter>Assets\sprite\Item\itemframe</Filter>
+    <ImageContentTask Include="Assets\sprite\Item\speedUpRecovery.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\sprite\Item\Bomb.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </Image>
-    <Image Include="Assets\sprite\Item\HpRecovery.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </Image>
-    <Image Include="Assets\sprite\Item\speedUpRecovery.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </Image>
-    <Image Include="Assets\sprite\Item\attackUpRecovery.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </Image>
     <Image Include="Assets\sprite\title\Villain\Villain1.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain2.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain3.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain4.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain5.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain6.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain7.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain8.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
     <Image Include="Assets\sprite\title\Villain\Villain9.png">
-      <Filter>Assets\sprite\title\villain</Filter>
+      <Filter>Assets\sprite\title\Villain</Filter>
     </Image>
-    <Image Include="Assets\sprite\ItemIcon\AttackUp.png">
-      <Filter>Assets\sprite\iteicon</Filter>
-    </Image>
-    <Image Include="Assets\sprite\ItemIcon\Itemframe.png">
-      <Filter>Assets\sprite\iteicon</Filter>
-    </Image>
-    <Image Include="Assets\sprite\ItemIcon\SpeedUp.png">
-      <Filter>Assets\sprite\iteicon</Filter>
+    <Image Include="Assets\sprite\Item\bomb.png">
+      <Filter>Assets\sprite\Item</Filter>
     </Image>
   </ItemGroup>
 </Project>
