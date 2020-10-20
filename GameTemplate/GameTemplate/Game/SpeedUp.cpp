@@ -25,18 +25,8 @@ SpeedUp::~SpeedUp()
 {
 }
 
-void SpeedUp::SetItemMove(const ItemBase::eItemState& state)
-{
-
-}
 bool SpeedUp::Start()
 {
-
-	//移動速度UP
-	m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
-	m_itemSprite->Init(L"Assets/sprite/speedUpRecovery.dds", 150.0f, 300.0f);
-	m_itemSprite->SetPosition(NEXT3_ITEM_POSITION);
-	m_itemSprite->SetScale(NEXT3_ITEM_SCALE);
 
 	//左上に表示するアイコン関係のsprite
 	{
@@ -53,8 +43,6 @@ bool SpeedUp::Start()
 		m_itemiconSprite->SetScale(ITEM_SET_SCALE);
 	}
 
-	m_number = 3;			//アイテム位置番号（選択中）
-
 	return true;
 }
 void SpeedUp::InUse()
@@ -63,11 +51,11 @@ void SpeedUp::InUse()
 	//アイコンの点滅。
 	m_flashingTimer++;
 	if (m_flashingTimer <= ICON_INCREASE_TIME) {
-		m_itemSprite->DeltaAlpha(ICON_DELTA_ALPHA);
+		m_itemiconSprite->DeltaAlpha(ICON_DELTA_ALPHA);
 	}
 	else if (m_flashingTimer <= ICON_DECREASE_TIME)
 	{
-		m_itemSprite->DeltaAlpha(-ICON_DELTA_ALPHA);
+		m_itemiconSprite->DeltaAlpha(-ICON_DELTA_ALPHA);
 	}
 	else {
 		m_flashingTimer = ICON_TIMER_RESET;
