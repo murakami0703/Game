@@ -2,6 +2,8 @@
 #include "HpRecoveryUI.h"
 #include "GameData.h"
 
+#include "HpRecovery.h"
+
 HpRecoveryUI::HpRecoveryUI()
 {
 }
@@ -49,6 +51,9 @@ void HpRecoveryUI::UseItem(FontRender* itemContRender)
 	wchar_t text[256];
 	swprintf(text, L"%02d", gamedate->GetItemHpRecovery());
 	itemContRender->SetText(text);
+
+	HpRecovery* m_hpRecovery = g_goMgr->NewGameObject<HpRecovery>();
+
 }
 void HpRecoveryUI::OnNowItem(FontRender* itemContRender)
 {

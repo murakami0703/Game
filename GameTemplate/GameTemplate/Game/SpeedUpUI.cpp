@@ -2,6 +2,7 @@
 #include "SpeedUpUI.h"
 #include "GameData.h"
 
+#include "SpeedUp.h"
 
 SpeedUpUI::SpeedUpUI()
 {
@@ -53,6 +54,9 @@ void SpeedUpUI::UseItem(FontRender* itemContRender)
 	wchar_t text[256];
 	swprintf(text, L"%02d", gamedate->GetItemSpeedUp());
 	itemContRender->SetText(text);
+
+	SpeedUp* m_spedup = g_goMgr->NewGameObject<SpeedUp>();
+
 }
 
 void SpeedUpUI::OnNowItem(FontRender* itemContRender)

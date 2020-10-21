@@ -11,6 +11,7 @@ public:
 		First_Item_Select,
 		Second_Item_Select,
 		Third_Item_Select,
+		Item_Select_Num
 	};
 
 	/// <summary>

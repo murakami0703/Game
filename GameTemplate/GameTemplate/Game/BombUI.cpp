@@ -2,6 +2,8 @@
 #include "BombUI.h"
 #include "GameData.h"
 
+#include "Bum.h"
+
 BombUI::BombUI()
 {
 }
@@ -49,6 +51,8 @@ void BombUI::UseItem(FontRender* itemContRender)
 	wchar_t text[256];
 	swprintf(text, L"%02d", gamedate->GetItemBum());
 	itemContRender->SetText(text);
+	Bum* m_bum = g_goMgr->NewGameObject<Bum>();
+
 }
 void BombUI::OnNowItem(FontRender* itemContRender)
 {

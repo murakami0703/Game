@@ -12,14 +12,6 @@ public:
 	bool Start();
 	void Update();
 
-	/// <summary>
-	/// 上下の判定フラグを返す。
-	/// </summary>
-	/// <returns></returns>
-	bool GetUpDounFlag() const
-	{
-		return m_upDounFlag;
-	}
 
 private:
 	//選択状態
@@ -45,25 +37,13 @@ private:
 
 private:
 
-	eSelectState m_state = Item_Now;					//選択状態
+	eSelectState m_state = Item_Move;					//選択状態
 	eItemState m_itemState = Item_HpRecovery;			//アイテムの選択状態
 
 	FontRender* m_itemCountFont;						//アイテム所持数カウント。
 	CVector2 m_fontMovePos = CVector2().Zero();			//フォントの座標。
 
 private:
-/*	HpRecoveryUI* m_hprecoveryUi;
-	BombUI*m_bombUi;
-	AttackUpUI*m_attackUpUi;
-	SpeedUpUI*m_speedUpUi;
-*/
 	ItemUIBase* m_uiItems[Item_Num];	//UIアイテム。
-
-	/// <summary>
-	/// 上下選択フラグ
-	/// </summary>
-	/// <param name="flag">true   上     false    下</param>
-	bool m_upDounFlag = true;
-
 };
 

@@ -1,16 +1,46 @@
 #include "stdafx.h"
 #include "GameUI.h"
 #include "GameData.h"
+
+//ŠeUIˆ—ƒNƒ‰ƒXB
+#include "PlayerHPUI.h"
 #include "ItemUI.h"
 
 GameUI* GameUI::m_instance = nullptr;
+
+/////////////////////////////////////////////////////////
+/// ’è”
+/////////////////////////////////////////////////////////
+
+const CVector3 m_itemC1Pos = { 460.0f,-240.0f,0.0f };		//˜g1‚ÌÀ•W
+const CVector3 m_itemC2Pos = { 560.0f,-120.0f,0.0f };		//˜g2‚ÌÀ•W
+const CVector3 m_itemC3Pos = { 475.0f,-50.0f,0.0f };		//˜g3‚ÌÀ•W
+const CVector3 m_itemC4Pos = { 545.0f,-3.0f,0.0f };		//˜g4‚ÌÀ•W
+
+const CVector3 m_itemC1Scale = { 0.8f,0.8f,0.8f };		//˜g1Šg‘å—¦
+const CVector3 m_itemC24Scale = { 0.7f,0.7f,0.7f };		//˜g2`4Šg‘å—¦
+
+const CVector3 m_itemSCPos = { 460.0f,-240.0f,0.0f };		//‘I‘ð˜g‚ÌÀ•W
+const CVector3 m_itemHPos = { 505.0f,14.0f,0.0f };		//’[‚ÌÀ•W
+const CVector3 m_itemLPos = { 585.0f,-250.0f,0.0f };		//L‚ÌÀ•W
+const CVector3 m_itemZLPos = { 605.0f,20.0f,0.0f };		//ZL‚ÌÀ•W
+
+const CVector3 m_itemLScale = { 0.8f,0.8f,0.8f };			//LŠg‘å—¦
+const CVector3 m_itemHScale = { 0.6f,0.6f,0.6f };			//’[Šg‘å—¦
+
+const int m_bigCountValue = 30;
+const int m_smallCountValue = 60;
+const CVector3 m_scalingValue = { 0.002f,0.002f,0.002f };			//‘I‘ð˜gŠg‘å’l
+const CVector3 m_hpScale = { 0.15f,0.15f,0.15f };		//HP‚ÌŠg‘å—¦
+const float m_hpvAddXPos = 50.0f;					//HP2ˆÈã‚ÌXÀ•W‚Ì•Ï‰»’l
+const CVector3 m_soulPos = { -575.0f,200.0f,0.0f };		//°Šl“¾”‚ÌÀ•W
+const CVector3 m_soulFramePos = { -500.0f,200.0f,0.0f };		//°Šl“¾”˜g‚ÌÀ•W
+const CVector3 m_soulScale = { 0.35f,0.35f,0.35f };		//°Šl“¾”Šg‘å—¦
 
 GameUI::GameUI()
 {
 	m_instance = this;
 }
-
-
 GameUI::~GameUI()
 {
 }
@@ -71,37 +101,6 @@ bool GameUI::Start()
 		r->SetScale(m_itemZSCScale);
 		m_spriteRender.push_back(r);
 	}
-	//HP
-	{
-		//8”Ô¨HP”¼•ª
-		r = g_goMgr->NewGameObject<SpriteRender>();
-		r->Init(L"Assets/sprite/Hp_Half.dds", 350.0f, 350.0f);
-		r->SetAlpha(0.0f);
-		m_spriteRender.push_back(r);
-		
-		//HP‚ð”z’u‚·‚éB
-		m_setHP = GameData::GetInstance()->GetHitPoint();
-		for (int i = 0; i < m_setHP; i++) {
-			if (i >= 1) {
-				//9`20”Ô¨HP2`12
-				r = g_goMgr->NewGameObject<SpriteRender>();
-				r->Init(L"Assets/sprite/Hp.dds", 350.0f, 350.0f);
-				m_hpPos.x += m_hpvAddXPos;
-				r->SetPosition(m_hpPos);
-				r->SetScale(m_hpScale);
-				m_spriteRender.push_back(r);
-			}
-			else {
-				//8”Ô¨HP1
-				r = g_goMgr->NewGameObject<SpriteRender>();
-				r->Init(L"Assets/sprite/Hp.dds", 350.0f, 350.0f);
-				r->SetPosition(m_hpPos);
-				r->SetScale(m_hpScale);
-				m_spriteRender.push_back(r);
-			}
-		}
-	}
-	m_spriteNum += m_setHP+1;
 
 	//?”Ô¨°Šl“¾”
 	r = g_goMgr->NewGameObject<SpriteRender>();
@@ -127,7 +126,9 @@ bool GameUI::Start()
 	m_soulFont->SetPosition({ -490.0f,230.0f });
 
 	m_soulSpNum += 1;
-	//ƒAƒCƒeƒ€
+	//ƒvƒŒƒCƒ„[HPUI
+	g_goMgr->NewGameObject<PlayerHPUI>();
+	//ƒAƒCƒeƒ€UI
 	g_goMgr->NewGameObject<ItemUI>();
 
 	return true;
@@ -152,17 +153,7 @@ void GameUI::HPCalc()
 {
 	//¡‚ÌHP—Ê‚ðŽæ“¾B
 	//HP”¼•ª•\Ž¦
-	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {
-		m_spriteRender[m_spriteNum]->SetAlpha(0.0f);
-		m_setHP -= 1.0f;
-
-	}
-	else if(GameData::GetInstance()->GetHitPoint() > m_setHP) {
-		m_spriteRender[m_spriteNum]->SetAlpha(1.0f);
-		m_setHP += 1.0f;
-
-	}
-
+	
 }
 
 void GameUI::OnlyDelete()
@@ -182,14 +173,7 @@ void GameUI::Update()
 {
 	GameData* m_gamedate = GameData::GetInstance();
 
-	if (GameData::GetInstance()->GetHitPoint() < m_setHP) {
-		m_spriteNum -= 1;
-		HPCalc();
-	}
-	else if (GameData::GetInstance()->GetHitPoint() > m_setHP) {
-		m_spriteNum += 1;
-		HPCalc();
-	}
+	
 	if (GameData::GetInstance()->GetAnima() > m_soulNowNum) {
 		swprintf(soulText, L"%02d", GameData::GetInstance()->GetAnima());
 		m_soulFont->SetText(soulText);

@@ -2,6 +2,7 @@
 #include "AttackUpUI.h"
 #include "GameData.h"
 
+#include "AttackUp.h"
 
 AttackUpUI::AttackUpUI()
 {
@@ -50,6 +51,9 @@ void AttackUpUI::UseItem(FontRender* itemContRender)
 	wchar_t text[256];
 	swprintf(text, L"%02d", gamedate->GetItemAttackUp());
 	itemContRender->SetText(text);
+
+	AttackUp* m_attackUp = g_goMgr->NewGameObject<AttackUp>();
+
 }
 void AttackUpUI::OnNowItem(FontRender* itemContRender)
 {

@@ -360,6 +360,9 @@
     <ClCompile Include="AttackUpUI.cpp">
       <Filter>ui\itemui</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerHPUI.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -604,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="AttackUpUI.h">
       <Filter>ui\itemui</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHPUI.h">
+      <Filter>ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -33,5 +33,5 @@ void ItemUIBase::SetItemMove(const eSelectState& state)
 
 void ItemUIBase::Update()
 {
-
+	SetItemMove(m_selectState);
 }
