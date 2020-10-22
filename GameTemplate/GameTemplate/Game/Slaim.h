@@ -1,8 +1,8 @@
 #pragma once
 #include "character/CharacterController.h"
 
-class BattlePoint;
-class Slaim : public IGameObject
+struct BattlePoint;
+class Slaim final : public IActor
 {
 public:
 	Slaim();
@@ -14,27 +14,7 @@ public:
 	bool Start();
 	void Update();
 
-	/// <summary>
-/// 座標を設定。
-/// </summary>
-	void Slaim::SetPosition(CVector3 pos)
-	{
-		m_position = pos;
-	}
-	/// <summary>
-	/// 回転を設定。
-	/// </summary>
-	void Slaim::SetRotation(CQuaternion rot)
-	{
-		m_rotation = rot;
-	}
-	/// <summary>
-	/// 回転率を設定。
-	/// </summary>
-	void Slaim::SetScale(CVector3 sca)
-	{
-		m_scale = sca;
-	}
+	
 
 private:
 
@@ -79,9 +59,6 @@ private:
 
 	SkinModelRender* m_enemyModelRender;				//エネミースキンモデルレンダー。
 	SkinModelRender* m_enemyDeadModelRender;				//エネミースキンモデルレンダー。
-	CVector3 m_position = CVector3().Zero();			//座標。
-	CQuaternion m_rotation = CQuaternion().Identity();	//回転。
-	CVector3 m_scale = CVector3().One();				//拡大率。
 	EState m_state = eState_Idle;					//状態。
 
 	CharacterController m_characon;		//キャラコン

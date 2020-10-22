@@ -1,7 +1,7 @@
 #pragma once
 #include "IActor.h"
 
-class BattlePoint;
+struct BattlePoint;
 class Ghost final : public IActor
 {
 public:
@@ -9,23 +9,6 @@ public:
 	~Ghost();
 	bool Start() override;
 	void Update() override;
-
-	/// <summary>
-	/// エネミのポジションを返す関数。
-	/// </summary>
-	/// <returns>座標</returns>
-	CVector3 Ghost::GetPosition() {
-		return m_position;
-	}
-
-	/// <summary>
-	/// 攻撃判定
-	/// </summary>
-	/// <returns>trueなら攻撃中</returns>
-	bool Ghost::GetAttackflag() {
-		return EneAttackflag;
-	}
-
 private:
 
 	// 状態

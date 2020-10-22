@@ -125,7 +125,7 @@ public:
 
 
 	//////////////ç∞///////////////////
-	void  AnimaCalc(int x) {
+	void  SoulCalc(int x) {
 		Anima += x;
 		if (Anima < 0) {
 			Anima = 0;
@@ -154,7 +154,7 @@ public:
 		return resultflag;
 	}
 
-	int GetAnima() {
+	int GetSoul() {
 		return Anima;
 	}
 

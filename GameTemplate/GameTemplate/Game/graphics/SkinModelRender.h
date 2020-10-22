@@ -155,6 +155,7 @@ public:
 	void Render();
 
  private:
+	 std::wstring m_filepath;
 	SkinModel					m_skinModel;						//スキンモデル。
 	CVector3 m_position = CVector3().Zero();			//座標
 	CQuaternion m_rotation = CQuaternion().Identity();	//回転

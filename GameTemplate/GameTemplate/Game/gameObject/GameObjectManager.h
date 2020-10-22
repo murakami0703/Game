@@ -1,6 +1,17 @@
 #pragma once
 #include "IGameObject.h"
 
+
+//ゲームオブジェクトのプライオリティ
+enum {
+	GameObjectPrio_MostHigh,	//最優先。
+	GameObjectPrio_High,		//２番目の優先。
+	GameObjectPrio_Middle,		//３番目の優先。
+	GameObjectPrio_Low,			//４番目の優先。
+	GameObjectPrio_MostLow,		//一番低い優先。
+};
+
+
 class GameObjectManager
 {
 public:
@@ -13,11 +24,17 @@ public:
 	/// <summary>
 	/// ゲームオブジェクトの追加。
 	/// </summary>
+	/// <param name="prio">優先順位。値が小さいほど優先順位は高い。</param>
 	template <class T>
-	T* NewGameObject()
+	T* NewGameObject( int prio = GameObjectPrio_Middle)
 	{
 		T* newObj = new T;
+		newObj->SetPriority( prio );
 		m_goList.push_back(newObj);
+		//優先順位を使ってリストをソートする。
+		m_goList.sort([&](IGameObject* lhs, IGameObject* rhs) {
+			return lhs->GetPriority() < rhs->GetPriority();
+		});
 		return newObj;
 	}
 	/// <summary>

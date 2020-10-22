@@ -34,6 +34,7 @@ LevelSet::~LevelSet()
 
 bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 {
+	static int hoge = 0;
 	//ステージ
 	if (objData.EqualObjectName(L"Floor")) {
 		Map* m_map = g_goMgr->NewGameObject<Map>();
@@ -44,24 +45,27 @@ bool LevelSet::OnPreBuildMapchip(LevelObjectData& objData)
 	}
 	//ゴースト
 	if (objData.EqualObjectName(L"ghosts")) {
+		
 		Ghost* m_ghost = g_goMgr->NewGameObject<Ghost>();
 		m_ghost->SetPosition(objData.position);
 		m_ghost->SetRotation(objData.rotation);
 		m_ghost->SetScale(objData.scale);
 
 		m_enemyCount++;
-
+			
+		
 		return true;
 	}
 	//バット
 	if (objData.EqualObjectName(L"bat")) {
+
 		Bat* m_bat = g_goMgr->NewGameObject<Bat>();
 		m_bat->SetPosition(objData.position);
 		m_bat->SetRotation(objData.rotation);
 		m_bat->SetScale(objData.scale);
 
 		m_enemyCount++;
-
+		hoge++;
 		return true;
 	}
 	//スライム

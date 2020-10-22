@@ -1,6 +1,13 @@
 #pragma once
 #include "ItemUIBase.h"
 
+
+/// <summary>
+/// 攻撃力アップUIクラス
+/// </summary>
+/// <remarks>
+/// このクラスはTemplateMethodパターンのConcreteClass役です。
+/// </remarks>
 class AttackUpUI : public ItemUIBase
 {
 public:

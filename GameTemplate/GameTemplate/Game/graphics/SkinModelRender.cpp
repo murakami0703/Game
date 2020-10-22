@@ -25,6 +25,7 @@ bool SkinModelRender::Start() {
 
 void SkinModelRender::Init(const wchar_t* filePath, AnimationClip* animationClips , int numAnimationClips , EnFbxUpAxis fbxUpAxis)
 {
+	m_filepath = filePath;
 	m_skinModel.Init(filePath, fbxUpAxis);
 	InitAnimation(animationClips, numAnimationClips);
 }

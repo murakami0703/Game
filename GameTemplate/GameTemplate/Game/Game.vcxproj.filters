@@ -61,9 +61,6 @@
     <Filter Include="sprite\fade">
       <UniqueIdentifier>{4ea41b5e-cd79-4b6f-943e-9e568262d923}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ui">
-      <UniqueIdentifier>{bcd1fcb9-9023-4b06-bc07-719c195d1b73}</UniqueIdentifier>
-    </Filter>
     <Filter Include="graphics\effect">
       <UniqueIdentifier>{46d61319-d978-4013-a21e-b5e36393fe44}</UniqueIdentifier>
     </Filter>
@@ -121,8 +118,20 @@
     <Filter Include="Assets\sprite\title\Villain">
       <UniqueIdentifier>{6216bbe5-958d-4ef6-b748-0a0f35af4629}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{b04dd774-f857-442f-80bb-447f52ed7cff}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ui\itemui">
-      <UniqueIdentifier>{581c3e2e-4f8f-4118-922e-5ad7e5895478}</UniqueIdentifier>
+      <UniqueIdentifier>{50f16e9c-cfed-4e9e-81a0-1d86272287bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\itemui\item">
+      <UniqueIdentifier>{481850f6-467c-400f-82a9-31c196ed5bee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\playerhpui">
+      <UniqueIdentifier>{4cc48e3f-cbd8-40d9-872c-1f159f7eb439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\soului">
+      <UniqueIdentifier>{75fddeb3-89f9-4da0-939c-1ac34eb69353}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -243,9 +252,6 @@
     <ClCompile Include="Gimmick.cpp">
       <Filter>gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="GameUI.cpp">
-      <Filter>ui</Filter>
-    </ClCompile>
     <ClCompile Include="Anima.cpp">
       <Filter>anima</Filter>
     </ClCompile>
@@ -300,9 +306,6 @@
     <ClCompile Include="Engine.cpp">
       <Filter>system</Filter>
     </ClCompile>
-    <ClCompile Include="ItemUI.cpp">
-      <Filter>ui</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>gimmick</Filter>
     </ClCompile>
@@ -345,23 +348,32 @@
       <Filter>item</Filter>
     </ClCompile>
     <ClCompile Include="SpriteBase.cpp" />
+    <ClCompile Include="GameUI.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemUI.cpp">
+      <Filter>ui\itemui</Filter>
+    </ClCompile>
     <ClCompile Include="ItemUIBase.cpp">
       <Filter>ui\itemui</Filter>
     </ClCompile>
-    <ClCompile Include="SpeedUpUI.cpp">
-      <Filter>ui\itemui</Filter>
-    </ClCompile>
-    <ClCompile Include="HpRecoveryUI.cpp">
-      <Filter>ui\itemui</Filter>
+    <ClCompile Include="AttackUpUI.cpp">
+      <Filter>ui\itemui\item</Filter>
     </ClCompile>
     <ClCompile Include="BombUI.cpp">
-      <Filter>ui\itemui</Filter>
+      <Filter>ui\itemui\item</Filter>
     </ClCompile>
-    <ClCompile Include="AttackUpUI.cpp">
-      <Filter>ui\itemui</Filter>
+    <ClCompile Include="HpRecoveryUI.cpp">
+      <Filter>ui\itemui\item</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedUpUI.cpp">
+      <Filter>ui\itemui\item</Filter>
     </ClCompile>
     <ClCompile Include="PlayerHPUI.cpp">
-      <Filter>ui</Filter>
+      <Filter>ui\playerhpui</Filter>
+    </ClCompile>
+    <ClCompile Include="SoulUI.cpp">
+      <Filter>ui\soului</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -490,9 +502,6 @@
     <ClInclude Include="Gimmick.h">
       <Filter>gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="GameUI.h">
-      <Filter>ui</Filter>
-    </ClInclude>
     <ClInclude Include="Anima.h">
       <Filter>anima</Filter>
     </ClInclude>
@@ -548,9 +557,6 @@
     <ClInclude Include="Engine.h">
       <Filter>system</Filter>
     </ClInclude>
-    <ClInclude Include="ItemUI.h">
-      <Filter>ui</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>gimmick</Filter>
     </ClInclude>
@@ -593,24 +599,34 @@
       <Filter>item</Filter>
     </ClInclude>
     <ClInclude Include="SpriteBase.h" />
+    <ClInclude Include="GameUI.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemUI.h">
+      <Filter>ui\itemui</Filter>
+    </ClInclude>
     <ClInclude Include="ItemUIBase.h">
       <Filter>ui\itemui</Filter>
     </ClInclude>
-    <ClInclude Include="SpeedUpUI.h">
-      <Filter>ui\itemui</Filter>
-    </ClInclude>
-    <ClInclude Include="HpRecoveryUI.h">
-      <Filter>ui\itemui</Filter>
+    <ClInclude Include="AttackUpUI.h">
+      <Filter>ui\itemui\item</Filter>
     </ClInclude>
     <ClInclude Include="BombUI.h">
-      <Filter>ui\itemui</Filter>
+      <Filter>ui\itemui\item</Filter>
     </ClInclude>
-    <ClInclude Include="AttackUpUI.h">
-      <Filter>ui\itemui</Filter>
+    <ClInclude Include="HpRecoveryUI.h">
+      <Filter>ui\itemui\item</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedUpUI.h">
+      <Filter>ui\itemui\item</Filter>
     </ClInclude>
     <ClInclude Include="PlayerHPUI.h">
-      <Filter>ui</Filter>
+      <Filter>ui\playerhpui</Filter>
     </ClInclude>
+    <ClInclude Include="SoulUI.h">
+      <Filter>ui\soului</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectPriority.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">

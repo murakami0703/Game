@@ -175,6 +175,7 @@
     <ClCompile Include="SiegePoint.cpp" />
     <ClCompile Include="Slaim.cpp" />
     <ClCompile Include="SoulManager.cpp" />
+    <ClCompile Include="SoulUI.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="FontRender.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameObjectPriority.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameUI.h" />
     <ClInclude Include="Ghost.h" />
@@ -272,6 +274,7 @@
     <ClInclude Include="SiegePoint.h" />
     <ClInclude Include="Slaim.h" />
     <ClInclude Include="SoulManager.h" />
+    <ClInclude Include="SoulUI.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />

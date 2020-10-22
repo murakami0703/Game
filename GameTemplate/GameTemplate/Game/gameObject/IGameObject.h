@@ -37,7 +37,13 @@ public:
 	{
 		return m_priority;
 	}
-
+	/// <summary>
+	/// 実行優先度を取得
+	/// </summary>
+	void SetPriority(GameObjectPrio  prio) 
+	{
+		m_priority = prio;
+	}
 	/// <summary>
 	/// 削除リクエスト
 	/// </summary>

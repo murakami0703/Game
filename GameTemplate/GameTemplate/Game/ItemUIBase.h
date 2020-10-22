@@ -1,6 +1,22 @@
 #pragma once
+
+
+/// <summary>
+/// アイテム用のUIの基底クラス
+/// </summary>
+/// <remarks>
+/// このクラスはTemplateMethodパターンのAbstratClass役のクラスです。
+/// </remarks>
 class ItemUIBase : public IActor
 {
+private://派生クラスで実装する必要がある関数群
+	virtual void NowItemSelect() = 0;			//選択中のアイテム。
+	virtual void FirstItemSelect() = 0;			//次1のアイテム。
+	virtual void SecondItemSelect() = 0;		//次2のアイテム。
+	virtual void ThirdItemSelect() = 0;			//次3のアイテム。
+public:
+	virtual void UseItem(FontRender* itemContRender) = 0;		//アイテム使用中。
+	virtual void OnNowItem(FontRender* itemContRender) = 0;		//現在のアイテムになったときに呼ばれる処理。
 public:
 	ItemUIBase();
 	~ItemUIBase();
@@ -29,12 +45,7 @@ public:
 
 	void SetItemMove(const eSelectState& state);	//アイテム移動。
 	void Update() override;
-	virtual void NowItemSelect() = 0;			//選択中のアイテム。
-	virtual void FirstItemSelect() = 0;			//次1のアイテム。
-	virtual void SecondItemSelect() = 0;		//次2のアイテム。
-	virtual void ThirdItemSelect() = 0;			//次3のアイテム。
-	virtual void UseItem(FontRender* itemContRender) = 0;					//アイテム使用中。
-	virtual void OnNowItem(FontRender* itemContRender) = 0;				//現在のアイテムになったときに呼ばれる処理。
+	
 
 private:
 	eSelectState m_selectState = Now_Item_Select;

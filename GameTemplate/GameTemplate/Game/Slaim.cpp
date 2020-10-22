@@ -187,11 +187,11 @@ void Slaim::Premove2()
 	m_enemyModelRender->PlayAnimation(eAnimation_Premove2, INTERPOLATE_TIME);
 
 	if (m_enemyModelRender->IsPlayingAnimation() == false) {
-		//プレイヤーの上に離れまーーーーース
+		//プレイヤーの上に離れます
 		m_setMoveVec.Normalize();
 		m_moveVec = m_setMoveVec * SRAIM_FALLPOINT_SPEED;
 
-		//だいぶ上に行ったので攻撃しますぅ。
+		//だいぶ上に行ったので攻撃します。
 		if (m_position.y >= SLAIM_ATTACK_LENGTH) {
 			m_setMoveVec = m_toPlayerVec;
 			//攻撃状態に遷移。
@@ -199,7 +199,7 @@ void Slaim::Premove2()
 		}
 	}
 	else {
-		//プレイヤーとの距離を調べ向かわせる方向のベクトルを求めるます。
+		//プレイヤーとの距離を調べ向かわせる方向のベクトルを求めます。
 		m_playerPos.y += FALLPOINT_POSY_ADDVALUE;
 		m_setMoveVec = m_toPlayerVec - m_position;
 

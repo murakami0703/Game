@@ -1,16 +1,13 @@
 #pragma once
 
-class GameUI : public IGameObject
+class GameUI final : public IGameObject
 {
 public:
 	GameUI();
 	~GameUI();
 
-	bool Start();
-	/// <summary>
-	/// 更新処理。
-	/// </summary>
-	void Update();
+	bool Start() override;
+	void Update() override;
 
 	/// <summary>
 	/// インスタンスの取得。
@@ -20,19 +17,18 @@ public:
 	{
 		return m_instance;
 	}
-private:
-	void HPCalc();
 
-	void OnlyDelete();
 private:
-
 	static GameUI* m_instance;
-	
-	void ScalingSelectCase();					//選択枠の拡大縮小
+
+private:
+	void ScalingSelectCase();					//選択枠の拡大縮小。
+	void OnlyDelete();							//全削除。
+
+private:
+
 	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* r;
-	FontRender* m_soulFont;
-	wchar_t soulText[256];
+	SpriteRender* r;							//スプライトレンダー。
 
 	//アイテム関連
 	int m_scalingCount = 0;								//選択枠拡大縮小用カウント

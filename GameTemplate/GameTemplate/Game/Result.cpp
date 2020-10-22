@@ -369,7 +369,7 @@ void Result::SoulNumber()
 	GameData* m_gamedate = GameData::GetInstance();
 	//ゲームデータの値まで加算
 	m_soulNumber++;
-	if (m_soulNumber <= m_gamedate->GetAnima()) {
+	if (m_soulNumber <= m_gamedate->GetSoul()) {
 		wchar_t text[256];
 		swprintf(text, L"%d", m_soulNumber);
 		m_soulNumFont->SetText(text);

@@ -45,17 +45,18 @@ bool Ghost::Start()
 	m_skinModelRender->SetScale(m_scale);
 
 	m_skinModelRender->SetShadowCaster(true);		//シャドウマップに描画。
-
+	//m_skinModelRender->PlayAnimation(0);
 	return true;
 }
 
 void Ghost::Horizon()
 {
+
 	//エネミーの前方方向を求める。
 	//前方方向は{0, 0, 1}のベクトルをm_rotationで回して求める。
 	CVector3 enemyForward = GHOST_FORWARD_VECTOR;
 	m_rotation.Multiply(enemyForward);
-
+#if 0
 	//エネミーからプレイヤーに伸びるベクトルを求める。
 	CVector3 toPlayerDir = m_toPlayerVec;
 
@@ -69,8 +70,11 @@ void Ghost::Horizon()
 
 	//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
 	float angle = acos(d);
-
-
+#else
+	//プレイヤーがコウモリの前方から見てどこにいるのか(角度と距離)を計算する。
+	float angle, toPlayerLen;
+	CalcAngleAndLength(angle, toPlayerLen, enemyForward, m_toPlayerVec);
+#endif
 	//視野角判定
 	//角度は絶対値にする。
 	if (fabsf(angle) < CMath::DegToRad(GHOST_HORIANGLE) && toPlayerLen < GHOST_HORILONG)
@@ -153,7 +157,7 @@ void Ghost::Follow()
 	m_rotation = qRot;
 	//近いので攻撃
 	if (m_battlePoint != nullptr) {
-		if (m_toPlayerVec.Length() <= 200.0f) {
+		if (m_toBPVec.Length() <= FOLLOW_LENGTH) {
 			EneAttackflag = true;
 			m_timer = 0;
 			m_state = eState_Premove;

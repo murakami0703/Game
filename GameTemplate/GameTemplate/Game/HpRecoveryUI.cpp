@@ -48,8 +48,9 @@ void HpRecoveryUI::UseItem(FontRender* itemContRender)
 	//アイテム使用。
 	GameData* gamedate = GameData::GetInstance();
 	gamedate->HPRecoveryCalc(-1);
-	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemHpRecovery());
+	gamedate->HPCalc(1.0f);
+	wchar_t text[MAX_PATH];
+	swprintf(text, MAX_PATH - 1, L"%02d", gamedate->GetItemHpRecovery());
 	itemContRender->SetText(text);
 
 	HpRecovery* m_hpRecovery = g_goMgr->NewGameObject<HpRecovery>();
@@ -59,7 +60,7 @@ void HpRecoveryUI::OnNowItem(FontRender* itemContRender)
 {
 	//選択されてるのアイテムの数を表示。
 	GameData* gamedate = GameData::GetInstance();
-	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemHpRecovery());
+	wchar_t text[MAX_PATH];
+	swprintf(text, MAX_PATH - 1, L"%02d", gamedate->GetItemHpRecovery());
 	itemContRender->SetText(text);
 }

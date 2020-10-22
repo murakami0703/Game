@@ -63,7 +63,7 @@ void Anima::Appear()
 void Anima::Get()
 {	
 	//æ“¾‚µ‚½‚æII
-	GameData::GetInstance()->AnimaCalc(SOUL_GET);
+	GameData::GetInstance()->SoulCalc(SOUL_GET);
 	m_state = Anima_Destroy;	//Šl“¾‚µ‚½‚Ì‚ÅÁ–Å‚³‚¹‚éB
 }
 void Anima::Destroy()

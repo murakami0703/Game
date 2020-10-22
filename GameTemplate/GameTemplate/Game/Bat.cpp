@@ -54,7 +54,7 @@ bool Bat::Start()
 	//cmoファイルの読み込み。
 	m_skinModelRender = g_goMgr->NewGameObject<SkinModelRender>();
 	m_skinModelRender->Init(L"Assets/modelData/bat.cmo", m_animClips, eAnimation_Num);
-	m_skinModelRender->PlayAnimation(0);
+	m_skinModelRender->PlayAnimation(eAnimation_Premove);
 	m_skinModelRender->SetPosition(m_position);
 	m_skinModelRender->SetRotation(m_rotation);
 	m_skinModelRender->SetScale(m_scale);
@@ -66,20 +66,14 @@ bool Bat::Start()
 
 void Bat::Horizon()
 {
-	//視野角判定
-	//エネミーからプレイヤーに伸びるベクトルを求める。
-	CVector3 toPlayerDir = m_toPlayerVec;
+	//エネミーの前方方向を求める。
+	//前方方向は{0, 0, 1}のベクトルをm_rotationで回して求める。
+	CVector3 enemyForward = BAT_FORWARD_VECTOR;
+	m_rotation.Multiply(enemyForward);
 
-	//正規化を行う前に、プレイヤーまでの距離を求めておく。
-	float toPlayerLen = toPlayerDir.Length();
-	//正規化
-	toPlayerDir.Normalize();
-
-	//enemyForwardとtoPlayerDirとの内積を計算する。
-	float d = BAT_FORWARD_VECTOR.Dot(toPlayerDir);
-
-	//内積の結果をacos関数に渡して、enemyForwardとtoPlayerDirのなす角を求める。
-	float angle = acos(d);
+	//todo
+	float angle, toPlayerLen;
+	CalcAngleAndLength(angle, toPlayerLen, enemyForward, m_toPlayerVec);
 
 	//視野角判定。
 	//fabsfは絶対値を求める関数！

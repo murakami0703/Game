@@ -44,7 +44,7 @@ const int HP_LOWEST_VALUE = 0;				//HPの最低値。
 const float EF_SOUL_SET_POSY = 430.0f;						//エフェクト、魂出現時のY軸の高さ。
 const CVector3 SMOKE_SCALE = { 2.0f,2.0f,2.0f };			//煙エフェクトの拡大率。
 
-const float HPBAR_ACTIVE_TRUE = 1.0f;					//透明度(表示)。
+const float HPBAR_ACTIVE_TRUE = 1.0f;				//透明度(表示)。
 const float HPBAR_ACTIVE_FALSE = 0.0f;				//透明度(非表示)。
 
 const float HPBAR_ADD_POSY = 300.0f;				//HPバー表示のY軸の加算値。
