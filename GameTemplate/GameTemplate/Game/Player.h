@@ -30,7 +30,6 @@ private:
 		Player_Idle,		//待機
 		Player_Walk,		//歩き
 		Player_Attack,		//攻撃
-		Player_ItemUse,		//アイテム使用
 		Player_Damage,		//ダメージ
 		Player_Dead			//死
 	};

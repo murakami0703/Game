@@ -204,6 +204,10 @@ void Player::Update()
 	if (gamedata->GetHitPoint() < m_nowHP) {
 		Damage();		//ダメージ受けました
 	}
+
+	if (gamedata->GetItemInUseFlag() != false) {
+
+	}
 	//状態。
 	switch (m_state)
 	{
@@ -215,9 +219,6 @@ void Player::Update()
 		break;
 	case Player::Player_Attack:
 		Attack();		//攻撃
-		break;
-	case Player::Player_ItemUse:
-		ItemUse();		//アイテム使用。
 		break;
 	case Player::Player_Damage:
 		Damage();		//ダメージ受けました
