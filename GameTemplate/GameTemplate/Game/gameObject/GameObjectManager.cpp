@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "GameObjectManager.h"
-#include "Player.h"
+#include "gameobject/GameObjectManager.h"
+#include "player/Player.h"
 
 //GameObjectManagerクラスのインスタンス。
 GameObjectManager* g_goMgr = nullptr;

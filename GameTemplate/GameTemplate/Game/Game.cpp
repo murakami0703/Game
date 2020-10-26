@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "GameCamera.h"
-#include "Player.h"
-#include "GameData.h"
-#include "LevelSet.h"
-#include "GameUI.h"
-#include "Result.h"
-#include "EffectManager.h"
-#include "SoulManager.h"
+#include "player/Player.h"
+#include "data/GameData.h"
+#include "stage/LevelSet.h"
+#include "ui/GameUI.h"
+#include "scene/Result.h"
+#include "manager/EffectManager.h"
+#include "manager/SoulManager.h"
 
-#include "SiegePoint.h"
-#include "GameOver.h"
+#include "siegepoint/SiegePoint.h"
+#include "scene/GameOver.h"
 
 
 Game::Game()

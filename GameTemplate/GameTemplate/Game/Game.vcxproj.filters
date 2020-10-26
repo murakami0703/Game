@@ -133,6 +133,18 @@
     <Filter Include="ui\soului">
       <UniqueIdentifier>{75fddeb3-89f9-4da0-939c-1ac34eb69353}</UniqueIdentifier>
     </Filter>
+    <Filter Include="iactor">
+      <UniqueIdentifier>{7f4eabfb-0e98-40c7-9743-4cdf5257938c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{a372ba7c-586f-4722-b143-c4ca649d51bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stage">
+      <UniqueIdentifier>{80e5a3bc-0c7e-48d5-9cbe-88e6944879da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="siegepoint">
+      <UniqueIdentifier>{87739895-11b5-498a-917f-8b5df2a919de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -206,16 +218,10 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Player.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
     <ClCompile Include="GameCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="ShadowMap.cpp" />
-    <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="graphics\camera2D\Camera2D.cpp">
       <Filter>graphics\2D</Filter>
     </ClCompile>
@@ -249,131 +255,158 @@
     <ClCompile Include="sound\SoundSource.cpp">
       <Filter>sound</Filter>
     </ClCompile>
-    <ClCompile Include="Gimmick.cpp">
-      <Filter>gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="Anima.cpp">
-      <Filter>anima</Filter>
-    </ClCompile>
-    <ClCompile Include="GameData.cpp">
-      <Filter>data</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelSet.cpp" />
-    <ClCompile Include="Font.cpp">
-      <Filter>graphics\font</Filter>
-    </ClCompile>
-    <ClCompile Include="FontRender.cpp">
-      <Filter>graphics\font</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
-      <Filter>manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Ghost.cpp">
-      <Filter>enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="SiegePoint.cpp" />
-    <ClCompile Include="Result.cpp" />
-    <ClCompile Include="Slaim.cpp">
-      <Filter>enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Bat.cpp">
-      <Filter>enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Title.cpp" />
-    <ClCompile Include="Golem.cpp">
-      <Filter>boss</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectEngine.cpp">
-      <Filter>graphics\effect</Filter>
-    </ClCompile>
-    <ClCompile Include="Effect.cpp">
-      <Filter>graphics\effect</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectPlay.cpp">
-      <Filter>graphics\effect</Filter>
-    </ClCompile>
-    <ClCompile Include="TreasureBox.cpp">
-      <Filter>gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOver.cpp" />
-    <ClCompile Include="SoulManager.cpp">
-      <Filter>manager</Filter>
-    </ClCompile>
-    <ClCompile Include="StageSelect.cpp" />
-    <ClCompile Include="PointLight.cpp">
-      <Filter>light</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>system</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>gimmick</Filter>
-    </ClCompile>
-    <ClCompile Include="MapChipRender.cpp">
-      <Filter>level</Filter>
-    </ClCompile>
-    <ClCompile Include="StageGate.cpp" />
-    <ClCompile Include="FadeIn.cpp">
-      <Filter>sprite\fade</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeOut.cpp">
-      <Filter>sprite\fade</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsGhostObject.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Bum.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackUp.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
-    <ClCompile Include="HpRecovery.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
-    <ClCompile Include="SpeedUp.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsObjectBase.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>physics</Filter>
-    </ClCompile>
-    <ClCompile Include="IActor.cpp" />
-    <ClCompile Include="ItemBase.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteBase.cpp" />
-    <ClCompile Include="GameUI.cpp">
+    <ClCompile Include="ui\GameUI.cpp">
       <Filter>ui</Filter>
     </ClCompile>
-    <ClCompile Include="ItemUI.cpp">
-      <Filter>ui\itemui</Filter>
+    <ClCompile Include="ui\SoulUI.cpp">
+      <Filter>ui\soului</Filter>
     </ClCompile>
-    <ClCompile Include="ItemUIBase.cpp">
-      <Filter>ui\itemui</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackUpUI.cpp">
-      <Filter>ui\itemui\item</Filter>
-    </ClCompile>
-    <ClCompile Include="BombUI.cpp">
-      <Filter>ui\itemui\item</Filter>
-    </ClCompile>
-    <ClCompile Include="HpRecoveryUI.cpp">
-      <Filter>ui\itemui\item</Filter>
-    </ClCompile>
-    <ClCompile Include="SpeedUpUI.cpp">
-      <Filter>ui\itemui\item</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHPUI.cpp">
+    <ClCompile Include="ui\PlayerHPUI.cpp">
       <Filter>ui\playerhpui</Filter>
     </ClCompile>
-    <ClCompile Include="SoulUI.cpp">
-      <Filter>ui\soului</Filter>
+    <ClCompile Include="ui\itemui\ItemUI.cpp">
+      <Filter>ui\itemui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\itemui\ItemUIBase.cpp">
+      <Filter>ui\itemui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\itemui\item\AttackUpUI.cpp">
+      <Filter>ui\itemui\item</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\itemui\item\BombUI.cpp">
+      <Filter>ui\itemui\item</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\itemui\item\HpRecoveryUI.cpp">
+      <Filter>ui\itemui\item</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\itemui\item\SpeedUpUI.cpp">
+      <Filter>ui\itemui\item</Filter>
+    </ClCompile>
+    <ClCompile Include="system\Engine.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite\fade\FadeIn.cpp">
+      <Filter>sprite\fade</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite\fade\FadeOut.cpp">
+      <Filter>sprite\fade</Filter>
+    </ClCompile>
+    <ClCompile Include="player\Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\BoxCollider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsGhostObject.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsObjectBase.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\SphereCollider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="manager\EffectManager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="manager\SoulManager.cpp">
+      <Filter>manager</Filter>
+    </ClCompile>
+    <ClCompile Include="light\PointLight.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="level\MapChipRender.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="item\AttackUp.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="item\Bum.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="item\HpRecovery.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="item\ItemBase.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="item\SpeedUp.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\effect\EffectEngine.cpp">
+      <Filter>graphics\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\effect\EffectPlay.cpp">
+      <Filter>graphics\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\effect\Effect.cpp">
+      <Filter>graphics\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\font\FontRender.cpp">
+      <Filter>graphics\font</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\font\Font.cpp">
+      <Filter>graphics\font</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\RenderTarget.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics\ShadowMap.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="gimick\Item.cpp">
+      <Filter>gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="gimick\TreasureBox.cpp">
+      <Filter>gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="gimick\Gimmick.cpp">
+      <Filter>gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy\Bat.cpp">
+      <Filter>enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy\Ghost.cpp">
+      <Filter>enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy\Slaim.cpp">
+      <Filter>enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="data\GameData.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="boss\Golem.cpp">
+      <Filter>boss</Filter>
+    </ClCompile>
+    <ClCompile Include="iactor\IActor.cpp">
+      <Filter>iactor</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Title.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\GameOver.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Result.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\StageSelect.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\LevelSet.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\Map.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="stage\StageGate.cpp">
+      <Filter>stage</Filter>
+    </ClCompile>
+    <ClCompile Include="siegepoint\SiegePoint.cpp">
+      <Filter>siegepoint</Filter>
+    </ClCompile>
+    <ClCompile Include="soul\Anima.cpp">
+      <Filter>anima</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -456,16 +489,10 @@
       <Filter>level</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Player.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="GameCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="ShadowMap.h" />
-    <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="graphics\camera2D\Camera2D.h">
       <Filter>graphics\2D</Filter>
     </ClInclude>
@@ -499,134 +526,160 @@
     <ClInclude Include="sound\SoundEngine.h">
       <Filter>sound</Filter>
     </ClInclude>
-    <ClInclude Include="Gimmick.h">
-      <Filter>gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="Anima.h">
-      <Filter>anima</Filter>
-    </ClInclude>
-    <ClInclude Include="GameData.h">
-      <Filter>data</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelSet.h" />
-    <ClInclude Include="Font.h">
-      <Filter>graphics\font</Filter>
-    </ClInclude>
-    <ClInclude Include="FontRender.h">
-      <Filter>graphics\font</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectManager.h">
-      <Filter>manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Ghost.h">
-      <Filter>enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="SiegePoint.h" />
-    <ClInclude Include="Result.h" />
-    <ClInclude Include="Slaim.h">
-      <Filter>enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Bat.h">
-      <Filter>enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Golem.h">
-      <Filter>boss</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectEngine.h">
-      <Filter>graphics\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="Effect.h">
-      <Filter>graphics\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectPlay.h">
-      <Filter>graphics\effect</Filter>
-    </ClInclude>
-    <ClInclude Include="TreasureBox.h">
-      <Filter>gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOver.h" />
-    <ClInclude Include="SoulManager.h">
-      <Filter>manager</Filter>
-    </ClInclude>
-    <ClInclude Include="StageSelect.h" />
-    <ClInclude Include="PointLight.h">
-      <Filter>light</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>system</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>gimmick</Filter>
-    </ClInclude>
-    <ClInclude Include="MapChipRender.h">
-      <Filter>level</Filter>
-    </ClInclude>
-    <ClInclude Include="StageGate.h" />
-    <ClInclude Include="FadeIn.h">
-      <Filter>sprite\fade</Filter>
-    </ClInclude>
-    <ClInclude Include="FadeOut.h">
-      <Filter>sprite\fade</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsGhostObject.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Bum.h">
-      <Filter>item</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackUp.h">
-      <Filter>item</Filter>
-    </ClInclude>
-    <ClInclude Include="HpRecovery.h">
-      <Filter>item</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeedUp.h">
-      <Filter>item</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsObjectBase.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereCollider.h">
-      <Filter>physics</Filter>
-    </ClInclude>
-    <ClInclude Include="IActor.h" />
-    <ClInclude Include="ItemBase.h">
-      <Filter>item</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteBase.h" />
-    <ClInclude Include="GameUI.h">
+    <ClInclude Include="ui\GameUI.h">
       <Filter>ui</Filter>
     </ClInclude>
-    <ClInclude Include="ItemUI.h">
-      <Filter>ui\itemui</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemUIBase.h">
-      <Filter>ui\itemui</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackUpUI.h">
-      <Filter>ui\itemui\item</Filter>
-    </ClInclude>
-    <ClInclude Include="BombUI.h">
-      <Filter>ui\itemui\item</Filter>
-    </ClInclude>
-    <ClInclude Include="HpRecoveryUI.h">
-      <Filter>ui\itemui\item</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeedUpUI.h">
-      <Filter>ui\itemui\item</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHPUI.h">
-      <Filter>ui\playerhpui</Filter>
-    </ClInclude>
-    <ClInclude Include="SoulUI.h">
+    <ClInclude Include="ui\SoulUI.h">
       <Filter>ui\soului</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectPriority.h" />
+    <ClInclude Include="ui\PlayerHPUI.h">
+      <Filter>ui\playerhpui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\itemui\ItemUIBase.h">
+      <Filter>ui\itemui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\itemui\ItemUI.h">
+      <Filter>ui\itemui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\itemui\item\AttackUpUI.h">
+      <Filter>ui\itemui\item</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\itemui\item\BombUI.h">
+      <Filter>ui\itemui\item</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\itemui\item\HpRecoveryUI.h">
+      <Filter>ui\itemui\item</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\itemui\item\SpeedUpUI.h">
+      <Filter>ui\itemui\item</Filter>
+    </ClInclude>
+    <ClInclude Include="system\Engine.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\fade\FadeIn.h">
+      <Filter>sprite\fade</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\fade\FadeOut.h">
+      <Filter>sprite\fade</Filter>
+    </ClInclude>
+    <ClInclude Include="player\Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\BoxCollider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsGhostObject.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsObjectBase.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\SphereCollider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="manager\SoulManager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="manager\EffectManager.h">
+      <Filter>manager</Filter>
+    </ClInclude>
+    <ClInclude Include="light\PointLight.h">
+      <Filter>light</Filter>
+    </ClInclude>
+    <ClInclude Include="level\MapChipRender.h">
+      <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="item\AttackUp.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="item\Bum.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="item\HpRecovery.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="item\ItemBase.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="item\SpeedUp.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\effect\Effect.h">
+      <Filter>graphics\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\effect\EffectEngine.h">
+      <Filter>graphics\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\effect\EffectPlay.h">
+      <Filter>graphics\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\font\Font.h">
+      <Filter>graphics\font</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\font\FontRender.h">
+      <Filter>graphics\font</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\RenderTarget.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\ShadowMap.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="gimick\Item.h">
+      <Filter>gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="gimick\TreasureBox.h">
+      <Filter>gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="gimick\Gimmick.h">
+      <Filter>gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy\Bat.h">
+      <Filter>enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy\Ghost.h">
+      <Filter>enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy\Slaim.h">
+      <Filter>enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="data\GameData.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="boss\Golem.h">
+      <Filter>boss</Filter>
+    </ClInclude>
+    <ClInclude Include="iactor\IActor.h">
+      <Filter>iactor</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\StageSelect.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Title.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\GameOver.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Result.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\LevelSet.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\Map.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="stage\StageGate.h">
+      <Filter>stage</Filter>
+    </ClInclude>
+    <ClInclude Include="siegepoint\SiegePoint.h">
+      <Filter>siegepoint</Filter>
+    </ClInclude>
+    <ClInclude Include="soul\Anima.h">
+      <Filter>anima</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -838,7 +891,6 @@
     <ImageContentTask Include="Assets\sprite\Item\speedUpRecovery.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\bomb.png" />
     <ImageContentTask Include="Assets\sprite\title\Villain\Villain9.png">
       <Filter>Assets\sprite\title\Villain</Filter>
     </ImageContentTask>
@@ -865,6 +917,9 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\Villain\Villain8.png">
       <Filter>Assets\sprite\title\Villain</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\bomb.png">
+      <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>

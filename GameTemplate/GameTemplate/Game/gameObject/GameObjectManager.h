@@ -1,5 +1,5 @@
 #pragma once
-#include "IGameObject.h"
+#include "gameobject/IGameObject.h"
 
 
 //ゲームオブジェクトのプライオリティ

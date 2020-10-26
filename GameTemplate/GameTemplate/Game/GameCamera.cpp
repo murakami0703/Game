@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GameCamera.h"
-#include "Player.h"
+#include "player/Player.h"
 
 GameCamera::GameCamera(){}
 GameCamera::~GameCamera(){}

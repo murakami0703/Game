@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EffectEngine.h"
+#include "graphics/effect/EffectEngine.h"
 
 /// <summary>
 /// レンダリングモード。

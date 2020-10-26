@@ -1,6 +1,5 @@
 #include "stdafx.h"
-#include "Title.h"
-#include "Game.h"
+#include "scene/Title.h"
 
 
 /// ///////////////////////////////////////////////////////////////////

@@ -52,20 +52,20 @@
 #include "sprite/SpriteStandby.h"
 #include "sprite/Sprite.h"
 
-#include "ShadowMap.h"
-#include "RenderTarget.h"
+#include "graphics/ShadowMap.h"
+#include "graphics/RenderTarget.h"
 
 
 #include "gameObject/GameObjectManager.h"
-#include "Engine.h"
+#include "system/Engine.h"
 
 //‚±‚±‚©‚ç‰º‚ÉrenderƒNƒ‰ƒX‚©‚­
 #include "sound/SoundSource.h"
 #include "graphics/SkinModelRender.h"
-	#include "sprite/SpriteRender.h"
-#include "FontRender.h"
+#include "sprite/SpriteRender.h"
+#include "graphics/font/FontRender.h"
 
-#include "IActor.h"
+#include "iactor/IActor.h"
 
 
 

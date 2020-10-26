@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Skeleton.h"
-#include "PointLight.h"
+#include "light/PointLight.h"
 #include "SkinModelEffect.h"
 
 /*!
