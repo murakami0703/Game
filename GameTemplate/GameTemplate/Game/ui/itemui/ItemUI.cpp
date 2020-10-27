@@ -52,15 +52,15 @@ void ItemUI::ItemUse(const eItemState& m_State)
 {
 	//アイテム使用。
 	m_uiItems[m_itemState]->UseItem(m_itemCountFont);
-	m_state = Item_Now;
+	m_state = Item_InUse;
 }
 void ItemUI::ItemMove()
 {
 	//アイテム選択
 	GameData* m_gamedate = GameData::GetInstance();
 	//現在のアイテムを更新。
-	for (int i = 0; i < static_cast<int>(ItemUIBase::Item_Select_Num); i++){
-		int itemNo = (m_itemState + i) % static_cast<int>(ItemUIBase::Item_Select_Num);
+	for (int i = 0; i <= static_cast<int>(ItemUIBase::Item_InUse); i++){
+		int itemNo = (m_itemState + i) % static_cast<int>(ItemUIBase::Item_InUse);
 		m_uiItems[itemNo]->SetState(static_cast<ItemUIBase::eSelectState>(i));
 	}
 	//選択中のアイテム数の表示。
@@ -69,10 +69,14 @@ void ItemUI::ItemMove()
 }
 void ItemUI::ItemNow()
 {
-	//現在選択されているアイテム。
+	GameData* gamedata = GameData::GetInstance();
+	
+	//アイテム使用中じゃないとき。
+	if (gamedata->GetItemInUseFlag != true) {
 	if (g_pad[0].IsTrigger(enButtonY)) {
 		//Yボタンが押されたらアイテム使用状態に遷移。
 		m_state = Item_Use;
+	}
 	}
 
 	//LB1またはLB2ボタンが押されたらアイテム移動状態に遷移。
@@ -101,7 +105,15 @@ void ItemUI::ItemNow()
 void ItemUI::ItemInUse()
 {
 	//アイテム使用中。
-	//各アイテムによってラグを設ける。
+	//各アイテムが使用済みになると選択できるようになります。
+	GameData* gamedata = GameData::GetInstance();
+	if (gamedata->GetItemInUseFlag != true) {
+		m_uiItems[m_itemState]->ItemInUse();
+		m_state = Item_Now;
+	}
+
+	//使用中にアイテム使用ボタンを押すと。
+	//左右に揺れて使用できない感じを演出させる。
 
 }
 

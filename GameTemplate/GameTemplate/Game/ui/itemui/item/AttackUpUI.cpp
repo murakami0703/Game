@@ -43,6 +43,8 @@ void AttackUpUI::ThirdItemSelect()
 	//次3のアイテム。
 	m_itemSprite->SetPosScale(NEXT3_ITEM_POSITION, NEXT3_ITEM_SCALE);
 }
+
+
 void AttackUpUI::UseItem(FontRender* itemContRender)
 {
 	//アイテム使用。
@@ -52,8 +54,13 @@ void AttackUpUI::UseItem(FontRender* itemContRender)
 	swprintf(text, L"%02d", gamedate->GetItemAttackUp());
 	itemContRender->SetText(text);
 
-	AttackUp* m_attackUp = g_goMgr->NewGameObject<AttackUp>();
+	attackUp = g_goMgr->NewGameObject<AttackUp>();
 
+}
+
+void AttackUpUI::ItemUseEnd() 
+{
+	attackUp->SetState(AttackUp::End_Use);
 }
 void AttackUpUI::OnNowItem(FontRender* itemContRender)
 {

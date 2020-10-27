@@ -103,9 +103,6 @@
     <Filter Include="Assets\modelData\item">
       <UniqueIdentifier>{f7ebcde0-563f-4d3d-8920-4988377e8360}</UniqueIdentifier>
     </Filter>
-    <Filter Include="item">
-      <UniqueIdentifier>{f5db5701-c2a9-4471-a3ee-4f8088466487}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\sprite\itemicon">
       <UniqueIdentifier>{f28c817d-efd2-4231-a281-8a280efcf1d3}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,9 @@
     </Filter>
     <Filter Include="siegepoint">
       <UniqueIdentifier>{87739895-11b5-498a-917f-8b5df2a919de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="item">
+      <UniqueIdentifier>{f5db5701-c2a9-4471-a3ee-4f8088466487}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -330,9 +330,6 @@
     <ClCompile Include="item\ItemBase.cpp">
       <Filter>item</Filter>
     </ClCompile>
-    <ClCompile Include="item\SpeedUp.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\effect\EffectEngine.cpp">
       <Filter>graphics\effect</Filter>
     </ClCompile>
@@ -407,6 +404,9 @@
     </ClCompile>
     <ClCompile Include="soul\Anima.cpp">
       <Filter>anima</Filter>
+    </ClCompile>
+    <ClCompile Include="item\SpeedUp.cpp">
+      <Filter>item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

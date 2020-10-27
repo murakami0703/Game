@@ -5,6 +5,9 @@
 #include "manager/EffectManager.h"
 
 
+/////////////////////////////////////////////////////////
+/// ’è”
+/////////////////////////////////////////////////////////
 const CVector3 ITEMFRAME_SET_POTITION = { -600.0f,100.0f ,0.0f };		//ƒtƒŒ[ƒ€‚ÌÀ•WB
 const CVector3 ITEMFRAME_SET_SCALE = { 1.5f,1.5f ,1.5f };			//ƒtƒŒ[ƒ€‚ÌŠg‘å—¦B
 
@@ -15,6 +18,9 @@ const float ICON_INCREASE_TIME = 30.0f;						//ƒAƒCƒRƒ“‚Ì–¾‚é‚³‚ğ‘‰Á‚³‚¹‚éŠÔ
 const float ICON_DECREASE_TIME = 60.0f;						//ƒAƒCƒRƒ“‚Ì–¾‚é‚³‚ğŒ¸­‚³‚¹‚éŠÔB
 const float ICON_DELTA_ALPHA = 0.7f / 30.0f;				//•ÏˆÊ‚³‚¹‚é“§–¾“x‚Ì’lB
 const float ICON_TIMER_RESET = 0.0f;						//ƒAƒCƒRƒ“‚Ìƒ^ƒCƒ}[‚ğ‰Šúó‘Ô‚É‚·‚éB
+
+const int ITEM_USE_TIME = 600;						//ƒAƒCƒeƒ€g—pŠÔB
+const int ITEM_USE_ICON_FLASHINGTIME = 420;			//ƒAƒCƒeƒ€ƒAƒCƒRƒ“‚Ì“_–ÅŠJnŠÔB
 
 SpeedUp::SpeedUp()
 {
@@ -45,9 +51,9 @@ bool SpeedUp::Start()
 
 	return true;
 }
-void SpeedUp::InUse()
+
+void SpeedUp::Flashing()
 {
-	//g—p’†B
 	//ƒAƒCƒRƒ“‚Ì“_–ÅB
 	m_flashingTimer++;
 	if (m_flashingTimer <= ICON_INCREASE_TIME) {
@@ -62,12 +68,28 @@ void SpeedUp::InUse()
 	}
 
 }
+
+void SpeedUp::InUse()
+{
+	//g—p’†B
+	GameData* gamedata = GameData::GetInstance();
+	//g—p’†B
+	m_timer++;
+
+	if (m_timer >= ITEM_USE_TIME) {
+		//ˆê’èŠÔŒo‰ß‚µ‚½‚Ì‚ÅƒAƒCƒeƒ€Œø‰Ê‚ğÁ‚·B
+		gamedata->SetItemInUseFlag(false);
+	}
+	else if (m_timer >= ITEM_USE_ICON_FLASHINGTIME) {
+		//‚à‚¤­‚µ‚ÅŒø‰Ê‚ªØ‚ê‚é‚Ì‚ÅƒAƒCƒRƒ“‚à“_–Å‚³‚¹‚Ä•ª‚©‚è‚â‚·‚­‚µ‚Ü‚·B
+		Flashing();
+	}
+
+
+}
 void SpeedUp::EndUse()
 {
 	//I‚í‚èB
 	g_goMgr->DeleteGameObject(this);
-}
-void SpeedUp::Update() {
-
 }
 

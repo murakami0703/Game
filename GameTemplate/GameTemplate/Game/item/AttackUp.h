@@ -13,8 +13,15 @@ public:
 
 	void InUse() override;		//使用中。
 	void EndUse() override;		//終わり。
+
+private:
+	void Flashing();			//点滅。
 private:
 	SpriteRender* m_frameSprite;
-	SpriteRender* m_itemSprite;
+	SpriteRender* m_itemiconSprite;
+
+	int m_timer = 0;				//アイテム使用中のタイマー。
+	float m_flashingTimer = 0;		//点滅用タイマー。
+
 };
 

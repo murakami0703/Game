@@ -15,6 +15,7 @@ private://派生クラスで実装する必要がある関数群
 	virtual void SecondItemSelect() = 0;		//次2のアイテム。
 	virtual void ThirdItemSelect() = 0;			//次3のアイテム。
 public:
+	virtual void ItemUseEnd() = 0;				//アイテム使用中。
 	virtual void UseItem(FontRender* itemContRender) = 0;		//アイテム使用中。
 	virtual void OnNowItem(FontRender* itemContRender) = 0;		//現在のアイテムになったときに呼ばれる処理。
 public:
@@ -27,7 +28,7 @@ public:
 		First_Item_Select,
 		Second_Item_Select,
 		Third_Item_Select,
-		Item_Select_Num
+		Item_InUse,
 	};
 
 	/// <summary>

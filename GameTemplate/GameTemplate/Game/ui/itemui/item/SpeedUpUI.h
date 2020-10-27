@@ -13,7 +13,8 @@ public:
 	void FirstItemSelect() override;		//次1のアイテム。
 	void SecondItemSelect() override;		//次2のアイテム。
 	void ThirdItemSelect() override;		//次3のアイテム。
-
+	void ItemInUse() override;				//アイテム使用中。
+	
 	void UseItem(FontRender* itemContRender) override;					//アイテム使用中。
 	void OnNowItem(FontRender* itemContRender) override;
 

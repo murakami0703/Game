@@ -55,7 +55,7 @@ void SpeedUpUI::UseItem(FontRender* itemContRender)
 	swprintf(text, L"%02d", gamedate->GetItemSpeedUp());
 	itemContRender->SetText(text);
 
-	SpeedUp* m_spedup = g_goMgr->NewGameObject<SpeedUp>();
+	g_goMgr->NewGameObject<SpeedUp>();
 
 }
 

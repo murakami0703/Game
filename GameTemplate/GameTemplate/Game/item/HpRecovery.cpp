@@ -3,6 +3,9 @@
 #include "player/Player.h"
 #include "data/GameData.h"
 
+/////////////////////////////////////////////////////////
+/// 定数
+/////////////////////////////////////////////////////////
 
 HpRecovery::HpRecovery()
 {
@@ -30,4 +33,6 @@ void HpRecovery::InUse()
 void HpRecovery::EndUse()
 {
 	//終わり。
+	//諸々削除させる。
+	g_goMgr->DeleteGameObject(this);
 }

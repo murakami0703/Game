@@ -80,6 +80,7 @@ void Player::Idel()
 }
 void Player::Move()
 {
+	GameData* gamedata = GameData::GetInstance();
 	//移動
 
 	m_move.x = 0.0f;
@@ -87,25 +88,25 @@ void Player::Move()
 	//十字移動と回転。
 	if (g_pad[0].IsPress(enButtonLeft)) {
 		//左
-		m_move.x -= MOVE_SPEED;
+		m_move.x -= gamedata->GetSPD();
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_L);
 
 	}
 	else if (g_pad[0].IsPress(enButtonRight)) {
 		//右
-		m_move.x += MOVE_SPEED;
+		m_move.x += gamedata->GetSPD();
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_R);
 
 	}
 	else if (g_pad[0].IsPress(enButtonUp)) {
 		//前
-		m_move.z += MOVE_SPEED;
+		m_move.z += gamedata->GetSPD();
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_F);
 
 	}
 	else if (g_pad[0].IsPress(enButtonDown)) {
 		//後ろ
-		m_move.z -= MOVE_SPEED;
+		m_move.z -= gamedata->GetSPD();
 		m_rotation.SetRotation(CVector3().AxisY(), PLAYER_ROTATION_ANGLE_D);
 
 	}

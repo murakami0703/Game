@@ -23,6 +23,10 @@ public:
 	float GetATK() {
 		return ATK;
 	}
+	//ˆÚ“®‘¬“xæ“¾
+	float GetSPD() {
+		return SPD;
+	}
 	//Å‘å‘Ì—Íæ“¾
 	float GetMAXHitPoint() {
 		return MAXHP;
