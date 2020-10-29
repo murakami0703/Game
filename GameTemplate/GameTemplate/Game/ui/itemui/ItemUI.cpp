@@ -57,7 +57,6 @@ void ItemUI::ItemUse(const eItemState& m_State)
 void ItemUI::ItemMove()
 {
 	//アイテム選択
-	GameData* m_gamedate = GameData::GetInstance();
 	//現在のアイテムを更新。
 	for (int i = 0; i <= static_cast<int>(ItemUIBase::Item_InUse); i++){
 		int itemNo = (m_itemState + i) % static_cast<int>(ItemUIBase::Item_InUse);
@@ -72,11 +71,9 @@ void ItemUI::ItemNow()
 	GameData* gamedata = GameData::GetInstance();
 	
 	//アイテム使用中じゃないとき。
-	if (gamedata->GetItemInUseFlag != true) {
 	if (g_pad[0].IsTrigger(enButtonY)) {
 		//Yボタンが押されたらアイテム使用状態に遷移。
 		m_state = Item_Use;
-	}
 	}
 
 	//LB1またはLB2ボタンが押されたらアイテム移動状態に遷移。
@@ -107,8 +104,8 @@ void ItemUI::ItemInUse()
 	//アイテム使用中。
 	//各アイテムが使用済みになると選択できるようになります。
 	GameData* gamedata = GameData::GetInstance();
-	if (gamedata->GetItemInUseFlag != true) {
-		m_uiItems[m_itemState]->ItemInUse();
+	if (gamedata->GetItemInUseFlag() != true) {
+		m_uiItems[m_itemState]->ItemUseEnd();
 		m_state = Item_Now;
 	}
 

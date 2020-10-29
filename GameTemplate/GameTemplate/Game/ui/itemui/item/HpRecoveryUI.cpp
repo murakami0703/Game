@@ -2,8 +2,6 @@
 #include "ui/itemui/item/HpRecoveryUI.h"
 #include "data/GameData.h"
 
-#include "item/HpRecovery.h"
-
 HpRecoveryUI::HpRecoveryUI()
 {
 }
@@ -11,6 +9,8 @@ HpRecoveryUI::HpRecoveryUI()
 
 HpRecoveryUI::~HpRecoveryUI()
 {
+	g_goMgr->DeleteGameObject(m_itemSprite);
+	g_goMgr->DeleteGameObject(hpRecovery);
 }
 bool HpRecoveryUI::Start() {
 
@@ -46,20 +46,29 @@ void HpRecoveryUI::ThirdItemSelect()
 void HpRecoveryUI::UseItem(FontRender* itemContRender)
 {
 	//アイテム使用。
-	GameData* gamedate = GameData::GetInstance();
-	gamedate->HPRecoveryCalc(-1);
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->HPRecoveryCalc(-1);
 	wchar_t text[MAX_PATH];
-	swprintf(text, MAX_PATH - 1, L"%02d", gamedate->GetItemHpRecovery());
+	swprintf(text, MAX_PATH - 1, L"%02d", gamedata->GetItemHpRecovery());
 	itemContRender->SetText(text);
 
-	g_goMgr->NewGameObject<HpRecovery>();
+	//アイテム使用中フラグオン。
+	gamedata->SetItemInUseFlag(true);
+
+	hpRecovery = g_goMgr->NewGameObject<HpRecovery>();
 
 }
 void HpRecoveryUI::OnNowItem(FontRender* itemContRender)
 {
 	//選択されてるのアイテムの数を表示。
-	GameData* gamedate = GameData::GetInstance();
+	GameData* gamedata = GameData::GetInstance();
 	wchar_t text[MAX_PATH];
-	swprintf(text, MAX_PATH - 1, L"%02d", gamedate->GetItemHpRecovery());
+	swprintf(text, MAX_PATH - 1, L"%02d", gamedata->GetItemHpRecovery());
 	itemContRender->SetText(text);
+}
+
+void HpRecoveryUI::ItemUseEnd()
+{
+	//アイテム使い終わりました。
+	hpRecovery->SetState(HpRecovery::End_Use);
 }

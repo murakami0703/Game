@@ -51,10 +51,10 @@ void Bum::Parabolic()
 
 
 	m_catmull_U += 0.1f;
-	CVector3 output_point = m_StartPoint * (1 - m_catmull_U)*(1 - m_catmull_U)*(1 - m_catmull_U) + 3 *
-		m_middlePoint1 * m_catmull_U*(1 - m_catmull_U)*(1 - m_catmull_U) + 3 *
+	/*CVector3 output_point = m_StartPoint * (1 - m_catmull_U)*(1 - m_catmull_U)*(1 - m_catmull_U) + 3 *
+		m_middlePoint1 * m_catmull_U*(1 - m_catmull_U)*(1 - m_catmull_U) + 3.0f *
 		m_middlePoint2 * m_catmull_U*m_catmull_U*(1 - m_catmull_U) +
-		m_endPoint * m_catmull_U*m_catmull_U*m_catmull_U;
+		m_endPoint * m_catmull_U*m_catmull_U*m_catmull_U;*/
 }
 
 void Bum::InUse()

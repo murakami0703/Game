@@ -1,14 +1,13 @@
 #pragma once
-
-class Anima : public IGameObject
+class Soul : public IGameObject
 {
 	/// <summary>
 	/// 魂。
 	/// エネミが死んだときに生成。
 	/// </summary>
 public:
-	Anima();
-	~Anima();
+	Soul();
+	~Soul();
 
 	bool Start();
 	void Update();

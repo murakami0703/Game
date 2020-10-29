@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "manager/SoulManager.h"
-#include "soul/Anima.h"
+#include "soul/Soul.h"
 
 SoulManager* SoulManager::m_instance = nullptr;
 
@@ -29,7 +29,7 @@ void SoulManager::Update() {}
 void SoulManager::SoulGenerated(CVector3 position)
 {
 	//Soul¶¬
-	Anima* m_anima = g_goMgr->NewGameObject<Anima>();
-	m_anima->SetPosition(position);
+	Soul* m_soul = g_goMgr->NewGameObject<Soul>();
+	m_soul->SetPosition(position);
 }
 

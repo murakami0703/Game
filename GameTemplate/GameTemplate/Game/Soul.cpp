@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "soul/Anima.h"
+#include "soul/Soul.h"
 #include "player/Player.h"
 #include "data/GameData.h"
 
@@ -13,11 +13,10 @@ const float GROUND_POSY = 430.0f;		//地面のY座標。
 const float SOUL_GET_LENGTH = 50.0f;	//魂が獲得できる距離。
 const float SOUL_MOVESPEED = 5.0f;		//魂の下降速度。
 
+Soul::Soul(){}
+Soul::~Soul(){}
 
-Anima::Anima(){}
-Anima::~Anima(){}
-
-bool Anima::Start()
+bool Soul::Start()
 {
 	//アニメーションクリップのロードとループフラグの設定。
 	m_animClips[eAnimation_Move].Load(L"Assets/animData/AnimaMove.tka");
@@ -36,8 +35,8 @@ bool Anima::Start()
 	return  true;
 }
 
-void Anima::Appear()
-{	
+void Soul::Appear()
+{
 	//出現中。
 	//魂が地面から離れていたら下降します。
 	if (m_position.y <= GROUND_POSY) {
@@ -60,32 +59,32 @@ void Anima::Appear()
 	}
 
 }
-void Anima::Get()
-{	
+void Soul::Get()
+{
 	//取得したよ！！
 	GameData::GetInstance()->SoulCalc(SOUL_GET);
 	m_state = Anima_Destroy;	//獲得したので消滅させる。
 }
-void Anima::Destroy()
-{	
+void Soul::Destroy()
+{
 	//消滅。
 	g_goMgr->DeleteGameObject(m_animaModelRender);
 	g_goMgr->DeleteGameObject(this);
 }
 
-void Anima::Update()
+void Soul::Update()
 {
 	switch (m_state)
 	{
-	case Anima::Anima_Appear:
+	case Soul::Anima_Appear:
 		//出現中。
 		Appear();
 		break;
-	case Anima::Anima_Get:
+	case Soul::Anima_Get:
 		//獲得。
 		Get();
 		break;
-	case Anima::Anima_Destroy:
+	case Soul::Anima_Destroy:
 		//消滅。
 		Destroy();
 		break;

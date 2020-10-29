@@ -7,6 +7,8 @@
 /// 定数
 /////////////////////////////////////////////////////////
 
+const float HPRECOVERY_USE_ADD_HP = 1.0f;		//回復薬使用時のHP上昇値。
+
 HpRecovery::HpRecovery()
 {
 }
@@ -24,10 +26,12 @@ bool HpRecovery::Start()
 void HpRecovery::InUse()
 {
 	//使用中。
-	if (GameData::GetInstance()->GetItemInUseFlag() != false) {
-		//HPを+１する。
-		GameData::GetInstance()->HPCalc(1.0f);
-		GameData::GetInstance()->SetItemInUseFlag(false);
+	GameData* gamedata = GameData::GetInstance();
+
+	if (gamedata->GetItemInUseFlag() != false) {
+		//HPを+１加算する。
+		gamedata->HPCalc(HPRECOVERY_USE_ADD_HP);
+		gamedata->SetItemInUseFlag(false);
 	}
 }
 void HpRecovery::EndUse()

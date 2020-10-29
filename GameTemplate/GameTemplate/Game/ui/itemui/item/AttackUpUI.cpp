@@ -2,16 +2,13 @@
 #include "ui/itemui/item/AttackUpUI.h"
 #include "data/GameData.h"
 
-#include "item/AttackUp.h"
-
-AttackUpUI::AttackUpUI()
-{
-}
-
-
+AttackUpUI::AttackUpUI(){}
 AttackUpUI::~AttackUpUI()
 {
+	g_goMgr->DeleteGameObject(m_itemSprite);
+	g_goMgr->DeleteGameObject(attackUp);
 }
+
 bool AttackUpUI::Start() 
 {
 	//攻撃力UP
@@ -48,25 +45,30 @@ void AttackUpUI::ThirdItemSelect()
 void AttackUpUI::UseItem(FontRender* itemContRender)
 {
 	//アイテム使用。
-	GameData* gamedate = GameData::GetInstance();
-	gamedate->AttackUpCalc(-1);
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->AttackUpCalc(-1);
 	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemAttackUp());
+	swprintf(text, L"%02d", gamedata->GetItemAttackUp());
 	itemContRender->SetText(text);
+
+	//アイテム使用中フラグオン。
+	gamedata->SetItemInUseFlag(true);
 
 	attackUp = g_goMgr->NewGameObject<AttackUp>();
 
 }
 
-void AttackUpUI::ItemUseEnd() 
-{
-	attackUp->SetState(AttackUp::End_Use);
-}
 void AttackUpUI::OnNowItem(FontRender* itemContRender)
 {
 	//選択されてるのアイテムの数を表示。
-	GameData* gamedate = GameData::GetInstance();
+	GameData* gamedata = GameData::GetInstance();
 	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemAttackUp());
+	swprintf(text, L"%02d", gamedata->GetItemAttackUp());
 	itemContRender->SetText(text);
+}
+
+void AttackUpUI::ItemUseEnd()
+{
+	//アイテム使い終わりました。
+	attackUp->SetState(AttackUp::End_Use);
 }

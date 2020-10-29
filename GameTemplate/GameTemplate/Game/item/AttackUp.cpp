@@ -28,6 +28,8 @@ AttackUp::AttackUp()
 
 AttackUp::~AttackUp()
 {
+	g_goMgr->DeleteGameObject(m_frameSprite);
+	g_goMgr->DeleteGameObject(m_itemiconSprite);
 }
 
 bool AttackUp::Start()
@@ -47,7 +49,9 @@ bool AttackUp::Start()
 		m_itemiconSprite->SetScale(ITEM_SET_SCALE);
 	}
 
-	return true;
+	//攻撃力UP。
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->ATKIncrease();
 
 	return true;
 }
@@ -87,4 +91,9 @@ void AttackUp::InUse()
 void AttackUp::EndUse()
 {
 	//終わり。
+		//終わり。
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->ATKRevert();
+	g_goMgr->DeleteGameObject(this);
+
 }

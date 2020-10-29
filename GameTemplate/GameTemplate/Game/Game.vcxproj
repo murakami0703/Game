@@ -167,11 +167,12 @@
     <ClCompile Include="scene\StageSelect.cpp" />
     <ClCompile Include="scene\Title.cpp" />
     <ClCompile Include="siegepoint\SiegePoint.cpp" />
-    <ClCompile Include="soul\Anima.cpp" />
+    <ClCompile Include="Soul.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
+    <ClCompile Include="SpriteIActor.cpp" />
     <ClCompile Include="sprite\fade\FadeIn.cpp" />
     <ClCompile Include="sprite\fade\FadeOut.cpp" />
     <ClCompile Include="sprite\Sprite.cpp" />
@@ -264,11 +265,12 @@
     <ClInclude Include="scene\StageSelect.h" />
     <ClInclude Include="scene\Title.h" />
     <ClInclude Include="siegepoint\SiegePoint.h" />
-    <ClInclude Include="soul\Anima.h" />
+    <ClInclude Include="Soul.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
+    <ClInclude Include="SpriteIActor.h" />
     <ClInclude Include="sprite\fade\FadeIn.h" />
     <ClInclude Include="sprite\fade\FadeOut.h" />
     <ClInclude Include="sprite\Sprite.h" />

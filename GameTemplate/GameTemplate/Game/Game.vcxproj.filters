@@ -64,9 +64,6 @@
     <Filter Include="graphics\effect">
       <UniqueIdentifier>{46d61319-d978-4013-a21e-b5e36393fe44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="anima">
-      <UniqueIdentifier>{f9529674-c482-4ded-9f84-ebd8e2370e10}</UniqueIdentifier>
-    </Filter>
     <Filter Include="data">
       <UniqueIdentifier>{93d2c609-dbd2-4cbd-95a1-3a081b3bee9e}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,9 @@
     </Filter>
     <Filter Include="item">
       <UniqueIdentifier>{f5db5701-c2a9-4471-a3ee-4f8088466487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="soul">
+      <UniqueIdentifier>{f9529674-c482-4ded-9f84-ebd8e2370e10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -402,11 +402,14 @@
     <ClCompile Include="siegepoint\SiegePoint.cpp">
       <Filter>siegepoint</Filter>
     </ClCompile>
-    <ClCompile Include="soul\Anima.cpp">
-      <Filter>anima</Filter>
-    </ClCompile>
     <ClCompile Include="item\SpeedUp.cpp">
       <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="Soul.cpp">
+      <Filter>soul</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteIActor.cpp">
+      <Filter>iactor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -677,8 +680,11 @@
     <ClInclude Include="siegepoint\SiegePoint.h">
       <Filter>siegepoint</Filter>
     </ClInclude>
-    <ClInclude Include="soul\Anima.h">
-      <Filter>anima</Filter>
+    <ClInclude Include="Soul.h">
+      <Filter>soul</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteIActor.h">
+      <Filter>iactor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

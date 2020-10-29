@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "enemy/Slaim.h"
 #include "data/GameData.h"
-#include "soul/Anima.h"
+#include "soul/Soul.h"
 #include "player/Player.h"
 #include "siegepoint/SiegePoint.h"
 #include "manager/EffectManager.h"

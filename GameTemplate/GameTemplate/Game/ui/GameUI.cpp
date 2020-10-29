@@ -13,27 +13,27 @@ GameUI* GameUI::m_instance = nullptr;
 /// ’è”
 /////////////////////////////////////////////////////////
 
-const CVector3 m_itemC1Pos = { 460.0f,-240.0f,0.0f };		//˜g1‚ÌÀ•W
-const CVector3 m_itemC2Pos = { 560.0f,-120.0f,0.0f };		//˜g2‚ÌÀ•W
-const CVector3 m_itemC3Pos = { 475.0f,-50.0f,0.0f };		//˜g3‚ÌÀ•W
-const CVector3 m_itemC4Pos = { 545.0f,-3.0f,0.0f };		//˜g4‚ÌÀ•W
+const CVector3 ITEM_FRAME1_POS = { 460.0f,-240.0f,0.0f };		//˜g1‚ÌÀ•W
+const CVector3 ITEM_FRAME2_POS = { 560.0f,-120.0f,0.0f };		//˜g2‚ÌÀ•W
+const CVector3 ITEM_FRAME3_POS = { 475.0f,-50.0f,0.0f };		//˜g3‚ÌÀ•W
+const CVector3 ITEM_FRAME4_POS = { 545.0f,-3.0f,0.0f };		//˜g4‚ÌÀ•W
 
-const CVector3 m_itemC1Scale = { 0.8f,0.8f,0.8f };		//˜g1Šg‘å—¦
-const CVector3 m_itemC24Scale = { 0.7f,0.7f,0.7f };		//˜g2`4Šg‘å—¦
+const CVector3 ITEM_FRAME1_SCALE = { 0.8f,0.8f,0.8f };		//˜g1Šg‘å—¦
+const CVector3 ITEM_FRAME234_SCALE = { 0.7f,0.7f,0.7f };		//˜g2`4Šg‘å—¦
 
-const CVector3 m_itemSCPos = { 460.0f,-240.0f,0.0f };		//‘I‘ð˜g‚ÌÀ•W
-const CVector3 m_itemHPos = { 505.0f,14.0f,0.0f };		//’[‚ÌÀ•W
-const CVector3 m_itemLPos = { 585.0f,-250.0f,0.0f };		//L‚ÌÀ•W
-const CVector3 m_itemZLPos = { 605.0f,20.0f,0.0f };		//ZL‚ÌÀ•W
+const CVector3 ITEM_SELECT_FRAME_POS = { 460.0f,-240.0f,0.0f };		//‘I‘ð˜g‚ÌÀ•W
+const CVector3 LB_SPRITE_POS = { 585.0f,-250.0f,0.0f };		//L‚ÌÀ•W
+const CVector3 RB_SPRITE_POS = { 605.0f,20.0f,0.0f };		//ZL‚ÌÀ•W
+const CVector3 END_SPRITE_POS = { 505.0f,14.0f,0.0f };		//’[‚ÌÀ•W
 
-const CVector3 m_itemLScale = { 0.8f,0.8f,0.8f };			//LŠg‘å—¦
-const CVector3 m_itemHScale = { 0.6f,0.6f,0.6f };			//’[Šg‘å—¦
+const CVector3 SELECTFRAME_RB_SPRITE_SCALE = { 0.7f,0.7f,0.7f };			//LŠg‘å—¦
+const CVector3 LB_SPRITE_SCALE = { 0.8f,0.8f,0.8f };			//LŠg‘å—¦
+const CVector3 END_SPRITE_SCALE = { 0.6f,0.6f,0.6f };			//’[Šg‘å—¦
 
-const int m_bigCountValue = 30;
-const int m_smallCountValue = 60;
-const CVector3 m_scalingValue = { 0.002f,0.002f,0.002f };			//‘I‘ð˜gŠg‘å’l
-const CVector3 m_hpScale = { 0.15f,0.15f,0.15f };		//HP‚ÌŠg‘å—¦
-const float m_hpvAddXPos = 50.0f;					//HP2ˆÈã‚ÌXÀ•W‚Ì•Ï‰»’l
+const int FRAME_BIGCOUNT_VALUE = 30;
+const int FRAME_SMALLCOUNT_VALUE = 60;
+const CVector3 SCALING_VALUE = { 0.002f,0.002f,0.002f };			//‘I‘ð˜gŠg‘å’l
+
 GameUI::GameUI()
 {
 	m_instance = this;
@@ -48,53 +48,53 @@ bool GameUI::Start()
 		//0”Ô¨ItemCase1
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
-		r->SetPosition(m_itemC1Pos);
-		r->SetScale(m_itemC1Scale);
+		r->SetPosition(ITEM_FRAME1_POS);
+		r->SetScale(ITEM_FRAME1_SCALE);
 		r->SetAlpha(0.9f);
 		m_spriteRender.push_back(r);
 		//1”Ô¨ItemCase2
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
-		r->SetPosition(m_itemC2Pos);
-		r->SetScale(m_itemC24Scale);
+		r->SetPosition(ITEM_FRAME2_POS);
+		r->SetScale(ITEM_FRAME234_SCALE);
 		r->SetAlpha(0.6f);
 		m_spriteRender.push_back(r);
 		//2”Ô¨ItemCase3
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case3.dds", 204.0f, 204.0f);
-		r->SetPosition(m_itemC3Pos);
-		r->SetScale(m_itemC24Scale);
+		r->SetPosition(ITEM_FRAME3_POS);
+		r->SetScale(ITEM_FRAME234_SCALE);
 		r->SetAlpha(0.4f);
 		m_spriteRender.push_back(r);
 		//3”Ô¨ItemCase4
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case4.dds", 148.0f, 148.0f);
-		r->SetPosition(m_itemC4Pos);
-		r->SetScale(m_itemC24Scale);
+		r->SetPosition(ITEM_FRAME4_POS);
+		r->SetScale(ITEM_FRAME234_SCALE);
 		r->SetAlpha(0.2f);
 		m_spriteRender.push_back(r);
 		//4”Ô¨Itemwaku
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/waku.dds", 363.0f, 362.0f);
-		r->SetPosition(m_itemSCPos);
+		r->SetPosition(ITEM_SELECT_FRAME_POS);
 		r->SetScale(m_itemZSCScale);
 		m_spriteRender.push_back(r);
 		//5”Ô¨Itemhasi
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/hasi.dds", 70.0f, 63.0f);
-		r->SetPosition(m_itemHPos);
-		r->SetScale(m_itemHScale);
+		r->SetPosition(END_SPRITE_POS);
+		r->SetScale(END_SPRITE_SCALE);
 		m_spriteRender.push_back(r);
 		//6”Ô¨ItemL
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/L.dds", 100.0f, 148.0f);
-		r->SetPosition(m_itemLPos);
-		r->SetScale(m_itemLScale);
+		r->SetPosition(LB_SPRITE_SCALE);
+		r->SetScale(LB_SPRITE_SCALE);
 		m_spriteRender.push_back(r);
 		//7”Ô¨ItemZL
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/ZL.dds", 102.0f, 79.0f);
-		r->SetPosition(m_itemZLPos);
+		r->SetPosition(RB_SPRITE_POS);
 		r->SetScale(m_itemZSCScale);
 		m_spriteRender.push_back(r);
 	}
@@ -111,17 +111,17 @@ bool GameUI::Start()
 
 void GameUI::ScalingSelectCase() {
 	//‘I‘ð˜g‚ÌŠg‘åk¬
-	if (m_scalingCount > m_smallCountValue) {
+	if (m_scalingCount > FRAME_SMALLCOUNT_VALUE) {
 		m_scalingCount = 0;
 	}
-	else if (m_scalingCount <= m_bigCountValue) {
-		m_itemZSCScale += m_scalingValue;
+	else if (m_scalingCount <= FRAME_BIGCOUNT_VALUE) {
+		m_itemSelectFrameScale += SCALING_VALUE;
 	}
 	else{
-		m_itemZSCScale -= m_scalingValue;
+		m_itemSelectFrameScale -= SCALING_VALUE;
 	}
 	m_scalingCount++;
-	m_spriteRender[4]->SetScale(m_itemZSCScale);
+	m_spriteRender[4]->SetScale(m_itemSelectFrameScale);
 }
 
 

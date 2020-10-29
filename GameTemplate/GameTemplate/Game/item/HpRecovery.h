@@ -14,6 +14,5 @@ public:
 
 	void InUse() override;		//使用中。
 	void EndUse() override;		//終わり。
-private:
 };
 

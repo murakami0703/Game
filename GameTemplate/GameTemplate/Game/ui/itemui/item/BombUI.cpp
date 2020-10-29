@@ -2,8 +2,6 @@
 #include "ui/itemui/item/BombUI.h"
 #include "data/GameData.h"
 
-#include "item/Bum.h"
-
 BombUI::BombUI()
 {
 }
@@ -11,6 +9,8 @@ BombUI::BombUI()
 
 BombUI::~BombUI()
 {
+	g_goMgr->DeleteGameObject(m_itemSprite);
+	g_goMgr->DeleteGameObject(bomb);
 }
 bool BombUI::Start() 
 {
@@ -46,19 +46,29 @@ void BombUI::ThirdItemSelect()
 void BombUI::UseItem(FontRender* itemContRender)
 {
 	//アイテム使用。
-	GameData* gamedate = GameData::GetInstance();
-	gamedate->BumCalc(-1);
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->BumCalc(-1);
 	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemBum());
+	swprintf(text, L"%02d", gamedata->GetItemBum());
 	itemContRender->SetText(text);
-	g_goMgr->NewGameObject<Bum>();
+
+	//アイテム使用中フラグオン。
+	gamedata->SetItemInUseFlag(true);
+
+	bomb = g_goMgr->NewGameObject<Bum>();
 
 }
 void BombUI::OnNowItem(FontRender* itemContRender)
 {
 	//選択されてるのアイテムの数を表示。
-	GameData* gamedate = GameData::GetInstance();
+	GameData* gamedata = GameData::GetInstance();
 	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemBum());
+	swprintf(text, L"%02d", gamedata->GetItemBum());
 	itemContRender->SetText(text);
+}
+
+void BombUI::ItemUseEnd()
+{
+	//アイテム使い終わりました。
+	bomb->SetState(Bum::End_Use);
 }

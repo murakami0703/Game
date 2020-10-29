@@ -22,7 +22,8 @@ private:
 	CVector3 m_middlePoint2 = CVector3::Zero();			//中間地点2。
 	CVector3 m_endPoint = CVector3::Zero();			//終点。
 
-	CVector3 m_correction = CVector3::Zero();			//補正。
+	//CVector3 m_correction = CVector3::Zero();			//補正。
+	float m_catmull_U;			//補正。
 
 };
 

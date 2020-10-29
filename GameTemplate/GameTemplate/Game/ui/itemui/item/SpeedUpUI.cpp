@@ -2,8 +2,6 @@
 #include "ui/itemui/item/SpeedUpUI.h"
 #include "data/GameData.h"
 
-#include "item/SpeedUp.h"
-
 SpeedUpUI::SpeedUpUI()
 {
 }
@@ -11,6 +9,8 @@ SpeedUpUI::SpeedUpUI()
 
 SpeedUpUI::~SpeedUpUI()
 {
+	g_goMgr->DeleteGameObject(m_itemSprite);
+	g_goMgr->DeleteGameObject(speedUp);
 }
 
 bool SpeedUpUI::Start() {
@@ -49,21 +49,29 @@ void SpeedUpUI::ThirdItemSelect()
 void SpeedUpUI::UseItem(FontRender* itemContRender)
 {
 	//アイテム使用。
-	GameData* gamedate = GameData::GetInstance();
-	gamedate->SpeedUpCalc(-1);
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->SpeedUpCalc(-1);
 	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemSpeedUp());
+	swprintf(text, L"%02d", gamedata->GetItemSpeedUp());
 	itemContRender->SetText(text);
 
-	g_goMgr->NewGameObject<SpeedUp>();
+	//アイテム使用中フラグオン。
+	gamedata->SetItemInUseFlag(true);
+
+	speedUp = g_goMgr->NewGameObject<SpeedUp>();
 
 }
-
 void SpeedUpUI::OnNowItem(FontRender* itemContRender)
 {
 	//選択されてるのアイテムの数を表示。
-	GameData* gamedate = GameData::GetInstance();
+	GameData* gamedata = GameData::GetInstance();
 	wchar_t text[256];
-	swprintf(text, L"%02d", gamedate->GetItemSpeedUp());
+	swprintf(text, L"%02d", gamedata->GetItemSpeedUp());
 	itemContRender->SetText(text);
+}
+
+void SpeedUpUI::ItemUseEnd()
+{
+	//アイテム使い終わりました。
+	speedUp->SetState(SpeedUp::End_Use);
 }

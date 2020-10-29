@@ -29,6 +29,8 @@ SpeedUp::SpeedUp()
 
 SpeedUp::~SpeedUp()
 {
+	g_goMgr->DeleteGameObject(m_frameSprite);
+	g_goMgr->DeleteGameObject(m_itemiconSprite);
 }
 
 bool SpeedUp::Start()
@@ -48,6 +50,9 @@ bool SpeedUp::Start()
 		m_itemiconSprite->SetPosition(ITEM_SET_POTITION);
 		m_itemiconSprite->SetScale(ITEM_SET_SCALE);
 	}
+	//移動速度UP。
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->SPDIncrease();
 
 	return true;
 }
@@ -57,10 +62,12 @@ void SpeedUp::Flashing()
 	//アイコンの点滅。
 	m_flashingTimer++;
 	if (m_flashingTimer <= ICON_INCREASE_TIME) {
+		//だんだん表示する。
 		m_itemiconSprite->DeltaAlpha(ICON_DELTA_ALPHA);
 	}
 	else if (m_flashingTimer <= ICON_DECREASE_TIME)
 	{
+		//だんだん非表示になる。
 		m_itemiconSprite->DeltaAlpha(-ICON_DELTA_ALPHA);
 	}
 	else {
@@ -68,7 +75,6 @@ void SpeedUp::Flashing()
 	}
 
 }
-
 void SpeedUp::InUse()
 {
 	//使用中。
@@ -84,12 +90,12 @@ void SpeedUp::InUse()
 		//もう少しで効果が切れるのでアイコンも点滅させて分かりやすくします。
 		Flashing();
 	}
-
-
 }
 void SpeedUp::EndUse()
 {
 	//終わり。
+	GameData* gamedata = GameData::GetInstance();
+	gamedata->SPDRevert();
 	g_goMgr->DeleteGameObject(this);
 }
 
