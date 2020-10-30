@@ -77,7 +77,7 @@ bool GameUI::Start()
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/waku.dds", 363.0f, 362.0f);
 		r->SetPosition(ITEM_SELECT_FRAME_POS);
-		r->SetScale(m_itemZSCScale);
+		r->SetScale(SELECTFRAME_RB_SPRITE_SCALE);
 		m_spriteRender.push_back(r);
 		//5”Ô¨Itemhasi
 		r = g_goMgr->NewGameObject<SpriteRender>();
@@ -95,7 +95,7 @@ bool GameUI::Start()
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/ZL.dds", 102.0f, 79.0f);
 		r->SetPosition(RB_SPRITE_POS);
-		r->SetScale(m_itemZSCScale);
+		r->SetScale(SELECTFRAME_RB_SPRITE_SCALE);
 		m_spriteRender.push_back(r);
 	}
 

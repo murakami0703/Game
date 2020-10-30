@@ -15,7 +15,7 @@ public:
 	/// <summary>
 	/// 座標を取得。
 	/// </summary>
-	CVector3 GetPosition()
+	CVector3 GetPosition() const
 	{
 		return m_position;
 	}
@@ -23,21 +23,29 @@ public:
 	/// <summary>
 	/// 座標を設定。
 	/// </summary>
-	void SetPosition(CVector3 pos)
+	void SetPosition(const CVector3 pos) 
 	{
 		m_position = pos;
 	}
 	/// <summary>
 	/// 回転を設定。
 	/// </summary>
-	void SetRotation(CQuaternion rot)
+	void SetRotation(const CQuaternion rot)
 	{
 		m_rotation = rot;
 	}
 	/// <summary>
+	/// 回転を設定。
+	/// </summary>
+	CQuaternion GetRotation() const
+	{
+		return m_rotation;
+	}
+
+	/// <summary>
 	/// 回転率を設定。
 	/// </summary>
-	void SetScale(CVector3 sca)
+	void SetScale(const CVector3 sca)
 	{
 		m_scale = sca;
 	}

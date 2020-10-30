@@ -172,7 +172,6 @@
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
-    <ClCompile Include="SpriteIActor.cpp" />
     <ClCompile Include="sprite\fade\FadeIn.cpp" />
     <ClCompile Include="sprite\fade\FadeOut.cpp" />
     <ClCompile Include="sprite\Sprite.cpp" />
@@ -270,7 +269,6 @@
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
-    <ClInclude Include="SpriteIActor.h" />
     <ClInclude Include="sprite\fade\FadeIn.h" />
     <ClInclude Include="sprite\fade\FadeOut.h" />
     <ClInclude Include="sprite\Sprite.h" />

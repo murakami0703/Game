@@ -408,9 +408,6 @@
     <ClCompile Include="Soul.cpp">
       <Filter>soul</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteIActor.cpp">
-      <Filter>iactor</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -682,9 +679,6 @@
     </ClInclude>
     <ClInclude Include="Soul.h">
       <Filter>soul</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteIActor.h">
-      <Filter>iactor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

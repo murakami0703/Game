@@ -17,13 +17,6 @@ public:
 private:
 	void Parabolic();			//放物線の処理。
 private:
-	CVector3 m_StartPoint = CVector3::Zero();			//始点。
-	CVector3 m_middlePoint1 = CVector3::Zero();			//中間地点1。
-	CVector3 m_middlePoint2 = CVector3::Zero();			//中間地点2。
-	CVector3 m_endPoint = CVector3::Zero();			//終点。
-
-	//CVector3 m_correction = CVector3::Zero();			//補正。
-	float m_catmull_U;			//補正。
-
+	CVector3 diff = CVector3::Zero();	//移動方向。
 };
 

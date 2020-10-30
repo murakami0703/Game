@@ -33,28 +33,9 @@ bool Bum::Start()
 
 void Bum::Parabolic()
 {
-	Player* m_playerPos = Player::GetInstance();
-	
-	m_StartPoint = m_playerPos->GetPosition();	//始点
-	CVector3 Pos = m_position;
-	Pos.y += 100.0f;
-	m_endPoint = Pos;	//終点
-	CVector3 Vec = Pos - m_playerPos->GetPosition();	//始点から終点に伸びるベクトル
-	Vec /= 4.0f;
-	CVector3 Pos2 = m_playerPos->GetPosition() + Vec;
-	Pos2.y += 100.0f;
-	m_middlePoint1 = Pos2;	//始点寄り
-	Pos2 = Pos - Vec;
-	Pos2.y = m_middlePoint1.y;
-	m_middlePoint2 = Pos2;	//終点寄り
-
-
-
-	m_catmull_U += 0.1f;
-	/*CVector3 output_point = m_StartPoint * (1 - m_catmull_U)*(1 - m_catmull_U)*(1 - m_catmull_U) + 3 *
-		m_middlePoint1 * m_catmull_U*(1 - m_catmull_U)*(1 - m_catmull_U) + 3.0f *
-		m_middlePoint2 * m_catmull_U*m_catmull_U*(1 - m_catmull_U) +
-		m_endPoint * m_catmull_U*m_catmull_U*m_catmull_U;*/
+	Player* player = Player::GetInstance();
+	//プレイヤーの向きによって放り投げる位置を決めます。
+	//CMath::DegToRad(359.0f)角度　IF
 }
 
 void Bum::InUse()
