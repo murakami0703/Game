@@ -36,6 +36,20 @@ void Bum::Parabolic()
 	Player* player = Player::GetInstance();
 	//プレイヤーの向きによって放り投げる位置を決めます。
 	//CMath::DegToRad(359.0f)角度　IF
+	if (player->GetRotation().y == CMath::DegToRad(80.0f)) {
+		//左
+	}
+	else if (player->GetRotation().y == CMath::DegToRad(-80.0f)) {
+		//右
+	}
+	else if (player->GetRotation().y == CMath::DegToRad(0.0f)) {
+		//上
+	}
+	else if (player->GetRotation().y == CMath::DegToRad(110.0f)) {
+		//下
+	}
+
+
 }
 
 void Bum::InUse()
@@ -45,9 +59,6 @@ void Bum::InUse()
 
 	//移動処理。
 	if (g_pad[0].IsTrigger(enButtonX)) {
-		m_position.x += 200.0f;
-		//m_position.y -= 300.0f;
-		gamedate->SetItemInUseFlag(true);
 	}
 	else if(gamedate->GetItemInUseFlag() != true){
 		m_position = Player::GetInstance()->GetPosition();
