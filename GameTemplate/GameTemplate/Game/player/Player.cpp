@@ -20,7 +20,7 @@ const int LIGHT_CHANGEDEFAULT_TIME = 10;			//ƒ‰ƒCƒg‚ÌƒJƒ‰[‚ðƒfƒtƒHƒ‹ƒg‚É–ß‚·‚Ü‚
 const int TIMER_INITIAL_VALUE_ZERO = 0;				//ƒ^ƒCƒ}[‚Ì‰Šú‰»—p‚Ì’lB
 const float PLAYER_ROTATION_ANGLE_L = 80.0f;		//¶‚Ì‰ñ“]Šp“xB
 const float PLAYER_ROTATION_ANGLE_R = -80.0f;		//‰E‚Ì‰ñ“]Šp“xB
-const float PLAYER_ROTATION_ANGLE_F = 0.0f;			//‰º‚Ì‰ñ“]Šp“xB
+const float PLAYER_ROTATION_ANGLE_F = 0.0f;			//ã‚Ì‰ñ“]Šp“xB
 const float PLAYER_ROTATION_ANGLE_D = 110.0f;		//‰º‚Ì‰ñ“]Šp“xB
 const float MOVE_SPEED = 900.0f;					//ˆÚ“®‘¬“xB
 
