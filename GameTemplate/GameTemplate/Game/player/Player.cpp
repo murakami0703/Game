@@ -42,6 +42,13 @@ bool Player::Start()
 	m_animClips[Animation_Walk].SetLoopFlag(true);
 	m_animClips[Animation_Run].Load(L"Assets/animData/player/player_dash.tka");
 	m_animClips[Animation_Run].SetLoopFlag(true);
+
+	m_animClips[Animation_Bomb_With].Load(L"Assets/animData/player/player_bom_with.tka");
+	m_animClips[Animation_Bomb_With].SetLoopFlag(true);
+	m_animClips[Animation_Bomb_With_Walk].Load(L"Assets/animData/player/player_bomwith_walk.tka");
+	m_animClips[Animation_Bomb_With_Walk].SetLoopFlag(true);
+	m_animClips[Animation_Bomb_Throw].Load(L"Assets/animData/player/player_bom_throw.tka");
+
 	m_animClips[Animation_Drink].Load(L"Assets/animData/player/player_drink.tka");
 	m_animClips[Animation_Attack].Load(L"Assets/animData/player/player_attacktes.tka");
 	m_animClips[Animation_Damage].Load(L"Assets/animData/player/player_damage.tka");
@@ -73,7 +80,17 @@ void Player::Idel()
 {
 	//待機状態
 	//なにもしない
-	m_skinModelRender->PlayAnimation(Animation_Idel);
+	GameData* gamedata = GameData::GetInstance();
+
+	//アイテム所持の有無によってアニメーションを変えます。
+	if (gamedata->GetItemInUseFlag() != false) {
+		m_skinModelRender->PlayAnimation(Animation_Bomb_With);
+	}
+	else {
+		m_skinModelRender->PlayAnimation(Animation_Idel);
+	}
+
+	//ボタンが押されたら歩き状態へ。
 	if (g_pad[0].IsPressAnyKey()){
 		m_state = Player_Walk;
 	}
@@ -127,11 +144,19 @@ void Player::Move()
 	}
 
 	m_position = m_characon.Execute(CHARACON_TIME, m_move);
-	if (g_pad[0].IsPress(enButtonB)) {
-		m_skinModelRender->PlayAnimation(Animation_Run);
+
+	//アイテム所持の有無によってアニメーションを変えます。
+	if (gamedata->GetItemInUseFlag() != false) {
+		m_skinModelRender->PlayAnimation(Animation_Bomb_With_Walk);
 	}
 	else {
-		m_skinModelRender->PlayAnimation(Animation_Walk);
+		m_skinModelRender->PlayAnimation(Animation_Idel);
+		if (g_pad[0].IsPress(enButtonB)) {
+			m_skinModelRender->PlayAnimation(Animation_Run);
+		}
+		else {
+			m_skinModelRender->PlayAnimation(Animation_Walk);
+		}
 	}
 
 }

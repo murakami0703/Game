@@ -39,8 +39,8 @@ private:
 		Animation_Idel,					//待機。
 		Animation_Walk,					//歩き。
 		Animation_Run,					//走り。
+		Animation_Bomb_With,		//爆弾所持中の歩き。
 		Animation_Bomb_With_Walk,		//爆弾所持中の歩き。
-		Animation_Bomb_With_Run,		//爆弾所持中の走り。
 		Animation_Bomb_Throw,			//爆弾投げる。
 		Animation_Drink,				//ポーション飲む。
 		Animation_Attack,				//攻撃。

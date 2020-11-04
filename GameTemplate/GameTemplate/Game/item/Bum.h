@@ -15,8 +15,12 @@ public:
 	void EndUse() override;		//終わり。
 
 private:
-	void Parabolic();			//放物線の処理。
+	void Parabolic();			//配置先の処理。
+	void MoveBomb();			//移動の処理。
+
 private:
-	CVector3 diff = CVector3::Zero();	//移動方向。
+	CVector3 disPosition = CVector3::Zero();	//配置場所の格納。
+
+	bool m_bombMoveFlag = false;		//爆弾移動中か判定用フラグ。
 };
 
