@@ -18,6 +18,7 @@ private:
 	void BackMove();								//背景スプライトの移動処理。
 	void SpriteMove(SpriteRender* m_sprite);		//スプライトの下降移動処理。
 	void SpriteIndicate(SpriteRender* m_sprite);	//スプライトの表示処理。
+	void SpriteHide(SpriteRender* m_sprite);		//スプライトの非表示処理。
 	void SpriteScaleUp(SpriteRender* m_sprite);		//スプライトの拡大表示処理。
 
 	void BackTable();		//Backgraundを表示。
@@ -79,7 +80,7 @@ private:
 
 	//ステージ名関連
 	const float m_nameStopXPos = 50.0f;					//X座標の停止位置。
-	const float m_nameSpeed = 40.0f;					//文字の移動速度。
+	const float m_nameSpeed = 30.0f;					//文字の移動速度。
 
 	//魂関連
 	const CVector3 m_soulPos = { 215.0f,75.0f,0.0f };		//魂の座標。
@@ -111,11 +112,14 @@ private:
 	const float m_triangleSpeed = 0.5f;								//三角の移動速度。
 
 	//プレイヤーイラスト関連
+	const CVector3 m_playerIllustrationPos = { -350.0f,-150.0f,0.0f };		//プレイヤーイラストの座標。
+	const CVector3 m_playerIllustrationScale = { 0.3f,0.3f,0.3f };			//プレイヤーイラストの座標。
 
 	//全体使用
 	const float m_startAlpha = 0.0f;				//大体の初期透明度。
 	const float m_fallMoveSpeed = -15.0f;			//下降速度。
 	const float m_Indicate = 0.1f;				//表示させる値。
+	const float m_hide = 0.2f;					//非表示表示させる値。
 
 	//リザルトsprite関連
 	const CVector3 m_bgStartPos = { 720.0f,0.0f,0.0f };

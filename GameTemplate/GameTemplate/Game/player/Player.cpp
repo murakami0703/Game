@@ -44,7 +44,6 @@ bool Player::Start()
 	m_animClips[Animation_Run].SetLoopFlag(true);
 
 	m_animClips[Animation_Bomb_With].Load(L"Assets/animData/player/player_bom_with.tka");
-	m_animClips[Animation_Bomb_With].SetLoopFlag(true);
 	m_animClips[Animation_Bomb_With_Walk].Load(L"Assets/animData/player/player_bomwith_walk.tka");
 	m_animClips[Animation_Bomb_With_Walk].SetLoopFlag(true);
 	m_animClips[Animation_Bomb_Throw].Load(L"Assets/animData/player/player_bom_throw.tka");
@@ -150,7 +149,6 @@ void Player::Move()
 		m_skinModelRender->PlayAnimation(Animation_Bomb_With_Walk);
 	}
 	else {
-		m_skinModelRender->PlayAnimation(Animation_Idel);
 		if (g_pad[0].IsPress(enButtonB)) {
 			m_skinModelRender->PlayAnimation(Animation_Run);
 		}

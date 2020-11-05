@@ -3,7 +3,7 @@
 #include "item/SpeedUp.h"
 
 /// <summary>
-/// 攻撃力アップUIクラス
+/// 移動速度アップUIクラス
 /// </summary>
 /// <remarks>
 /// このクラスはTemplateMethodパターンのConcreteClass役です。

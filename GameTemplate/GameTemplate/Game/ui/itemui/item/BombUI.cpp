@@ -55,7 +55,7 @@ void BombUI::UseItem(FontRender* itemContRender)
 	//アイテム使用中フラグオン。
 	gamedata->SetItemInUseFlag(true);
 
-	bomb = g_goMgr->NewGameObject<Bum>();
+	bomb = g_goMgr->NewGameObject<Bomb>();
 
 }
 void BombUI::OnNowItem(FontRender* itemContRender)
@@ -70,5 +70,5 @@ void BombUI::OnNowItem(FontRender* itemContRender)
 void BombUI::ItemUseEnd()
 {
 	//アイテム使い終わりました。
-	bomb->SetState(Bum::End_Use);
+	bomb->SetState(Bomb::End_Use);
 }

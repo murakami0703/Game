@@ -178,7 +178,8 @@ Result::Result()
 	//21番→プレイヤーイラスト
 	m_itemSprite = g_goMgr->NewGameObject<SpriteRender>();
 	m_itemSprite->Init(L"Assets/sprite/Player_Illustration.dds", 1690.0f, 3142.0f);
-	m_itemSprite->SetPosition(m_nextFontPos);
+	m_itemSprite->SetPosition(m_playerIllustrationPos);
+	m_itemSprite->SetScale(m_playerIllustrationScale);
 	m_itemSprite->SetAlpha(m_startAlpha);
 	m_spriteRender.push_back(m_itemSprite);
 
@@ -238,6 +239,17 @@ void Result::SpriteIndicate(SpriteRender* m_sprite)
 	float m_alpha = m_sprite->GetAlpha();
 	if (m_alpha < 1.0f) {
 		m_alpha += m_Indicate;
+
+	}
+	m_sprite->SetAlpha(m_alpha);
+
+}
+void Result::SpriteHide(SpriteRender* m_sprite)
+{
+	//スプライトの非表示処理
+	float m_alpha = m_sprite->GetAlpha();
+	if (m_alpha > 0.0f) {
+		m_alpha -= m_hide;
 
 	}
 	m_sprite->SetAlpha(m_alpha);
@@ -330,7 +342,9 @@ void Result::Frame()
 	SpriteIndicate(m_spriteRender[9]);
 	SpriteIndicate(m_spriteRender[10]);
 	SpriteIndicate(m_spriteRender[11]);
-	
+	//キャラクターイラストの表示。
+	SpriteIndicate(m_spriteRender[21]);
+
 	//表示完了、次の処理へ...。
 	if (m_spriteRender[11]->GetAlpha() >= 1.0f) {
 		m_state = Result_StageName;
@@ -458,17 +472,17 @@ void Result::Removal()
 {
 	//一旦リザルトと点線以外排除。
 	//透明度減少させてゆくぅ
-	SpriteIndicate(m_spriteRender[10]);
-	SpriteIndicate(m_spriteRender[11]);
-	SpriteIndicate(m_spriteRender[12]);
-	SpriteIndicate(m_spriteRender[13]);
-	SpriteIndicate(m_spriteRender[14]);
-	SpriteIndicate(m_spriteRender[15]);
-	SpriteIndicate(m_spriteRender[16]);
-	SpriteIndicate(m_spriteRender[17]);
-	SpriteIndicate(m_spriteRender[18]);
-	SpriteIndicate(m_spriteRender[19]);
-	SpriteIndicate(m_spriteRender[20]);
+	SpriteHide(m_spriteRender[10]);
+	SpriteHide(m_spriteRender[11]);
+	SpriteHide(m_spriteRender[12]);
+	SpriteHide(m_spriteRender[13]);
+	SpriteHide(m_spriteRender[14]);
+	SpriteHide(m_spriteRender[15]);
+	SpriteHide(m_spriteRender[16]);
+	SpriteHide(m_spriteRender[17]);
+	SpriteHide(m_spriteRender[18]);
+	SpriteHide(m_spriteRender[19]);
+	SpriteHide(m_spriteRender[20]);
 
 	//排除完了、次の処理へ...。
 	if (m_spriteRender[20]->GetAlpha() >= 1.0f) {

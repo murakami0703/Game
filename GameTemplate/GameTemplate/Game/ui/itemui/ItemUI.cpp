@@ -5,7 +5,7 @@
 //アイテム
 
 #include "item/HpRecovery.h"
-#include "item/bum.h"
+#include "item/Bomb.h"
 #include "item/AttackUp.h"
 #include "item/SpeedUp.h"
 
@@ -58,7 +58,7 @@ void ItemUI::ItemMove()
 {
 	//アイテム選択
 	//現在のアイテムを更新。
-	for (int i = 0; i <= static_cast<int>(ItemUIBase::Item_InUse); i++){
+	for (int i = 0; i < static_cast<int>(ItemUIBase::Item_InUse); i++){
 		int itemNo = (m_itemState + i) % static_cast<int>(ItemUIBase::Item_InUse);
 		m_uiItems[itemNo]->SetState(static_cast<ItemUIBase::eSelectState>(i));
 	}

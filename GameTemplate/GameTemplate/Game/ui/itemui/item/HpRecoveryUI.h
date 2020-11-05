@@ -4,7 +4,7 @@
 
 
 /// <summary>
-/// 攻撃力アップUIクラス
+/// 回復薬UIクラス
 /// </summary>
 /// <remarks>
 /// このクラスはTemplateMethodパターンのConcreteClass役です。

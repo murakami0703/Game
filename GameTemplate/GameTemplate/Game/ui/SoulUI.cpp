@@ -86,6 +86,8 @@ void SoulUI::SoulUIGetMove()
 	}
 	m_spriteRender[0]->SetAlpha(1.0f);
 	m_spriteRender[0]->SetPosition(m_position);
+	m_spriteRender[1]->SetPosition(m_position);
+
 }
 void SoulUI::FontBoundMove()
 {

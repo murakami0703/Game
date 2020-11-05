@@ -88,7 +88,7 @@ bool GameUI::Start()
 		//6î‘Å®ItemL
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/L.dds", 100.0f, 148.0f);
-		r->SetPosition(LB_SPRITE_SCALE);
+		r->SetPosition(LB_SPRITE_POS);
 		r->SetScale(LB_SPRITE_SCALE);
 		m_spriteRender.push_back(r);
 		//7î‘Å®ItemZL

@@ -102,6 +102,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="boss\Golem.cpp" />
     <ClCompile Include="data\GameData.cpp" />
     <ClCompile Include="enemy\Bat.cpp" />
@@ -137,7 +138,6 @@
     <ClCompile Include="gameObject\IGameObject.cpp" />
     <ClCompile Include="iactor\IActor.cpp" />
     <ClCompile Include="item\AttackUp.cpp" />
-    <ClCompile Include="item\Bum.cpp" />
     <ClCompile Include="item\HpRecovery.cpp" />
     <ClCompile Include="item\ItemBase.cpp" />
     <ClCompile Include="item\SpeedUp.cpp" />
@@ -172,6 +172,7 @@
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
+    <ClCompile Include="SpriteIActor.cpp" />
     <ClCompile Include="sprite\fade\FadeIn.cpp" />
     <ClCompile Include="sprite\fade\FadeOut.cpp" />
     <ClCompile Include="sprite\Sprite.cpp" />
@@ -196,6 +197,7 @@
     <ClCompile Include="ui\SoulUI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="boss\Golem.h" />
     <ClInclude Include="data\GameData.h" />
     <ClInclude Include="enemy\Bat.h" />
@@ -232,7 +234,6 @@
     <ClInclude Include="gameObject\IGameObject.h" />
     <ClInclude Include="iactor\IActor.h" />
     <ClInclude Include="item\AttackUp.h" />
-    <ClInclude Include="item\Bum.h" />
     <ClInclude Include="item\HpRecovery.h" />
     <ClInclude Include="item\ItemBase.h" />
     <ClInclude Include="item\SpeedUp.h" />
@@ -269,6 +270,7 @@
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
+    <ClInclude Include="SpriteIActor.h" />
     <ClInclude Include="sprite\fade\FadeIn.h" />
     <ClInclude Include="sprite\fade\FadeOut.h" />
     <ClInclude Include="sprite\Sprite.h" />

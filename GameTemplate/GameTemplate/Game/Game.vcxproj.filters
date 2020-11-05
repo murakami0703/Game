@@ -321,9 +321,6 @@
     <ClCompile Include="item\AttackUp.cpp">
       <Filter>item</Filter>
     </ClCompile>
-    <ClCompile Include="item\Bum.cpp">
-      <Filter>item</Filter>
-    </ClCompile>
     <ClCompile Include="item\HpRecovery.cpp">
       <Filter>item</Filter>
     </ClCompile>
@@ -407,6 +404,12 @@
     </ClCompile>
     <ClCompile Include="Soul.cpp">
       <Filter>soul</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>item</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteIActor.cpp">
+      <Filter>iactor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -593,9 +596,6 @@
     <ClInclude Include="item\AttackUp.h">
       <Filter>item</Filter>
     </ClInclude>
-    <ClInclude Include="item\Bum.h">
-      <Filter>item</Filter>
-    </ClInclude>
     <ClInclude Include="item\HpRecovery.h">
       <Filter>item</Filter>
     </ClInclude>
@@ -679,6 +679,12 @@
     </ClInclude>
     <ClInclude Include="Soul.h">
       <Filter>soul</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>item</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteIActor.h">
+      <Filter>iactor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

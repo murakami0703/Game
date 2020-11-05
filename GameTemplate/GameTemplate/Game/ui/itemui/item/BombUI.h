@@ -1,9 +1,9 @@
 #pragma once
 #include "ui/itemui/ItemUIBase.h"
-#include "item/Bum.h"
+#include "item/Bomb.h"
 
 /// <summary>
-/// 攻撃力アップUIクラス
+/// 爆弾UIクラス
 /// </summary>
 /// <remarks>
 /// このクラスはTemplateMethodパターンのConcreteClass役です。
@@ -25,6 +25,6 @@ public:
 	void ItemUseEnd();										//アイテム使用後。
 
 private:
-	Bum* bomb;
+	Bomb* bomb;
 };
 
