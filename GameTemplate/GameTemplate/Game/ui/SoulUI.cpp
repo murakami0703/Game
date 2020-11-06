@@ -6,12 +6,33 @@
 /// 定数
 /////////////////////////////////////////////////////////
 
-const CVector3 SOUL_FRAME_POS = { -800.0f,200.0f,0.0f };			//フレームの座標
+const CVector3 SOUL_FRAME_POS = { -800.0f,200.0f,0.0f };			//フレームの座標。
 const float SOUL_FLANE_ALPHA = 0.8f;								//フレームの透明度。
-const CVector3 SOUL_POS = { -575.0f,200.0f,0.0f };					//魂の座標
-const CVector3 SOULANDFRAME_SCALE = { 0.35f,0.35f,0.35f };			//魂とフレームの拡大率
+const CVector3 SOUL_POS = { -850.0f,200.0f,0.0f };					//魂の座標。
+const CVector3 SOULANDFRAME_SCALE = { 0.35f,0.35f,0.35f };			//魂とフレームの拡大率。
 
+const float SOUL_FRAME_UPBOUND = -500.0f;							//フレームのバウンド時X軸に上昇する位置。
+const float SOUL_FRAME_DOWNBOUND = -530.0f;							//フレームのバウンド時X軸に下降する位置。
+const float SOUL_ICON_UPBOUND = -550.0f;							//魂アイコンのバウンド時X軸に上昇する位置。
+const float SOUL_ICON_DOWNBOUND = -570.0f;							//魂アイコンのバウンド時X軸に下降する位置。
 
+const float UPBOUND_ADD = 10.0f;									//上昇バウンド時加算する値。
+const float DOWNBOUND_ADD = 5.0f;									//下降バウンド時加算する値。
+
+const float ACTIVE_TRUE = 1.0f;										//透明度(表示)。
+const float ACTIVE_FALSE = 0.0f;									//透明度(非表示)。
+
+const CVector2 SOUL_COUNT_FONT_POS = { -765.0f,230.0f };			//カウントフォントの座標。
+const float SOUL_COUNT_FONT_SCALE = 2.0f;							//カウントフォントの拡大率。
+
+const float SOUL_COUNT_FONT_X_UPBOUND = -460.0f;					//魂カウントフォントのバウンド時X軸に上昇する位置。
+const float SOUL_COUNT_FONT_X_DOWNBOUND = -490.0f;					//魂カウントフォントのバウンド時X軸に下降する位置。
+
+const float SOUL_COUNT_FONT_UPBOUND = -250.0f;						//カウントフォントのバウンド時Y軸に上昇する位置。
+const float SOUL_COUNT_FONT_DOWNBOUND = -230.0f;					//カウントフォントのバウンド時Y軸に下降する位置。
+const float SOUL_COUNT_FONT_BOUND_ADD = 5.0f;						//カウントフォントのバウンド時加算する値。
+
+const int INDICATE_END = 600;										//魂カウントUIの表示終了タイム。
 SoulUI::SoulUI()
 {
 }
@@ -42,11 +63,11 @@ bool SoulUI::Start()
 	GameData* gamedate = GameData::GetInstance();
 	m_soulFont = g_goMgr->NewGameObject<FontRender>();
 	m_soulNowNum = gamedate->GetSoul();
-	wchar_t text[MAX_PATH];
-	swprintf(text, MAX_PATH - 1, L"%02d", m_soulNowNum);
-	m_soulFont->SetText(text);
-	m_soulFont->SetScale(2.0f);
-	m_soulFont->SetPosition({ -490.0f,230.0f });
+
+	swprintf(soulNum, MAX_PATH - 1, L"%02d", m_soulNowNum);
+	m_soulFont->SetText(soulNum);
+	m_soulFont->SetPosition(SOUL_COUNT_FONT_POS);
+	m_soulFont->SetScale(SOUL_COUNT_FONT_SCALE);
 
 	return true;
 }
@@ -66,44 +87,89 @@ void SoulUI::SoulUIGetMove()
 	//魂獲得時所持バーの出現処理。
 	//リザルト台座を表示。
 	//右から表示させる。
-	CVector3 m_position = m_spriteRender[0]->GetPosition();	//座標。
+	CVector3 m_framePos = m_spriteRender[0]->GetPosition();	//座標。
+	CVector3 m_soulIconPos = m_spriteRender[1]->GetPosition();	//座標。
+	CVector2 m_soulCountPos = m_soulFont->GetPosition();	//フォント座標。
 
-	if (m_position.x < -500.0f && bound == false) {
-		m_position.x += 20.0f;
+	if (m_framePos.x < SOUL_FRAME_UPBOUND &&
+		m_soulIconPos.x < SOUL_ICON_UPBOUND &&
+		m_soulCountPos.x < SOUL_COUNT_FONT_X_UPBOUND &&
+		bound == false) {
+		m_framePos.x += UPBOUND_ADD;
+		m_soulIconPos.x += UPBOUND_ADD;
+		m_soulCountPos.x += UPBOUND_ADD;
 	}
 	else {
 		bound = true;
 		//ここからバウンド処理
-		if (bound == true && m_position.x > -530.0f) {
-			m_position.x -= 5.0f;
+		if (m_framePos.x > SOUL_FRAME_DOWNBOUND &&
+			m_soulIconPos.x > SOUL_ICON_DOWNBOUND &&
+			m_soulCountPos.x < SOUL_COUNT_FONT_X_DOWNBOUND &&
+			bound == true) {
+			m_framePos.x -= DOWNBOUND_ADD;
+			m_soulIconPos.x -= DOWNBOUND_ADD;
+			m_soulCountPos.x -= DOWNBOUND_ADD;
 		}
 		else {
 			//バウンド終了、次の処理へ...。
 			bound = false;
-			m_soulUiState = SoulUI_FontBoundMove;
+			//m_soulUiState = SoulUI_FontBoundMove;
 		}
 
 	}
-	m_spriteRender[0]->SetAlpha(1.0f);
-	m_spriteRender[0]->SetPosition(m_position);
-	m_spriteRender[1]->SetPosition(m_position);
+	m_spriteRender[0]->SetPosition(m_framePos);
+	m_spriteRender[1]->SetPosition(m_soulIconPos);
+	m_soulFont->SetPosition(m_soulCountPos);
 
 }
 void SoulUI::FontBoundMove()
 {
 	//魂獲得時フォントのカウントをバウンドさせる処理。
+
+	GameData* gamedate = GameData::GetInstance();
+	//魂の加算。
+	swprintf(soulNum, MAX_PATH - 1, L"%02d", gamedate->GetSoul());
+	m_soulFont->SetText(soulNum);
+	m_soulNowNum++;
+
+	//バウンド処理。	
+	CVector2 m_position = m_soulFont->GetPosition();	//フォント座標。
+
+	if (m_position.y < SOUL_COUNT_FONT_UPBOUND && bound == false) {
+		m_position.y += SOUL_COUNT_FONT_BOUND_ADD;
+	}
+	else {
+		bound = true;
+		//ここからバウンド処理
+		if (bound == true && m_position.x > SOUL_COUNT_FONT_DOWNBOUND) {
+			m_position.y -= SOUL_COUNT_FONT_BOUND_ADD;
+		}
+		else {
+			//バウンド終了、次の処理へ...。
+			bound = false;
+			m_soulUiState = SoulUI_Indicate;
+		}
+
+	}
+	m_soulFont->SetPosition(m_position);
+
 }
 void SoulUI::SoulUIIndicate()
 {
 	//一定時間だけ表示状態のまま保つ。
+	m_indicateTimer++;
+
+	if (m_indicateTimer >= INDICATE_END) {
+		m_soulUiState = SoulUI_Return;
+	}
 }
 void SoulUI::SoulUIReturn()
 {
 	//元の状態に戻す。
+
 }
 void SoulUI::Update()
 {
-	GameData* gamedate = GameData::GetInstance();
 
 	switch (m_soulUiState)
 	{
@@ -124,11 +190,6 @@ void SoulUI::Update()
 		break;
 	}
 
-	//魂の加算。
-	//wchar_t text[MAX_PATH];
-	//swprintf(text, MAX_PATH - 1, L"%02d", gamedate->GetSoul());
-	//m_soulFont->SetText(text);
-	//m_soulNowNum++;
 
 }
 

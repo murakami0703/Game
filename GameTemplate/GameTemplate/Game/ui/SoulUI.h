@@ -29,12 +29,15 @@ private:
 	SpriteRender* m_soulRender;						//スプライトレンダー。
 
 	FontRender* m_soulFont;							//魂の数表記用フォント。
+	wchar_t soulNum[MAX_PATH];						//魂カウントフォントテキスト。
+
 	CVector2 m_fontPos = CVector2().Zero();
 	eSoulMoveState m_soulUiState = SoulUI_Default;	//状態。
-	bool bound = false;									//バウンド用フラグ。
+	bool bound = false;								//バウンド用フラグ。
 
 	//Fout関係
-	int m_soulNowNum = 0;							//現在の魂の数を格納
+	int m_soulNowNum = 0;								//現在の魂の数を格納
 
+	int m_indicateTimer = 0;							//魂獲得UIの表示タイマー。単位:フレーム
 };
 
