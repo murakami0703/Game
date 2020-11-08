@@ -12,6 +12,7 @@ private:
 	enum eSoulMoveState {
 		SoulUI_Default,			//通常状態。(非表示）
 		SoulUI_GetMove,			//魂獲得時所持バーの出現処理。
+		SoulUI_SoulCount,		//魂の数をカウントする。
 		SoulUI_FontBoundMove,	//魂獲得時フォントのカウントをバウンドさせる処理。
 		SoulUI_Indicate,		//一定時間だけ表示状態のまま保つ。
 		SoulUI_Return			//元の状態に戻す。
@@ -20,6 +21,7 @@ private:
 
 	void SoulUIDefault();				//通常状態。(非表示）
 	void SoulUIGetMove();				//魂獲得時所持バーの出現処理。
+	void SoulCount();					//魂の数をカウントする。
 	void FontBoundMove();				//魂獲得時フォントのカウントをバウンドさせる処理。
 	void SoulUIIndicate();				//一定時間だけ表示状態のまま保つ。
 	void SoulUIReturn();				//元の状態に戻す。

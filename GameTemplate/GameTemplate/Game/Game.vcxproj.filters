@@ -680,11 +680,11 @@
     <ClInclude Include="Soul.h">
       <Filter>soul</Filter>
     </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>item</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteIActor.h">
       <Filter>iactor</Filter>
+    </ClInclude>
+    <ClInclude Include="item\Bomb.h">
+      <Filter>item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
