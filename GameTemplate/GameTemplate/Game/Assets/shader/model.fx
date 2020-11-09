@@ -37,6 +37,7 @@ cbuffer VSPSCb : register(b0){
 	int isHasNormalMap;		//法線マップフラグ。
 	int isHasSpecularMap;	//スぺキュラマップフラグ。
 	int isHasAmbientMap;	//アンビエントマップフラグ
+	float alpha;			//α値。
 };
 
 /// <summary>
@@ -354,6 +355,8 @@ float4 PSMain( PSInput In ) : SV_Target0
 {
 	//albedoテクスチャからカラーをフェッチする。
 	float4 albedoColor = albedoTexture.Sample(Sampler, In.TexCoord);
+	//テクスチャカラーのα値を乗算。
+	albedoColor.a *= alpha;
 
 	float3 normal = NormalCalc(In.Normal, In.Tangent, In.TexCoord);
 	//ディレクションライトの拡散反射光を計算する。

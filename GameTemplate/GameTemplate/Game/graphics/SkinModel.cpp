@@ -31,6 +31,9 @@ void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
 	//サンプラステートの初期化。
 	InitSamplerState();
 
+	//半透明合成のブレンドステートを初期化。
+	InitTranslucentBlendState();
+
 	//ディレクションライトの初期化。
 	InitDirectionLight();
 	//ポイントライトの初期化。
@@ -116,9 +119,68 @@ void SkinModel::InitSamplerState()
 	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
+	
+}
+void SkinModel::InitAlphaBlendState()
+{
+	//半透明描画用に
+	//αブレンディング設定
+	D3D11_BLEND_DESC blendDesc;
+	ZeroMemory(&blendDesc, sizeof(blendDesc));
+	ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
 
+	blendDesc.RenderTarget[0].BlendEnable = true;
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_RED | D3D11_COLOR_WRITE_ENABLE_BLUE | D3D11_COLOR_WRITE_ENABLE_GREEN;
+
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+	pd3d->CreateBlendState(&blendDesc, &m_blendState);
 
 }
+void SkinModel::InitTranslucentBlendState()
+{
+	//例のごとく、作成するブレンドステートの情報を設定する。
+	CD3D11_DEFAULT defaultSettings;
+	//デフォルトセッティングで初期化する。
+	CD3D11_BLEND_DESC blendDesc(defaultSettings);
+
+	//αブレンディングを有効にする。
+	blendDesc.RenderTarget[0].BlendEnable = true;
+
+	//ソースカラーのブレンディング方法を指定している。
+	//ソースカラーとはピクセルシェーダ―からの出力を指している。
+	//この指定では、ソースカラーをSRC(rgba)とすると、
+	//最終的なソースカラーは下記のように計算される。
+	//最終的なソースカラー = SRC.rgb × SRC.a
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+
+	//ディスティネーションカラーのブレンディング方法を指定している。
+	//ディスティネーションカラーとは、
+	//すでに描き込まれているレンダリングターゲットのカラーを指している。
+	//この指定では、ディスティネーションカラーをDEST(rgba)、
+	//ソースカラーをSRC(RGBA)とすると、最終的なディスティネーションカラーは
+	//下記のように計算される。
+	//最終的なディスティネーションカラー = DEST.rgb × (1.0f - SRC.a)
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+
+	//最終的にレンダリングターゲットに描き込まれるカラーの計算方法を指定している。
+	//この指定だと、①＋②のカラーが書き込まれる。
+	//つまり、最終的にレンダリングターゲットに描き込まれるカラーは
+	//SRC.rgb × SRC.a + DEST.rgb × (1.0f - SRC.a)
+	//となる。
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+
+	//この設定で、ブレンドステートを作成すると
+	//半透明合成を行えるブレンドステートが作成できる。
+	auto d3dDevice = g_graphicsEngine->GetD3DDevice();
+	d3dDevice->CreateBlendState(&blendDesc, &m_translucentBlendState);
+
+}
+
 void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVector3 scale)
 {
 	//3dsMaxと軸を合わせるためのバイアス。
@@ -216,6 +278,8 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, EnRenderMode m_rend
 		d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
 		//ボーン行列をGPUに転送。
 		m_skeleton.SendBoneMatrixArrayToGPU();
+		//ブレンドステートを設定。
+		d3dDeviceContext->OMSetBlendState(m_blendState, 0, 0xFFFFFFFF);
 		//アルベドテクスチャを設定する。
 		ID3D11ShaderResourceView* m_shadowMapSRV = g_goMgr->GetShadowMap()->GetShadowMapSRV();
 		

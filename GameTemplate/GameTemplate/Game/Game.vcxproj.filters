@@ -145,6 +145,12 @@
     <Filter Include="soul">
       <UniqueIdentifier>{f9529674-c482-4ded-9f84-ebd8e2370e10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\icon">
+      <UniqueIdentifier>{b3285f4c-ea29-4f82-9a08-d2afaf374e06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\sprite\Item\frame">
+      <UniqueIdentifier>{be61e6f8-c2d1-4603-8ef8-79435111e7ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -813,30 +819,6 @@
     <ImageContentTask Include="Assets\sprite\title\title.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case1.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case2.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case3.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\case4.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\hasi.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\L.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\ZL.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\Item\waku.png">
-      <Filter>Assets\sprite\Item</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\light.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
@@ -851,12 +833,6 @@
     </ImageContentTask>
     <ImageContentTask Include="Assets\modelData\MatallicSmoothness.png">
       <Filter>Assets\modelData</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\hp\Boss_Hp.png">
-      <Filter>Assets\sprite\bosshp</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\hp\Boss_Hpframe.png">
-      <Filter>Assets\sprite\bosshp</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\gameover.png">
       <Filter>Assets\sprite</Filter>
@@ -927,8 +903,46 @@
     <ImageContentTask Include="Assets\sprite\Item\bomb.png">
       <Filter>Assets\sprite\Item</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case1.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case4.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case2.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\case3.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\ZL.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\waku.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\hasi.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\Item\L.png">
+      <Filter>Assets\sprite\Item\frame</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\hp\HP.png">
+      <Filter>Assets\sprite\bosshp</Filter>
+    </Image>
+    <Image Include="Assets\sprite\hp\HPBar.png">
+      <Filter>Assets\sprite\bosshp</Filter>
+    </Image>
+    <Image Include="Assets\sprite\icon\Boss_Icon1.png">
+      <Filter>Assets\sprite\icon</Filter>
+    </Image>
+    <Image Include="Assets\sprite\icon\Boss_Icon2.png">
+      <Filter>Assets\sprite\icon</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -105,6 +105,30 @@ public:
 	}
 
 	/// <summary>
+	/// a値の設定
+	/// </summary>
+	void SetAlpha(const float& alpha)
+	{
+		m_skinModel.SetAlpha(alpha);
+	}
+	/// <summary>
+	/// a値を取得
+	/// </summary>
+	float GetAlpha()
+	{
+		return m_skinModel.GetAlpha();
+	}
+
+	/// <summary>
+	/// α値を変位させる
+	/// </summary>
+	/// <param name="delta">乗算αを変位させる量</param>
+	void DeltaAlpha(float delta)
+	{
+		m_skinModel.DeltaAlpha(delta);
+	}
+
+	/// <summary>
 	/// 法線マップの設定。
 	/// </summary>
 	void SetNormalMap(const wchar_t* filePath)

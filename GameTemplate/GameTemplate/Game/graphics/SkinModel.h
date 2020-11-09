@@ -103,6 +103,38 @@ public:
 	}
 
 	/// <summary>
+/// a値の設定
+/// </summary>
+	void SetAlpha(const float& alpha)
+	{
+		m_alpha = alpha;
+	}
+	/// <summary>
+	/// a値を取得
+	/// </summary>
+	float GetAlpha()
+	{
+		return m_alpha;
+	}
+
+	/// <summary>
+	/// α値を変位させる
+	/// </summary>
+	/// <param name="delta">乗算αを変位させる量</param>
+	void DeltaAlpha(float delta)
+	{
+		m_alpha += delta;
+		//数値の境界チェック。
+		if (m_alpha > 1.0f) {
+			m_alpha = 1.0f;
+		}
+		else if (m_alpha < 0.0f) {
+			m_alpha = 0.0f;
+		}
+	}
+
+
+	/// <summary>
 	/// ライトの設定。
 	/// </summary>
 	void SetLightColor(CVector4 color) {
@@ -145,6 +177,16 @@ private:
 	*/
 	void InitSkeleton(const wchar_t* filePath);
 	/// <summary>
+	/// αブレンディングステートの設定。
+	/// </summary>
+	void InitAlphaBlendState();
+
+	/// <summary>
+	/// ブレンドステートの初期化。
+	/// </summary>
+	void InitTranslucentBlendState();
+
+	/// <summary>
 	/// ディレクションライトの初期化。
 	/// </summary>
 	void InitDirectionLight();
@@ -159,6 +201,7 @@ private:
 		CMatrix mProj;
 		CMatrix mLightView;		// ライトビュー行列。
 		CMatrix mLightProj;		// ライトプロジェクション行列。
+		float alpha;			//α値。
 		int isShadowReciever;	// シャドウレシーバーのフラグ。
 		int isHasNormalMap;		//法線マップのフラグ
 		int isHasSpecularMap;	//スぺキュラマップのフラグ。
@@ -192,12 +235,16 @@ private:
 	SLight				m_light;						//!<ライトの構造体。
 	ID3D11Buffer*		m_shadowMapcb = nullptr;		//!<シャドウマップ用の定数バッファ。
 
+	ID3D11BlendState* m_translucentBlendState = nullptr;	//半透明合成用のブレンドステート。
+	float						m_alpha = 1.0f;				//!<モデルのα値。
+	ID3D11BlendState*			m_blendState = nullptr;		//!<ブレンドステート。
+
 	ID3D11ShaderResourceView* m_normalMapSRV = nullptr;		//法線マップのSRV
 	ID3D11ShaderResourceView* m_specularSRV = nullptr;		//スぺキュラマップのSRV
 	ID3D11ShaderResourceView* m_ambientSRV = nullptr;		//アンビエントマップのSRV
 
 	bool m_isShadowReciever = false;						//シャドウレシーバーのフラグ。
-	bool m_isShadowCaster = false;						//シャドウレシーバーのフラグ。
+	bool m_isShadowCaster = false;							//シャドウレシーバーのフラグ。
 
 };
 
