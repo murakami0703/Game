@@ -32,7 +32,7 @@ const float GOLEM_FOLLOW_SPEED = 5.0f;		//追跡中の移動速度。
 const CVector3 GOLEM_FORWARD_VECTOR = { 0.0f, 0.0f, 1.0f };			//ゴーレムの前ベクトル。
 const int EFFECT_STARTPLAY_TIME = 1;								//エフェクトを再生させる時間。
 const float GOLEM_ATTACK_EFFECT_POS_Y = 430.0f;						//攻撃エフェクトのY座標。
-const CVector3 GOLEM_ATTACK_EFFECT_SCALE = { 50.0f,50.0f,50.0f };	//攻撃エフェクトの拡大率。
+const CVector3 GOLEM_ATTACK_EFFECT_SCALE = { 10.0f,10.0f,10.0f };	//攻撃エフェクトの拡大率。
 const float GOLEM_DAMAGE_RANGE = 300.0f;							//ダメージ判定の範囲。
 const int GOLEM_ATTACK_ENDTIME = 60;								//攻撃状態終了タイム。 単位:frame
 

@@ -26,7 +26,7 @@ private:
 
 	const float m_startYPos = 400.0f;	//GameOverの初期Ｙ位置。
 	const float m_moveYPos = 150.0f;	//GameOverの下降位置。
-	const float m_setYPos = 200.0f;		//GameOverの位置。
+	const float m_setYPos = 170.0f;		//GameOverの位置。
 
 	const float m_overSpeed = 10.0f;	//GameOverの移動速度。
 	bool m_bound = false;

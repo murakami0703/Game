@@ -51,16 +51,15 @@ void Game::Update() {
 	GameData* m_gamedate = GameData::GetInstance();
 
 	//敵を全部倒したのでリザルトへ
-	if ( m_gamedate->ResultFlag() == true) {
+	/*if ( m_gamedate->ResultFlag() == true) {
 		g_goMgr->SetMainSpriteMulColor({ 0.2f,0.2f, 0.2f, 1.0f });
 		g_goMgr->NewGameObject<Result>();
 		m_gamedate->SetResultFlag(false);
-	}
+	}*/
 	//プレイヤーのHPがなくなったのでGAMEOVERです。
 	if (m_gamedate->GetHitPoint() <= 0.0f && m_gamedate->GameOverFlag() == false) {
 		g_goMgr->NewGameObject<GameOver>();
 		m_gamedate->SetGameOverFlag(true);
-
 	}
 }
 

@@ -151,6 +151,9 @@
     <Filter Include="Assets\sprite\Item\frame">
       <UniqueIdentifier>{be61e6f8-c2d1-4603-8ef8-79435111e7ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\sprite\gameover">
+      <UniqueIdentifier>{d170efdb-6284-42aa-a74a-a4dab9956789}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="math\Vector.cpp">
@@ -692,6 +695,7 @@
     <ClInclude Include="item\Bomb.h">
       <Filter>item</Filter>
     </ClInclude>
+    <ClInclude Include="LevelData.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Footman_Default.fbx">
@@ -927,22 +931,23 @@
     <ImageContentTask Include="Assets\sprite\Item\L.png">
       <Filter>Assets\sprite\Item\frame</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gameover\continuity.png">
+      <Filter>Assets\sprite\gameover</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\icon\Boss_Icon2.png">
+      <Filter>Assets\sprite\icon</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\icon\Boss_Icon1.png">
+      <Filter>Assets\sprite\icon</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\hp\HP.png">
+      <Filter>Assets\sprite\bosshp</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\hp\HPBar.png">
+      <Filter>Assets\sprite\bosshp</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\sprite\hp\HP.png">
-      <Filter>Assets\sprite\bosshp</Filter>
-    </Image>
-    <Image Include="Assets\sprite\hp\HPBar.png">
-      <Filter>Assets\sprite\bosshp</Filter>
-    </Image>
-    <Image Include="Assets\sprite\icon\Boss_Icon1.png">
-      <Filter>Assets\sprite\icon</Filter>
-    </Image>
-    <Image Include="Assets\sprite\icon\Boss_Icon2.png">
-      <Filter>Assets\sprite\icon</Filter>
-    </Image>
   </ItemGroup>
 </Project>

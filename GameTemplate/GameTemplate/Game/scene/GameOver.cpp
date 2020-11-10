@@ -1,7 +1,12 @@
 #include "stdafx.h"
 #include "scene/GameOver.h"
 
+/////////////////////////////////////////////////////////
+/// 定数
+/////////////////////////////////////////////////////////
 
+const float ACTIVE_TRUE = 1.0f;					//透明度(表示)。
+const float ACTIVE_FALSE = 0.0f;					//透明度(非表示)。
 GameOver::GameOver()
 {
 }
@@ -19,7 +24,7 @@ bool GameOver::Start()
 	m_gameOverSprite = g_goMgr->NewGameObject<SpriteRender>();
 	m_gameOverSprite->Init(L"Assets/sprite/gameover.dds", 700.0f, 150.0f);
 	m_gameOverSprite->SetPosition({ 0.0f,m_startYPos ,0.0f });
-	m_gameOverSprite->SetAlpha(0.0f);
+	m_gameOverSprite->SetAlpha(ACTIVE_FALSE);
 	m_spriteRender.push_back(m_gameOverSprite);
 
 	return true;
@@ -51,7 +56,7 @@ void GameOver::GameOverSet()
 		m_bound = true;
 		//ここからバウンド処理
 		if (m_bound == true && m_position.y < m_setYPos) {
-			m_position.x += m_overSpeed;
+			m_position.y += m_overSpeed;
 		}
 		else {
 			//バウンド終了、次の処理へ...。
