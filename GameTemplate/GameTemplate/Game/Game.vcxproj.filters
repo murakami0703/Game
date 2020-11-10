@@ -838,9 +838,6 @@
     <ImageContentTask Include="Assets\modelData\MatallicSmoothness.png">
       <Filter>Assets\modelData</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Assets\sprite\gameover.png">
-      <Filter>Assets\sprite</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="Assets\sprite\title\game_title.png">
       <Filter>Assets\sprite\title</Filter>
     </ImageContentTask>
@@ -949,5 +946,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\sprite\gameover\gameover.png">
+      <Filter>Assets\sprite\gameover</Filter>
+    </Image>
   </ItemGroup>
 </Project>
