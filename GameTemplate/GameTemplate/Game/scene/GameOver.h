@@ -9,30 +9,42 @@ public:
 	void Update();
 
 private:
+
 	enum eState {
-		BackGD_Dark,		//ゲームシーンを灰色に。
-		Sprite_Set,			//GAMEOVERの文字出す。
-		Font_Set
+		BackGD_Dark,			//ゲームシーンを灰色に。
+		GameOver_Set,			//GAMEOVERの文字出す。
+		SelectButton_Set,		//選択ボタンの表示。
+		Button_Select,			//ボタン選択。
+		Scene_Switching			//シーン切り替え。
 	};
 
-	void BackGDDark();
-	void GameOverSet();
-	void NextSet();
+	//選択ボタン
+	enum EButton {
+		Button_Continuity,
+		Button_Exit
+	};
 
 private:
-	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
-	SpriteRender* m_gameOverSprite;
-	eState m_state = BackGD_Dark;
 
-	const float m_startYPos = 400.0f;	//GameOverの初期Ｙ位置。
-	const float m_moveYPos = 150.0f;	//GameOverの下降位置。
-	const float m_setYPos = 170.0f;		//GameOverの位置。
+	void BackGDDark();			//ゲームシーンを灰色に。
+	void GameOverSet();			//GAMEOVERの文字出す。
+	void SelectButtonSet();		//選択ボタンの表示。
+	void ButtonSelect();		//ボタン選択。
+	void SceneSwitching();		//シーン切り替え。
 
-	const float m_overSpeed = 10.0f;	//GameOverの移動速度。
+	void Continuity();			//コンティニュー。
+	void Exit();				//終わり。
+private:
+	std::vector<SpriteRender*> m_spriteRender;		//スプライトの動的配列
+	SpriteRender* m_gameOverSprite;					//スプライトレンダー。
+
+	eState m_state = BackGD_Dark;					//状態。
+	EButton m_buttonState = Button_Continuity;		//Buttonの選択状態。
+
 	bool m_bound = false;
 
 	float m_mulColor = 1.0f;			//BGの乗算カラー
-	const float m_SetMulColor = 0.2f;	//BGの最終乗算値
-
+	
+	int m_buttonActiveTimer = 0;		//ボタンを表示させるときに使うタイマー。
 };
 

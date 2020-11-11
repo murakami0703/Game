@@ -1,4 +1,8 @@
 #pragma once
+//各UI処理クラス。
+#include "ui/PlayerHPUI.h"
+#include "itemui/ItemUI.h"
+#include "ui/SoulUI.h"
 
 class GameUI final : public IGameObject
 {
@@ -28,6 +32,10 @@ private:
 private:
 	std::vector<SpriteRender*> m_spriteRender;	//スプライトの動的配列
 	SpriteRender* r;							//スプライトレンダー。
+
+	PlayerHPUI* m_playeHPUi;
+	ItemUI*		m_itemUi;
+	SoulUI*		m_soulUi;
 
 	//アイテム関連
 	int m_scalingCount = 0;								//選択枠拡大縮小用カウント

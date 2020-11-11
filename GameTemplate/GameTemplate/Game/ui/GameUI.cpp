@@ -2,10 +2,6 @@
 #include "GameUI.h"
 #include "data/GameData.h"
 
-//各UI処理クラス。
-#include "ui/PlayerHPUI.h"
-#include "itemui/ItemUI.h"
-#include "ui/SoulUI.h"
 
 GameUI* GameUI::m_instance = nullptr;
 
@@ -100,11 +96,11 @@ bool GameUI::Start()
 	}
 
 	//プレイヤーHPUI
-	g_goMgr->NewGameObject<PlayerHPUI>();
+	m_playeHPUi = g_goMgr->NewGameObject<PlayerHPUI>();
 	//アイテムUI
-	g_goMgr->NewGameObject<ItemUI>();
+	m_itemUi = g_goMgr->NewGameObject<ItemUI>();
 	//魂UI
-	g_goMgr->NewGameObject<SoulUI>();
+	m_soulUi = g_goMgr->NewGameObject<SoulUI>();
 
 	return true;
 }
@@ -132,9 +128,12 @@ void GameUI::OnlyDelete()
 	for (int i = 0; i < m_spriteRender.size(); i++) {
 		g_goMgr->DeleteGameObject(m_spriteRender[i]);
 	}
-	//フォント
-
+	//各種機能の削除
+	g_goMgr->DeleteGameObject(m_playeHPUi);
+	g_goMgr->DeleteGameObject(m_itemUi);
+	g_goMgr->DeleteGameObject(m_soulUi);
 	g_goMgr->DeleteGameObject(this);
+
 }
 
 void GameUI::Update()
@@ -148,4 +147,9 @@ void GameUI::Update()
 	if (m_gamedate->ResultFlag() == true) {
 		OnlyDelete();
 	}
+	//ゲームオーバーになったのでUI消す。
+	if (m_gamedate->GameOverFlag() == true) {
+		OnlyDelete();
+	}
+
 }

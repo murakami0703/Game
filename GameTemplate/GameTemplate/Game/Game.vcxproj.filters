@@ -943,12 +943,15 @@
     <ImageContentTask Include="Assets\sprite\hp\HPBar.png">
       <Filter>Assets\sprite\bosshp</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Assets\sprite\gameover\gameover.png">
+      <Filter>Assets\sprite\gameover</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\sprite\gameover\gameover.png">
+    <Image Include="Assets\sprite\gameover\exit.png">
       <Filter>Assets\sprite\gameover</Filter>
     </Image>
   </ItemGroup>

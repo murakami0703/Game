@@ -25,6 +25,9 @@ ItemUI::~ItemUI()
 	for (int itemNo = 0; itemNo < static_cast<int>(eItemState::Item_Num); itemNo++) {
 		g_goMgr->DeleteGameObject(m_uiItems[itemNo]);
 	}
+	//フォント。
+	g_goMgr->DeleteGameObject(m_itemCountFont);
+
 }
 
 bool ItemUI::Start()
