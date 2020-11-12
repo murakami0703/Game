@@ -1,5 +1,5 @@
 #pragma once
-class PlayerHPUI : public IGameObject
+class PlayerHPUI final : public IGameObject
 {
 public:
 	PlayerHPUI();

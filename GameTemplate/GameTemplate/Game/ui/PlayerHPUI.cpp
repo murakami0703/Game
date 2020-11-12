@@ -1,6 +1,3 @@
-
-
-
 #include "stdafx.h"
 #include "ui/PlayerHPUI.h"
 #include "data/GameData.h"
@@ -18,6 +15,7 @@ const float HP_ACTIVE_FALSE = 0.0f;					//透明度(非表示)。
 
 const float HP_PLUS = 1.0f;							//HPの加算値。
 const float HP_MINUS = -1.0f;						//HPの減少値。
+const float HP_DECISION = 0.0f;						//HPの判定値。
 
 
 PlayerHPUI::PlayerHPUI(){}
@@ -67,7 +65,7 @@ bool PlayerHPUI::Start()
 void PlayerHPUI::HPCalc(float damegeValue)
 {
 	//HPの増減計算処理。
-	if (damegeValue < 0) {
+	if (damegeValue < HP_DECISION) {
 		//ダメージ受けたとき。
 		m_spriteRender[m_hpSpriteNum]->SetAlpha(HP_ACTIVE_FALSE);
 		m_hpSpriteNum += (int)damegeValue;

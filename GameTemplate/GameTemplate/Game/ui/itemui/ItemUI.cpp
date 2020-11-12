@@ -3,7 +3,6 @@
 #include "data/GameData.h"
 
 //ƒAƒCƒeƒ€
-
 #include "item/HpRecovery.h"
 #include "item/Bomb.h"
 #include "item/AttackUp.h"

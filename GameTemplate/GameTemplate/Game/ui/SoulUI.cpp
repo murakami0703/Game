@@ -21,6 +21,7 @@ const float DOWNBOUND_ADD = 5.0f;									//‰º~ƒoƒEƒ“ƒh‰ÁZ‚·‚é’lB
 
 const CVector2 SOUL_COUNT_FONT_POS = { -780.0f,230.0f };			//ƒJƒEƒ“ƒgƒtƒHƒ“ƒg‚ÌÀ•WB
 const float SOUL_COUNT_FONT_SCALE = 2.0f;							//ƒJƒEƒ“ƒgƒtƒHƒ“ƒg‚ÌŠg‘å—¦B
+const int FONT_SIZE = MAX_PATH - 1;									//ƒtƒHƒ“ƒgƒTƒCƒYB
 
 const float SOUL_COUNT_FONT_X_UPBOUND = -480.0f;					//°ƒJƒEƒ“ƒgƒtƒHƒ“ƒg‚ÌƒoƒEƒ“ƒhX²‚Éã¸‚·‚éˆÊ’uB
 const float SOUL_COUNT_FONT_X_DOWNBOUND = -520.0f;					//°ƒJƒEƒ“ƒgƒtƒHƒ“ƒg‚ÌƒoƒEƒ“ƒhX²‚É‰º~‚·‚éˆÊ’uB
@@ -31,6 +32,7 @@ const float SOUL_COUNT_FONT_BOUND_ADD = 5.0f;						//ƒJƒEƒ“ƒgƒtƒHƒ“ƒg‚ÌƒoƒEƒ“ƒh
 
 const int INDICATE_END = 200;										//°ƒJƒEƒ“ƒgUI‚Ì•\¦I—¹ƒ^ƒCƒ€B
 const float RETURN_MOVE_SPEED = 10.0f;								//Œ³‚É–ß‚·‚Æ‚«‚ÌˆÚ“®‘¬“xB
+const int TIMER_RESET = 0;											//ƒ^ƒCƒ}[‚ğ‰Šúó‘Ô‚É–ß‚·B
 
 SoulUI::SoulUI()
 {
@@ -63,7 +65,7 @@ bool SoulUI::Start()
 	m_soulFont = g_goMgr->NewGameObject<FontRender>();
 	m_soulNowNum = gamedate->GetSoul();
 
-	swprintf(soulNum, MAX_PATH - 1, L"%02d", m_soulNowNum);
+	swprintf(soulNum, FONT_SIZE, L"%02d", m_soulNowNum);
 	m_soulFont->SetText(soulNum);
 	m_soulFont->SetPosition(SOUL_COUNT_FONT_POS);
 	m_soulFont->SetScale(SOUL_COUNT_FONT_SCALE);
@@ -84,12 +86,12 @@ void SoulUI::SoulUIDefault()
 void SoulUI::SoulUIGetMove()
 {
 	//°Šl“¾Šƒo[‚ÌoŒ»ˆ—B
-	//ƒŠƒUƒ‹ƒg‘äÀ‚ğ•\¦B
-	//‰E‚©‚ç•\¦‚³‚¹‚éB
 	CVector3 m_framePos = m_spriteRender[0]->GetPosition();		//ƒtƒŒ[ƒ€À•WB
 	CVector3 m_soulIconPos = m_spriteRender[1]->GetPosition();	//°ƒAƒCƒRƒ“À•WB
 	CVector2 m_soulCountPos = m_soulFont->GetPosition();		//ƒtƒHƒ“ƒgÀ•WB
 	
+	//ƒŠƒUƒ‹ƒg‘äÀ‚ğ•\¦B
+	//‰E‚©‚çˆÚ“®‚³‚¹‚éB
 	if (m_framePos.x < SOUL_FRAME_UPBOUND &&
 		m_soulIconPos.x < SOUL_ICON_UPBOUND &&
 		m_soulCountPos.x < SOUL_COUNT_FONT_X_UPBOUND &&
@@ -126,14 +128,14 @@ void SoulUI::SoulCount()
 	//°‚Ì‰ÁZB
 	GameData* gamedate = GameData::GetInstance();
 	m_soulNowNum++;
-	swprintf(soulNum, MAX_PATH - 1, L"%02d", gamedate->GetSoul());
+	swprintf(soulNum, FONT_SIZE, L"%02d", gamedate->GetSoul());
 	m_soulFont->SetText(soulNum);
 	m_soulUiState = SoulUI_FontBoundMove;
 
 }
 void SoulUI::FontBoundMove()
 {
-	//°Šl“¾ƒtƒHƒ“ƒg‚ÌƒJƒEƒ“ƒg‚ğƒoƒEƒ“ƒh‚³‚¹‚éˆ—B
+	//°Šl“¾ƒtƒHƒ“ƒg‚ğƒJƒEƒ“ƒgƒoƒEƒ“ƒh‚³‚¹‚éˆ—B
 	//ƒoƒEƒ“ƒhˆ—B	
 	CVector2 m_position = m_soulFont->GetPosition();	//ƒtƒHƒ“ƒgÀ•WB
 
@@ -163,14 +165,14 @@ void SoulUI::SoulUIIndicate()
 	m_indicateTimer++;
 
 	if (m_indicateTimer >= INDICATE_END) {
-		m_indicateTimer = 0;
+		m_indicateTimer = TIMER_RESET;
 		m_soulUiState = SoulUI_Return;
 	}
 
 	//‚à‚µ•\¦ó‘Ô’†‚É°‚ğæ“¾‚µ‚½‚ç
-	//ƒJƒEƒ“ƒgƒoƒEƒ“ƒhó‘Ô‚É–ß‚è‚Ü‚·B
+	//°‚ÌƒJƒEƒ“ƒgó‘Ô‚É–ß‚è‚Ü‚·B
 	if (gamedate->GetSoul() > m_soulNowNum) {
-		m_indicateTimer = 0;
+		m_indicateTimer = TIMER_RESET;
 		m_soulUiState = SoulUI_SoulCount;
 	}
 }
@@ -181,6 +183,7 @@ void SoulUI::SoulUIReturn()
 	CVector3 m_soulIconPos = m_spriteRender[1]->GetPosition();	//°ƒAƒCƒRƒ“À•WB
 	CVector2 m_soulCountPos = m_soulFont->GetPosition();		//ƒtƒHƒ“ƒgÀ•WB
 
+	//¶‚ÖˆÚ“®‚³‚¹‚ÄŒ³‚ÌˆÊ’u‚Ö–ß‚·B
 	if (m_framePos.x > SOUL_FRAME_POS.x &&
 		m_soulIconPos.x > SOUL_POS.x &&
 		m_soulCountPos.x > SOUL_COUNT_FONT_POS.x) {
@@ -203,24 +206,23 @@ void SoulUI::Update()
 	switch (m_soulUiState)
 	{
 	case SoulUI::SoulUI_Default:
-		SoulUIDefault();
+		SoulUIDefault();		//’Êíó‘ÔB(”ñ•\¦j
 		break;
 	case SoulUI::SoulUI_GetMove:
-		SoulUIGetMove();
+		SoulUIGetMove();		//°Šl“¾Šƒo[‚ÌoŒ»ˆ—B
 		break;
 	case SoulUI::SoulUI_SoulCount:
-		SoulCount();
+		SoulCount();			//°‚Ì”‚ğƒJƒEƒ“ƒg‚·‚éB
 		break;
 	case SoulUI::SoulUI_FontBoundMove:
-		FontBoundMove();
+		FontBoundMove();		//°Šl“¾ƒtƒHƒ“ƒg‚ÌƒJƒEƒ“ƒg‚ğƒoƒEƒ“ƒh‚³‚¹‚éˆ—B
 		break;
 	case SoulUI::SoulUI_Indicate:
-		SoulUIIndicate();
+		SoulUIIndicate();		//ˆê’èŠÔ‚¾‚¯•\¦ó‘Ô‚Ì‚Ü‚Ü•Û‚ÂB
 		break;
 	case SoulUI::SoulUI_Return:
-		SoulUIReturn();
+		SoulUIReturn();			//Œ³‚Ìó‘Ô‚É–ß‚·B
 		break;
 	}
-
 }
 

@@ -2,14 +2,8 @@
 #include "ui/itemui/ItemUIBase.h"
 
 
-ItemUIBase::ItemUIBase()
-{
-}
-
-
-ItemUIBase::~ItemUIBase()
-{
-}
+ItemUIBase::ItemUIBase(){}
+ItemUIBase::~ItemUIBase(){}
 
 void ItemUIBase::SetItemMove(const eSelectState& state)
 {

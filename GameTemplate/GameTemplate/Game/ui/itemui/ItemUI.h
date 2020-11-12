@@ -37,7 +37,7 @@ private:
 	void ItemInUse();							//アイテムの使用中のラグ処理。
 
 private:
-	ItemUIBase* m_uiItems[Item_Num];	//UIアイテム。
+	ItemUIBase* m_uiItems[Item_Num];					//UIアイテム。
 
 	eSelectState m_state = Item_Move;					//選択状態。
 	eItemState m_itemState = Item_HpRecovery;			//アイテムの選択。

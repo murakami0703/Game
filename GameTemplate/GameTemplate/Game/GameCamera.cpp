@@ -16,6 +16,7 @@ void GameCamera::Update()
 	/// カメラの更新
 	/// </summary>
 	
+	//斜め上から見下ろしているようにする。（カメラはプレイヤー固定。）
 	CVector3 p_pos = Player::GetInstance()->GetPosition();
 	//視点の計算。
 	cameraPos.x = p_pos.x;

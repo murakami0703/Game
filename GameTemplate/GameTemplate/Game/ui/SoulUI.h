@@ -1,5 +1,5 @@
 #pragma once
-class SoulUI : public IGameObject
+class SoulUI final : public IGameObject
 {
 public:
 	SoulUI();
@@ -38,8 +38,8 @@ private:
 	bool bound = false;								//バウンド用フラグ。
 
 	//Fout関係
-	int m_soulNowNum = 0;								//現在の魂の数を格納
+	int m_soulNowNum = 0;							//現在の魂の数を格納
 
-	int m_indicateTimer = 0;							//魂獲得UIの表示タイマー。単位:フレーム
+	int m_indicateTimer = 0;						//魂獲得UIの表示タイマー。単位:フレーム
 };
 

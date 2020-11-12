@@ -237,7 +237,7 @@ public:
 	static GameData* m_instance;
 private:
 
-	float HP = 0.0f;	//デフォルトHP
+	float HP = 5.0f;	//デフォルトHP
 	const float MAXHP = 12.0f;	//最大HP
 	float MP = 50.0f;	//デフォルトMP
 	const float MAXMP = 400.0f;	//最大MP

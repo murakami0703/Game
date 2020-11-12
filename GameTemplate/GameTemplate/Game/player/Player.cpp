@@ -57,7 +57,6 @@ bool Player::Start()
 	m_skinModelRender->Init(L"Assets/modelData/player.cmo", m_animClips, AnimationClip_Num);
 	m_position = { -4300.0f, 430.0f, -3000.0f };
 	m_skinModelRender->SetPosition(m_position);
-
 	m_scale = { 3.0f, 3.0f, 3.0f };
 	m_skinModelRender->SetScale(m_scale);
 

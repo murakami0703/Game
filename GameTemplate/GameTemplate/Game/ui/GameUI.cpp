@@ -9,26 +9,31 @@ GameUI* GameUI::m_instance = nullptr;
 /// ’è”
 /////////////////////////////////////////////////////////
 
-const CVector3 ITEM_FRAME1_POS = { 460.0f,-240.0f,0.0f };		//˜g1‚ÌÀ•W
-const CVector3 ITEM_FRAME2_POS = { 560.0f,-120.0f,0.0f };		//˜g2‚ÌÀ•W
-const CVector3 ITEM_FRAME3_POS = { 475.0f,-50.0f,0.0f };		//˜g3‚ÌÀ•W
-const CVector3 ITEM_FRAME4_POS = { 545.0f,-3.0f,0.0f };		//˜g4‚ÌÀ•W
+const CVector3 ITEM_FRAME1_POS = { 460.0f,-240.0f,0.0f };		//˜g1‚ÌÀ•WB
+const CVector3 ITEM_FRAME2_POS = { 560.0f,-120.0f,0.0f };		//˜g2‚ÌÀ•WB
+const CVector3 ITEM_FRAME3_POS = { 475.0f,-50.0f,0.0f };		//˜g3‚ÌÀ•WB
+const CVector3 ITEM_FRAME4_POS = { 545.0f,-3.0f,0.0f };			//˜g4‚ÌÀ•WB
 
-const CVector3 ITEM_FRAME1_SCALE = { 0.8f,0.8f,0.8f };		//˜g1Šg‘å—¦
-const CVector3 ITEM_FRAME234_SCALE = { 0.7f,0.7f,0.7f };		//˜g2`4Šg‘å—¦
+const float ITEM_FRAME1_ALPHA = 0.9f;		//˜g1‚Ì“§–¾“xB
+const float ITEM_FRAME2_ALPHA = 0.6f;		//˜g2‚Ì“§–¾“xB
+const float ITEM_FRAME3_ALPHA = 0.4f;		//˜g3‚Ì“§–¾“xB
+const float ITEM_FRAME4_ALPHA = 0.2f;		//˜g4‚Ì“§–¾“xB
 
-const CVector3 ITEM_SELECT_FRAME_POS = { 460.0f,-240.0f,0.0f };		//‘I‘ð˜g‚ÌÀ•W
-const CVector3 LB_SPRITE_POS = { 585.0f,-250.0f,0.0f };		//L‚ÌÀ•W
-const CVector3 RB_SPRITE_POS = { 605.0f,20.0f,0.0f };		//ZL‚ÌÀ•W
-const CVector3 END_SPRITE_POS = { 505.0f,14.0f,0.0f };		//’[‚ÌÀ•W
+const CVector3 ITEM_FRAME1_SCALE = { 0.8f,0.8f,0.8f };				//˜g1Šg‘å—¦B
+const CVector3 ITEM_FRAME234_SCALE = { 0.7f,0.7f,0.7f };			//˜g2`4Šg‘å—¦B
 
-const CVector3 SELECTFRAME_RB_SPRITE_SCALE = { 0.7f,0.7f,0.7f };			//LŠg‘å—¦
-const CVector3 LB_SPRITE_SCALE = { 0.8f,0.8f,0.8f };			//LŠg‘å—¦
-const CVector3 END_SPRITE_SCALE = { 0.6f,0.6f,0.6f };			//’[Šg‘å—¦
+const CVector3 ITEM_SELECT_FRAME_POS = { 460.0f,-240.0f,0.0f };		//‘I‘ð˜g‚ÌÀ•WB
+const CVector3 LB_SPRITE_POS = { 585.0f,-250.0f,0.0f };				//L‚ÌÀ•WB
+const CVector3 RB_SPRITE_POS = { 605.0f,20.0f,0.0f };				//ZL‚ÌÀ•WB
+const CVector3 END_SPRITE_POS = { 505.0f,14.0f,0.0f };				//’[‚ÌÀ•WB
 
-const int FRAME_BIGCOUNT_VALUE = 30;
-const int FRAME_SMALLCOUNT_VALUE = 60;
-const CVector3 SCALING_VALUE = { 0.002f,0.002f,0.002f };			//‘I‘ð˜gŠg‘å’l
+const CVector3 SELECTFRAME_RB_SPRITE_SCALE = { 0.7f,0.7f,0.7f };	//ZL,ƒtƒŒ[ƒ€‚ÌŠg‘å—¦B
+const CVector3 LB_SPRITE_SCALE = { 0.8f,0.8f,0.8f };				//L‚ÌŠg‘å—¦B
+const CVector3 END_SPRITE_SCALE = { 0.6f,0.6f,0.6f };				//’[‚ÌŠg‘å—¦B
+
+const int FRAME_BIGCOUNT_VALUE = 30;								//Šg‘å‚³‚¹‚éŽžŠÔB’PˆÊFƒtƒŒ[ƒ€
+const int FRAME_SMALLCOUNT_VALUE = 60;								//k¬‚³‚¹‚éŽžŠÔB’PˆÊFƒtƒŒ[ƒ€
+const CVector3 SCALING_VALUE = { 0.002f,0.002f,0.002f };			//‘I‘ð˜gŠg‘å’lB
 
 GameUI::GameUI()
 {
@@ -46,28 +51,28 @@ bool GameUI::Start()
 		r->Init(L"Assets/sprite/case1.dds", 275.0f, 275.0f);
 		r->SetPosition(ITEM_FRAME1_POS);
 		r->SetScale(ITEM_FRAME1_SCALE);
-		r->SetAlpha(0.9f);
+		r->SetAlpha(ITEM_FRAME1_ALPHA);
 		m_spriteRender.push_back(r);
 		//1”Ô¨ItemCase2
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case2.dds", 247.0f, 247.0f);
 		r->SetPosition(ITEM_FRAME2_POS);
 		r->SetScale(ITEM_FRAME234_SCALE);
-		r->SetAlpha(0.6f);
+		r->SetAlpha(ITEM_FRAME2_ALPHA);
 		m_spriteRender.push_back(r);
 		//2”Ô¨ItemCase3
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case3.dds", 204.0f, 204.0f);
 		r->SetPosition(ITEM_FRAME3_POS);
 		r->SetScale(ITEM_FRAME234_SCALE);
-		r->SetAlpha(0.4f);
+		r->SetAlpha(ITEM_FRAME3_ALPHA);
 		m_spriteRender.push_back(r);
 		//3”Ô¨ItemCase4
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/case4.dds", 148.0f, 148.0f);
 		r->SetPosition(ITEM_FRAME4_POS);
 		r->SetScale(ITEM_FRAME234_SCALE);
-		r->SetAlpha(0.2f);
+		r->SetAlpha(ITEM_FRAME4_ALPHA);
 		m_spriteRender.push_back(r);
 		//4”Ô¨Itemwaku
 		r = g_goMgr->NewGameObject<SpriteRender>();
@@ -81,6 +86,9 @@ bool GameUI::Start()
 		r->SetPosition(END_SPRITE_POS);
 		r->SetScale(END_SPRITE_SCALE);
 		m_spriteRender.push_back(r);
+	}
+	//RB,LB•¶Žš
+	{
 		//6”Ô¨ItemL
 		r = g_goMgr->NewGameObject<SpriteRender>();
 		r->Init(L"Assets/sprite/L.dds", 100.0f, 148.0f);
@@ -106,7 +114,8 @@ bool GameUI::Start()
 }
 
 void GameUI::ScalingSelectCase() {
-	//‘I‘ð˜g‚ÌŠg‘åk¬
+
+	//‘I‘ð˜g(ƒIƒŒƒ“ƒW)‚ÌŠg‘åk¬
 	if (m_scalingCount > FRAME_SMALLCOUNT_VALUE) {
 		m_scalingCount = 0;
 	}
@@ -140,8 +149,7 @@ void GameUI::Update()
 {
 	GameData* m_gamedate = GameData::GetInstance();
 
-	
-	ScalingSelectCase();
+	ScalingSelectCase();	//‘I‘ð˜g‚ÌŠg‘åk¬ˆ—B
 
 	//ƒ{ƒX‚ª“|‚³‚ê‚½‚Ì‚ÅUIÁ‚·B
 	if (m_gamedate->ResultFlag() == true) {
