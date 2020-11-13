@@ -1,5 +1,5 @@
 #pragma once
-#include "SpriteIActor.h"
+//#include "SpriteIActor.h"
 
 class SpriteRender : public IGameObject
 {
@@ -132,7 +132,7 @@ public:
 		m_pivot = pivot;
 	}
 
-	SpriteIActor m_spriteMove;
+	//SpriteIActor m_spriteMove;
 private:
 	Sprite	m_sprite;				//スプライト。
 	CVector3 m_position = CVector3().Zero();			//座標

@@ -15,12 +15,12 @@ void SpriteIActor::SpriteBound()
 	//バウンド。
 }
 
-void SpriteIActor::SpriteMove(const CVector2& move, const int& moveTime, const int& moveDelay, const bool& relative = false)
-{
-	//リストに追加
-	SpriteMoveSet set = { move,{0.0f,0.0f},moveTime,moveDelay,0,relative,false };
-	m_spriteMoveList.push_back(set);
-}
+//void SpriteIActor::SpriteMove(const CVector2& move, const int& moveTime, const int& moveDelay, const bool& relative = false)
+//{
+//	//リストに追加
+//	//SpriteMoveSet set = { move,{0.0f,0.0f},moveTime,moveDelay,0,relative,false };
+//	//m_spriteMoveList.push_back(set);
+//}
 
 void SpriteIActor::SpriteMoveUpdate()
 {

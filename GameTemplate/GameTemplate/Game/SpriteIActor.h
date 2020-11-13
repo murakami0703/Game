@@ -24,7 +24,7 @@ public:
 	//スプライトの各種機能を提供させる。
 	void SpriteSupporter_Update();
 	//移動
-	void SpriteMove(const CVector2& move, const int& moveTime,	const int& moveDelay, const bool& relative = false);
+	//void SpriteMove(const CVector2& move, const int& moveTime,	const int& moveDelay, const bool& relative = false);
 	void SpriteBound(); //バウンド。
 
 		//状態取得用

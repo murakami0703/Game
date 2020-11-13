@@ -1,7 +1,7 @@
 #pragma once
 #include "SpriteIActor.h"
 
-class GameOver : public SpriteIActor
+class GameOver : public IGameObject
 {
 public:
 	GameOver();
@@ -38,7 +38,7 @@ private:
 	void Exit();				//終わり。
 private:
 	std::vector<SpriteRender*> m_spriteRenderArray;		//スプライトの動的配列
-
+	SpriteRender* m_spriteRender;
 	eState m_state = BackGD_Dark;					//状態。
 	EButton m_buttonState = Button_Continuity;		//Buttonの選択状態。
 
