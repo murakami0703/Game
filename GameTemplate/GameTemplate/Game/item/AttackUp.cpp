@@ -91,7 +91,6 @@ void AttackUp::InUse()
 void AttackUp::EndUse()
 {
 	//終わり。
-		//終わり。
 	GameData* gamedata = GameData::GetInstance();
 	gamedata->ATKRevert();
 	g_goMgr->DeleteGameObject(this);

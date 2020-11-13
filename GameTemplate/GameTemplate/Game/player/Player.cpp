@@ -88,10 +88,19 @@ void Player::Idel()
 		m_skinModelRender->PlayAnimation(Animation_Idel);
 	}
 
-	//ボタンが押されたら歩き状態へ。
-	if (g_pad[0].IsPressAnyKey()){
+	//移動ボタンが押されたら歩き状態へ。
+	if (g_pad[0].IsPress(enButtonLeft) ||
+		g_pad[0].IsPress(enButtonRight) ||
+		g_pad[0].IsPress(enButtonUp) ||
+		g_pad[0].IsPress(enButtonDown) 
+)	{
 		m_state = Player_Walk;
 	}
+	if (g_pad[0].IsPress(enButtonA)) {
+		m_state = Player_Attack;
+	}
+
+	//攻撃ボタンが押されたら攻撃状態に。
 }
 void Player::Move()
 {

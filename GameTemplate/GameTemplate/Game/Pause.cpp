@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "Pause.h"
 
+/////////////////////////////////////////////////////////
+/// ’è”
+/////////////////////////////////////////////////////////
+
 
 Pause::Pause()
 {
@@ -10,3 +14,13 @@ Pause::Pause()
 Pause::~Pause()
 {
 }
+
+bool Pause::Start()
+{
+	return true;
+}
+void Pause::Update()
+{
+
+}
+

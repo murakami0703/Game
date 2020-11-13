@@ -1,5 +1,7 @@
 #pragma once
-class GameOver : public IGameObject
+#include "SpriteIActor.h"
+
+class GameOver : public SpriteIActor
 {
 public:
 	GameOver();
@@ -35,13 +37,12 @@ private:
 	void Continuity();			//コンティニュー。
 	void Exit();				//終わり。
 private:
-	std::vector<SpriteRender*> m_spriteRender;		//スプライトの動的配列
-	SpriteRender* m_gameOverSprite;					//スプライトレンダー。
+	std::vector<SpriteRender*> m_spriteRenderArray;		//スプライトの動的配列
 
 	eState m_state = BackGD_Dark;					//状態。
 	EButton m_buttonState = Button_Continuity;		//Buttonの選択状態。
 
-	bool m_bound = false;
+	bool m_bound = false;				//バウンド判定。
 
 	float m_mulColor = 1.0f;			//BGの乗算カラー
 	

@@ -38,7 +38,7 @@ bool Bomb::Start()
 
 void Bomb::Parabolic()
 {
-
+	//“Š‚°‚éêŠ‚ğŒˆ‚ß‚éB
 
 }
 void Bomb::MoveBomb() {
