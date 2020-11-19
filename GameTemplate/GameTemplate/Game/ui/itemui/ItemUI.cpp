@@ -111,11 +111,6 @@ void ItemUI::ItemInUse()
 		m_state = Item_Now;
 	}
 
-	//使用中にアイテム使用ボタンを押すと。
-	//左右に揺れて使用できない感じを演出させる。
-	if (gamedata->GetItemInUseFlag() != false) {
-		m_uiItems[m_itemState]->ItemUseEnd();
-	}
 
 }
 

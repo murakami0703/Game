@@ -81,12 +81,12 @@ void Player::Idel()
 	GameData* gamedata = GameData::GetInstance();
 
 	//アイテム所持の有無によってアニメーションを変えます。
-	if (gamedata->GetItemInUseFlag() != false) {
-		m_skinModelRender->PlayAnimation(Animation_Bomb_With);
-	}
-	else {
+	//if (gamedata->GetItemInUseFlag() != false) {
+	//	m_skinModelRender->PlayAnimation(Animation_Bomb_With);
+	//}
+	//else {
 		m_skinModelRender->PlayAnimation(Animation_Idel);
-	}
+	//}
 
 	//移動ボタンが押されたら歩き状態へ。
 	if (g_pad[0].IsPress(enButtonLeft) ||
@@ -153,17 +153,17 @@ void Player::Move()
 	m_position = m_characon.Execute(CHARACON_TIME, m_move);
 
 	//アイテム所持の有無によってアニメーションを変えます。
-	if (gamedata->GetItemInUseFlag() != false) {
+	/*if (gamedata->GetItemInUseFlag() != false) {
 		m_skinModelRender->PlayAnimation(Animation_Bomb_With_Walk);
 	}
 	else {
-		if (g_pad[0].IsPress(enButtonB)) {
+	*/	if (g_pad[0].IsPress(enButtonB)) {
 			m_skinModelRender->PlayAnimation(Animation_Run);
 		}
 		else {
 			m_skinModelRender->PlayAnimation(Animation_Walk);
 		}
-	}
+	//}
 
 }
 void Player::Attack()
